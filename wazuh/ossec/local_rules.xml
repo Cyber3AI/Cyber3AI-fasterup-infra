@@ -1,0 +1,258 @@
+<!-- Local rules - FasterUp AI Autonomous -->
+<group name="suricata">
+  <!-- Ridica nivel Suricata la 7 + compliance generic IDS -->
+  <rule id="100200" level="7" overwrite="yes">
+    <if_sid>86601</if_sid>
+    <description>Suricata Alert — FasterUp IDS</description>
+    <group>ids,gdpr_IV_35.7.d,nist_800_53_SI.4,pci_dss_11.4,tsc_CC7.2,</group>
+  </rule>
+  <!-- FALSE POSITIVE-URI — suprimate pe TOTI senzorii -->
+  <rule id="100201" level="0">
+    <if_sid>100200</if_sid>
+    <field name="alert.signature">SURICATA Ethertype unknown</field>
+    <description>False positive — ignorat</description>
+  </rule>
+  <rule id="100202" level="0">
+    <if_sid>100200</if_sid>
+    <field name="alert.signature">ET INFO Microsoft Connection Test</field>
+    <description>False positive — Microsoft test ignorat</description>
+  </rule>
+  <rule id="100203" level="0">
+    <if_sid>100200</if_sid>
+    <field name="alert.signature">ET INFO Spotify P2P</field>
+    <description>False positive — Spotify ignorat</description>
+  </rule>
+  <!-- Suprima promiscuous mode — normal pentru bridge senzor -->
+  <rule id="100204" level="0">
+    <if_sid>5104</if_sid>
+    <field name="predecoder.hostname">rol-network</field>
+    <description>False positive — bridge promiscuous mode ignorat</description>
+  </rule>
+  <rule id="100205" level="0">
+    <if_sid>5104</if_sid>
+    <field name="predecoder.hostname">icisoc101</field>
+    <description>False positive — bridge promiscuous mode ignorat (icisoc101)</description>
+  </rule>
+  <!-- Whitelist infra — suprima AR pentru srcip in lista vitala -->
+  <rule id="100210" level="0">
+    <if_sid>5712</if_sid>
+    <list field="srcip" lookup="address_match_key">etc/lists/whitelist-infra</list>
+    <description>Whitelist infra — suprima AR pentru srcip in lista vitala</description>
+  </rule>
+  <!-- P2 — Suprima zgomot benign Suricata (apt updates, telemetry, etc) -->
+  <rule id="100211" level="1">
+    <if_sid>100200</if_sid>
+    <field name="alert.category">Not Suspicious Traffic</field>
+    <description>Suricata: trafic benign — suprimat</description>
+  </rule>
+  <rule id="100212" level="1">
+    <if_sid>100200</if_sid>
+    <field name="alert.category">Generic Protocol Command Decode</field>
+    <description>Suricata: protocol decode error — suprimat</description>
+  </rule>
+  <!-- P2 — Threat hunting (Misc activity) -->
+  <rule id="100213" level="2">
+    <if_sid>100200</if_sid>
+    <field name="alert.category">Misc activity</field>
+    <description>Suricata: threat hunting — Misc activity (catch-all benign - doar hunting/log)</description>
+    <mitre>
+      <id>T1071</id>
+    </mitre>
+    <group>ids,threat_hunting,gdpr_IV_35.7.d,nist_800_53_SI.4,nist_800_53_AU.14,pci_dss_11.4,tsc_CC7.2,</group>
+  </rule>
+  <!-- P2 — Atacuri reale (proactiv definite, vor matchui cand apar) -->
+  <rule id="100214" level="1">
+    <if_sid>100200</if_sid>
+    <field name="alert.category">Potential Corporate Privacy Violation</field>
+    <description>Suricata: policy/privacy (P2P, remote-access) - suprimat</description>
+  </rule>
+  <rule id="100215" level="10">
+    <if_sid>100200</if_sid>
+    <field name="alert.category">Web Application Attack</field>
+    <description>Suricata: Web Application Attack detectat</description>
+    <mitre>
+      <id>T1190</id>
+    </mitre>
+    <group>ids,attack,gdpr_IV_35.7.d,gdpr_IV_32.2,hipaa_164.312.b,nist_800_53_SI.4,nist_800_53_SI.10,nist_800_53_SC.7,pci_dss_11.4,pci_dss_6.5.1,pci_dss_6.5.7,tsc_CC6.1,tsc_CC7.2,</group>
+  </rule>
+  <rule id="100216" level="12">
+    <if_sid>100200</if_sid>
+    <field name="alert.category">A Network Trojan was detected</field>
+    <description>Suricata: Network Trojan / malware C2 detectat</description>
+    <mitre>
+      <id>T1071</id>
+    </mitre>
+    <group>ids,malware,gdpr_IV_35.7.d,gdpr_IV_32.2,hipaa_164.312.b,nist_800_53_SI.3,nist_800_53_SI.4,nist_800_53_SC.7,pci_dss_11.4,pci_dss_5.1,pci_dss_5.3,tsc_CC6.1,tsc_CC6.8,tsc_CC7.2,</group>
+  </rule>
+  <rule id="100217" level="12">
+    <if_sid>100200</if_sid>
+    <field name="alert.category">Attempted Administrator Privilege Gain</field>
+    <description>Suricata: Privilege escalation attempt detectat</description>
+    <mitre>
+      <id>T1068</id>
+    </mitre>
+    <group>ids,privilege_escalation,gdpr_IV_35.7.d,gdpr_IV_32.2,nist_800_53_SI.4,nist_800_53_AC.6,pci_dss_11.4,pci_dss_7.1,tsc_CC6.1,tsc_CC6.3,tsc_CC7.2,</group>
+  </rule>
+  <!-- P2 — Suricata anomaly events (decode/stream/applayer) — vizibil in raport, sub pragul AR/CyberBot -->
+  <rule id="100220" level="6">
+    <if_sid>86600</if_sid>
+    <field name="event_type">anomaly</field>
+    <description>Suricata: anomaly event ($(anomaly.type)) — $(anomaly.event)</description>
+    <group>ids,anomaly,gdpr_IV_35.7.d,nist_800_53_SI.4,pci_dss_11.4,tsc_CC7.2,</group>
+  </rule>
+</group>
+<group name="vulnerability_overrides,">
+  <rule id="100300" level="7" overwrite="yes">
+    <if_sid>23505</if_sid>
+    <description>Vulnerability detector — High level downgraded from 10 to 7 (suppress active-response and Telegram)</description>
+    <group>vulnerability-detector,gdpr_IV_35.7.d,pci_dss_11.2.1,pci_dss_11.2.3,tsc_CC7.1,tsc_CC7.2,</group>
+  </rule>
+  <rule id="100301" level="7" overwrite="yes">
+    <if_sid>23506</if_sid>
+    <description>Vulnerability detector — Critical level downgraded from 13 to 7 (suppress active-response and Telegram)</description>
+    <group>vulnerability-detector,gdpr_IV_35.7.d,pci_dss_11.2.1,pci_dss_11.2.3,tsc_CC7.1,tsc_CC7.2,</group>
+  </rule>
+</group>
+
+<group name="local,canary,">
+  <rule id="100299" level="7">
+    <location>/var/log/canary.log</location>
+    <match>FASTERUP_CANARY_TEST</match>
+    <description>FasterUp Healthcheck — Canary synthetic alert (DO NOT ACTION)</description>
+    <group>healthcheck,canary,</group>
+  </rule>
+</group>
+
+<group name="fasterup,soc_mgmt_suppress,">
+  <rule id="100500" level="0">
+    <if_group>sshd</if_group>
+    <srcip>10.0.0.0/24</srcip>
+    <description>FasterUp: SSH management SOC (LAN intern 10.0.0.0/24) - suprimat</description>
+  </rule>
+  <rule id="100501" level="0">
+    <if_group>sshd</if_group>
+    <srcip>89.167.112.95</srcip>
+    <description>FasterUp: SSH management SOC (HUB VPN relay) - suprimat</description>
+  </rule>
+  <rule id="100502" level="0">
+    <if_group>sshd</if_group>
+    <srcip>86.123.191.93</srcip>
+    <description>FasterUp: SSH management SOC (Digi egress) - suprimat</description>
+  </rule>
+</group>
+
+<group name="misp,threat_intel,">
+  <!-- MISP IOC match — ALERT-ONLY level 9 (sub pragul AR=10, fara auto-block). Lista etc/lists/misp-ip, refresh zilnic din MISP. -->
+  <rule id="100230" level="9">
+    <if_sid>100200</if_sid>
+    <list field="data.dest_ip" lookup="address_match_key">etc/lists/misp-ip</list>
+    <description>MISP IOC: trafic catre IP din threat-intel ($(data.dest_ip))</description>
+    <group>ids,</group>
+  </rule>
+  <rule id="100231" level="9">
+    <if_sid>100200</if_sid>
+    <list field="data.src_ip" lookup="address_match_key">etc/lists/misp-ip</list>
+    <description>MISP IOC: trafic de la IP din threat-intel ($(data.src_ip))</description>
+    <group>ids,</group>
+  </rule>
+  <rule id="100232" level="9">
+    <if_group>sshd</if_group>
+    <list field="srcip" lookup="address_match_key">etc/lists/misp-ip</list>
+    <description>MISP IOC: SSH implicand IP din threat-intel ($(srcip))</description>
+    <group>authentication,</group>
+  </rule>
+  <rule id="100240" level="9">
+    <if_sid>100200</if_sid>
+    <field name="data.alert.signature">CYBER3 MISP IOC</field>
+    <description>MISP IOC: domeniu din threat-intel detectat ($(data.alert.signature))</description>
+    <group>ids,</group>
+  </rule>
+
+</group>
+<!-- CYBER3 → SOC: reguli pentru evenimentele EDR/XDR de la endpoint-uri (Faza 3).
+     ALERT-ONLY: toate ≤ level 9 (sub pragul active-response level≥10) + fără srcip → nicio
+     auto-blocare. Se adaugă în /var/ossec/etc/rules/local_rules.xml pe manager. Segregare pe $(org). -->
+<group name="cyber3,edr,xdr,">
+
+  <!-- Bază: orice eveniment CYBER3 (marcaj c3.app=cyber3, decodat JSON). Fără alertă proprie. -->
+  <rule id="100600" level="0">
+    <decoded_as>json</decoded_as>
+    <field name="c3.app">^cyber3$</field>
+    <description>CYBER3 endpoint event</description>
+  </rule>
+
+  <!-- Heartbeat: doar prezență, fără alertă. -->
+  <rule id="100601" level="0">
+    <if_sid>100600</if_sid>
+    <field name="c3.type">^heartbeat$</field>
+    <description>CYBER3: heartbeat endpoint ($(c3.org))</description>
+  </rule>
+
+  <!-- Scanare PC raportată. -->
+  <rule id="100602" level="4">
+    <if_sid>100600</if_sid>
+    <field name="c3.type">^pc_scan$</field>
+    <description>CYBER3: scanare PC raportata (org: $(c3.org), dispozitiv: $(c3.device_id))</description>
+  </rule>
+  <!-- Malware găsit pe endpoint (c3.data.malware_found > 0). -->
+  <rule id="100603" level="9">
+    <if_sid>100602</if_sid>
+    <field name="c3.data.malware_found" type="pcre2">[1-9]</field>
+    <description>CYBER3: MALWARE gasit pe endpoint (org: $(c3.org), dispozitiv: $(c3.device_id))</description>
+  </rule>
+
+  <!-- Amenințare detectată (scam/link/număr periculos). -->
+  <rule id="100604" level="9">
+    <if_sid>100600</if_sid>
+    <field name="c3.type">^threat$</field>
+    <description>CYBER3: amenintare detectata pe endpoint (org: $(c3.org), indicator: $(c3.data.indicator))</description>
+  </rule>
+
+  <!-- Email în breșă. -->
+  <rule id="100605" level="5">
+    <if_sid>100600</if_sid>
+    <field name="c3.type">^breach$</field>
+    <description>CYBER3: email in bresa (org: $(c3.org))</description>
+  </rule>
+
+  <!-- Backup raportat + backup eșuat. -->
+  <rule id="100606" level="3">
+    <if_sid>100600</if_sid>
+    <field name="c3.type">^backup$</field>
+    <description>CYBER3: stare backup raportata (org: $(c3.org))</description>
+  </rule>
+  <rule id="100607" level="6">
+    <if_sid>100606</if_sid>
+    <field name="c3.data.status" type="pcre2">fail</field>
+    <description>CYBER3: BACKUP ESUAT pe endpoint (org: $(c3.org), dispozitiv: $(c3.device_id))</description>
+  </rule>
+
+  <!-- anre (icisoc110): reconectare periodica benigna ~3h (plafon sesiune FortiGate ANRE/ISP) - suprimat. Vezi anre-sensor-migration -->
+  <rule id="100290" level="0">
+    <if_sid>503</if_sid>
+    <match>Agent started: 'anre</match>
+    <description>anre: reconectare periodica benigna - suprimat</description>
+  </rule>
+
+</group>
+
+
+<group name="suricata_applayer_suppress,">
+  <!-- 24 iul 2026: suprima zgomotul Suricata applayer anomaly (flood ANRE SMB); pastreaza decode/stream + semnaturi de atac -->
+  <rule id="100950" level="0">
+    <if_sid>100220</if_sid>
+    <field name="anomaly.type">applayer</field>
+    <description>Suprimat: Suricata applayer anomaly (zgomot parser)</description>
+  </rule>
+</group>
+<group name="agent_flooding_suppress_temp,">
+  <!-- TEMPORAR 24 iul 2026: suprima agent_flooding (Wazuh 203/204) de la floodul BENIGN ANRE (Windows Update Delivery Optimization + SMB AD). DE SCOS dupa fixul sensor-side (applayer:no pe anre). Volume-guard ramane plasa de siguranta pe volum. -->
+  <rule id="100951" level="0">
+    <if_sid>203</if_sid>
+    <description>TEMP: agent_flooding suprimat (flood benign Windows Update ANRE)</description>
+  </rule>
+  <rule id="100952" level="0">
+    <if_sid>204</if_sid>
+    <description>TEMP: agent event queue 204 suprimat</description>
+  </rule>
+</group>

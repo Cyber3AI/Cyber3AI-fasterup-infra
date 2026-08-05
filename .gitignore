@@ -1,0 +1,19 @@
+# secrete — NICIODATA in repo (sunt in R2: cyber3-code/infra-dr/)
+*.key
+*.pem
+*.crt
+client.keys
+.env
+portal.db
+*.db
+.gnupg/
+*.gpg
+*.asc
+*_data.sql
+database.php
+*.b64
+*.token
+__pycache__/
+*.pyc
+*.bak*
+data/reports/
