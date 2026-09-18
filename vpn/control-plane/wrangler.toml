@@ -1,0 +1,39 @@
+name = "cyber3-vpn-cp"
+main = "src/index.js"
+compatibility_date = "2024-09-01"
+
+# storage control-plane (users, peers) — KV (tokenul nu are D1)
+kv_namespaces = [
+  { binding = "VPN", id = "368940c1e4c345db869c87fef410b13a" }
+]
+
+# nodul exit curent (1 nod la test). Secretele AGENT_TOKEN + ADMIN_TOKEN se pun cu `wrangler secret put`.
+[vars]
+# Workers nu pot fetch IP direct -> hostname via nip.io (interim; prod = cloudflared/DNS real)
+NODE_URL = "http://91.99.135.199.nip.io:8080"
+# MOD TEST: "1" = sare peste verificarea premium la /connect (pentru testul pe telefon). PUNE "0" dupa test.
+OPEN_TEST = "0"
+
+# ---- Billing Paddle (Merchant of Record) — singurul procesator web. Lemon Squeezy ELIMINAT complet 16 iul 2026. ----
+# BILLING="paddle" comută checkout-ul; webhook Paddle = /billing/paddle-webhook.
+PADDLE_ENV = "live"                    # LIVE (producție) — 7 iul 2026
+BILLING = "paddle"                     # Paddle = canal PRINCIPAL web (Lemon scos)
+PADDLE_CHECKOUT_URL = "https://cyber3.app/checkout"
+PADDLE_PRICE_FASTER_MONTHLY = "pri_01kwvneysrr0hytdkvk2n8taby"
+PADDLE_PRICE_FASTER_ANNUAL = "pri_01kwvnez16fafpzv55a32angn4"
+PADDLE_PRICE_MAXIMUS_MONTHLY = "pri_01kwvnezhn3y35ajd8tnzwk95j"
+PADDLE_PRICE_MAXIMUS_ANNUAL = "pri_01kwvnezrvr1x9q4xdwf2z0rxn"
+# Secrete (wrangler secret put): PADDLE_API_KEY, PADDLE_WEBHOOK_SECRET
+
+# ---- Google Play Billing (doar build-ul `play` din Play Store) ----
+# Verificarea abonamentelor Play se face la /billing/play/verify cu Google Play Developer API.
+# Secret necesar: GOOGLE_SA_JSON = JSON-ul service account-ului (cu androidpublisher), pus cu:
+#   wrangler secret put GOOGLE_SA_JSON   (lipești tot conținutul fișierului JSON)
+ANDROID_PACKAGE = "ai.cyber3.app"
+
+# ---- Identitate passwordless (Pas 5): email OTP via Resend ----
+# Adresa expeditor (domeniul trebuie verificat in Resend). Cheia se pune cu: wrangler secret put RESEND_API_KEY
+RESEND_FROM = "CYBER3 <noreply@cyber3.ai>"
+
+[triggers]
+crons = ["*/5 * * * *"]

@@ -1,0 +1,39 @@
+name = "cyber3-vpn-ops"
+main = "src/index.js"
+compatibility_date = "2026-09-01"
+
+# Portalul operațional al infrastructurii VPN (CYBER3 azi, VPNzone.NET mâine) — intern, Basic Auth mihai.
+routes = [
+  { pattern = "vpn.cyber3.ai", custom_domain = true }
+]
+
+# OPS = starea portalului (snapshot, istoric 24h, alerte, registru noduri planificate)
+# CP  = KV-ul control-plane-ului cyber3-vpn-cp (CITIT DOAR: noduri, peers, abonați, consum free)
+kv_namespaces = [
+  { binding = "OPS", id = "d8839c9b97d44a3c8e15804e900dacae" },
+  { binding = "CP",  id = "368940c1e4c345db869c87fef410b13a" },
+]
+
+# Legături interne worker→worker (fără ieșire pe internet → fără eroarea 1042)
+services = [
+  { binding = "VPNCP",   service = "cyber3-vpn-cp" },
+  { binding = "BILLING", service = "cyber3-billing" },
+  { binding = "METRICS", service = "cyber3-metrics" },
+]
+
+[triggers]
+crons = ["*/5 * * * *"]
+
+[vars]
+ALERT_TO = "mihai@rol.ro"
+ALERT_FROM = "CYBER3 VPN Ops <noreply@cyber3.ai>"
+
+# Secrete (wrangler secret put):
+#   OPS_PASS        parola Basic Auth (user mihai) = parola unică
+#   AGENT_TOKEN     tokenul agenților de pe noduri
+#   HZ_TOKEN        API Hetzner Cloud (doar citire folosită)
+#   CP_ADMIN        tokenul admin al cyber3-vpn-cp (înregistrare nod)
+#   BILLING_ADMIN   tokenul admin billing.cyber3.ai (încasări app)
+#   RESEND_API_KEY  alerte CRIT pe email
+#   GOOGLE_SA_JSON  cont de serviciu Play (re-verificare abonamente, androidpublisher)
+#   METRICS_TOKEN   tokenul /report al cyber3-metrics (pâlnia aplicației)
