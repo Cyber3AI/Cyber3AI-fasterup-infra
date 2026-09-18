@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Notă de atenționare — val de atacuri ransomware asupra serviciilor esențiale | FasterUp SOC · CYBER3.AI</title>
+<meta name="description" content="Ransomware la Cadastru (ANCPI) și ANP: structura atacului pas cu pas, cum apără FasterUp SOC + CYBER3.AI + Global Scan și recomandări urgente pentru instituții și operatori de servicii esențiale.">
+<meta name="robots" content="index,follow">
+<link rel="canonical" href="https://fasterup.ai/alerta-ransomware.html">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Notă de atenționare — val de atacuri ransomware asupra serviciilor esențiale">
+<meta property="og:description" content="Structura atacului de la Cadastru (ANCPI), cum apărăm cu FasterUp SOC + CYBER3.AI + Global Scan și recomandări urgente.">
+<meta property="og:url" content="https://fasterup.ai/alerta-ransomware.html">
+<style>
+  :root{--navy:#061A3A;--navy2:#0a2550;--red:#E10024;--gold:#D4AF37;--ink:#e8eef7;--ink2:#9FB3D1;--line:#1E4C95;--panel:#0d2347}
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--navy);color:var(--ink);font-family:-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif;line-height:1.55;font-size:16px}
+  .wrap{max-width:900px;margin:0 auto;padding:0 20px 60px}
+  header.top{border-bottom:3px solid var(--red);padding:18px 0 12px;margin-bottom:8px}
+  .brand{display:flex;align-items:baseline;gap:16px;flex-wrap:wrap}
+  .brand .fu{font-weight:800;font-size:26px;letter-spacing:.5px}
+  .brand .fu .r{color:var(--red)}
+  .brand .c3{font-weight:800;font-size:26px;letter-spacing:.5px}
+  .brand .c3 .r{color:var(--red)}
+  .brand .sub{color:var(--ink2);font-size:12.5px;letter-spacing:.03em;margin-left:auto}
+  .badge{display:inline-block;background:var(--red);color:#fff;font-weight:800;font-size:12px;letter-spacing:.14em;text-transform:uppercase;padding:4px 12px;border-radius:6px;margin:22px 0 6px}
+  h1{font-size:30px;line-height:1.15;margin:6px 0 6px}
+  .subtitle{color:var(--gold);font-weight:700;font-size:18px;margin:0 0 6px}
+  .meta{color:var(--ink2);font-size:13px;margin-bottom:10px}
+  h2{color:#fff;font-size:21px;margin:34px 0 8px;padding-bottom:6px;border-bottom:1px solid var(--line)}
+  h2 .n{color:var(--red);margin-right:6px}
+  h2.red{color:#fff}h2.red .n{color:var(--red)}
+  p{margin:9px 0}
+  .lead{font-size:17px;background:var(--panel);border-left:4px solid var(--gold);padding:14px 16px;border-radius:8px;margin:14px 0}
+  ol,ul{margin:8px 0 8px 2px;padding-left:22px}
+  li{margin:6px 0}
+  li b,.pill{color:#fff}
+  .pillar{background:var(--panel);border:1px solid var(--line);border-left:4px solid var(--red);border-radius:10px;padding:12px 15px;margin:10px 0}
+  .pillar b{color:var(--gold)}
+  .note{color:var(--ink2);font-size:14px;font-style:italic;margin-top:8px}
+  .rec{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:6px 18px;margin:10px 0}
+  .rec li b{color:#fff}
+  .cta{background:linear-gradient(135deg,#0a2550,#132f63);border:1px solid var(--gold);border-radius:12px;padding:16px 18px;margin:26px 0 6px}
+  .cta b{color:var(--gold)}
+  .cta a{color:#fff;font-weight:700}
+  a{color:var(--gold)}
+  footer.bot{border-top:1px solid var(--line);margin-top:34px;padding-top:16px;text-align:center;color:var(--ink2);font-size:12.5px}
+  footer.bot .tag{color:var(--gold);font-weight:700;font-size:12.5px;margin-bottom:6px}
+  @media(max-width:560px){h1{font-size:24px}.brand .fu,.brand .c3{font-size:21px}.brand .sub{margin-left:0;width:100%}}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header class="top">
+    <div class="brand">
+      <span class="fu">FasterUp<span class="r"> SOC</span></span>
+      <span class="c3"><span class="r">CYBER3</span>.AI</span>
+      <span class="sub">SOC autonom · Threat Intelligence · EDR/XDR · Global Scan &amp; VAS</span>
+    </div>
+  </header>
+
+  <span class="badge">Notă de atenționare · URGENT</span>
+  <h1>Val de atacuri ransomware asupra instituțiilor și operatorilor de servicii esențiale din România</h1>
+  <div class="meta">Document public · 29 iulie 2026</div>
+
+  <div class="lead">
+    În iulie 2026, un val de atacuri ransomware a lovit instituții publice și operatori de servicii esențiale din România. Exemple publice: sistemul național de cadastru (<b>ANCPI</b>) și Administrația Națională a Penitenciarelor (<b>ANP</b>) — la câteva zile distanță și atribuite, potrivit surselor din presă, acelorași atacatori. Mai jos: structura atacului pas cu pas, cum apărăm noi clienții și un capitol de <b>recomandări urgente</b>.
+  </div>
+
+  <h2><span class="n">1.</span>Situația</h2>
+  <p>Ținta acestui val — administrație, utilități, infrastructură critică — coincide cu profilul operatorilor pe care îi protejăm. La ANP au fost criptate stații și servere, cu indisponibilitatea serviciilor critice (programări, telefonie, e-mail intern, VPN între locații, site public). Când un serviciu esențial se oprește, impactul este imediat și public.</p>
+
+  <h2><span class="n">2.</span>Structura atacului de la Cadastru (ANCPI)</h2>
+  <p>Potrivit relatărilor publice, atacul asupra Agenției Naționale de Cadastru și Publicitate Imobiliară (ANCPI) a urmat un tipar clasic de ransomware asupra unei entități esențiale:</p>
+  <ol>
+    <li><b>Intruziune și mișcare laterală nedetectate</b> — atacatorii au avut timp să se extindă în rețea zile la rând, în absența unei monitorizări active.</li>
+    <li><b>Exfiltrare masivă</b> — date personale ale cetățenilor din mai multe baze de date și o copie a codului sursă al sistemelor naționale.</li>
+    <li><b>Ștergerea backup-urilor disponibile</b> — exact resursa necesară pentru recuperare a fost eliminată.</li>
+    <li><b>Indisponibilitate ~3 zile</b> — platforma e-Terra și e-mailul instituției au căzut; tranzacțiile imobiliare s-au oprit la nivel național (notari, avocați, cetățeni).</li>
+    <li><b>Dublă extorcare</b> — datele furate au fost scoase la vânzare online.</li>
+  </ol>
+  <p>La câteva zile distanță, ANP a fost lovită după același tipar, atribuit de surse acelorași atacatori. Vector de intrare tipic: serviciu expus la internet (VPN/RDP neactualizat) sau phishing → mișcare laterală prin SMB / exploit-uri EternalBlue. Slăbiciuni comune: <b>SMBv1 activ, RDP expus, VPN/firewall neactualizat, lipsa segmentării</b> și — decisiv — absența monitorizării și blocării în timp real.</p>
+
+  <h2 class="red"><span class="n">3.</span>Cum apărăm noi — FasterUp.AI + CYBER3.AI + Global Scan</h2>
+  <p>Protejăm operatorii de servicii esențiale printr-o soluție integrată și suverană (UE), care acoperă exact fazele atacului de mai sus:</p>
+  <div class="pillar"><b>FasterUp SOC (senzor INLINE)</b> — motor IDS/IPS inline care vede toată rețeaua și detectează în timp real mișcarea laterală, exploit-urile și C2; <b>Active Response</b> blochează sursa la firewall și oprește propagarea înainte de criptare. Triaj AI (CyberBot), threat intelligence (MISP), monitorizare 24/7.</div>
+  <div class="pillar"><b>CYBER3.AI (EDR/XDR)</b> — aplicația desktop detectează malware pe stații și îl izolează în carantină (taie execuția ransomware-ului local), verifică postura (antivirus, firewall, patch) și raportează în SOC. Plus Security LLM suveran și protecție mobilă.</div>
+  <div class="pillar"><b>CYBER3 Global Scan (VAS)</b> — descoperă autonom întreaga rețea și găsește exact suprafața de atac a ransomware-ului (SMBv1/EternalBlue, RDP expus, servicii învechite), pe care o închidem preventiv, înainte de atacator.</div>
+  <p class="note">Acolo unde instituțiile lovite nu au avut vizibilitate și blocare în timp real, clienții noștri le au. Nicio soluție nu oferă garanție absolută — obiectivul este reducerea drastică a riscului plus detecție, blocare și recuperare rapidă.</p>
+
+  <h2 class="red"><span class="n">4.</span>Recomandări urgente</h2>
+  <div class="rec">
+  <ol>
+    <li><b>Dezactivați SMBv1</b> (GPO) — vectorul EternalBlue/WannaCry pentru mișcarea laterală.</li>
+    <li><b>NU expuneți RDP la internet</b> — acces doar prin VPN, cu MFA și NLA.</li>
+    <li><b>Actualizați urgent VPN/firewall</b> și sistemele expuse — aplicați patch-urile critice.</li>
+    <li><b>MFA peste tot</b> — VPN, e-mail, conturi de administrare.</li>
+    <li><b>Backup-uri OFFLINE, testate (3-2-1)</b> — singura protecție reală anti-ransomware.</li>
+    <li><b>Segmentați rețeaua (VLAN)</b> — limitați mișcarea laterală.</li>
+    <li><b>Monitorizare și blocare în timp real (SOC)</b> — detecție înainte de criptare.</li>
+    <li><b>EDR/XDR pe stații</b> și evaluare de vulnerabilități (VAS) periodică — închideți expunerile din timp.</li>
+  </ol>
+  </div>
+
+  <div class="cta">
+    <b>La greu contează cine supraveghează — și poate acționa în timp real.</b><br>
+    Oferim un <b>Global Scan de urgență</b> și verificarea posturii de securitate. FasterUp SOC și CYBER3.AI sunt operaționale și de folos exact la greu.<br>
+    ROL PORTAL SERVICES SRL · <a href="mailto:contact@rol.ro">contact@rol.ro</a> · <a href="https://fasterup.ai/">fasterup.ai</a> · <a href="https://cyber3.ai/">cyber3.ai</a>
+  </div>
+
+  <footer class="bot">
+    <div class="tag">Suveran UE · Conformitate AI Act · NIS2-ready · Security LLM · Global Scan &amp; VAS · Senzor INLINE &amp; EDR/XDR app · Protecție mobilă</div>
+    ROL PORTAL SERVICES SRL · contact@rol.ro · cyber3.ai · fasterup.ai
+  </footer>
+</div>
+</body>
+</html>

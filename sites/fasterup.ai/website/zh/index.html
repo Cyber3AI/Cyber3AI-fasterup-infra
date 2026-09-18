@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>FasterUp.AI — AI 自主网络安全平台</title>
+<meta name="description" content="FasterUp AI Autonomous Platform — 面向企业与公共管理的托管 SOC 与漏洞评估。自主检测、决策与响应。">
+<meta property="og:title" content="FasterUp.AI — AI 自主网络安全平台">
+<meta property="og:description" content="面向企业与公共管理的托管 SOC 与漏洞评估。数秒内自主检测与响应。">
+<meta property="og:image" content="/assets/icon.svg">
+<link rel="icon" href="/assets/icon.svg">
+<link rel="stylesheet" href="/styles.css">
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-KH8RKEF517"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-KH8RKEF517');</script>
+</head>
+<body>
+
+<header class="nav">
+  <a class="brand" href="/zh/"><i class="xmark"></i><span>FasterUp</span>.AI</a>
+  <nav class="links">
+    <a href="#services">服务</a>
+    <a href="#technology">技术</a>
+    <a href="#xdr">终端 XDR</a>
+    <a href="#packages">套餐</a>
+    <a href="#start">开始</a>
+    <a href="/contact">联系</a>
+    <select class="lang" aria-label="语言" onchange="localStorage.setItem('fulang',this.value);document.cookie='fulang='+encodeURIComponent(this.value)+';path=/;max-age=31536000;samesite=lax';location.href=this.value">
+      <option value="/ro/">RO</option>
+      <option value="/">EN</option>
+      <option value="/es/">ES</option>
+      <option value="/it/">IT</option>
+      <option value="/de/">DE</option>
+      <option value="/fr/">FR</option>
+      <option value="/ru/">RU</option>
+      <option value="/zh/">中文</option>
+    </select>
+    <a class="btn-sm" href="#start">申请评估</a>
+  </nav>
+</header>
+<script>
+  (function(){var p=location.pathname,m=p.match(/^\/(ro|es|it|de|fr|ru|zh)\//),v=m?'/'+m[1]+'/':'/',s=document.querySelector('.lang');if(s)s.value=v;})();
+</script>
+
+<section class="hero">
+  <div class="grid-bg"></div>
+  <div class="hero-inner">
+    <div class="eyebrow">▸ FASTERUP AI AUTONOMOUS PLATFORM</div>
+    <h1><span class="r">自主网络安全</span><br>面向企业与公共管理</h1>
+    <p class="sub">FasterUp 实时检测、决策并响应网络威胁——七层互补防御,从链路到工作站和手机,由 MLEO 编排为一个自主决策。托管安全运营中心与漏洞评估,部署在您的现场。</p>
+    <div class="cta">
+      <a class="btn" href="#start">▸ 申请评估</a>
+      <a class="btn ghost" href="#technology">工作原理</a>
+    </div>
+    <div class="stats">
+      <div><b>10ms–11s</b><span>从威胁到自主决策</span></div>
+      <div><b>24/7</b><span>监控与响应</span></div>
+      <div><b>7</b><span>层互补防御,由 MLEO 编排</span></div>
+      <div><b data-count="914944" data-suffix="+">0</b><span>实时威胁指标</span></div>
+    </div>
+  </div>
+</section>
+
+<section id="services" class="section">
+  <div class="head">
+    <div class="kicker">服务</div>
+    <h2>两项服务。一个自主平台。</h2>
+    <p>托管检测与响应以及持续漏洞评估——由同一 AI 引擎和同一实时威胁情报驱动。</p>
+  </div>
+  <div class="cards">
+    <article class="card feature">
+      <div class="badge">托管 · 24/7</div><div class="ico"><svg class="cshield" viewBox="0 0 24 24"><path d="M12 2.1 L20.6 5 V11 C20.6 16.6 16.8 20.5 12 21.9 C7.2 20.5 3.4 16.6 3.4 11 V5 Z" fill="rgba(212,175,55,.14)" stroke="#d4af37" stroke-width="1.3"/><g fill="none" stroke="#f2d778" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5.2 V18.2"/><path d="M12 5.7 h2.2 a2 2 0 0 1 0 3.9 H12"/><path d="M8 11 L16 15.6"/><path d="M16 11 L8 15.6"/></g></svg></div>
+      <h3>SOC — 安全运营中心</h3>
+      <p>在七层互补防御上进行完全托管的自主监控。FasterUp 检测入侵、网络异常、命令与控制、数据外泄和策略违规——AI 引擎决策,MLEO 在正确的层执行:拦截、通知或升级,只需数秒。</p>
+      <div class="tech"><span>Cluster 1 IDS/IPS</span><span>Cluster 1 SIEM</span><span>CYBER3 Context Fusion Engine</span><span>MISP threat intel</span></div>
+      <p class="note">数秒内自主响应——而非数小时。告警与报告通过 Telegram 和电子邮件送达您的团队。</p>
+      <details class="more"><summary>查看详情</summary>
+        <div class="body"><ul><li>7×24 监控，<b>无需自有安全分析师</b>——平台处理常规，人工处理例外。</li><li>基于 Cluster 1 IDS/IPS 的实时检测，通过 Cluster 1 SIEM 进行事件关联。</li><li>每条告警进行四来源情境融合：MISP + Cluster 1 IDS/IPS + SIEM + CYBER3 数据库。</li><li>按严重程度的自主行动：静默记录 → 自动拦截 IP → 紧急告警 → 升级给人工。</li></ul><div class="adv"><b>竞争优势：</b>单一供应商掌握整条链路——从网络传感器到决策——因此响应仅需 <b>2–11 秒，而非数小时</b>，无需雇佣、培训并在凌晨 3 点保持清醒的 SOC。</div></div>
+      </details>
+    </article>
+
+    <article class="card feature">
+      <div class="badge">持续</div><div class="ico">🎯</div>
+      <h3>VAS — 漏洞评估</h3>
+      <p>对您资产的持续自动评估，发现已知漏洞、错误配置和暴露服务。您将收到经优先级排序、可执行的报告——在攻击者发现之前先修复最重要的问题。</p>
+      <div class="tech"><span>资产发现</span><span>CVE 检测</span><span>计划扫描</span><span>优先级报告</span></div>
+      <p class="note">比攻击者更早了解您的暴露面。扫描安全运行，按您控制的计划执行。</p>
+      <details class="more"><summary>查看详情</summary>
+        <div class="body"><ul><li>网络中的<b>自动资产发现</b>——无法保护你不知道拥有的东西。</li><li>检测已知漏洞（CVE）和不安全配置。</li><li>计划扫描，安全执行，按<b>你掌控的日程</b>。</li><li>优先级报告——先修复影响最大的风险。</li></ul><div class="adv"><b>竞争优势：</b>VAS 与 SOC 协同——SOC 阻止进行中的攻击，而 VAS 在攻击者发现缺口之前<b>主动缩小你的攻击面</b>。</div></div>
+      </details>
+    </article>
+
+    <article class="card">
+      <div class="ico">🤖</div>
+      <h3>自主响应</h3>
+      <p>每条告警都由 AI 结合所有来源进行评估。根据严重程度,FasterUp 会记录、自动拦截、发出紧急告警或升级给分析师——并由 MLEO 在正确的层执行拦截,从防火墙到隔离 VLAN。无需人工介入即可处置。</p>
+      <div class="tech"><span>拦截</span><span>通知</span><span>升级</span></div>
+      <p class="note">按严重程度的行动，24/7——即使凌晨 3 点。</p>
+      <details class="more"><summary>查看详情</summary>
+        <div class="body"><ul><li><b>可疑</b>——含糊事件，需跟踪 → 静默记录。</li><li><b>已确认</b>——确认攻击 → 自动拦截源 IP。</li><li><b>严重</b>——高影响事件 → 发出紧急告警。</li><li><b>关键</b>——关键性入侵 → 升级给人工分析师。</li></ul><div class="adv"><b>竞争优势：</b>平台<b>无需等待人工即可行动</b>。只有当关键决策确实需要时，你的团队才介入。</div></div>
+      </details>
+    </article>
+
+    <article class="card">
+      <div class="ico">🧠</div>
+      <h3>AI 情境融合引擎</h3>
+      <p>CYBER3 Context Fusion Engine 将四个独立来源——威胁情报、网络遥测、SIEM 关联和 CYBER3 Database——统一为单一情境化风险决策。</p>
+      <div class="tech"><span>多来源</span><span>情境化风险</span><span>2–11秒</span></div>
+      <p class="note">将四个信号融合为结构化决策——FasterUp 专有技术。</p>
+      <details class="more"><summary>查看详情</summary>
+        <div class="body"><ul><li>四个独立信号共同评分：<b>MISP</b> 威胁情报、<b>Cluster 1 IDS/IPS</b> 网络遥测、<b>Cluster 1 SIEM</b> 关联、<b>CYBER3 数据库</b>。</li><li>每条告警一个情境化风险决策——2–11 秒内完成。</li><li>专有技术，由 ROL PORTAL SERVICES 端到端掌控。</li></ul><div class="adv"><b>竞争优势：</b>同一引擎也驱动 <b>CYBER3 终端应用（XDR）</b>——网络与工作站共享<b>同一实时威胁情报</b>，闭合边界与终端检测之间的环路。</div></div>
+      </details>
+    </article>
+
+    <article class="card">
+      <div class="ico">🖥️</div>
+      <h3>网络传感器</h3>
+      <p>部署在您各站点的专用传感器——内联或被动——在现场运行前几层网络防护:链路上的 Inline IPS、防火墙中的 Active Response 以及以太网层的 L2 Shield,抵御 ARP 欺骗、伪造 DHCP、扫描和漏洞利用——无需触碰工作站。</p>
+      <div class="tech"><span>inline / 被动</span><span>专用 VPN</span><span>无终端代理</span></div>
+      <p class="note">通过加密专用 VPN 连接回 SOC。</p>
+      <details class="more"><summary>查看详情</summary>
+        <div class="body"><ul><li>在每个站点以 inline 或被动方式安装——<b>每站点约 15 分钟</b>，终端上无代理。</li><li>监视 ARP 欺骗、恶意 DHCP、扫描、漏洞利用和异常行为。</li><li><b>你的数据留在你的现场</b>——仅元数据通过加密专用 VPN 流向 SOC。</li></ul><div class="adv"><b>竞争优势：</b>隐私优先设计——为 <b>GDPR 与公共部门</b>数据处理而构建，具备完整审计跟踪。</div></div>
+      </details>
+    </article>
+
+    <article class="card">
+      <div class="ico">🔔</div>
+      <h3>清晰、易懂的告警</h3>
+      <p>当有重要情况时，您的团队会收到简明易懂的解释——发生了什么、为何是威胁，以及 FasterUp 已经采取的措施——通过 Telegram 和电子邮件。</p>
+      <div class="tech"><span>Telegram</span><span>电子邮件</span><span>AI 解释</span></div>
+      <p class="note">没有噪音。只呈现需要您关注的内容，清晰说明。</p>
+      <details class="more"><summary>查看详情</summary>
+        <div class="body"><ul><li>清晰语言的解释：<b>发生了什么、为何是威胁，以及平台已经采取的措施</b>。</li><li>通过 Telegram 和电子邮件送达你的团队。</li><li>没有原始日志堆，没有告警风暴。</li></ul><div class="adv"><b>竞争优势：</b>零告警疲劳——你的员工只看到<b>需要关注的内容</b>，且已分级并处理。</div></div>
+      </details>
+    </article>
+  </div>
+</section>
+
+<section id="technology" class="section alt d7">
+  <div class="head">
+    <div class="kicker">技术</div>
+    <h2>级联拦截。七层互补防御。</h2>
+    <p>每个威胁都要穿过七层防御组成的级联:从链路到以太网,再到云端和终端。某一层漏过的,由下一层拦截。各层互补而非冗余:每一层都覆盖其他层看不到的角度。MLEO 将它们编排为一个有机整体。</p>
+  </div>
+
+  <div id="defense" class="d7-block">
+  <div class="d7-status" aria-labelledby="d7-st-h">
+    <div class="d7-st-head"><h3 id="d7-st-h">Capabilities Status</h3><span class="d7-sum"><i class="d7-led"></i>7 / 7 Active</span></div>
+    <div class="d7-caps">
+<div class="d7-cap" style="--c:#3b82f6"><div class="d7-top"><span class="d7-no">1</span>网络</div><div class="d7-cnm">Inline IPS</div><div class="d7-ln"><span class="d7-act"><i class="d7-led"></i>Active</span><span><span class="d7-rtl">响应 </span><span class="d7-rt">&lt; 10 ms</span></span></div></div>
+<div class="d7-cap" style="--c:#f59e0b"><div class="d7-top"><span class="d7-no">2</span>主机</div><div class="d7-cnm">Active Response</div><div class="d7-ln"><span class="d7-act"><i class="d7-led"></i>Active</span><span><span class="d7-rtl">响应 </span><span class="d7-rt">2–11 s</span></span></div></div>
+<div class="d7-cap" style="--c:#22d3ee"><div class="d7-top"><span class="d7-no">3</span>以太网</div><div class="d7-cnm">L2 Shield</div><div class="d7-ln"><span class="d7-act"><i class="d7-led"></i>Active</span><span><span class="d7-rtl">响应 </span><span class="d7-rt">&lt; 1 ms</span></span></div></div>
+<div class="d7-cap" style="--c:#34d399"><div class="d7-top"><span class="d7-no">4</span>AI</div><div class="d7-cnm">CYBER3 Context Fusion Engine</div><div class="d7-ln"><span class="d7-act"><i class="d7-led"></i>Active</span><span><span class="d7-rtl">响应 </span><span class="d7-rt">2–11 s</span></span></div></div>
+<div class="d7-cap" style="--c:#a78bfa"><div class="d7-top"><span class="d7-no">5</span>云端</div><div class="d7-cnm">CYBER3 Edge</div><div class="d7-ln"><span class="d7-act"><i class="d7-led"></i>Active</span><span><span class="d7-rtl">响应 </span><span class="d7-rt">&lt; 50 ms</span></span></div></div>
+<div class="d7-cap" style="--c:#2dd4bf"><div class="d7-top"><span class="d7-no">6</span>桌面</div><div class="d7-cnm">CYBER3 EDR/XDR for Desktop</div><div class="d7-ln"><span class="d7-act"><i class="d7-led"></i>Active</span><span><span class="d7-rtl">响应 </span><span class="d7-rt">实时</span></span></div></div>
+<div class="d7-cap" style="--c:#fb7185"><div class="d7-top"><span class="d7-no">7</span>移动</div><div class="d7-cnm">CYBER3 Mobile Protection</div><div class="d7-ln"><span class="d7-act"><i class="d7-led"></i>Active</span><span><span class="d7-rtl">响应 </span><span class="d7-rt">实时</span></span></div></div>
+<div class="d7-cap d7-mleo" style="--c:#D4AF37"><div class="d7-top"><span class="d7-no">⬡</span>编排器</div><div class="d7-cnm">Multi Layer Enforcement Orchestrator</div><div class="d7-ln"><span class="d7-orch">编排 7 / 7 层</span><span class="d7-rt">L2 ↔ L3</span></div></div>
+    </div>
+  </div>
+
+  <div class="d7-cascade">
+    <canvas id="d7-rain" aria-hidden="true"></canvas>
+    <div class="d7-rows">
+      <div class="d7-in"><span>◤ 流量 + 威胁进入</span><span class="d7-in-r">100% 检测</span></div>
+<div class="d7-row" style="--c:#3b82f6"><div class="d7-num">1</div><div class="d7-mid"><div class="d7-nm">Inline IPS<span class="d7-badge">网络 · L3–L7</span></div><div class="d7-mech">链路内联检测 · 特征 + 异常 · IOC 指标</div><div class="d7-exp">在链路上<span class="c">检测并拦截数据包</span>,毫秒级完成,在其进入客户网络之前。</div><div class="d7-fnl" style="width:100%"></div></div><div class="d7-right"><span class="d7-act"><i class="d7-led"></i>Active</span><span class="d7-rt2">&lt; 10 ms</span><span class="d7-vs">响应时间</span></div></div>
+<div class="d7-row" style="--c:#f59e0b"><div class="d7-num">2</div><div class="d7-mid"><div class="d7-nm">Active Response<span class="d7-badge">主机 · L3</span></div><div class="d7-mech">防火墙 DROP 规则 · 升级为全舰队永久封禁</div><div class="d7-exp">对告警的自动响应:为攻击者 IP 写入<span class="c">防火墙 DROP 规则</span>。原生兜底,不依赖 AI。</div><div class="d7-fnl" style="width:82%"></div></div><div class="d7-right"><span class="d7-act"><i class="d7-led"></i>Active</span><span class="d7-rt2">2–11 s</span><span class="d7-vs">响应时间</span></div></div>
+<div class="d7-row" style="--c:#22d3ee"><div class="d7-num">3</div><div class="d7-mid"><div class="d7-nm">L2 Shield<span class="d7-badge">以太网 · L2</span></div><div class="d7-mech">原生以太网 · 反 ARP 欺骗(网关 IP↔MAC 绑定)· 反伪造 DHCP · 防黑洞 dead-man</div><div class="d7-exp"><span class="c">唯一的以太网层防护。</span>阻止中间人、ARP 投毒和伪造 DHCP——IP 层<span class="c">看不到</span>的攻击。</div><div class="d7-fnl" style="width:70%"></div></div><div class="d7-right"><span class="d7-act"><i class="d7-led"></i>Active</span><span class="d7-rt2">&lt; 1 ms</span><span class="d7-vs">响应时间</span></div></div>
+<div class="d7-row" style="--c:#34d399"><div class="d7-num">4</div><div class="d7-mid"><div class="d7-nm">CYBER3 Context Fusion Engine<span class="d7-badge">AI · L3–L7</span></div><div class="d7-mech">多源融合:网络 + 主机 + 威胁情报 + CYBER3 DB</div><div class="d7-exp">基于融合上下文自主决策;甚至拦截<span class="c">通往 C2 的出站连接</span>(命令与控制)。</div><div class="d7-fnl" style="width:60%"></div></div><div class="d7-right"><span class="d7-act"><i class="d7-led"></i>Active</span><span class="d7-rt2">2–11 s</span><span class="d7-vs">响应时间</span></div></div>
+<div class="d7-row" style="--c:#a78bfa"><div class="d7-num">5</div><div class="d7-mid"><div class="d7-nm">CYBER3 Edge<span class="d7-badge">云端 · 随处</span></div><div class="d7-mech">DNS 防护盾 · 边缘 IOC(200万+ 指标)· 浏览器扩展</div><div class="d7-exp"><span class="c">随处可用,即使在网络之外</span>的 Web 与 DNS 防护:危险域名和网址在连接前即被拦截。</div><div class="d7-fnl" style="width:52%"></div></div><div class="d7-right"><span class="d7-act"><i class="d7-led"></i>Active</span><span class="d7-rt2">&lt; 50 ms</span><span class="d7-vs">响应时间</span></div></div>
+<div class="d7-row" style="--c:#2dd4bf"><div class="d7-num">6</div><div class="d7-mid"><div class="d7-nm">CYBER3 EDR/XDR for Desktop<span class="d7-badge">桌面 · 工作站</span></div><div class="d7-mech">行为检测 · XDR 遥测 → SOC · 隔离</div><div class="d7-exp">覆盖到达<span class="c">工作站</span>的威胁(USB、文件、进程),超越网络边界。</div><div class="d7-fnl" style="width:46%"></div></div><div class="d7-right"><span class="d7-act"><i class="d7-led"></i>Active</span><span class="d7-rt2">实时</span><span class="d7-vs">响应时间</span></div></div>
+<div class="d7-row" style="--c:#fb7185"><div class="d7-num">7</div><div class="d7-mid"><div class="d7-nm">CYBER3 Mobile Protection<span class="d7-badge">移动 · 设备</span></div><div class="d7-mech">反诈骗 / 反钓鱼 · DNS 过滤 · VPN</div><div class="d7-exp">在<span class="c">移动中</span>保护用户:最后一层,位于个人设备上。</div><div class="d7-fnl" style="width:42%"></div></div><div class="d7-right"><span class="d7-act"><i class="d7-led"></i>Active</span><span class="d7-rt2">实时</span><span class="d7-vs">响应时间</span></div></div>
+      <div class="d7-outb"><span>◣ 到达网络 / 用户</span><span class="d7-outb-r">流量经 7 层检测</span></div>
+    </div>
+  </div>
+
+  <div class="d7-mleo-sec">
+    <p class="d7-mtag"><span class="d7-hex">⬡</span>自有编排器 · 7 层</p>
+    <h3 class="d7-mh">Multi Layer Enforcement Orchestrator<small>MLEO · 连接 7 层的核心</small></h3>
+    <p class="d7-ml">如果没有编排,每一层都会<b>各自检测、各自拦截</b>。MLEO 是<b>在各层之间关联信号、并决定每个威胁由哪一层执行处置</b>的核心,其基础是统一的设备身份:同一台设备在<b>第 3 层被视为 IP</b>,在<b>第 2 层被视为 MAC</b>。</p>
+    <div class="d7-corr">
+      <div class="d7-cbox"><p class="d7-k">第 3 层 · 第 1 · 2 · 4 层</p><p class="d7-t">基于 IP 的封禁</p><p class="d7-d">Inline IPS、Active Response 与 CYBER3 Context Fusion Engine:谁发起攻击、在哪个端口、何时。</p></div>
+      <div class="d7-arr" aria-hidden="true">⇄</div>
+      <div class="d7-cbox d7-core"><p class="d7-k">MLEO · 统一身份</p><p class="d7-t">唯一的事实来源</p><p class="d7-id">MAC ↔ IP ↔ VLAN ↔ 端口<br>↔ 物理位置 ↔ 关键程度</p></div>
+      <div class="d7-arr" aria-hidden="true">⇄</div>
+      <div class="d7-cbox"><p class="d7-k">第 2 层 · 第 3 层</p><p class="d7-t">MAC 身份</p><p class="d7-d">L2 Shield:带历史的 ARP 表、以太网异常、IP 背后的真实设备。</p></div>
+    </div>
+    <div class="d7-out"><b>在正确的层执行处置</b><span>传感器上的 drop 列表(L3)</span><span class="d7-sep">·</span><span>交换机上的隔离 VLAN(L2)</span><span class="d7-sep">·</span><span>只封禁一次,而不是在每一层分别封禁</span></div>
+    <div class="d7-mcols">
+      <div><h4>解决什么问题</h4><ul class="d7-prob"><li><b>通过更换 IP 规避</b>在一个 IP 上被封禁的攻击者换一个 IP 继续。在 L3 看似新的参与者;在 L2 仍是同一个 MAC——MLEO 能识别它。</li><li><b>ARP 欺骗时的正确隔离</b>伪造的流量看起来来自受害者。方向性关联隔离的是攻击者,而不是流量看似来自的那台机器。</li><li><b>统一视图,而非零散封禁</b>同一设备不再在 3–4 层上被彼此无关地分别封禁。</li><li><b>随时间追溯</b>从 24 小时前出现的 IP 出发,即可找到设备的 MAC 和所在物理端口。</li></ul></div>
+      <div><h4>安全原则</h4><div class="d7-chips"><span>先观察后执行</span><span>allowlist 绝对优先</span><span>事务性回滚</span><span>隔离 VLAN,而非关闭端口</span><span>每层均 fail-safe</span></div>
+        <h4>MLEO 执行链</h4><ol class="d7-stages"><li class=""><span class="d7-sn">0</span><span>持续采集:ARP、MAC 表、各层封禁记录</span><span class="d7-ss">可见性</span></li><li class=""><span class="d7-sn">1</span><span>对账表 MAC ↔ IP ↔ VLAN ↔ 端口,含 IP 历史</span><span class="d7-ss">可见性</span></li><li class=""><span class="d7-sn">2</span><span>每条 L3 封禁都获得其 L2 身份(MAC、VLAN、端口、关键程度)</span><span class="d7-ss">可见性</span></li><li class=""><span class="d7-sn">3</span><span>15 分钟内同一 MAC、不同 IP:更换 IP 规避告警<span class="d7-risk">第 0–3 步提供完整可见性,且不触碰客户网络</span></span><span class="d7-ss">可见性</span></li><li class="enf gate"><span class="d7-sn">4</span><span>执行:端口移入隔离 VLAN,配合 allowlist 与回滚<span class="d7-risk">前提:allowlist + 已测试的回滚</span></span><span class="d7-ss">执行</span></li><li class="enf"><span class="d7-sn">5</span><span>有封禁历史的端口出现新 MAC;伪造 ARP + L3 封禁:隔离端口</span><span class="d7-ss">执行</span></li><li class="enf"><span class="d7-sn">6</span><span>反向 L2 → L3:异常 MAC 解析为 IP 并预防性封禁</span><span class="d7-ss">执行</span></li></ol></div>
+    </div>
+  </div>
+
+  <div class="d7-foot"><div class="d7-note"><h3>为什么是级联?</h3><p>没有哪一层单独是完美的。被 IPS 拦下的数据包不会再到达 Active Response;漏过的由 CYBER3 Context Fusion Engine 拦截;IP 层看不到的 L2 攻击(ARP 欺骗)由 L2 Shield 阻止。</p></div><div class="d7-note"><h3>自主运行,无需人工</h3><p>检测 → 上下文融合 → 2–11 秒内自主决策 → 行动:临时封禁、升级为永久封禁、通知。allowlist 在每一步保护合法设备。</p></div><div class="d7-note"><h3>一个有机整体</h3><p>MLEO 不是新的一层,而是连接现有各层的编排器:原本各自为战的七层,成为一个在所有层级都能看到同一设备的有机整体。</p></div></div>
+  <p class="d7-tag">FasterUp NEXTGEN SOC · <b>7 层 · MLEO · 纵深防御</b></p>
+  <script src="/defense7.js" defer></script>
+  </div>
+
+  <div class="head d7-pipehead">
+    <h3>感知。关联。决策。行动——自主完成。</h3>
+    <p>FasterUp AI Autonomous Platform 在数秒内将原始网络信号转化为结构化响应，为每个决策融合四个独立情报来源。</p>
+  </div>
+  <div class="arch">
+    <div class="flow">
+      <details class="node device"><summary><b>网络传感器</b><span>Cluster 1 IDS/IPS · inline 或被动</span></summary>
+        <div class="nbody">每个站点的专用传感器捕获并检查流量，发现 ARP 欺骗、恶意 DHCP、扫描和漏洞利用——终端上无代理。仅元数据离开你的网络，通过加密专用 VPN。</div>
+      </details>
+      <div class="arrow">→</div>
+      <details class="node edge"><summary><b>SIEM 关联</b><span>Cluster 1 SIEM · 事件标准化与关联</span></summary>
+        <div class="nbody">原始数据包转化为规范化事件，再在整个环境中关联，使孤立信号汇成一个有意义的单一事件——而非数千条互不相连的日志。</div>
+      </details>
+      <div class="arrow">→</div>
+      <details class="node soc"><summary><b>CYBER3 Context Fusion Engine</b><span>2–11秒内自主决策</span></summary>
+        <div class="nbody">专有引擎将四个独立来源——MISP 威胁情报、Cluster 1 IDS/IPS 遥测、SIEM 关联和 CYBER3 数据库——融合为单一情境化风险决策，2–11 秒内完成。</div>
+      </details>
+      <div class="arrow">→</div>
+      <details class="node device"><summary><b>响应</b><span>拦截 · 通知 · 升级</span></summary>
+        <div class="nbody">按严重程度，平台自行行动：静默记录、自动拦截源 IP、紧急告警或升级给人工分析师——端到端数秒，7×24。</div>
+      </details>
+    </div>
+    <details class="kanon" open>
+      <summary><span class="tag">自主</span> 平台如何对每条告警进行决策与行动</summary>
+      <div class="kbody">每条告警都由 AI 跨四个来源评分。<b>可疑</b>事件被静默记录；<b>确认的攻击</b>触发自动 IP 拦截；<b>严重</b>事件发出紧急告警；<b>关键性入侵</b>升级给人工分析师。端到端：2–11 秒。</div>
+    </details>
+    <details class="kanon" open>
+      <summary><span class="tag">HEALTH CHECK</span> 自我监控——并自我修复——的平台</summary>
+      <div class="kbody">整个平台由自主的 <b>Health Check</b> 系统统管，全天候持续监控、管理并自我修复整支传感器舰队——无需人工介入。它检测停滞的抓包、重启卡死的服务、恢复断开的 VPN 隧道，并以合成 canary 告警验证端到端管道。每个传感器自我修复，舰队始终在线。</div>
+    </details>
+  </div>
+  <div class="principles">
+    <details class="p"><summary><b>默认自主</b></summary><span>无需等待分析师即可决策与行动——平台处理常规，人工处理例外。</span></details>
+    <details class="p"><summary><b>多来源情境融合</b></summary><span>MISP threat intel + Cluster 1 IDS/IPS 遥测 + Cluster 1 SIEM 关联 + CYBER3 Database——每个决策皆然。</span></details>
+    <details class="p"><summary><b>部署在您的现场</b></summary><span>传感器位于您的网络中；仅元数据通过加密专用 VPN 流向 SOC。</span></details>
+    <details class="p"><summary><b>为问责而构建</b></summary><span>完整审计跟踪、结构化报告以及符合 GDPR 的数据处理——为公共管理而设计。</span></details>
+    <details class="p"><summary><b>开放且成熟的技术栈</b></summary><span>基于 Cluster 1 IDS/IPS、SIEM 关联与 MISP 威胁情报——经加固、编排，并由我们的 AI 引擎决策。</span></details>
+    <details class="p"><summary><b>实时管道</b></summary><span>原始数据包 → 规范化事件 → 关联告警 → AI 决策 → 响应，端到端数秒完成。</span></details>
+  </div>
+</section>
+
+<section id="xdr" class="section x7">
+  <div class="head">
+    <div class="kicker">ENDPOINT XDR · CYBER3</div>
+    <h2>SOC 延伸至每一台工作站——以及每一部手机</h2>
+    <p>级联防御的第 6 层和第 7 层运行在员工的设备上：CYBER3 EDR/XDR for Desktop 部署于每台 Windows 工作站，CYBER3 Mobile Protection 部署于每部手机。两者向同一个 SOC 上报，使用同一个威胁数据库，并由同一个 MLEO 统一编排——从网络传感器到手机应用，技术始终由同一方掌控。</p>
+  </div>
+  <div class="x7-prod"><div class="x7-ph"><span class="x7-tag">第 6 层 · Windows</span><h3>CYBER3 EDR/XDR for Desktop</h3><p>原生 Windows 应用，将每台工作站变为接入 SOC 的检测与响应节点。经过数字签名，自动更新，并可通过客户控制台按组织统一管理。</p></div><div class="x7-gal"><figure class="x7-main"><img id="x7d-main" src="/assets/shots/desktop-home-en.webp" alt="CYBER3 EDR/XDR for Desktop — 仪表板" loading="lazy" width="1600" height="1067"></figure><div class="x7-thumbs"><button type="button" class="x7-th on" data-g="x7d" data-src="/assets/shots/desktop-home-en.webp" data-alt="CYBER3 EDR/XDR for Desktop — 仪表板"><img src="/assets/shots/desktop-home-en.webp" alt="" loading="lazy"><span>仪表板</span></button><button type="button" class="x7-th" data-g="x7d" data-src="/assets/shots/desktop-globalscan-en.webp" data-alt="CYBER3 EDR/XDR for Desktop — Global Scan"><img src="/assets/shots/desktop-globalscan-en.webp" alt="" loading="lazy"><span>Global Scan</span></button><button type="button" class="x7-th" data-g="x7d" data-src="/assets/shots/desktop-isolation-en.webp" data-alt="CYBER3 EDR/XDR for Desktop — 工作站隔离"><img src="/assets/shots/desktop-isolation-en.webp" alt="" loading="lazy"><span>工作站隔离</span></button><button type="button" class="x7-th" data-g="x7d" data-src="/assets/shots/desktop-pcscan-en.webp" data-alt="CYBER3 EDR/XDR for Desktop — 电脑扫描"><img src="/assets/shots/desktop-pcscan-en.webp" alt="" loading="lazy"><span>电脑扫描</span></button><button type="button" class="x7-th" data-g="x7d" data-src="/assets/shots/desktop-vpn-en.webp" data-alt="CYBER3 EDR/XDR for Desktop — CYBER3 VPN"><img src="/assets/shots/desktop-vpn-en.webp" alt="" loading="lazy"><span>CYBER3 VPN</span></button></div></div><div class="x7-blocks"><div class="x7-b"><div class="x7-bi"><svg class="cshield" viewBox="0 0 24 24"><path d="M12 2.1 L20.6 5 V11 C20.6 16.6 16.8 20.5 12 21.9 C7.2 20.5 3.4 16.6 3.4 11 V5 Z" fill="rgba(212,175,55,.14)" stroke="#d4af37" stroke-width="1.3"/><g fill="none" stroke="#f2d778" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5.2 V18.2"/><path d="M12 5.7 h2.2 a2 2 0 0 1 0 3.9 H12"/><path d="M8 11 L16 15.6"/><path d="M16 11 L8 15.6"/></g></svg></div><h4>实时防护</h4><p>DNS-Shield 覆盖整台工作站：危险域名在解析阶段即被拦截；即使防护意外停止，DNS 仍可正常工作（fail-open）。本地威胁引擎内置超过 250 万个已知威胁指标，浏览器防护扩展包含 29,131 条规则。</p></div><div class="x7-b"><div class="x7-bi">🔍</div><h4>电脑扫描</h4><p>检查工作站的安全状况——杀毒软件、防火墙、UAC、系统更新——并扫描 Downloads、Temp 文件夹及开机启动项中的已知恶意软件。0–100 评分，一键移入隔离区，每 3 小时自动重新扫描。</p></div><div class="x7-b"><div class="x7-bi">🛰️</div><h4>内置 CYBER3 Global Scan</h4><p>发现本地网络中的所有设备，检查 38 个暴露端口，并将软件版本与已知 CVE 进行比对——非破坏性扫描，只“看门，不进门”。可选生成 AI 报告，并保存至组织账户。</p></div><div class="x7-b"><div class="x7-bi">🛑</div><h4>工作站隔离</h4><p>一旦确认存在恶意软件，或收到 SOC 指令，CYBER3 守护程序即将工作站从网络中断开，同时保留与 SOC 的连接，以便远程恢复。除非 SOC 继续保持隔离，30 分钟后将自动恢复连接；kill-switch 可立即解除隔离。</p></div><div class="x7-b"><div class="x7-bi">🖥️</div><h4>客户控制台 + SOC</h4><p>组织模式可通过激活码启用，也可在部署时静默启用。desktopapp.cyber3.ai 控制台展示工作站清单、状态和事件，并可远程执行扫描、隔离和重新连接——工作站在 30 秒内接收指令。每个客户只能看到自己的设备。</p></div><div class="x7-b"><div class="x7-bi">📡</div><h4>安全遥测</h4><p>离开工作站的只有安全元数据——心跳、扫描、威胁、隔离状态——经由本地传感器传输；在办公场所以外，则经由 CYBER3 云边缘传输。个人模式下不发送任何数据。</p></div><div class="x7-b"><div class="x7-bi">🔒</div><h4>CYBER3 VPN</h4><p>加密、无日志的 WireGuard VPN：每天免费 400 MB，订阅即享不限流量，服务器分布于 4 个国家，付费方案可自选服务器。</p></div><div class="x7-b"><div class="x7-bi">⚡</div><h4>即时检测 + 备份</h4><p>检测消息（AI 判定）、链接、电话号码、邮箱泄露和密码（k-匿名：仅哈希前缀离开设备）。将重要文件备份至本地办公场所的服务器，并支持保留策略。</p></div></div></div>
+  <div class="x7-prod x7-mob"><div class="x7-ph"><span class="x7-tag x7-tag7">第 7 层 · Android</span><h3>CYBER3 Mobile Protection</h3><p>这款 Android 应用在每位员工的手机上实时拦截诈骗、网络钓鱼和危险网站，所有处理均在设备端完成。与传感器和工作站共用同一威胁数据库，每 12 小时更新一次。现已在 Google Play 上架。</p></div><div class="x7-phones"><figure class="x7-phone"><img src="/assets/shots/mobile-home-en.webp" alt="CYBER3 Mobile Protection — 主页" loading="lazy" width="540" height="1202"><figcaption>主页</figcaption></figure><figure class="x7-phone"><img src="/assets/shots/mobile-guard-en.webp" alt="CYBER3 Mobile Protection — 来电与消息防护" loading="lazy" width="540" height="1202"><figcaption>来电与消息防护</figcaption></figure></div><div class="x7-blocks"><div class="x7-b"><div class="x7-bi">📞</div><h4>来电防护</h4><p>CYBER3 成为手机的 Caller ID：每个来电号码都会与威胁数据库比对。可选自动拒接已知诈骗号码，并在来电界面上方显示醒目警示。</p></div><div class="x7-b"><div class="x7-bi">💬</div><h4>消息防护</h4><p>读取收到的通知——SMS、WhatsApp 及其他应用——无需 SMS 权限，仅在消息存在危险时发出警告。</p></div><div class="x7-b"><div class="x7-bi">🤖</div><h4>消息检测</h4><p>从任意应用粘贴或分享一条消息，即可获得“安全”“可疑”或“危险”的判定及原因：仿冒品牌、高风险域名、催促或付款话术、URL 伎俩——由 AI 给出解释。</p></div><div class="x7-b"><div class="x7-bi">🌐</div><h4>网页防护</h4><p>手机本地 DNS 过滤，无需中间服务器：威胁数据库中的危险域名、广告和追踪器在所有应用中均被拦截。</p></div><div class="x7-b"><div class="x7-bi">📱</div><h4>手机扫描</h4><p>0–100 评分：屏幕锁定、USB 调试、开发者选项、安全补丁时效；拥有管理员或无障碍权限的应用、带有高风险权限的侧载应用——并将每个已安装应用的哈希值与威胁数据库比对。</p></div><div class="x7-b"><div class="x7-bi">🪪</div><h4>身份与泄露</h4><p>检测邮箱是否泄露，每 12 小时持续监控，每次发现新泄露即发送通知；采用 k-匿名方式检测密码。</p></div><div class="x7-b"><div class="x7-bi">🔒</div><h4>CYBER3 VPN</h4><p>加密、无日志的 WireGuard VPN：每天免费 400 MB，订阅即享不限流量，4 个国家共 6 台服务器，支持分离隧道（split tunneling）和内置测速。</p></div><div class="x7-b"><div class="x7-bi">🔗</div><h4>号码与链接检测 + 上报</h4><p>检测任意号码或链接；未知威胁可提交上报，经分析师验证后纳入共享威胁数据库。</p></div></div></div>
+  <div class="x7-eco"><h3>一个生态系统。技术由同一方端到端掌控。</h3><p class="x7-ep">这七层并非不同厂商产品的拼凑，而是由同一家公司构建、运营和支持的统一系统——产品之间没有盲区，整条链路只有一个责任方。</p><div class="x7-where"><div class="x7-w"><b>1–4</b><span class="x7-wl">在传感器上，部署于您的现场</span><span class="x7-wn">Inline IPS · Active Response · L2 Shield · CYBER3 Context Fusion Engine</span></div><div class="x7-w"><b>5</b><span class="x7-wl">在云端，随时随地</span><span class="x7-wn">CYBER3 Edge——边缘侧的 DNS-shield 与威胁数据库</span></div><div class="x7-w"><b>6</b><span class="x7-wl">在每台工作站上</span><span class="x7-wn">CYBER3 EDR/XDR for Desktop</span></div><div class="x7-w"><b>7</b><span class="x7-wl">在每部手机上</span><span class="x7-wn">CYBER3 Mobile Protection</span></div></div><div class="x7-ecols"><div><h4>七层共享</h4><ul class="x7-shared"><li>同一个 CYBER3 威胁数据库（超过 250 万个指标，每日更新）</li><li>同一个 SOC，24/7 全天候</li><li>同一个 MLEO 编排器：在某一层发现的威胁，会在最合适的层级执行处置</li><li>闭环：我们自有的传感器将其指标贡献给保护工作站和手机的数据库</li></ul></div><div><h4>我们自主构建和运营的部分</h4><div class="x7-own"><span>网络传感器及其规则集</span><span>L2 Shield</span><span>CYBER3 Context Fusion Engine 与 MLEO</span><span>CYBER3 Edge 与威胁数据库</span><span>自主可控的安全大模型（LLM）</span><span>Desktop 与 Mobile 应用</span><span>VPN 网络</span><span>客户控制台与 SOC 门户</span></div></div></div><div class="x7-why"><h4>为何对机构至关重要</h4><ul><li>覆盖最主要的攻击途径：员工与工作站——网络钓鱼、诈骗、恶意链接与附件、泄露的密码。</li><li>保护外勤或远程办公的员工，而不仅限于物理边界之内。</li><li>隐私优先设计：设备端处理与 k-匿名；无需注册账户，无广告，无广告 SDK。</li><li>终端遥测数据汇入同一个 SOC 和 MLEO，打通网络侧检测与终端侧检测的闭环。</li></ul></div></div>
+  <script src="/endpoint7.js" defer></script>
+</section>
+
+<section id="packages" class="section alt">
+  <div class="head">
+    <div class="kicker">套餐</div>
+    <h2>按贵机构规模定制</h2>
+    <p>每个方案都包含上一方案的全部内容,并增加防御层与能力。具体配置(传感器、站点、工作站、手机)在对环境进行初步评估后确定。</p>
+  </div>
+  <div class="cards pk7-cards">
+    <article class="card pk7"><div class="badge" style="background:#1E4C95">STANDARD</div><h3>Standard</h3>
+      <p class="pk7-inc">包含</p><ul class="pk7-list"><li>7×24 托管 SOC · 2–11 秒自主响应</li><li>主站点的内联传感器</li><li>第 1–4 层:Inline IPS · Active Response · L2 Shield · CYBER3 Context Fusion Engine</li><li>MLEO:L3 ↔ L2 关联,并在正确的层执行</li><li>每月定期漏洞评估</li><li>通俗易懂的告警(Telegram、邮件)+ 含 NIS2 报告的客户门户</li><li>传感器 7×24 自主健康检查</li></ul>
+      <details class="more"><summary>适合</summary><div class="body">IT 基础设施集中的中心办公点。无需自建 SOC 即可获得 7×24 自主监控与定期漏洞画像。</div></details></article>
+    <article class="card pk7"><div class="badge" style="background:#1E4C95">扩展</div><h3>扩展</h3>
+      <p class="pk7-inc">Standard 的全部内容,另加</p><ul class="pk7-list"><li>所有站点部署内联传感器</li><li>第 5 层 · CYBER3 Edge:面向整个组织的 DNS 防护盾与边缘 IOC</li><li>第 6 层 · 关键工作站部署 CYBER3 EDR/XDR for Desktop</li><li>客户控制台:隔离工作站、远程扫描、终端群状态</li><li>内部网络的 CYBER3 Global Scan</li><li>MLEO 覆盖所有站点</li><li>每两周漏洞评估</li></ul>
+      <details class="more"><summary>适合</summary><div class="body">暴露较高的多站点机构。处处网络覆盖，外加最重要工作站上的终端 XDR。</div></details></article>
+    <article class="card pk7 feature"><div class="badge">推荐</div><h3>完整</h3>
+      <p class="pk7-inc">扩展版的全部内容,另加</p><ul class="pk7-list"><li>所有工作站部署 CYBER3 EDR/XDR for Desktop</li><li>第 7 层 · 员工手机部署 CYBER3 Mobile Protection</li><li>MLEO 覆盖全部 7 层:网络、云端、工作站、手机</li><li>持续漏洞评估</li><li>组织账户的泄露与身份监测</li><li>网络 + 终端 + 移动统一报告(NIS2 第 21/23 条)</li></ul>
+      <details class="more"><summary>适合</summary><div class="body">县级、敏感公民数据、严格合规。完整的多层防御——边界与每台工作站——由单一供应商提供并统一报告。</div></details></article>
+  </div>
+  <p class="pricenote">价格：本文件介绍服务与技术方案。详细的财务报价应要求提供，依据初始评估（站点、传感器、终端）以及适用于贵机构的采购方式。</p>
+</section>
+
+<section id="start" class="section">
+  <div class="head">
+    <div class="kicker">开始</div>
+    <h2>从评估到自主防御</h2>
+    <p>为任何规模的组织提供简单的上手流程——从单一办公室到分布式公共机构。</p>
+  </div>
+  <div class="dl">
+    <article class="plat">
+      <div class="pico">🎯</div>
+      <h3>1 · 评估</h3>
+      <p>我们通过漏洞评估梳理您的资产和暴露面——清晰呈现您的现状。</p>
+      <a class="btn" href="mailto:contact@rol.ro?subject=FasterUp%20-%20Contact">▸ 申请评估</a>
+      <span class="hint">无需承诺 · 按您的环境定制</span>
+      <details class="more"><summary>查看详情</summary>
+        <div class="body">我们通过漏洞评估梳理贵机构的资产与暴露面——结果是对现状的清晰呈现。<b>无需承诺，严格限定于贵方环境</b>，并为合理规模的报价奠定基础。</div>
+      </details>
+    </article>
+
+    <article class="plat">
+      <div class="pico">🖥️</div>
+      <h3>2 · 传感器部署</h3>
+      <p>我们在您的站点安装网络传感器——inline 或被动——通过专用加密 VPN 连接到 SOC。</p>
+      <a class="btn ghost" href="#technology">▸ 查看架构</a>
+      <span class="hint">每站点约 15 分钟 · 无终端代理</span>
+      <details class="more"><summary>查看详情</summary>
+        <div class="body">我们在每个站点安装网络传感器，inline 或被动，通过加密专用 VPN 连接到 SOC。<b>每站点约 15 分钟，终端上无代理。</b>可选地，按贵方策略在工作站和移动设备上部署 CYBER3 XDR 应用。</div>
+      </details>
+    </article>
+
+    <article class="plat">
+      <div class="pico"><svg class="cshield" viewBox="0 0 24 24"><path d="M12 2.1 L20.6 5 V11 C20.6 16.6 16.8 20.5 12 21.9 C7.2 20.5 3.4 16.6 3.4 11 V5 Z" fill="rgba(212,175,55,.14)" stroke="#d4af37" stroke-width="1.3"/><g fill="none" stroke="#f2d778" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5.2 V18.2"/><path d="M12 5.7 h2.2 a2 2 0 0 1 0 3.9 H12"/><path d="M8 11 L16 15.6"/><path d="M16 11 L8 15.6"/></g></svg></div>
+      <h3>3 · 自主 SOC</h3>
+      <p>7×24 的 AI 监控与响应上线。您收到告警和报告——其余交给平台。</p>
+      <a class="btn" href="mailto:contact@rol.ro?subject=FasterUp%20-%20Contact">▸ 联系我们</a>
+      <span class="hint">托管 · 自主 · 始终在线</span>
+      <details class="more"><summary>查看详情</summary>
+        <div class="body">7×24 的 AI 监控与响应上线。你收到清晰的告警和报告，其余交给平台——在自主 Health Check 之下运行，它监控、管理并自我修复整支舰队，<b>无需人工介入</b>。</div>
+      </details>
+    </article>
+  </div>
+</section>
+
+<style>
+.c3foot{width:100%;box-sizing:border-box;border-top:1px solid #1E4C95;background:#040f24;color:#9FB3D1;padding:12px 22px;display:flex;flex-direction:column;gap:6px;font-size:12px}
+.c3foot .c3r{display:flex;flex-wrap:wrap;align-items:center;gap:4px 16px;width:100%}
+.c3foot .c3b{font-weight:800;font-size:15px;color:#FF0000}.c3foot .c3b .cr{color:#fff}
+.c3foot .c3tag{color:#9FB3D1}
+.c3foot .c3badges{margin-left:auto;color:#D4AF37;border:1px solid rgba(212,175,55,.4);border-radius:8px;padding:3px 10px;font-size:10.5px;letter-spacing:.3px}
+.c3foot a{color:#9FB3D1;text-decoration:none}.c3foot a:hover{color:#D4AF37}
+.c3foot .c3sep{color:#1E4C95}
+.c3foot .c3r3{border-top:1px solid rgba(30,76,149,.3);padding-top:6px;color:#6f86ad;font-size:10.5px}
+.c3foot .c3grow{flex:1;min-width:10px}
+@media(max-width:760px){.c3foot .c3badges{margin-left:0}.c3foot .c3grow{display:none}}
+.cshield{width:1.28em;height:1.28em;vertical-align:-.30em;display:inline-block}</style>
+<footer class="c3foot">
+  <div class="c3r">
+    <span class="c3b">FasterUp<span class="cr">.AI</span></span>
+    <span class="c3tag">面向企业与公共管理的 AI 自主网络安全平台。托管 SOC 与漏洞评估。</span>
+    <span class="c3badges">ISO/IEC 27001:2022 · GDPR · NIS2 · AI Act</span>
+    <a class="c3sw" href="https://cyber3.ai/status/zh/" target="_blank" rel="noopener"><i id="c3swd"></i><span id="c3swt">…</span></a>
+  </div>
+  <div class="c3r">
+    <a href="#services">服务</a><a href="#technology">技术</a>    <a href="#xdr">终端 XDR</a>
+    <a href="#packages">套餐</a>
+<a href="#start">开始</a><a href="https://cyber3.ai/status/zh/" target="_blank" rel="noopener">服务状态</a>
+    <span class="c3sep">·</span>
+    <a href="/contact">联系</a><a href="/terms">条款</a><a href="/privacy">隐私</a>
+  </div>
+  <div class="c3r c3r3">
+    <span>ROL PORTAL SERVICES SRL · CUI RO 36837313 · J2016016379403 · ISO/IEC 27001:2022 · <a href="mailto:contact@rol.ro">contact@rol.ro</a></span>
+    <span class="c3grow"></span>
+    <span>© 2026 FasterUp.AI — ROL PORTAL SERVICES SRL · 保留所有权利。</span>
+  </div>
+</footer>
+
+<script src="/app.js"></script>
+<style>.c3sw{display:inline-flex;align-items:center;gap:7px;font-size:11.5px;color:#9FB3D1;text-decoration:none}.c3sw:hover span{color:#D4AF37}
+.c3sw i{width:8px;height:8px;border-radius:50%;background:#9FB3D1;flex:0 0 auto}
+.c3sw i.ok{background:#37d39b;box-shadow:0 0 6px #37d39b;animation:c3swp 2s ease-in-out infinite}
+.c3sw i.deg{background:#e8b53a;box-shadow:0 0 6px #e8b53a}
+@keyframes c3swp{0%,100%{opacity:1}50%{opacity:.45}}</style>
+<script>(function(){var U=["https://cyber3-edge.cyber3.workers.dev/v1/health","https://cyber3-llm.cyber3.workers.dev/v1/health","https://cyber3-vpn-cp.cyber3.workers.dev/health"];
+function chk(){Promise.all(U.map(function(u){return fetch(u,{cache:"no-store"}).then(function(r){return r.ok?0:1}).catch(function(){return 1})})).then(function(res){
+var bad=res.reduce(function(a,b){return a+b},0),d=document.getElementById("c3swd"),t=document.getElementById("c3swt");if(!d)return;
+d.className=bad?"deg":"ok";t.textContent=bad?"部分服务受影响":"所有系统运行正常";});}chk();setInterval(chk,60000);})();</script>
+</body>
+</html>

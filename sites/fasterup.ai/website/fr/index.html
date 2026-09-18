@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>FasterUp.AI — Plateforme Autonome de Cybersécurité par IA</title>
+<meta name="description" content="FasterUp AI Autonomous Platform — SOC géré et Évaluation de Vulnérabilités pour les entreprises et l'administration publique. Détecte, décide et répond de façon autonome.">
+<meta property="og:title" content="FasterUp.AI — Plateforme Autonome de Cybersécurité par IA">
+<meta property="og:description" content="SOC géré & Évaluation de Vulnérabilités pour entreprises et administration publique. Détection et réponse autonomes en secondes.">
+<meta property="og:image" content="/assets/icon.svg">
+<link rel="icon" href="/assets/icon.svg">
+<link rel="stylesheet" href="/styles.css">
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-KH8RKEF517"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-KH8RKEF517');</script>
+</head>
+<body>
+
+<header class="nav">
+  <a class="brand" href="/fr/"><i class="xmark"></i><span>FasterUp</span>.AI</a>
+  <nav class="links">
+    <a href="#services">Services</a>
+    <a href="#technology">Technologie</a>
+    <a href="#xdr">Endpoint XDR</a>
+    <a href="#packages">Forfaits</a>
+    <a href="#start">Démarrer</a>
+    <a href="/contact">Contact</a>
+    <select class="lang" aria-label="Langue" onchange="localStorage.setItem('fulang',this.value);document.cookie='fulang='+encodeURIComponent(this.value)+';path=/;max-age=31536000;samesite=lax';location.href=this.value">
+      <option value="/ro/">RO</option>
+      <option value="/">EN</option>
+      <option value="/es/">ES</option>
+      <option value="/it/">IT</option>
+      <option value="/de/">DE</option>
+      <option value="/fr/">FR</option>
+      <option value="/ru/">RU</option>
+      <option value="/zh/">中文</option>
+    </select>
+    <a class="btn-sm" href="#start">Demander une évaluation</a>
+  </nav>
+</header>
+<script>
+  (function(){var p=location.pathname,m=p.match(/^\/(ro|es|it|de|fr|ru|zh)\//),v=m?'/'+m[1]+'/':'/',s=document.querySelector('.lang');if(s)s.value=v;})();
+</script>
+
+<section class="hero">
+  <div class="grid-bg"></div>
+  <div class="hero-inner">
+    <div class="eyebrow">▸ FASTERUP AI AUTONOMOUS PLATFORM</div>
+    <h1><span class="r">Cybersécurité autonome</span><br>pour les entreprises et l'administration publique</h1>
+    <p class="sub">FasterUp détecte, décide et répond aux cybermenaces en temps réel — sept couches de défense complémentaires, du fil au poste de travail et au téléphone, orchestrées par MLEO en une seule décision autonome. Centre des opérations de sécurité géré et évaluation des vulnérabilités, installés dans vos locaux.</p>
+    <div class="cta">
+      <a class="btn" href="#start">▸ Demander une évaluation</a>
+      <a class="btn ghost" href="#technology">Comment ça marche</a>
+    </div>
+    <div class="stats">
+      <div><b>10ms–11s</b><span>de la menace à la décision autonome</span></div>
+      <div><b>24/7</b><span>surveillance &amp; réponse</span></div>
+      <div><b>7</b><span>couches de défense complémentaires, orchestrées par MLEO</span></div>
+      <div><b data-count="914944" data-suffix="+">0</b><span>indicateurs de menace en direct</span></div>
+    </div>
+  </div>
+</section>
+
+<section id="services" class="section">
+  <div class="head">
+    <div class="kicker">SERVICES</div>
+    <h2>Deux services. Une plateforme autonome.</h2>
+    <p>Détection et réponse gérées et évaluation continue des vulnérabilités — propulsées par le même moteur IA et la même intelligence des menaces en direct.</p>
+  </div>
+  <div class="cards">
+    <article class="card feature">
+      <div class="badge">GÉRÉ · 24/7</div><div class="ico"><svg class="cshield" viewBox="0 0 24 24"><path d="M12 2.1 L20.6 5 V11 C20.6 16.6 16.8 20.5 12 21.9 C7.2 20.5 3.4 16.6 3.4 11 V5 Z" fill="rgba(212,175,55,.14)" stroke="#d4af37" stroke-width="1.3"/><g fill="none" stroke="#f2d778" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5.2 V18.2"/><path d="M12 5.7 h2.2 a2 2 0 0 1 0 3.9 H12"/><path d="M8 11 L16 15.6"/><path d="M16 11 L8 15.6"/></g></svg></div>
+      <h3>SOC — Centre d'Opérations de Sécurité</h3>
+      <p>Surveillance autonome et entièrement gérée sur sept couches de défense complémentaires. FasterUp détecte les intrusions, les anomalies réseau, le command-and-control, l'exfiltration de données et les violations de politique — l'IA décide et MLEO applique sur la bonne couche : bloquer, notifier ou escalader, en quelques secondes.</p>
+      <div class="tech"><span>Cluster 1 IDS/IPS</span><span>Cluster 1 SIEM</span><span>CYBER3 Context Fusion Engine</span><span>MISP threat intel</span></div>
+      <p class="note">Réponse autonome en secondes — pas en heures. Les alertes et rapports parviennent à votre équipe par Telegram &amp; e-mail.</p>
+      <details class="more"><summary>Voir les détails</summary>
+        <div class="body"><ul><li>Surveillance 24/7 <b>sans analystes de sécurité internes</b> — la plateforme gère la routine, les humains les exceptions.</li><li>Détection en temps réel sur Cluster 1 IDS/IPS, corrélation d'événements via Cluster 1 SIEM.</li><li>Fusion de contexte de quatre sources à chaque alerte : MISP + Cluster 1 IDS/IPS + SIEM + la base CYBER3.</li><li>Action autonome selon la gravité : journalisation silencieuse → blocage IP automatique → alerte urgente → escalade vers un humain.</li></ul><div class="adv"><b>Avantage concurrentiel :</b> un seul fournisseur possède toute la chaîne — du capteur réseau à la décision — la réponse prend donc <b>2–11 secondes, pas des heures</b>, sans SOC à recruter, former et maintenir éveillé à 3 h du matin.</div></div>
+      </details>
+    </article>
+
+    <article class="card feature">
+      <div class="badge">CONTINU</div><div class="ico">🎯</div>
+      <h3>VAS — Évaluation de Vulnérabilités</h3>
+      <p>Évaluation automatique et continue de vos actifs pour les vulnérabilités connues, mauvaises configurations et services exposés. Vous recevez des rapports priorisés et exploitables — pour corriger d'abord l'essentiel, avant que les attaquants ne le trouvent.</p>
+      <div class="tech"><span>découverte d'actifs</span><span>détection de CVE</span><span>scans planifiés</span><span>rapports priorisés</span></div>
+      <p class="note">Connaissez votre exposition avant les attaquants. Les scans s'exécutent en toute sécurité, selon un calendrier que vous contrôlez.</p>
+      <details class="more"><summary>Voir les détails</summary>
+        <div class="body"><ul><li><b>Découverte automatique des actifs</b> sur votre réseau — vous ne pouvez pas protéger ce que vous ignorez posséder.</li><li>Détection des vulnérabilités connues (CVE) et des configurations non sécurisées.</li><li>Scans planifiés, exécutés en toute sécurité, selon un calendrier <b>que vous contrôlez</b>.</li><li>Rapports priorisés — corrigez d'abord les risques à plus fort impact.</li></ul><div class="adv"><b>Avantage concurrentiel :</b> VAS et SOC travaillent ensemble — le SOC arrête les attaques en cours tandis que VAS <b>réduit proactivement votre surface d'attaque</b> avant que les attaquants ne trouvent la faille.</div></div>
+      </details>
+    </article>
+
+    <article class="card">
+      <div class="ico">🤖</div>
+      <h3>Réponse autonome</h3>
+      <p>Chaque alerte est évaluée par l'IA sur toutes les sources. Selon la gravité, FasterUp journalise, bloque automatiquement, lève une alerte urgente ou escalade vers un analyste — et MLEO exécute le blocage sur la bonne couche, du pare-feu au VLAN de quarantaine. Aucune intervention humaine nécessaire.</p>
+      <div class="tech"><span>bloque</span><span>notifie</span><span>escalade</span></div>
+      <p class="note">Actions selon la gravité, 24/7 — même à 3 h du matin.</p>
+      <details class="more"><summary>Voir les détails</summary>
+        <div class="body"><ul><li><b>Suspect</b> — événement ambigu, à surveiller → journalisé en silence.</li><li><b>Confirmé</b> — attaque confirmée → blocage automatique de l'IP source.</li><li><b>Grave</b> — événement à fort impact → une alerte urgente est déclenchée.</li><li><b>Critique</b> — compromission critique → escalade vers un analyste humain.</li></ul><div class="adv"><b>Avantage concurrentiel :</b> la plateforme <b>agit sans attendre un humain</b>. Votre équipe n'intervient que lorsqu'une décision critique l'exige vraiment.</div></div>
+      </details>
+    </article>
+
+    <article class="card">
+      <div class="ico">🧠</div>
+      <h3>Moteur de Fusion de Contexte IA</h3>
+      <p>Le moteur CYBER3 Context Fusion Engine unifie quatre sources indépendantes — renseignement sur les menaces, télémétrie réseau, corrélation SIEM et CYBER3 Database — en une seule décision contextuelle de risque.</p>
+      <div class="tech"><span>multi-source</span><span>risque contextuel</span><span>2–11s</span></div>
+      <p class="note">Fusion de quatre signaux en une décision structurée — technologie propriétaire FasterUp.</p>
+      <details class="more"><summary>Voir les détails</summary>
+        <div class="body"><ul><li>Quatre signaux indépendants évalués ensemble : <b>MISP</b> threat intel, télémétrie réseau <b>Cluster 1 IDS/IPS</b>, corrélation <b>Cluster 1 SIEM</b>, la <b>base CYBER3</b>.</li><li>Une décision contextuelle de risque par alerte — en 2–11 secondes.</li><li>Technologie propriétaire, maîtrisée de bout en bout par ROL PORTAL SERVICES.</li></ul><div class="adv"><b>Avantage concurrentiel :</b> le même moteur propulse aussi l'application <b>CYBER3 d'endpoint (XDR)</b> — réseau et postes partagent <b>une même intelligence des menaces en direct</b>, bouclant la boucle entre périmètre et endpoint.</div></div>
+      </details>
+    </article>
+
+    <article class="card">
+      <div class="ico">🖥️</div>
+      <h3>Capteurs réseau</h3>
+      <p>Des capteurs dédiés sur vos sites — en ligne ou passifs — exécutent sur place les premières couches réseau : Inline IPS sur le fil, Active Response dans le pare-feu et L2 Shield au niveau Ethernet, contre l'ARP spoofing, le DHCP pirate, les scans et les exploits — sans toucher aux postes de travail.</p>
+      <div class="tech"><span>inline / passif</span><span>VPN privé</span><span>sans agents sur postes</span></div>
+      <p class="note">Reliés au SOC via un VPN privé chiffré.</p>
+      <details class="more"><summary>Voir les détails</summary>
+        <div class="body"><ul><li>Installés inline ou passifs sur chaque site — <b>~15 minutes par site</b>, sans agents sur les postes.</li><li>Surveillent l'ARP spoofing, le DHCP pirate, les scans, les exploits et les comportements anormaux.</li><li><b>Vos données restent dans vos locaux</b> — seules les métadonnées circulent vers le SOC, via un VPN privé chiffré.</li></ul><div class="adv"><b>Avantage concurrentiel :</b> confidentialité dès la conception — pensé pour le traitement des données du <b>RGPD et du secteur public</b>, avec piste d'audit complète.</div></div>
+      </details>
+    </article>
+
+    <article class="card">
+      <div class="ico">🔔</div>
+      <h3>Des alertes claires et humaines</h3>
+      <p>Quand quelque chose compte, votre équipe reçoit une explication concise et compréhensible — ce qui s'est passé, pourquoi c'est une menace et ce que FasterUp a déjà fait — par Telegram et e-mail.</p>
+      <div class="tech"><span>Telegram</span><span>e-mail</span><span>explication IA</span></div>
+      <p class="note">Pas de bruit. Seulement ce qui requiert votre attention, expliqué simplement.</p>
+      <details class="more"><summary>Voir les détails</summary>
+        <div class="body"><ul><li>Explication en langage clair : <b>ce qui s'est passé, pourquoi c'est une menace et ce que la plateforme a déjà fait</b>.</li><li>Transmise à votre équipe par Telegram et e-mail.</li><li>Pas de vidage de journaux, pas de déluge d'alertes.</li></ul><div class="adv"><b>Avantage concurrentiel :</b> zéro fatigue d'alerte — votre personnel ne voit <b>que ce qui requiert son attention</b>, déjà trié et traité.</div></div>
+      </details>
+    </article>
+  </div>
+</section>
+
+<section id="technology" class="section alt d7">
+  <div class="head">
+    <div class="kicker">TECHNOLOGIE</div>
+    <h2>Blocage en cascade. Sept couches complémentaires.</h2>
+    <p>Chaque menace traverse une cascade de sept couches de défense : du fil à Ethernet, puis le cloud et le poste final. Ce qui échappe à une couche est arrêté par la suivante. Les couches sont complémentaires, non redondantes : chacune couvre un angle que les autres ne voient pas. MLEO les orchestre comme un seul organisme.</p>
+  </div>
+
+  <div id="defense" class="d7-block">
+  <div class="d7-status" aria-labelledby="d7-st-h">
+    <div class="d7-st-head"><h3 id="d7-st-h">Capabilities Status</h3><span class="d7-sum"><i class="d7-led"></i>7 / 7 Active</span></div>
+    <div class="d7-caps">
+<div class="d7-cap" style="--c:#3b82f6"><div class="d7-top"><span class="d7-no">1</span>Réseau</div><div class="d7-cnm">Inline IPS</div><div class="d7-ln"><span class="d7-act"><i class="d7-led"></i>Active</span><span><span class="d7-rtl">réponse </span><span class="d7-rt">&lt; 10 ms</span></span></div></div>
+<div class="d7-cap" style="--c:#f59e0b"><div class="d7-top"><span class="d7-no">2</span>Hôte</div><div class="d7-cnm">Active Response</div><div class="d7-ln"><span class="d7-act"><i class="d7-led"></i>Active</span><span><span class="d7-rtl">réponse </span><span class="d7-rt">2–11 s</span></span></div></div>
+<div class="d7-cap" style="--c:#22d3ee"><div class="d7-top"><span class="d7-no">3</span>Ethernet</div><div class="d7-cnm">L2 Shield</div><div class="d7-ln"><span class="d7-act"><i class="d7-led"></i>Active</span><span><span class="d7-rtl">réponse </span><span class="d7-rt">&lt; 1 ms</span></span></div></div>
+<div class="d7-cap" style="--c:#34d399"><div class="d7-top"><span class="d7-no">4</span>IA</div><div class="d7-cnm">CYBER3 Context Fusion Engine</div><div class="d7-ln"><span class="d7-act"><i class="d7-led"></i>Active</span><span><span class="d7-rtl">réponse </span><span class="d7-rt">2–11 s</span></span></div></div>
+<div class="d7-cap" style="--c:#a78bfa"><div class="d7-top"><span class="d7-no">5</span>Cloud</div><div class="d7-cnm">CYBER3 Edge</div><div class="d7-ln"><span class="d7-act"><i class="d7-led"></i>Active</span><span><span class="d7-rtl">réponse </span><span class="d7-rt">&lt; 50 ms</span></span></div></div>
+<div class="d7-cap" style="--c:#2dd4bf"><div class="d7-top"><span class="d7-no">6</span>Poste</div><div class="d7-cnm">CYBER3 EDR/XDR for Desktop</div><div class="d7-ln"><span class="d7-act"><i class="d7-led"></i>Active</span><span><span class="d7-rtl">réponse </span><span class="d7-rt">temps réel</span></span></div></div>
+<div class="d7-cap" style="--c:#fb7185"><div class="d7-top"><span class="d7-no">7</span>Mobile</div><div class="d7-cnm">CYBER3 Mobile Protection</div><div class="d7-ln"><span class="d7-act"><i class="d7-led"></i>Active</span><span><span class="d7-rtl">réponse </span><span class="d7-rt">temps réel</span></span></div></div>
+<div class="d7-cap d7-mleo" style="--c:#D4AF37"><div class="d7-top"><span class="d7-no">⬡</span>Orchestrateur</div><div class="d7-cnm">Multi Layer Enforcement Orchestrator</div><div class="d7-ln"><span class="d7-orch">orchestre 7 / 7 couches</span><span class="d7-rt">L2 ↔ L3</span></div></div>
+    </div>
+  </div>
+
+  <div class="d7-cascade">
+    <canvas id="d7-rain" aria-hidden="true"></canvas>
+    <div class="d7-rows">
+      <div class="d7-in"><span>◤ Trafic + menaces entrants</span><span class="d7-in-r">100 % inspecté</span></div>
+<div class="d7-row" style="--c:#3b82f6"><div class="d7-num">1</div><div class="d7-mid"><div class="d7-nm">Inline IPS<span class="d7-badge">Réseau · L3–L7</span></div><div class="d7-mech">inspection en ligne sur le fil · signatures + anomalies · indicateurs IOC</div><div class="d7-exp">Détecte et <span class="c">arrête le paquet sur le fil</span>, en millisecondes, avant qu'il n'entre dans le réseau du client.</div><div class="d7-fnl" style="width:100%"></div></div><div class="d7-right"><span class="d7-act"><i class="d7-led"></i>Active</span><span class="d7-rt2">&lt; 10 ms</span><span class="d7-vs">temps de réponse</span></div></div>
+<div class="d7-row" style="--c:#f59e0b"><div class="d7-num">2</div><div class="d7-mid"><div class="d7-nm">Active Response<span class="d7-badge">Hôte · L3</span></div><div class="d7-mech">règle DROP dans le pare-feu · escalade vers un blocage permanent sur toute la flotte</div><div class="d7-exp">Réponse automatique à une alerte : une <span class="c">règle DROP dans le pare-feu</span> pour l'IP de l'attaquant. Repli natif, indépendant de l'IA.</div><div class="d7-fnl" style="width:82%"></div></div><div class="d7-right"><span class="d7-act"><i class="d7-led"></i>Active</span><span class="d7-rt2">2–11 s</span><span class="d7-vs">temps de réponse</span></div></div>
+<div class="d7-row" style="--c:#22d3ee"><div class="d7-num">3</div><div class="d7-mid"><div class="d7-nm">L2 Shield<span class="d7-badge">Ethernet · L2</span></div><div class="d7-mech">Ethernet natif · anti-ARP-spoof (pin IP↔MAC de la passerelle) · anti-DHCP pirate · dead-man anti-blackhole</div><div class="d7-exp"><span class="c">La seule couche au niveau Ethernet.</span> Arrête le MITM, l'empoisonnement ARP et le DHCP pirate — des attaques que les couches IP <span class="c">ne voient pas</span>.</div><div class="d7-fnl" style="width:70%"></div></div><div class="d7-right"><span class="d7-act"><i class="d7-led"></i>Active</span><span class="d7-rt2">&lt; 1 ms</span><span class="d7-vs">temps de réponse</span></div></div>
+<div class="d7-row" style="--c:#34d399"><div class="d7-num">4</div><div class="d7-mid"><div class="d7-nm">CYBER3 Context Fusion Engine<span class="d7-badge">IA · L3–L7</span></div><div class="d7-mech">fusion multi-sources : réseau + hôte + threat intel + CYBER3 DB</div><div class="d7-exp">Décision autonome à partir du contexte fusionné ; bloque même <span class="c">les connexions sortantes vers un C2</span> (commande et contrôle).</div><div class="d7-fnl" style="width:60%"></div></div><div class="d7-right"><span class="d7-act"><i class="d7-led"></i>Active</span><span class="d7-rt2">2–11 s</span><span class="d7-vs">temps de réponse</span></div></div>
+<div class="d7-row" style="--c:#a78bfa"><div class="d7-num">5</div><div class="d7-mid"><div class="d7-nm">CYBER3 Edge<span class="d7-badge">Cloud · partout</span></div><div class="d7-mech">DNS-shield · IOC en périphérie (2M+ indicateurs) · extension de navigateur</div><div class="d7-exp">Protection web et DNS <span class="c">partout, même hors réseau</span> : les domaines et URL dangereux sont bloqués avant la connexion.</div><div class="d7-fnl" style="width:52%"></div></div><div class="d7-right"><span class="d7-act"><i class="d7-led"></i>Active</span><span class="d7-rt2">&lt; 50 ms</span><span class="d7-vs">temps de réponse</span></div></div>
+<div class="d7-row" style="--c:#2dd4bf"><div class="d7-num">6</div><div class="d7-mid"><div class="d7-nm">CYBER3 EDR/XDR for Desktop<span class="d7-badge">Poste · station de travail</span></div><div class="d7-mech">détection comportementale · télémétrie XDR → SOC · quarantaine</div><div class="d7-exp">Couvre les menaces arrivées <span class="c">sur le poste</span> (USB, fichiers, processus), au-delà du réseau.</div><div class="d7-fnl" style="width:46%"></div></div><div class="d7-right"><span class="d7-act"><i class="d7-led"></i>Active</span><span class="d7-rt2">temps réel</span><span class="d7-vs">temps de réponse</span></div></div>
+<div class="d7-row" style="--c:#fb7185"><div class="d7-num">7</div><div class="d7-mid"><div class="d7-nm">CYBER3 Mobile Protection<span class="d7-badge">Mobile · appareil</span></div><div class="d7-mech">anti-arnaque / anti-phishing · filtrage DNS · VPN</div><div class="d7-exp">Protège l'utilisateur <span class="c">en mobilité</span> : la dernière couche, sur l'appareil personnel.</div><div class="d7-fnl" style="width:42%"></div></div><div class="d7-right"><span class="d7-act"><i class="d7-led"></i>Active</span><span class="d7-rt2">temps réel</span><span class="d7-vs">temps de réponse</span></div></div>
+      <div class="d7-outb"><span>◣ Atteint le réseau / l'utilisateur</span><span class="d7-outb-r">trafic inspecté sur 7 couches</span></div>
+    </div>
+  </div>
+
+  <div class="d7-mleo-sec">
+    <p class="d7-mtag"><span class="d7-hex">⬡</span>Orchestrateur propriétaire · 7 couches</p>
+    <h3 class="d7-mh">Multi Layer Enforcement Orchestrator<small>MLEO · LE NOYAU QUI RELIE LES 7 COUCHES</small></h3>
+    <p class="d7-ml">Sans orchestration, chaque couche <b>détecterait et bloquerait de son côté</b>. MLEO est le noyau qui <b>corrèle les signaux entre les couches et décide sur quelle couche chaque menace est traitée</b>, à partir d'une identité unifiée de l'appareil : la même machine vue comme <b>IP en couche 3</b> et comme <b>MAC en couche 2</b>.</p>
+    <div class="d7-corr">
+      <div class="d7-cbox"><p class="d7-k">Couche 3 · couches 1 · 2 · 4</p><p class="d7-t">Blocages sur IP</p><p class="d7-d">Inline IPS, Active Response et CYBER3 Context Fusion Engine : qui a attaqué, sur quel port, quand.</p></div>
+      <div class="d7-arr" aria-hidden="true">⇄</div>
+      <div class="d7-cbox d7-core"><p class="d7-k">MLEO · identité unifiée</p><p class="d7-t">Une seule source de vérité</p><p class="d7-id">MAC ↔ IP ↔ VLAN ↔ port<br>↔ emplacement physique ↔ criticité</p></div>
+      <div class="d7-arr" aria-hidden="true">⇄</div>
+      <div class="d7-cbox"><p class="d7-k">Couche 2 · couche 3</p><p class="d7-t">Identité MAC</p><p class="d7-d">L2 Shield : table ARP avec historique, anomalies Ethernet, l'appareil réel derrière l'IP.</p></div>
+    </div>
+    <div class="d7-out"><b>Enforcement sur la bonne couche</b><span>drop list sur le capteur (L3)</span><span class="d7-sep">·</span><span>quarantaine VLAN sur le switch (L2)</span><span class="d7-sep">·</span><span>bloqué une seule fois, pas sur chaque couche séparément</span></div>
+    <div class="d7-mcols">
+      <div><h4>Ce que cela résout</h4><ul class="d7-prob"><li><b>L'évasion par changement d'IP</b>Un attaquant bloqué sur une IP en prend une autre et continue. En L3, il semble être un nouvel acteur ; en L2, c'est la même MAC — et MLEO la reconnaît.</li><li><b>Une isolation correcte lors d'un ARP spoofing</b>Le trafic usurpé semble venir de la victime. La corrélation directionnelle isole l'attaquant, pas la machine dont le trafic semble provenir.</li><li><b>Une vue unique, pas des blocages fragmentés</b>Le même appareil n'est plus bloqué séparément sur 3–4 couches sans lien entre elles.</li><li><b>Un suivi dans le temps</b>À partir d'une IP vue il y a 24 heures, vous retrouvez la MAC et le port physique où se trouve l'appareil.</li></ul></div>
+      <div><h4>Principes de sécurité</h4><div class="d7-chips"><span>observer avant d'appliquer</span><span>allowlist à priorité absolue</span><span>rollback transactionnel</span><span>quarantaine VLAN, pas d'arrêt</span><span>fail-safe sur chaque couche</span></div>
+        <h4>La chaîne d'enforcement MLEO</h4><ol class="d7-stages"><li class=""><span class="d7-sn">0</span><span>Collecte continue : ARP, tables MAC, blocages de chaque couche</span><span class="d7-ss">visibilité</span></li><li class=""><span class="d7-sn">1</span><span>Table de réconciliation MAC ↔ IP ↔ VLAN ↔ port, avec historique d'IP</span><span class="d7-ss">visibilité</span></li><li class=""><span class="d7-sn">2</span><span>Chaque blocage L3 reçoit son identité L2 (MAC, VLAN, port, criticité)</span><span class="d7-ss">visibilité</span></li><li class=""><span class="d7-sn">3</span><span>Même MAC, IP différentes en 15 minutes : alerte d'évasion par changement d'IP<span class="d7-risk">les étapes 0–3 offrent une visibilité complète sans toucher au réseau du client</span></span><span class="d7-ss">visibilité</span></li><li class="enf gate"><span class="d7-sn">4</span><span>Enforcement : port déplacé dans un VLAN de quarantaine, avec allowlist et rollback<span class="d7-risk">prérequis : allowlist + rollback testé</span></span><span class="d7-ss">enforcement</span></li><li class="enf"><span class="d7-sn">5</span><span>Nouvelle MAC sur un port avec historique de blocages ; ARP usurpé + blocage L3 : isolation du port</span><span class="d7-ss">enforcement</span></li><li class="enf"><span class="d7-sn">6</span><span>Sens inverse L2 → L3 : la MAC anormale est résolue en IP et bloquée à titre préventif</span><span class="d7-ss">enforcement</span></li></ol></div>
+    </div>
+  </div>
+
+  <div class="d7-foot"><div class="d7-note"><h3>Pourquoi en cascade ?</h3><p>Aucune couche n'est parfaite seule. Un paquet arrêté par l'IPS n'atteint plus Active Response ; celui qui passe est arrêté par CYBER3 Context Fusion Engine ; une attaque L2 (ARP spoofing), invisible pour les couches IP, est arrêtée par L2 Shield.</p></div><div class="d7-note"><h3>Autonome, sans intervention humaine</h3><p>Détection → fusion du contexte → décision autonome en 2–11 secondes → action : blocage temporaire, escalade vers un blocage permanent, notification. L'allowlist protège les équipements légitimes à chaque étape.</p></div><div class="d7-note"><h3>Un seul organisme</h3><p>MLEO n'est pas une nouvelle couche. C'est l'orchestrateur qui relie les couches existantes : sept couches qui voient séparément deviennent un seul organisme qui voit le même appareil à tous les niveaux.</p></div></div>
+  <p class="d7-tag">FasterUp NEXTGEN SOC · <b>7 couches · MLEO · défense en profondeur</b></p>
+  <script src="/defense7.js" defer></script>
+  </div>
+
+  <div class="head d7-pipehead">
+    <h3>Détecter. Corréler. Décider. Agir — de façon autonome.</h3>
+    <p>La plateforme FasterUp AI Autonomous transforme le signal réseau brut en une réponse structurée en secondes, en fusionnant quatre sources de renseignement indépendantes pour chaque décision.</p>
+  </div>
+  <div class="arch">
+    <div class="flow">
+      <details class="node device"><summary><b>Capteurs réseau</b><span>Cluster 1 IDS/IPS · inline ou passif</span></summary>
+        <div class="nbody">Des capteurs dédiés sur chaque site capturent et inspectent le trafic pour l'ARP spoofing, le DHCP pirate, les scans et les exploits — sans agents sur vos postes. Seules les métadonnées quittent votre réseau, via un VPN privé chiffré.</div>
+      </details>
+      <div class="arrow">→</div>
+      <details class="node edge"><summary><b>Corrélation SIEM</b><span>Cluster 1 SIEM · événements normalisés &amp; corrélés</span></summary>
+        <div class="nbody">Les paquets bruts deviennent des événements normalisés, puis corrélés sur tout le parc, de sorte que des signaux isolés se transforment en un incident unique et pertinent — pas en milliers de journaux déconnectés.</div>
+      </details>
+      <div class="arrow">→</div>
+      <details class="node soc"><summary><b>CYBER3 Context Fusion Engine</b><span>décision autonome en 2–11s</span></summary>
+        <div class="nbody">Le moteur propriétaire fusionne quatre sources indépendantes — MISP threat intel, télémétrie Cluster 1 IDS/IPS, corrélation SIEM et la base CYBER3 — en une seule décision contextuelle de risque en 2–11 secondes.</div>
+      </details>
+      <div class="arrow">→</div>
+      <details class="node device"><summary><b>Réponse</b><span>bloque · notifie · escalade</span></summary>
+        <div class="nbody">Selon la gravité, la plateforme agit d'elle-même : journalisation silencieuse, blocage automatique de l'IP source, alerte urgente ou escalade vers un analyste humain — de bout en bout en secondes, 24/7.</div>
+      </details>
+    </div>
+    <details class="kanon" open>
+      <summary><span class="tag">AUTONOME</span> Comment la plateforme décide et agit à chaque alerte</summary>
+      <div class="kbody">Chaque alerte est évaluée par l'IA sur quatre sources. Les événements <b>suspects</b> sont journalisés en silence ; une <b>attaque confirmée</b> déclenche un blocage IP automatique ; les événements <b>graves</b> déclenchent une alerte urgente ; une <b>compromission critique</b> escalade vers un analyste humain. De bout en bout : 2–11 secondes.</div>
+    </details>
+    <details class="kanon" open>
+      <summary><span class="tag">HEALTH CHECK</span> La plateforme qui se surveille — et se répare — elle-même</summary>
+      <div class="kbody">Toute la plateforme fonctionne sous un <b>Health Check</b> autonome qui surveille, administre et auto-répare en continu l'ensemble de la flotte de capteurs — 24/7, sans intervention humaine. Il détecte les captures de paquets bloquées, redémarre les services figés, rétablit les tunnels VPN tombés et valide la chaîne de bout en bout avec des alertes canary synthétiques. Chaque capteur se répare lui-même ; la flotte reste en ligne.</div>
+    </details>
+  </div>
+  <div class="principles">
+    <details class="p"><summary><b>Autonome par défaut</b></summary><span>Décide et agit sans attendre un analyste — la plateforme gère la routine, les humains les exceptions.</span></details>
+    <details class="p"><summary><b>Fusion de contexte multi-source</b></summary><span>MISP threat intel + télémétrie Cluster 1 IDS/IPS + corrélation Cluster 1 SIEM + CYBER3 Database — à chaque décision.</span></details>
+    <details class="p"><summary><b>Déployé dans vos locaux</b></summary><span>Les capteurs résident sur votre réseau ; seules les métadonnées circulent vers le SOC via un VPN privé chiffré.</span></details>
+    <details class="p"><summary><b>Conçu pour la responsabilité</b></summary><span>Piste d'audit complète, rapports structurés et traitement des données conforme au RGPD — pensé pour l'administration publique.</span></details>
+    <details class="p"><summary><b>Stack ouvert et éprouvé</b></summary><span>Bâti sur Cluster 1 IDS/IPS, corrélation SIEM et renseignement sur les menaces MISP — durci, orchestré et décidé par notre moteur IA.</span></details>
+    <details class="p"><summary><b>Pipeline en temps réel</b></summary><span>Paquet brut → événement normalisé → alerte corrélée → décision IA → réponse, de bout en bout en secondes.</span></details>
+  </div>
+</section>
+
+<section id="xdr" class="section x7">
+  <div class="head">
+    <div class="kicker">ENDPOINT XDR · CYBER3</div>
+    <h2>Le SOC, étendu à chaque poste de travail — et à chaque téléphone</h2>
+    <p>Les couches 6 et 7 de la cascade s'exécutent sur les appareils des collaborateurs : CYBER3 EDR/XDR for Desktop sur chaque poste Windows et CYBER3 Mobile Protection sur chaque téléphone. Tous deux remontent au même SOC, s'appuient sur la même base de menaces et sont orchestrés par le même MLEO — un seul propriétaire de la technologie, du capteur réseau jusqu'à l'application sur le téléphone.</p>
+  </div>
+  <div class="x7-prod"><div class="x7-ph"><span class="x7-tag">Couche 6 · Windows</span><h3>CYBER3 EDR/XDR for Desktop</h3><p>Une application Windows native qui fait de chaque poste de travail un point de détection et de réponse connecté au SOC. Signée numériquement, mise à jour automatiquement, administrée par organisation depuis la console client.</p></div><div class="x7-gal"><figure class="x7-main"><img id="x7d-main" src="/assets/shots/desktop-home-en.webp" alt="CYBER3 EDR/XDR for Desktop — Tableau de bord" loading="lazy" width="1600" height="1067"></figure><div class="x7-thumbs"><button type="button" class="x7-th on" data-g="x7d" data-src="/assets/shots/desktop-home-en.webp" data-alt="CYBER3 EDR/XDR for Desktop — Tableau de bord"><img src="/assets/shots/desktop-home-en.webp" alt="" loading="lazy"><span>Tableau de bord</span></button><button type="button" class="x7-th" data-g="x7d" data-src="/assets/shots/desktop-globalscan-en.webp" data-alt="CYBER3 EDR/XDR for Desktop — Global Scan"><img src="/assets/shots/desktop-globalscan-en.webp" alt="" loading="lazy"><span>Global Scan</span></button><button type="button" class="x7-th" data-g="x7d" data-src="/assets/shots/desktop-isolation-en.webp" data-alt="CYBER3 EDR/XDR for Desktop — Isolation du poste"><img src="/assets/shots/desktop-isolation-en.webp" alt="" loading="lazy"><span>Isolation du poste</span></button><button type="button" class="x7-th" data-g="x7d" data-src="/assets/shots/desktop-pcscan-en.webp" data-alt="CYBER3 EDR/XDR for Desktop — Analyse de l'ordinateur"><img src="/assets/shots/desktop-pcscan-en.webp" alt="" loading="lazy"><span>Analyse de l'ordinateur</span></button><button type="button" class="x7-th" data-g="x7d" data-src="/assets/shots/desktop-vpn-en.webp" data-alt="CYBER3 EDR/XDR for Desktop — CYBER3 VPN"><img src="/assets/shots/desktop-vpn-en.webp" alt="" loading="lazy"><span>CYBER3 VPN</span></button></div></div><div class="x7-blocks"><div class="x7-b"><div class="x7-bi"><svg class="cshield" viewBox="0 0 24 24"><path d="M12 2.1 L20.6 5 V11 C20.6 16.6 16.8 20.5 12 21.9 C7.2 20.5 3.4 16.6 3.4 11 V5 Z" fill="rgba(212,175,55,.14)" stroke="#d4af37" stroke-width="1.3"/><g fill="none" stroke="#f2d778" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5.2 V18.2"/><path d="M12 5.7 h2.2 a2 2 0 0 1 0 3.9 H12"/><path d="M8 11 L16 15.6"/><path d="M16 11 L8 15.6"/></g></svg></div><h4>Protection en temps réel</h4><p>DNS-Shield sur l'ensemble du poste : les domaines dangereux sont bloqués dès la résolution, et le DNS continue de fonctionner si le bouclier venait à s'arrêter (fail-open). Un moteur de menaces local fort de plus de 2,5 millions d'indicateurs connus et une extension de protection du navigateur avec 29 131 règles.</p></div><div class="x7-b"><div class="x7-bi">🔍</div><h4>Analyse de l'ordinateur</h4><p>Vérifie la posture de sécurité du poste — antivirus, pare-feu, UAC, mises à jour — et analyse Téléchargements, Temp et les éléments de démarrage à la recherche de malwares connus. Score 0–100, quarantaine en un clic, nouvelle analyse automatique toutes les 3 heures.</p></div><div class="x7-b"><div class="x7-bi">🛰️</div><h4>CYBER3 Global Scan, intégré</h4><p>Découvre chaque appareil du réseau local, vérifie 38 ports exposés et confronte les versions logicielles aux CVE connues — non destructif, il se contente de « regarder les portes ». Rapport IA optionnel, enregistré dans le compte de l'organisation.</p></div><div class="x7-b"><div class="x7-bi">🛑</div><h4>Isolation du poste</h4><p>En cas de malware confirmé, ou sur ordre du SOC, le gardien CYBER3 coupe le poste du réseau tout en conservant le lien avec le SOC, afin de pouvoir le reconnecter à distance. Le poste se reconnecte de lui-même au bout de 30 minutes, sauf si le SOC le maintient isolé ; un kill-switch désarme le mécanisme instantanément.</p></div><div class="x7-b"><div class="x7-bi">🖥️</div><h4>Console client + SOC</h4><p>Le mode organisation s'active avec un code d'activation ou en mode silencieux lors du déploiement. La console desktopapp.cyber3.ai affiche l'inventaire des postes, leur état et leurs événements, et pilote à distance l'analyse, l'isolation et la reconnexion — prises en compte par le poste sous 30 secondes. Chaque client ne voit que sa propre flotte.</p></div><div class="x7-b"><div class="x7-bi">📡</div><h4>Télémétrie de sécurité</h4><p>Seules des métadonnées de sécurité quittent le poste — heartbeat, analyses, menaces, isolation — via le capteur local ou, hors site, via l'edge cloud CYBER3. En mode personnel, rien n'est envoyé.</p></div><div class="x7-b"><div class="x7-bi">🔒</div><h4>CYBER3 VPN</h4><p>VPN WireGuard chiffré, sans journaux : 400 Mo gratuits chaque jour, illimité avec abonnement, serveurs dans 4 pays, choix du serveur sur les offres payantes.</p></div><div class="x7-b"><div class="x7-bi">⚡</div><h4>Vérifications instantanées + sauvegarde</h4><p>Messages (verdict de l'IA), liens, numéros de téléphone, fuites d'adresses e-mail et mots de passe (k-anonymat : seul un préfixe de hachage quitte l'appareil). Sauvegarde des fichiers importants sur le serveur sur site, avec rétention.</p></div></div></div>
+  <div class="x7-prod x7-mob"><div class="x7-ph"><span class="x7-tag x7-tag7">Couche 7 · Android</span><h3>CYBER3 Mobile Protection</h3><p>L'application Android qui stoppe arnaques, phishing et sites dangereux sur le téléphone de chaque collaborateur — en temps réel, avec un traitement sur l'appareil. La même base de menaces que les capteurs et les postes, actualisée toutes les 12 heures. Disponible sur Google Play.</p></div><div class="x7-phones"><figure class="x7-phone"><img src="/assets/shots/mobile-home-en.webp" alt="CYBER3 Mobile Protection — Accueil" loading="lazy" width="540" height="1202"><figcaption>Accueil</figcaption></figure><figure class="x7-phone"><img src="/assets/shots/mobile-guard-en.webp" alt="CYBER3 Mobile Protection — Protection des appels et des messages" loading="lazy" width="540" height="1202"><figcaption>Protection des appels et des messages</figcaption></figure></div><div class="x7-blocks"><div class="x7-b"><div class="x7-bi">📞</div><h4>Protection des appels</h4><p>CYBER3 devient le Caller ID du téléphone : chaque numéro entrant est vérifié dans la base de menaces. Rejet automatique optionnel des numéros d'arnaque connus et avertissement visuel par-dessus l'écran d'appel.</p></div><div class="x7-b"><div class="x7-bi">💬</div><h4>Protection des messages</h4><p>Lit les notifications entrantes — SMS, WhatsApp et autres applications — sans autorisations SMS, et n'alerte que lorsqu'un message est dangereux.</p></div><div class="x7-b"><div class="x7-bi">🤖</div><h4>Vérification des messages</h4><p>Collez ou partagez un message depuis n'importe quelle application et obtenez « Sûr », « Suspect » ou « Danger », avec les raisons : marque imitée, domaine à risque, formulation d'urgence ou de paiement, astuces dans l'URL — expliquées par l'IA.</p></div><div class="x7-b"><div class="x7-bi">🌐</div><h4>Protection web</h4><p>Un filtre DNS sur le téléphone, sans aucun serveur intermédiaire : les domaines dangereux de la base de menaces, les publicités et les traqueurs sont bloqués dans toutes les applications.</p></div><div class="x7-b"><div class="x7-bi">📱</div><h4>Analyse du téléphone</h4><p>Score 0–100 : verrouillage de l'écran, débogage USB, options pour les développeurs, ancienneté du correctif de sécurité ; applications disposant de droits d'administrateur ou d'accessibilité, applications installées hors store avec des autorisations à risque — et le hash de chaque application installée vérifié dans la base de menaces.</p></div><div class="x7-b"><div class="x7-bi">🪪</div><h4>Identité &amp; fuites</h4><p>Vérification des fuites de l'adresse e-mail avec surveillance continue toutes les 12 heures et notification à chaque nouvelle fuite ; vérification des mots de passe avec k-anonymat.</p></div><div class="x7-b"><div class="x7-bi">🔒</div><h4>CYBER3 VPN</h4><p>VPN WireGuard chiffré, sans journaux : 400 Mo gratuits chaque jour, illimité avec abonnement, 6 serveurs dans 4 pays, split tunneling et test de débit intégré.</p></div><div class="x7-b"><div class="x7-bi">🔗</div><h4>Vérification de numéros &amp; liens + signalement</h4><p>Vérifiez n'importe quel numéro ou lien ; les menaces inconnues peuvent être signalées et, une fois validées par un analyste, rejoignent la base de menaces commune.</p></div></div></div>
+  <div class="x7-eco"><h3>Un seul écosystème. Un seul propriétaire de la technologie, de bout en bout.</h3><p class="x7-ep">Les sept couches ne sont pas des produits de fournisseurs différents assemblés tant bien que mal. Elles forment un seul système, conçu, exploité et maintenu par la même entreprise — donc aucun angle mort entre les produits et un seul responsable pour toute la chaîne.</p><div class="x7-where"><div class="x7-w"><b>1–4</b><span class="x7-wl">Sur le capteur, dans vos locaux</span><span class="x7-wn">Inline IPS · Active Response · L2 Shield · CYBER3 Context Fusion Engine</span></div><div class="x7-w"><b>5</b><span class="x7-wl">Dans le cloud, partout</span><span class="x7-wn">CYBER3 Edge — DNS-shield et base de menaces en périphérie</span></div><div class="x7-w"><b>6</b><span class="x7-wl">Sur chaque poste de travail</span><span class="x7-wn">CYBER3 EDR/XDR for Desktop</span></div><div class="x7-w"><b>7</b><span class="x7-wl">Sur chaque téléphone</span><span class="x7-wn">CYBER3 Mobile Protection</span></div></div><div class="x7-ecols"><div><h4>Commun aux sept couches</h4><ul class="x7-shared"><li>la même base de menaces CYBER3 (plus de 2,5 millions d'indicateurs, actualisée quotidiennement)</li><li>le même SOC, 24/7</li><li>le même orchestrateur MLEO : une menace détectée sur une couche est traitée sur la bonne couche</li><li>une boucle fermée : nos propres capteurs alimentent en indicateurs la base qui protège les postes et les téléphones</li></ul></div><div><h4>Ce que nous concevons et exploitons nous-mêmes</h4><div class="x7-own"><span>les capteurs réseau et leurs jeux de règles</span><span>L2 Shield</span><span>CYBER3 Context Fusion Engine et MLEO</span><span>CYBER3 Edge et la base de menaces</span><span>le LLM de sécurité souverain</span><span>les applications Desktop et Mobile</span><span>le réseau VPN</span><span>la console client et le portail SOC</span></div></div></div><div class="x7-why"><h4>Pourquoi c'est important pour une institution</h4><ul><li>Couvre le vecteur d'attaque dominant : le collaborateur et son poste de travail — phishing, arnaques, liens et pièces jointes malveillants, mots de passe divulgués.</li><li>Protège le personnel sur le terrain ou en télétravail, pas seulement à l'intérieur du périmètre physique.</li><li>Confidentialité dès la conception : traitement sur l'appareil et k-anonymat ; aucun compte obligatoire, aucune publicité, aucun SDK publicitaire.</li><li>La télémétrie des endpoints alimente le même SOC et MLEO, et boucle la boucle entre détection réseau et détection sur le poste.</li></ul></div></div>
+  <script src="/endpoint7.js" defer></script>
+</section>
+
+<section id="packages" class="section alt">
+  <div class="head">
+    <div class="kicker">FORFAITS</div>
+    <h2>Dimensionné pour votre institution</h2>
+    <p>Chaque offre inclut tout ce que propose la précédente et ajoute des couches et des capacités. La configuration exacte (capteurs, sites, postes, téléphones) est définie après une évaluation initiale de votre environnement.</p>
+  </div>
+  <div class="cards pk7-cards">
+    <article class="card pk7"><div class="badge" style="background:#1E4C95">STANDARD</div><h3>Standard</h3>
+      <p class="pk7-inc">Inclut</p><ul class="pk7-list"><li>SOC géré 24/7 · réponse autonome en 2–11 s</li><li>Capteur en ligne sur le site principal</li><li>Couches 1–4 : Inline IPS · Active Response · L2 Shield · CYBER3 Context Fusion Engine</li><li>MLEO : corrélation L3 ↔ L2 et enforcement sur la bonne couche</li><li>Évaluation des vulnérabilités mensuelle programmée</li><li>Alertes expliquées (Telegram, e-mail) + portail client avec rapports NIS2</li><li>Health Check autonome du capteur, 24/7</li></ul>
+      <details class="more"><summary>Recommandé pour</summary><div class="body">Site central avec infrastructure informatique concentrée. Vous obtenez une surveillance autonome 24/7 et une image régulière des vulnérabilités sans monter votre propre SOC.</div></details></article>
+    <article class="card pk7"><div class="badge" style="background:#1E4C95">ÉTENDU</div><h3>Étendu</h3>
+      <p class="pk7-inc">Tout Standard, plus</p><ul class="pk7-list"><li>Capteurs en ligne sur tous les sites</li><li>Couche 5 · CYBER3 Edge : DNS-shield et IOC en périphérie pour toute l'organisation</li><li>Couche 6 · CYBER3 EDR/XDR for Desktop sur les postes critiques</li><li>Console client : isolation du poste, analyses à distance, état de la flotte</li><li>CYBER3 Global Scan du réseau interne</li><li>MLEO sur tous les sites</li><li>Évaluation des vulnérabilités bimensuelle</li></ul>
+      <details class="more"><summary>Recommandé pour</summary><div class="body">Institutions multi-sites à exposition élevée. Couverture réseau partout, plus XDR d'endpoint sur les postes les plus importants.</div></details></article>
+    <article class="card pk7 feature"><div class="badge">RECOMMANDÉ</div><h3>Complet</h3>
+      <p class="pk7-inc">Tout Étendu, plus</p><ul class="pk7-list"><li>CYBER3 EDR/XDR for Desktop sur tous les postes</li><li>Couche 7 · CYBER3 Mobile Protection sur les téléphones du personnel</li><li>MLEO sur les 7 couches : réseau, cloud, poste, téléphone</li><li>Évaluation des vulnérabilités continue</li><li>Surveillance des fuites et de l'identité pour les comptes de l'organisation</li><li>Rapports unifiés réseau + endpoint + mobile (NIS2 art. 21/23)</li></ul>
+      <details class="more"><summary>Recommandé pour</summary><div class="body">Niveau départemental, données sensibles des citoyens, conformité stricte. Défense complète en couches — périmètre et chaque poste — avec un seul fournisseur et un seul rapport unifié.</div></details></article>
+  </div>
+  <p class="pricenote">Tarifs : ce document présente les services et la solution technique. Une offre financière détaillée est établie sur demande, en fonction de l'évaluation initiale (sites, capteurs, endpoints) et du mode de passation applicable à votre institution.</p>
+</section>
+
+<section id="start" class="section">
+  <div class="head">
+    <div class="kicker">DÉMARRER</div>
+    <h2>De l'évaluation à la défense autonome</h2>
+    <p>Un déploiement simple pour les organisations de toute taille — d'un seul bureau à une institution publique répartie.</p>
+  </div>
+  <div class="dl">
+    <article class="plat">
+      <div class="pico">🎯</div>
+      <h3>1 · Évaluation</h3>
+      <p>Nous cartographions vos actifs et votre exposition par une Évaluation de Vulnérabilités — une image claire de votre situation.</p>
+      <a class="btn" href="mailto:contact@rol.ro?subject=FasterUp%20-%20Contact">▸ Demander une évaluation</a>
+      <span class="hint">Sans engagement · adapté à votre environnement</span>
+      <details class="more"><summary>Voir les détails</summary>
+        <div class="body">Nous cartographions les actifs et l'exposition de votre institution par une évaluation de vulnérabilités — le résultat est une image claire de votre état actuel. <b>Sans engagement, strictement limitée à votre environnement</b>, elle sert de base à une offre correctement dimensionnée.</div>
+      </details>
+    </article>
+
+    <article class="plat">
+      <div class="pico">🖥️</div>
+      <h3>2 · Déploiement des capteurs</h3>
+      <p>Nous installons des capteurs réseau sur vos sites — inline ou passifs — reliés au SOC via un VPN privé chiffré.</p>
+      <a class="btn ghost" href="#technology">▸ Voir l'architecture</a>
+      <span class="hint">~15 min par site · sans agents sur postes</span>
+      <details class="more"><summary>Voir les détails</summary>
+        <div class="body">Nous installons des capteurs réseau sur chaque site, inline ou passifs, reliés au SOC via un VPN privé chiffré. <b>Environ 15 minutes par site, sans agents sur vos postes.</b> En option, nous déployons l'application CYBER3 XDR sur les postes et les mobiles selon votre politique.</div>
+      </details>
+    </article>
+
+    <article class="plat">
+      <div class="pico"><svg class="cshield" viewBox="0 0 24 24"><path d="M12 2.1 L20.6 5 V11 C20.6 16.6 16.8 20.5 12 21.9 C7.2 20.5 3.4 16.6 3.4 11 V5 Z" fill="rgba(212,175,55,.14)" stroke="#d4af37" stroke-width="1.3"/><g fill="none" stroke="#f2d778" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5.2 V18.2"/><path d="M12 5.7 h2.2 a2 2 0 0 1 0 3.9 H12"/><path d="M8 11 L16 15.6"/><path d="M16 11 L8 15.6"/></g></svg></div>
+      <h3>3 · SOC autonome</h3>
+      <p>La surveillance et la réponse par IA 24/7 entrent en service. Vous recevez alertes et rapports — la plateforme fait le reste.</p>
+      <a class="btn" href="mailto:contact@rol.ro?subject=FasterUp%20-%20Contact">▸ Parlons-en</a>
+      <span class="hint">Géré · autonome · toujours actif</span>
+      <details class="more"><summary>Voir les détails</summary>
+        <div class="body">La surveillance et la réponse par IA 24/7 entrent en service. Vous recevez des alertes et des rapports clairs pendant que la plateforme fait le reste — sous un Health Check autonome qui surveille, administre et auto-répare toute la flotte, <b>sans intervention humaine</b>.</div>
+      </details>
+    </article>
+  </div>
+</section>
+
+<style>
+.c3foot{width:100%;box-sizing:border-box;border-top:1px solid #1E4C95;background:#040f24;color:#9FB3D1;padding:12px 22px;display:flex;flex-direction:column;gap:6px;font-size:12px}
+.c3foot .c3r{display:flex;flex-wrap:wrap;align-items:center;gap:4px 16px;width:100%}
+.c3foot .c3b{font-weight:800;font-size:15px;color:#FF0000}.c3foot .c3b .cr{color:#fff}
+.c3foot .c3tag{color:#9FB3D1}
+.c3foot .c3badges{margin-left:auto;color:#D4AF37;border:1px solid rgba(212,175,55,.4);border-radius:8px;padding:3px 10px;font-size:10.5px;letter-spacing:.3px}
+.c3foot a{color:#9FB3D1;text-decoration:none}.c3foot a:hover{color:#D4AF37}
+.c3foot .c3sep{color:#1E4C95}
+.c3foot .c3r3{border-top:1px solid rgba(30,76,149,.3);padding-top:6px;color:#6f86ad;font-size:10.5px}
+.c3foot .c3grow{flex:1;min-width:10px}
+@media(max-width:760px){.c3foot .c3badges{margin-left:0}.c3foot .c3grow{display:none}}
+.cshield{width:1.28em;height:1.28em;vertical-align:-.30em;display:inline-block}</style>
+<footer class="c3foot">
+  <div class="c3r">
+    <span class="c3b">FasterUp<span class="cr">.AI</span></span>
+    <span class="c3tag">Plateforme Autonome de Cybersécurité par IA pour les entreprises et l'administration publique. SOC géré &amp; Évaluation de Vulnérabilités.</span>
+    <span class="c3badges">ISO/IEC 27001:2022 · GDPR · NIS2 · AI Act</span>
+    <a class="c3sw" href="https://cyber3.ai/status/fr/" target="_blank" rel="noopener"><i id="c3swd"></i><span id="c3swt">…</span></a>
+  </div>
+  <div class="c3r">
+    <a href="#services">Services</a><a href="#technology">Technologie</a>    <a href="#xdr">Endpoint XDR</a>
+    <a href="#packages">Forfaits</a>
+<a href="#start">Démarrer</a><a href="https://cyber3.ai/status/fr/" target="_blank" rel="noopener">État du service</a>
+    <span class="c3sep">·</span>
+    <a href="/contact">Contact</a><a href="/terms">Conditions</a><a href="/privacy">Confidentialité</a>
+  </div>
+  <div class="c3r c3r3">
+    <span>ROL PORTAL SERVICES SRL · CUI RO 36837313 · J2016016379403 · ISO/IEC 27001:2022 · <a href="mailto:contact@rol.ro">contact@rol.ro</a></span>
+    <span class="c3grow"></span>
+    <span>© 2026 FasterUp.AI — ROL PORTAL SERVICES SRL · Tous droits réservés.</span>
+  </div>
+</footer>
+
+<script src="/app.js"></script>
+<style>.c3sw{display:inline-flex;align-items:center;gap:7px;font-size:11.5px;color:#9FB3D1;text-decoration:none}.c3sw:hover span{color:#D4AF37}
+.c3sw i{width:8px;height:8px;border-radius:50%;background:#9FB3D1;flex:0 0 auto}
+.c3sw i.ok{background:#37d39b;box-shadow:0 0 6px #37d39b;animation:c3swp 2s ease-in-out infinite}
+.c3sw i.deg{background:#e8b53a;box-shadow:0 0 6px #e8b53a}
+@keyframes c3swp{0%,100%{opacity:1}50%{opacity:.45}}</style>
+<script>(function(){var U=["https://cyber3-edge.cyber3.workers.dev/v1/health","https://cyber3-llm.cyber3.workers.dev/v1/health","https://cyber3-vpn-cp.cyber3.workers.dev/health"];
+function chk(){Promise.all(U.map(function(u){return fetch(u,{cache:"no-store"}).then(function(r){return r.ok?0:1}).catch(function(){return 1})})).then(function(res){
+var bad=res.reduce(function(a,b){return a+b},0),d=document.getElementById("c3swd"),t=document.getElementById("c3swt");if(!d)return;
+d.className=bad?"deg":"ok";t.textContent=bad?"Certains services affectés":"Tous les systèmes opérationnels";});}chk();setInterval(chk,60000);})();</script>
+</body>
+</html>
