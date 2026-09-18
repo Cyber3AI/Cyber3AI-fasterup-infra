@@ -270,6 +270,7 @@ async function collect(env, { force = false } = {}) {
   }
   snap.alerts = evaluate(snap, clients);
   await env.OPS.put("snap", JSON.stringify(snap));
+  await publishRouting(env, snap).catch(() => {});
   // istoric compact 24h
   const hist = (await env.OPS.get("hist", "json")) || [];
   hist.push({ t: snap.ts, n: Object.fromEntries(nodes.map((n) => [n.name, n.ok ? {
@@ -284,6 +285,24 @@ async function collect(env, { force = false } = {}) {
   await notify(env, snap.alerts).catch(() => {});
   await dailyReport(env, snap, clients).catch(() => {});
   return snap;
+}
+
+// ---------- tabela de rutare pentru control-plane (cheia `routing` în KV-ul lui) ----------
+// Control-plane-ul o folosește la /connect: nod manual (dacă aplicația îl trimite) → cel mai apropiat nod neplin →
+// cel mai liber din zonă → zona următoare. Dacă tabela e mai veche de 15 min, control-plane-ul revine la logica veche.
+// Coordonate: Hetzner (lat/lon exacte) sau, pentru noduri din alte data center-e, capitala țării din registru.
+const COUNTRY_LL = { RO: [44.43, 26.1], DE: [50.11, 8.68], NL: [52.37, 4.9], GB: [51.51, -0.13], FR: [48.86, 2.35], FI: [60.17, 24.94], SE: [59.33, 18.07],
+  PL: [52.23, 21.01], IT: [45.46, 9.19], ES: [40.42, -3.7], CH: [47.37, 8.54], AT: [48.21, 16.37], US: [39.04, -77.49], CA: [43.65, -79.38],
+  SG: [1.35, 103.82], JP: [35.68, 139.69], AE: [25.2, 55.27], IN: [19.08, 72.88], AU: [-33.87, 151.21], BR: [-23.55, -46.63], MD: [47.01, 28.86], BG: [42.7, 23.32], HU: [47.5, 19.04] };
+async function publishRouting(env, snap) {
+  const reg = (await env.OPS.get("registry", "json")) || {};
+  const nodes = snap.nodes.map((n) => {
+    const r = reg[n.name] || {};
+    const ll = n.hz && n.hz.lat != null ? [n.hz.lat, n.hz.lon] : (r.lat != null ? [r.lat, r.lon] : COUNTRY_LL[(n.country || r.country || "").toUpperCase()] || null);
+    return { name: n.name, ok: n.ok, drained: !!n.drained, cc: n.country || r.country || "", lat: ll ? ll[0] : null, lon: ll ? ll[1] : null,
+      active: n.met ? n.met.wg.active_3m : null, peers: n.met ? n.met.wg.peers : (n.stat ? n.stat.peers : null), cap: n.capacity || null };
+  });
+  await env.CP.put("routing", JSON.stringify({ ts: snap.ts, nodes }));
 }
 
 // ---------- agregări pe oră (30 zile) și pe zi (12 luni) — pentru grafice pe perioade ----------

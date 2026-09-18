@@ -229,6 +229,11 @@ details.proc .in{padding:0 16px 12px;font-size:13.2px;color:#cdd7ec}details.proc
     <div class="box"><div class="w">3 · Serverul</div><b>Nodul VPN</b>Server Ubuntu cu WireGuard. Agentul de pe nod (<code>cyber3-agent</code>) primește comenzile control-plane-ului. Traficul clientului iese spre Internet de aici.</div>
     <div class="box"><div class="w">4 · Supravegherea</div><b>Acest portal</b><code>vpn.cyber3.ai</code> citește la 5 minute nodurile, furnizorul (Hetzner), abonamentele (Google Play, web) și trimite alerte + raport zilnic.</div>
   </div>
+  <h3>Cum se alege nodul pentru un client</h3>
+  <div class="grid k3"><div class="card"><b class="gold">1 · Automat — cel mai apropiat</b><p class="mut" style="margin:6px 0 0">Clientul e trimis la nodul cel mai apropiat geografic (poziția vine de la Cloudflare, fără a salva adresa IP). Între nodurile din aceeași zonă (±800 km) câștigă cel mai liber.</p></div>
+  <div class="card"><b class="gold">2 · Cascadă — dacă zona e plină</b><p class="mut" style="margin:6px 0 0">Un nod peste 80% din capacitate sau cu pool-ul aproape plin trece la coada listei; clientul merge în zona următoare. Un nod căzut sau scos din rotație nu primește clienți. Dacă nodul ales nu răspunde, se încearcă automat următorul.</p></div>
+  <div class="card"><b class="gold">3 · Ales de client — independent</b><p class="mut" style="margin:6px 0 0">Dacă clientul alege o țară/un server în aplicație, alegerea lui are prioritate. La reconectare, clientul revine pe același nod dacă e încă bun (aceeași adresă de ieșire — contează la bănci și streaming).</p></div></div>
+  <div class="note">Plasă de siguranță: dacă tabela de stare (publicată de acest portal la 5 minute) e mai veche de 15 minute, control-plane-ul revine la metoda veche (verifică toate nodurile și alege cel mai gol). Aplicațiile nu au fost modificate — contractul lor cu serverul e neschimbat.</div>
   <h3>Rutina administratorului</h3>
   <div class="grid k3"><div class="card"><b class="gold">Zilnic (5 minute)</b><ul><li>Citește raportul de pe email (09:00).</li><li>Deschide tab-ul <b>Acum</b>: bannerul trebuie să fie verde.</li><li>Orice CRIT → procedura din Manual, în aceeași zi.</li></ul></div>
   <div class="card"><b class="gold">Săptămânal (20 minute)</b><ul><li><b>Grafice</b> 7 zile: crește numărul de clienți? Există vârfuri de CPU?</li><li><b>Resurse & costuri</b>: proiecția de trafic pe fiecare nod.</li><li><b>Scalare</b>: recomandări noi?</li><li><b>Clienți</b>: abonamente noi, pâlnia.</li></ul></div>
@@ -243,6 +248,7 @@ details.proc .in{padding:0 16px 12px;font-size:13.2px;color:#cdd7ec}details.proc
     <dt>Control-plane</dt><dd>Programul central (pe Cloudflare) care decide pe ce nod merge fiecare client și verifică abonamentele.</dd>
     <dt>Agent</dt><dd>Programul mic de pe fiecare nod care execută comenzile control-plane-ului și raportează starea nodului.</dd>
     <dt>Rotație</dt><dd>Lista nodurilor care primesc clienți noi. Un nod scos din rotație păstrează clienții conectați, dar nu primește alții.</dd>
+    <dt>Revenire (sticky)</dt><dd>La reconectare, clientul e trimis pe nodul folosit anterior, dacă e încă bun și în zona lui.</dd>
     <dt>Failover</dt><dd>Dacă un nod pică, control-plane-ul îl ocolește automat la conectările noi.</dd>
     <dt>RAM-only / no-logs</dt><dd>Cheile clienților trăiesc doar în memorie și dispar la repornire; nu se înregistrează ce site-uri vizitează clienții și nici adresele lor.</dd>
     <dt>Plafon gratuit</dt><dd>400 MB pe zi pe planul gratuit; peste, aplicația cere trecerea la un plan plătit. Se resetează la miezul nopții (UTC).</dd>
@@ -377,7 +383,7 @@ function render(){
  $("connk").innerHTML=kpi(totc,"conexiuni în 30 de zile","numărate la fiecare conectare")
   +kpi(pm("android"),"📱 de pe mobil (Android)",totc?pct(100*pm("android")/totc):"")
   +kpi(pm("windows"),"🖥️ de pe desktop (Windows)",totc?pct(100*pm("windows")/totc):"")
-  +kpi(Object.keys(cs.country||{}).length,"țări de unde se conectează",(cs.mode&&cs.mode.ales?cs.mode.ales:0)+" cu server ales manual");
+  +kpi(Object.keys(cs.country||{}).length,"țări de unde se conectează",Object.keys(cs.mode||{}).map(function(k){return k+" "+cs.mode[k]}).join(" · ")||"moduri: automat / revenire / ales");
  var ctry=Object.keys(cs.country||{}).map(function(k){return [k,cs.country[k]]}).sort(function(a,b){return b[1]-a[1]});
  $("tcountry").innerHTML='<tr><th>Țară</th><th>Conexiuni</th><th>Pondere</th></tr>'+(ctry.length?ctry.slice(0,40).map(function(c){var p=100*c[1]/Math.max(1,totc);return '<tr><td>'+flag(c[0])+" "+esc(cname(c[0]))+'</td><td class="num">'+c[1]+'</td><td>'+pct(p)+bar(p,101,101)+'</td></tr>'}).join(""):'<tr><td colspan="3" class="dim" style="white-space:normal">Nicio conexiune înregistrată încă. Contorizarea a pornit pe 18 sep 2026 — cifrele apar la primele conectări din aplicații.</td></tr>');
  var days=Object.keys(cn.days||{}).sort().slice(-30);
@@ -449,7 +455,7 @@ function render(){
  $("skpis").innerHTML=kpi(pct(util),"capacitate folosită",act+" conectați / "+cap+" posibili",util>70?"warn":"ok")+kpi(pct(poolU),"pool WireGuard folosit",peers+" / "+(253*N.length)+" chei")+kpi(eur(cost/Math.max(1,cap)),"cost / client conectat / lună","la capacitate plină")+kpi(rk.length,"noduri în pregătire","registrul flotei",rk.length?"gold":"");
  $("tregion").innerHTML='<tr><th>Țară</th><th>Noduri</th><th>Conectați / capacitate</th><th>Utilizare</th></tr>'+Object.keys(regions).map(function(k){var r=regions[k],u=r.cap?100*r.act/r.cap:0;return '<tr><td>'+flag(k)+" "+esc(cname(k))+'</td><td class="num">'+r.n+'</td><td class="num">'+r.act+" / "+r.cap+'</td><td>'+pct(u)+bar(u,70,90)+'</td></tr>'}).join("");
  var recs=[];
- recs.push('<b>Prioritar pentru creștere:</b> control-plane-ul alege azi nodul „cel mai gol” din toată lumea, fără să țină cont de unde e clientul — un client din România poate primi un nod din SUA (latență mare). Pentru multe noduri: alegere după regiunea clientului (țara vine deja de la Cloudflare) și stare citită din cache în loc de interogarea tuturor nodurilor la fiecare conectare. Modificare de făcut în control-plane, cu aprobarea ta.');
+ recs.push('<b>Rutare pe regiuni — activă din 19 sep 2026:</b> fiecare client e trimis la cel mai apropiat nod care nu e plin; între nodurile din aceeași zonă, la cel mai liber; alegerea manuală din aplicație are prioritate. Starea vine din acest portal la 5 minute — control-plane-ul nu mai interoghează toate nodurile la fiecare conectare, deci scalează la multe noduri. Un nod nou intră automat în calcul după activare.');
  Object.keys(regions).forEach(function(k){var r=regions[k];if(r.cap&&r.act/r.cap>0.7)recs.push("Adaugă un nod în "+flag(k)+" "+esc(cname(k))+": "+Math.round(100*r.act/r.cap)+"% din capacitate.")});
  N.forEach(function(n){if(n.hz&&n._over>0)recs.push(esc(n.name)+": trafic peste inclus proiectat ("+eur(n._over)+"/lună).");if(n.met&&n.met.wg.peers>=180)recs.push(esc(n.name)+": pool aproape plin ("+n.met.wg.peers+"/253).")});
  N.forEach(function(n){if(n.hz&&n.hz.included_bytes<2e12)recs.push(esc(n.name)+" ("+esc(n.city)+"): doar "+fb(n.hz.included_bytes)+" trafic inclus, "+eur(n.hz.price_tb)+"/TB peste — primul loc cu risc de cost la creștere.")});

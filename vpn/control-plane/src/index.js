@@ -126,6 +126,54 @@ async function paddleLookupEmail(env, email) {
 }
 
 // health-check toate nodurile in paralel; intoarce doar cele vii cu metrici
+// ---- RUTARE (19 sep 2026): ordinea în care se încearcă nodurile la /connect ----
+// 3) nodul ALES de client (câmpul `node`, trimis de aplicație) — independent, primul dacă e în rotație;
+// 1) altfel cel mai apropiat nod care nu e plin (coordonatele clientului vin de la Cloudflare);
+// 2) între nodurile din aceeași zonă (±800 km), cel mai liber; zonele pline trec la coada listei.
+// Reconectarea revine pe nodul anterior dacă e încă bun și aproape. Starea vine din tabela `routing`
+// publicată la 5 min de vpn.cyber3.ai (fără probe la fiecare conectare → scalează la multe noduri).
+// Tabelă lipsă/veche (>15 min) → null → /connect folosește logica anterioară (probe live, cel mai gol).
+function kmBetween(a1, o1, a2, o2) {
+  const r = Math.PI / 180, dA = (a2 - a1) * r, dO = (o2 - o1) * r;
+  const h = Math.sin(dA / 2) ** 2 + Math.cos(a1 * r) * Math.cos(a2 * r) * Math.sin(dO / 2) ** 2;
+  return 12742 * Math.asin(Math.min(1, Math.sqrt(h)));
+}
+async function orderedNodes(env, req, userId, preferred) {
+  const rot = await getNodes(env);
+  const rt = await env.VPN.get("routing", "json");
+  if (!rt || !rt.ts || now() - rt.ts > 15 * 60 * 1000 || !rot.length) return null;
+  const info = Object.fromEntries((rt.nodes || []).map((n) => [n.name, n]));
+  const lat = parseFloat(req.cf && req.cf.latitude), lon = parseFloat(req.cf && req.cf.longitude), cc = req.cf && req.cf.country;
+  // rotația (KV `nodes`, respectă scoaterile din rotație) + starea din tabelă; nodurile căzute sunt excluse,
+  // cele noi (încă nemăsurate) intră cu încărcare 0
+  const cands = rot.map((n) => ({ ...(info[n.name] || {}), name: n.name, url: n.url }))
+    .filter((n) => !info[n.name] || info[n.name].ok !== false);
+  if (!cands.length) return null;
+  for (const n of cands) {
+    n._d = Number.isFinite(lat) && Number.isFinite(lon) && n.lat != null ? kmBetween(lat, lon, n.lat, n.lon) : (cc && n.cc === cc ? 0 : 20000);
+    n._l = n.cap ? (n.active || 0) / n.cap : 0;
+    n._full = n._l >= 0.8 || (n.peers || 0) >= 240;
+  }
+  const free = cands.filter((n) => !n._full).sort((a, b) => a._d - b._d);
+  const out = [];
+  while (free.length) {
+    const d0 = free[0]._d;
+    const zone = free.filter((n) => n._d <= d0 + 800).sort((a, b) => a._l - b._l || a._d - b._d);
+    for (const z of zone) { out.push(z); free.splice(free.indexOf(z), 1); }
+  }
+  out.push(...cands.filter((n) => n._full).sort((a, b) => a._l - b._l));
+  const prev = await env.VPN.get("peer:" + userId, "json");
+  if (prev && prev.name) {
+    const i = out.findIndex((n) => n.name === prev.name);
+    if (i > 0 && !out[i]._full && out[i]._d <= out[0]._d + 800) { const [p] = out.splice(i, 1); p._sticky = true; out.unshift(p); }
+  }
+  if (typeof preferred === "string" && preferred) {
+    const i = out.findIndex((n) => n.name === preferred);
+    if (i >= 0) { const [p] = out.splice(i, 1); p._manual = true; out.unshift(p); }
+  }
+  return out;
+}
+
 async function healthyNodes(env) {
   const nodes = await getNodes(env);
   const checks = await Promise.all(
@@ -427,14 +475,29 @@ export default {
           if (tActive.length >= MAX_TUNNELS) return json({ error: "tunnel_limit", limit: MAX_TUNNELS }, 409);
         }
 
-        const healthy = await healthyNodes(env);
-        if (!healthy.length) return json({ error: "no healthy node" }, 503);
-        // asignare: cel mai putin incarcat (peers, apoi load1)
-        healthy.sort((a, b) => a.peers - b.peers || a.load1 - b.load1);
-        // nod preferat ales de user pe glob; fallback automat daca nu (mai) e sanatos
-        const pick = (typeof node === "string" && healthy.find((n) => n.name === node)) || healthy[0];
-
-        const a = await agentAt(env, pick.url, "POST", "/peer", { pubkey: client_pubkey });
+        // Ordinea nodurilor (vezi orderedNodes): ales de client → cel mai apropiat neplin → cel mai liber din zonă.
+        // Se încearcă primele 4; un nod care nu răspunde e sărit automat.
+        let pick = null, a = null, rmode = "auto";
+        const order = await orderedNodes(env, req, user_id, node).catch(() => null);
+        if (order) {
+          for (const cand of order.slice(0, 4)) {
+            try {
+              a = await agentAt(env, cand.url, "POST", "/peer", { pubkey: client_pubkey }, 5000);
+              pick = cand; rmode = cand._manual ? "ales" : cand._sticky ? "revenire" : "auto";
+              break;
+            } catch (_) { if (cand._manual) rmode = "ales-indisponibil"; }
+          }
+          if (pick && rmode === "auto" && order[0]._manual) rmode = "ales-indisponibil";
+        }
+        if (!pick) {
+          // plasa de siguranță = logica anterioară: probe live, cel mai gol, nodul ales dacă e sănătos
+          const healthy = await healthyNodes(env);
+          if (!healthy.length) return json({ error: "no healthy node" }, 503);
+          healthy.sort((x, y) => x.peers - y.peers || x.load1 - y.load1);
+          pick = (typeof node === "string" && healthy.find((n) => n.name === node)) || healthy[0];
+          a = await agentAt(env, pick.url, "POST", "/peer", { pubkey: client_pubkey });
+          rmode = "rezervă";
+        }
         await env.VPN.put(
           "peer:" + user_id,
           JSON.stringify({ pubkey: client_pubkey, ip: a.client_ip, node: pick.url, name: pick.name, ts: now() })
@@ -455,7 +518,7 @@ export default {
           const c = (await env.VPN.get(ck, "json")) || { total: 0, country: {}, platform: {}, tier: {}, node: {}, route: {}, mode: {} };
           const inc = (o, k) => { o[k] = (o[k] || 0) + 1; };
           c.total++; inc(c.country, cc); inc(c.platform, plat); inc(c.tier, freeTier ? "free" : "premium");
-          inc(c.node, pick.name); inc(c.route, cc + ">" + pick.name); inc(c.mode, typeof node === "string" && pick.name === node ? "ales" : "auto");
+          inc(c.node, pick.name); inc(c.route, cc + ">" + pick.name); inc(c.mode, rmode);
           await env.VPN.put(ck, JSON.stringify(c), { expirationTtl: 400 * 86400 });
         } catch (_) {}
         return json({
