@@ -1863,7 +1863,7 @@ body::after {
   letter-spacing: 0.2em;
 }
 .tg-msg.block { border-left-color: var(--red); }
-.tg-msg.block::after { content: 'BLOCK'; color: var(--red); }
+.tg-msg.block::after { content: 'BLOCKED'; color: var(--red); }
 .tg-msg .tg-head {
   font-family: var(--display);
   font-size: 10px;
@@ -2637,11 +2637,14 @@ li { margin-bottom: 6px; color: var(--ink); }
     <button class="tab" data-page="alerts" data-i18n="tab_alerts">Alerts</button>
     <button class="tab" data-page="clients" data-i18n="tab_clients">Clients</button>
     <button class="tab" data-page="reports" data-i18n="tab_reports">Reports</button>
+    <button class="tab" data-page="workstations" data-i18n="tab_workstations">Workstations</button>
     <button class="tab" data-page="sources" data-i18n="tab_sources">Context Sources Fusion</button>
         <button class="tab" data-page="howto" data-i18n="tab_howto">How to use</button>
         <button class="tab" data-page="howwork" data-i18n="tab_howwork">How to work</button>
     <button class="tab" data-page="system" data-i18n="tab_system">System</button>
     <button class="tab cyber3-only" data-page="cyber3">CYBER3.AI</button>
+    <button class="tab cyber3-only" data-page="vpn">VPN Premium</button>
+    <button class="tab cyber3-only" data-page="mleo">MLEO</button>
   </div>
   <div class="sys-status">
     <span><span class="status-dot"></span><span data-i18n="status_ai">AI ACTIVE</span></span>
@@ -2900,8 +2903,8 @@ li { margin-bottom: 6px; color: var(--ink); }
         <div class="kpi-delta" id="bKpi-alerts-delta"></div>
       </div>
       <div class="kpi">
-        <div class="kpi-label" data-i18n="kpi2_l">IPs blocked autonomously</div>
-        <div class="kpi-value red" id="bKpi-blocked">—</div>
+        <div class="kpi-label" data-i18n="kpi2_l">Total Blocked</div>
+        <div class="kpi-value phos" id="bKpi-blocked">—</div>
         <div class="kpi-delta" id="bKpi-blocked-delta"></div>
       </div>
       <div class="kpi">
@@ -2915,6 +2918,140 @@ li { margin-bottom: 6px; color: var(--ink); }
         <div class="kpi-delta" id="bKpi-telegram-delta"></div>
       </div>
     </div>
+
+    <!-- ====== WIDGET ALERTE Â· rezumat (adaugat 22 sep) ====== -->
+    <div class="card blk3-card" style="border-left-color:#e5484d">
+      <div class="card-head">
+        <div class="card-title">🚨 Alerte SOC · 24h</div>
+        <div class="card-meta"><span class="live"></span>DETECȚIE INLINE · TRIERE AUTONOMĂ</div>
+      </div>
+      <div class="card-body no-pad">
+        <div class="blk3-grid" style="grid-template-columns:repeat(3,minmax(0,1fr))">
+          <div class="blk3-tile" style="border-top:2px solid #e5484d"><div class="lyr">Detecție</div><div class="lbl" style="color:#e5484d">Alerte · 24h</div><div class="val" id="aw-alerts" style="color:#e5484d">—</div><div class="sub">Evenimente de securitate detectate și triate în ultimele 24h.</div><div class="cap">ULTIMELE 24H</div></div>
+          <div class="blk3-tile" style="border-top:2px solid var(--amber)"><div class="lyr">Triaj</div><div class="lbl" style="color:var(--amber)">Escaladări</div><div class="val" id="aw-esc" style="color:var(--amber)">—</div><div class="sub">Alerte care au necesitat atenție (escaladate din triere).</div><div class="cap">ULTIMELE 24H</div></div>
+          <div class="blk3-tile" style="border-top:2px solid var(--phos)"><div class="lyr">Răspuns</div><div class="lbl" style="color:var(--phos)">Blocate autonom</div><div class="val" id="aw-blocked" style="color:var(--phos)">—</div><div class="sub">Amenințări blocate fără intervenție umană (toate straturile).</div><div class="cap">ULTIMELE 24H</div></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ============ 3 STRATURI DE BLOCARE (real-time, RBAC) ============ -->
+    <style>
+    .blk3-card{border-left:3px solid var(--phos);margin-bottom:20px}
+    .blk3-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;padding:16px}
+    .blk3-tile{background:var(--bg-2);border:1px solid var(--line);border-radius:8px;padding:14px 16px}
+    .blk3-l1{color:var(--blue);border-top:2px solid var(--blue)}
+    .blk3-l2{color:var(--amber);border-top:2px solid var(--amber)}
+    .blk3-l3{color:var(--phos);border-top:2px solid var(--phos)}
+    .blk3-tile .lyr{font:600 10px/1 var(--mono);letter-spacing:.14em;color:var(--ink-faint);text-transform:uppercase}
+    .blk3-tile .lbl{font:700 13px/1.3 var(--mono);margin:6px 0 2px;letter-spacing:.03em;color:inherit}
+    .blk3-tile .val{font:700 34px/1 var(--mono);margin:2px 0;color:inherit}
+    .blk3-tile .sub{font-size:10.5px;color:var(--ink-dim);line-height:1.4;min-height:42px;margin-top:4px}
+    .blk3-tile .cap{font:500 9px/1 var(--mono);color:var(--ink-faint);letter-spacing:.09em;margin-top:8px;text-transform:uppercase}
+    .blk3-spark{display:flex;align-items:flex-end;gap:1px;height:24px;margin:6px 0 4px}
+    .blk3-spark i{flex:1;min-height:1px;background:currentColor;opacity:.55;border-radius:1px}
+    .blk3-scope{font:700 10px/1 var(--mono);letter-spacing:.1em;color:var(--phos);text-transform:uppercase}
+    .blk3-total{display:flex;align-items:baseline;gap:12px;padding:16px 16px 0;flex-wrap:wrap}
+    .blk3-total .tv{font:800 46px/1 var(--mono);color:var(--phos);text-shadow:0 0 18px var(--phos-glow)}
+    .blk3-total .tl{font:700 12px/1.3 var(--mono);letter-spacing:.06em;color:var(--ink);text-transform:uppercase}
+    .blk3-total .tsub{font-size:10.5px;color:var(--ink-dim)}
+    .blk3-tbl th.table-num,.blk3-tbl td.table-num{text-align:right}
+    .blk3-tbl .tot{color:var(--phos);font-weight:700}
+    .blk3-ps{padding:2px 16px 16px}
+    .blk3-ps-h{font:600 10px/1 var(--mono);letter-spacing:.1em;color:var(--ink-faint);text-transform:uppercase;margin:6px 0 8px}
+    .blk3-grid{grid-template-columns:repeat(4,minmax(0,1fr))}
+    @media(max-width:900px){.blk3-grid{grid-template-columns:repeat(2,1fr)}}
+    @media(max-width:560px){.blk3-grid{grid-template-columns:1fr}}
+    .blk3-tile.blk3-l2s .lyr,.blk3-tile.blk3-l2s .val{color:#22d3ee}
+    </style>
+    <div class="card blk3-card">
+      <div class="card-head">
+        <div class="card-title" data-i18n="blk3_title">▣ 3 Straturi de Blocare</div>
+        <div class="card-meta"><span class="live"></span><span data-i18n="blk3_meta">DEFENSE-IN-DEPTH · REAL-TIME</span> · <span class="blk3-scope" id="blk3-scope">FLOTĂ</span></div>
+      </div>
+      <div class="card-body no-pad">
+        <div class="blk3-total">
+          <div class="tv" id="blk3-total">—</div>
+          <div>
+            <div class="tl" data-i18n="blk_total">Blocate autonom · 24h</div>
+            <div class="tsub" data-i18n="blk_total_sub">Toate cele 3 straturi — fără intervenție umană</div>
+          </div>
+        </div>
+        <div class="blk3-grid">
+          <div class="blk3-tile blk3-l1">
+            <div class="lyr">Layer 1</div>
+            <div class="lbl" data-i18n="blk_l1">IPS Blocked</div>
+            <div class="val" id="blk3-ips">—</div>
+            <div class="blk3-spark" id="blk3-ips-spark"></div>
+            <div class="sub" data-i18n="blk_l1_sub">Suricata inline — pachete oprite la fir (milisecunde), înainte să intre în rețea.</div>
+            <div class="cap" data-i18n="blk_cap">ULTIMELE 24H</div>
+          </div>
+          <div class="blk3-tile blk3-l2">
+            <div class="lyr">Layer 2</div>
+            <div class="lbl" data-i18n="blk_l2">AR Native Blocked</div>
+            <div class="val" id="blk3-ar">—</div>
+            <div class="blk3-spark" id="blk3-ar-spark"></div>
+            <div class="sub" data-i18n="blk_l2_sub">Wazuh Active Response — firewall pe gazdă (fallback nativ), independent de AI.</div>
+            <div class="cap" data-i18n="blk_cap">ULTIMELE 24H</div>
+          </div>
+          <div class="blk3-tile blk3-l2s">
+            <div class="lyr">Layer 3</div>
+            <div class="lbl" data-i18n="blk_l2s">L2 Shield</div>
+            <div class="val" id="blk3-l2s">—</div>
+            <div class="blk3-spark" id="blk3-l2s-spark"></div>
+            <div class="sub" data-i18n="blk_l2s_sub">ebtables L2 — anti-ARP-spoof / rogue-DHCP (unghiul mort Ethernet).</div>
+            <div class="cap" data-i18n="blk_cap">ULTIMELE 24H</div>
+          </div>
+          <div class="blk3-tile blk3-l3">
+            <div class="lyr">Layer 4</div>
+            <div class="lbl" data-i18n="blk_l3">CyberBot Fusion Blocked</div>
+            <div class="val" id="blk3-cb">—</div>
+            <div class="blk3-spark" id="blk3-cb-spark"></div>
+            <div class="sub" data-i18n="blk_l3_sub">Decizie AI din fuziunea a 4 surse (MISP + CYBER3 DB + Suricata + Wazuh).</div>
+            <div class="cap" data-i18n="blk_cap">ULTIMELE 24H</div>
+          </div>
+        </div>
+        <div class="blk3-ps">
+          <div class="blk3-ps-h" data-i18n="blk_per_sensor">Defalcare pe senzor</div>
+          <table class="data-table blk3-tbl">
+            <thead><tr>
+              <th data-i18n="blk_col_sensor">Senzor</th>
+              <th class="table-num" style="color:var(--blue)" data-i18n="blk_l1">IPS Blocked</th>
+              <th class="table-num" style="color:var(--amber)" data-i18n="blk_l2">AR Native Blocked</th>
+              <th class="table-num" style="color:#22d3ee" data-i18n="blk_l2s">L2 Shield</th>
+              <th class="table-num" style="color:var(--phos)" data-i18n="blk_l3">CyberBot Fusion Blocked</th>
+              <th class="table-num tot" data-i18n="blk_total_col">Total Blocked</th>
+            </tr></thead>
+            <tbody id="blk3-tbody"><tr><td colspan="6" style="opacity:.5;padding:10px">…</td></tr></tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <!-- ====== WIDGET MLEO Â· rezumat (admin, adaugat 22 sep) ====== -->
+    <div class="card blk3-card" style="border-left-color:#f0b429">
+      <div class="card-head">
+        <div class="card-title">🔗 MLEO · Corelare L3↔L2</div>
+        <div class="card-meta">MULTI-LAYER ENFORCEMENT ORCHESTRATOR · CORELARE L3&harr;L2</div>
+      </div>
+      <div class="card-body no-pad">
+        <div class="blk3-grid" style="grid-template-columns:repeat(5,minmax(0,1fr))">
+          <div class="blk3-tile"><div class="lyr">L3↔L2</div><div class="lbl">Reconciliere</div><div class="val" id="mw-recon">—</div><div class="sub">Perechi MAC/IP din ARP-ul senzorilor.</div></div>
+          <div class="blk3-tile"><div class="lyr">Ethernet</div><div class="lbl">Dispozitive (MAC)</div><div class="val" id="mw-macs">—</div><div class="sub">Echipamente distincte la nivel Ethernet.</div></div>
+          <div class="blk3-tile" style="border-top:2px solid var(--amber)"><div class="lyr">Evaziune</div><div class="lbl" style="color:var(--amber)">Candidați</div><div class="val" id="mw-cand" style="color:var(--amber)">—</div><div class="sub">MAC-uri cu &gt;1 IP folosit.</div></div>
+          <div class="blk3-tile"><div class="lyr">Match 1</div><div class="lbl">Evaziune confirmată</div><div class="val" id="mw-m1">—</div><div class="sub">Același MAC blocat pe IP-uri diferite (15 min).</div></div>
+          <div class="blk3-tile"><div class="lyr">Carantină</div><div class="lbl">Propuneri (dry-run)</div><div class="val" id="mw-prop">—</div><div class="sub">Izolări L2 propuse. Armare manuală.</div></div>
+        </div>
+      </div>
+    </div>
+    <script>
+    (function(){
+      function txt(id){var e=document.getElementById(id);return e?e.textContent:null;}
+      function set(id,v){var e=document.getElementById(id);if(e&&v!=null)e.textContent=v;}
+      function mirror(){set('aw-alerts',txt('bKpi-alerts'));set('aw-esc',txt('bKpi-escalations'));set('aw-blocked',txt('blk3-total'));}
+      function loadMleoW(){var w=document.getElementById('mw-recon');if(!w||w.offsetParent===null)return;fetch('/api/mleo/summary',{credentials:'include'}).then(function(r){return r.json();}).then(function(d){var s=(d&&d.stats)||{};set('mw-recon',(s.recon_rows||0).toLocaleString());set('mw-macs',(s.distinct_mac||0).toLocaleString());set('mw-cand',(s.mac_multi_ip||0).toLocaleString());set('mw-m1',(s.match1||0).toLocaleString());set('mw-prop',(s.tx_proposed||0).toLocaleString());}).catch(function(){});}
+      mirror();setInterval(mirror,5000);loadMleoW();setInterval(loadMleoW,60000);
+    })();
+    </script>
 
     <!-- Grid 3col: Alerts + Sources + Decisions -->
     <div class="grid-3">
@@ -3141,7 +3278,7 @@ li { margin-bottom: 6px; color: var(--ink); }
           <option value="0">Toate nivelurile</option><option value="13">Critice (13+)</option><option value="10">Mari (10+)</option><option value="7">Medii (7+)</option>
         </select>
         <select id="alertDecFilter" onchange="applyAlertsFilter()" style="background:var(--bg-1);border:1px solid var(--line);border-radius:6px;color:var(--ink);padding:7px 10px;font-family:inherit;">
-          <option value="">Toate deciziile</option><option value="BLOCARE_IMEDIATA">BLOCK</option><option value="ESCALADARE">ESCALATE</option><option value="MONITORIZARE">MONITOR</option><option value="IGNORARE">IGNORE</option>
+          <option value="">Toate deciziile</option><option value="BLOCARE_IMEDIATA">BLOCKED</option><option value="ESCALADARE">ESCALATE</option><option value="MONITORIZARE">MONITOR</option><option value="IGNORARE">IGNORE</option>
         </select>
         <span id="alertFilterCount" style="color:var(--ink-dim);white-space:nowrap;"></span>
       </div>
@@ -3213,6 +3350,99 @@ li { margin-bottom: 6px; color: var(--ink); }
         </table>
       </div>
     </div>
+  </div>
+
+
+  <!-- ======= PAGE: WORKSTATIONS (EDR/XDR per client — generic, orice org cu solutia completa) ======= -->
+  <div class="page" data-page="workstations">
+    <style>
+      .ws-tiles{display:flex;gap:12px;flex-wrap:wrap;margin-bottom:16px}
+      .ws-tile{background:var(--bg-2);border:1px solid var(--line);padding:12px 18px;min-width:150px}
+      .ws-tile .v{font-family:var(--display);font-size:24px;color:var(--ink)}
+      .ws-tile .l{font-size:10px;letter-spacing:.15em;text-transform:uppercase;color:var(--ink-dim)}
+      .ws-tile.warn .v{color:var(--red)}
+      table.ws-t{width:100%;border-collapse:collapse;font-size:12px}
+      table.ws-t th{color:var(--ink-dim);text-transform:uppercase;font-size:10px;letter-spacing:.12em;text-align:left;padding:7px 10px;border-bottom:1px solid var(--line-hot)}
+      table.ws-t td{padding:7px 10px;border-bottom:1px solid var(--line);color:var(--ink)}
+      table.ws-t tr.sel td{background:var(--bg-3)}
+      table.ws-t tbody tr:hover td{background:var(--bg-2);cursor:pointer}
+      .ws-badge{display:inline-block;padding:1px 8px;font-size:10px;letter-spacing:.1em;border:1px solid}
+      .ws-on{color:var(--phos);border-color:var(--phos-dim)}
+      .ws-off{color:var(--ink-faint);border-color:var(--line-hot)}
+      .ws-blk{color:var(--red);border-color:var(--red)}
+      .ws-charts{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+      @media(max-width:1100px){.ws-charts{grid-template-columns:1fr}}
+      .ws-chart-title{font-size:11px;letter-spacing:.15em;text-transform:uppercase;color:var(--ink-dim);margin:4px 0 10px}
+      .ws-barrow{display:flex;align-items:center;gap:8px;margin:5px 0}
+      .ws-barrow .lbl{width:170px;min-width:170px;font-size:11px;color:var(--ink);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;text-align:right}
+      .ws-track{flex:1;height:12px;background:var(--bg-3);position:relative}
+      .ws-fill{height:100%;background:#3b93ea;border-radius:0 4px 4px 0;min-width:2px}
+      .ws-barrow .val{width:70px;font-size:11px;color:var(--ink-dim)}
+      .ws-hours{display:flex;align-items:flex-end;gap:2px;height:120px;border-bottom:1px solid var(--line-hot)}
+      .ws-hcol{flex:1;display:flex;flex-direction:column;justify-content:flex-end;height:100%}
+      .ws-hbar{background:#3b93ea;border-radius:4px 4px 0 0}
+      .ws-hlabels{display:flex;gap:2px;margin-top:4px}
+      .ws-hlabels span{flex:1;text-align:center;font-size:9px;color:var(--ink-faint)}
+      .ws-tip{position:fixed;z-index:99;background:var(--bg-3);border:1px solid var(--line-hot);color:var(--ink);font-size:11px;padding:5px 9px;pointer-events:none;display:none;box-shadow:0 4px 14px rgba(0,0,0,.5)}
+      .ws-sub{color:var(--ink-faint);font-size:11px}
+      .ws-filters{display:flex;gap:10px;align-items:center;margin-bottom:12px;flex-wrap:wrap}
+      .ws-filters select,#wsDay{background:var(--bg-2);color:var(--ink);border:1px solid var(--line-hot);padding:5px 8px;font-family:var(--mono);font-size:12px}
+      .ws-filters label{font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-dim)}
+    </style>
+    <div class="report-form" style="margin-bottom:16px">
+      <div style="font-family:var(--display);font-size:14px;letter-spacing:.2em;text-transform:uppercase;color:var(--ink);margin-bottom:14px">
+        <span class="section-tag">EDR/XDR</span>
+        <span>Stații protejate · CYBER3 Desktop + senzor inline</span>
+      </div>
+      <div class="ws-tiles" id="wsTiles"></div>
+      <div class="ws-filters">
+        <label>Perioadă trafic</label>
+        <select id="wsDays" onchange="wsLoadTraffic()">
+          <option value="1">24h</option>
+          <option value="7" selected>7 zile</option>
+          <option value="14">14 zile</option>
+          <option value="30">30 zile</option>
+        </select>
+        <span id="wsMeta" class="ws-sub"></span>
+      </div>
+      <table class="ws-t" id="wsTable">
+        <thead><tr>
+          <th>Stație</th><th>IP</th><th>OS</th><th>Senzor</th>
+          <th>Ultima raportare</th><th>Stare</th><th>Scanări</th><th>Blocări app</th>
+        </tr></thead>
+        <tbody id="wsTbody"><tr><td colspan="8" class="ws-sub">…</td></tr></tbody>
+      </table>
+    </div>
+    <div class="report-form" id="wsDetail" style="display:none">
+      <div style="font-family:var(--display);font-size:13px;letter-spacing:.2em;text-transform:uppercase;color:var(--ink);margin-bottom:12px">
+        <span class="section-tag">TRAFIC</span>
+        <span id="wsDetailName">—</span>
+      </div>
+      <div class="ws-charts">
+        <div>
+          <div class="ws-chart-title">Top situri după timp petrecut (minute active)</div>
+          <div id="wsSitesChart"></div>
+        </div>
+        <div>
+          <div class="ws-chart-title">Activitate pe ore (minute) ·
+            <select id="wsDay" onchange="wsRenderHours()"></select>
+          </div>
+          <div class="ws-hours" id="wsHours"></div>
+          <div class="ws-hlabels" id="wsHLabels"></div>
+        </div>
+      </div>
+      <div style="margin-top:18px">
+        <div class="ws-chart-title">Evenimente aplicație (blocări / amenințări / scanări)</div>
+        <div id="wsBlocks" class="ws-sub"></div>
+      </div>
+      <div style="margin-top:18px">
+        <div class="ws-chart-title">Toate siturile (perioada selectată)</div>
+        <table class="ws-t"><thead><tr>
+          <th>Site</th><th>Minute active</th><th>Evenimente</th>
+        </tr></thead><tbody id="wsSitesTbody"></tbody></table>
+      </div>
+    </div>
+    <div class="ws-tip" id="wsTip"></div>
   </div>
 
   <!-- ======= PAGE: REPORTS ======= -->
@@ -3545,17 +3775,56 @@ li { margin-bottom: 6px; color: var(--ink); }
   </div>
 
   <!-- ======= PAGE: CYBER3.AI (admin-only) ======= -->
-  <div class="page cyber3-only" data-page="cyber3">
+  <div class="page cyber3-only" data-page="mleo">
+  <style>
+  .mleo-grid{display:flex;flex-wrap:wrap;gap:12px}
+  .mleo-card{background:#12161c;border:1px solid #2a323c;border-radius:8px;padding:12px;min-width:165px;flex:1}
+  .mleo-card .v{font-size:26px;font-weight:700}
+  .mleo-card .l{font-weight:600;margin-top:2px}
+  .mleo-card .d{color:#8b98a5;font-size:12px;margin-top:4px;line-height:1.35}
+  .mleo-tbl{width:100%;border-collapse:collapse;font-size:13px;margin-top:4px}
+  .mleo-tbl td,.mleo-tbl th{border-bottom:1px solid #2a323c;padding:5px 8px;text-align:left;vertical-align:top}
+  .mleo-tbl th{color:#9aa;font-weight:600}
+  .mleo-note{background:#161b22;border-left:3px solid #f0b429;padding:8px 12px;border-radius:4px;color:#c9d1d9;font-size:13px;margin:10px 0}
+  </style>
+  <div style="max-width:1150px">
+  <h2 style="margin:0 0 4px">MLEO — Multi Layer Enforcement Orchestrator</h2>
+  <p style="color:#9aa;margin:0 0 12px">Corelează straturile de apărare: același dispozitiv văzut ca <b>IP (Layer 3)</b> și ca <b>MAC (Layer 2)</b>. Prinde evaziunea prin schimbare de IP și izolează <b>atacatorul, nu victima</b>. Etapele 0-3 = <b>observare, risc zero</b>; enforcement-ul (carantina) e doar <b>propus</b> — armarea e manuală, cu allowlist.</p>
+  <div class="mleo-note">🔒 Vizibil doar administratorului. MLEO citește telemetria existentă (ARP + blocări) — NU execută nimic automat pe senzori.</div>
+
+  <div id="mleoStats" class="mleo-grid"></div>
+
+  <h3 style="margin:18px 0 4px">🔎 Caută dispozitiv (IP → MAC + istoric)</h3>
+  <p style="color:#9aa;margin:0 0 8px">Dai un IP colectat recent și primești MAC-ul dispozitivului + toate IP-urile pe care le-a folosit (istoricul care trădează evaziunea).</p>
+  <input id="mleoQip" placeholder="ex. 192.168.0.150" style="padding:6px;width:230px;background:#0d1117;color:#e6edf3;border:1px solid #2a323c;border-radius:4px">
+  <button onclick="mleoQuery()" class="ext-btn">Caută</button>
+  <div id="mleoQres" style="margin-top:8px"></div>
+
+  <h3 style="margin:20px 0 4px">⚠️ Match 1 — evaziune prin schimbare de IP</h3>
+  <p style="color:#9aa;margin:0 0 4px">Același MAC blocat pe 2+ IP-uri diferite în 15 minute = dispozitiv care își schimbă IP-ul ca să scape de blocare. Rulează în <b>observare</b> (doar raportează, ca să măsurăm rata de fals-pozitiv din roaming/DHCP înainte de orice acțiune).</p>
+  <div id="mleoMatches"></div>
+
+  <h3 style="margin:20px 0 4px">🛡️ Propuneri de carantină (dry-run)</h3>
+  <p style="color:#9aa;margin:0 0 4px">La un Match 1, MLEO <b>propune</b> izolarea dispozitivului la nivel L2 (<code>ebtables drop pe MAC</code> — reversibil, funcționează și pe trafic VLAN). <b>NU se execută automat.</b> Armarea = acțiune manuală a operatorului, cu <b>allowlist</b> (echipamente medicale / gateway / servere / DNS = niciodată atinse) și <b>rollback</b> cu ID de tranzacție (dovedit reversibil de 5×). Stări: <code>proposed</code> (propus) → <code>armed</code> (armat de operator) → <code>reverted</code> (retras).</p>
+  <div id="mleoTx"></div>
+
+  <h3 style="margin:20px 0 4px">📇 Candidați de evaziune (MAC cu IP-uri multiple)</h3>
+  <p style="color:#9aa;margin:0 0 4px">Dispozitive interne care au folosit mai multe IP-uri. Nu-s neapărat ostile (DHCP re-lease, roaming), dar sunt urmărite — dacă unul e blocat pe 2 IP-uri, devine Match 1.</p>
+  <div id="mleoMulti"></div>
+  </div>
+</div>
+<div class="page cyber3-only" data-page="vpn">
     <div class="hero" style="margin-bottom:20px">
       <div style="font-family:var(--mono);font-size:11px;letter-spacing:.25em;color:var(--phos)">CYBER3.AI · VPN OPERATIONS</div>
-      <h2 style="margin:6px 0 0">Noduri exit VPN Premium</h2>
-      <div style="color:var(--ink-dim);font-size:13px;margin-top:4px">Tuneluri active, încărcare și sănătate noduri (control-plane <code>cyber3-vpn-cp</code>). Vizibil doar adminului.</div>
+      <h2 style="margin:6px 0 0">Operațiunile VPN s-au mutat pe portalul dedicat</h2>
+      <div style="color:var(--ink-dim);font-size:13px;margin-top:6px;max-width:760px">Noduri, încărcare, latență, clienți (Google Play + web), conexiuni pe țări și aplicații, trafic și costuri, alerte, grafice pe perioade, comandă și control, manualul administratorului — toate pe <b>vpn.cyber3.ai</b> (contul mihai).</div>
+      <div style="margin-top:14px"><a class="ext-btn" href="https://vpn.cyber3.ai" target="_blank" rel="noopener">▸ DESCHIDE vpn.cyber3.ai</a></div>
     </div>
-    <div id="cyber3Summary" style="display:flex;gap:14px;flex-wrap:wrap;margin-bottom:16px"></div>
-    <div id="cyber3Nodes" style="display:flex;gap:14px;flex-wrap:wrap"></div>
-    <div id="cyber3Meta" style="color:var(--ink-faint);font-size:11px;font-family:var(--mono);margin-top:14px"></div>
-    <div style="margin-top:10px"><button class="ext-btn" onclick="loadCyber3()">▸ REFRESH</button></div>
+    <div id="cyber3Summary" style="display:none"></div><div id="cyber3Nodes" style="display:none"></div><div id="cyber3Meta" style="display:none"></div>
+  </div>
 
+  <!-- ======= PAGE: CYBER3 Endpoints EDR/XDR (admin-only) ======= -->
+  <div class="page cyber3-only" data-page="cyber3">
     <!-- ===== CYBER3 Endpoints (EDR/XDR) ===== -->
     <div style="border-top:1px solid var(--line);margin:30px 0 18px"></div>
     <div style="font-family:var(--mono);font-size:11px;letter-spacing:.25em;color:var(--phos)">CYBER3.AI · ENDPOINTS EDR/XDR</div>
@@ -3921,8 +4190,8 @@ li { margin-bottom: 6px; color: var(--ink); }
             <tr>
               <td><code>AI Decisions · 24h</code></td>
               <td>
-                <span data-i18n-ro>Numărul total de decizii luate de AI în ultimele 24h: BLOCK, ESCALATE, MONITOR sau IGNORE.</span>
-                <span data-i18n-en>Total decisions made by AI in last 24h: BLOCK, ESCALATE, MONITOR or IGNORE.</span>
+                <span data-i18n-ro>Decizii ACTIVE luate autonom de AI în ultimele 24h (BLOCKED / ESCALATE) — alertele de severitate înaltă și critică asupra cărora motorul a acționat. Alertele monitorizate pasiv apar separat, la Alerts.</span>
+                <span data-i18n-en>ACTIVE decisions taken autonomously by AI in the last 24h (BLOCKED / ESCALATE) — high and critical severity alerts the engine acted upon. Passively monitored alerts are shown separately under Alerts.</span>
               </td>
             </tr>
             <tr>
@@ -3950,6 +4219,13 @@ li { margin-bottom: 6px; color: var(--ink); }
         </table>
       </div>
 
+      <div style="border-left:3px solid var(--phos);background:var(--bg-2);padding:12px 16px;margin:14px 0;border-radius:6px">
+        <p style="margin:0">
+          <span data-i18n-ro><strong>Cele 3 straturi de blocare (Total Blocked).</strong> Sub cele 4 KPI-uri, panoul afișează în timp real cele 3 straturi autonome de blocare: <strong style="color:var(--blue)">IPS Blocked</strong> (Suricata inline — la fir, milisecunde), <strong style="color:var(--amber)">AR Native Blocked</strong> (Wazuh Active Response — firewall pe gazdă) și <strong style="color:var(--phos)">CyberBot Fusion Blocked</strong> (decizia AI din 4 surse, blochează inclusiv conexiunile către C2). Sus e <strong>Total Blocked</strong> (suma celor 3), iar dedesubt defalcarea pe fiecare senzor — vezi doar senzorii tăi.</span>
+          <span data-i18n-en><strong>The 3 blocking layers (Total Blocked).</strong> Below the 4 KPIs, the panel shows the 3 autonomous blocking layers in real time: <strong style="color:var(--blue)">IPS Blocked</strong> (Suricata inline — at the wire, milliseconds), <strong style="color:var(--amber)">AR Native Blocked</strong> (Wazuh Active Response — host firewall) and <strong style="color:var(--phos)">CyberBot Fusion Blocked</strong> (the AI decision from 4 sources, blocking even connections to C2). At the top is <strong>Total Blocked</strong> (the sum of the 3), and below it the per-sensor breakdown — you only see your own sensors.</span>
+        </p>
+      </div>
+
       <h3>2.2 Autonomy Index</h3>
 
       <p>
@@ -3958,7 +4234,7 @@ li { margin-bottom: 6px; color: var(--ink); }
       </p>
       <ul>
         <li><strong>Total</strong> — <span data-i18n-ro>toate deciziile AI 24h</span><span data-i18n-en>all AI decisions 24h</span></li>
-        <li><strong>Autonome</strong> — <span data-i18n-ro>decizii BLOCK + IGNORE (acțiune fără om)</span><span data-i18n-en>BLOCK + IGNORE decisions (no human)</span></li>
+        <li><strong>Autonome</strong> — <span data-i18n-ro>decizii BLOCKED + IGNORE (acțiune fără om)</span><span data-i18n-en>BLOCKED + IGNORE decisions (no human)</span></li>
         <li><strong style="color:var(--amber)">Escaladate</strong> — <span data-i18n-ro>decizii ESCALATE + MONITOR (cu intervenție)</span><span data-i18n-en>ESCALATE + MONITOR decisions (human in loop)</span></li>
       </ul>
 
@@ -4039,7 +4315,7 @@ li { margin-bottom: 6px; color: var(--ink); }
             <tr><td>3</td><td><strong>Source IP</strong></td><td><span data-i18n-ro>IP-ul sursă al traficului care a generat alerta. Verde fosforescent = atenție.</span><span data-i18n-en>Source IP of the traffic that triggered the alert. Phosphor green = attention.</span></td></tr>
             <tr><td>4</td><td><strong>Attack Type</strong></td><td><span data-i18n-ro>Descrierea atacului + <strong>badge-uri MITRE și Compliance</strong> sub. Vezi §3.2 și §3.4.</span><span data-i18n-en>Attack description + <strong>MITRE and Compliance badges</strong> below. See §3.2 and §3.4.</span></td></tr>
             <tr><td>5</td><td><strong>Level</strong></td><td><span data-i18n-ro>Nivelul de severitate (0-15). Colorare automată — vezi §3.5.</span><span data-i18n-en>Severity level (0-15). Auto-coloring — see §3.5.</span></td></tr>
-            <tr><td>6</td><td><strong>AI Decision</strong></td><td><span data-i18n-ro>Decizia luată automat: BLOCK / ESCALATE / MONITOR / IGNORE. Vezi §3.6.</span><span data-i18n-en>Automated decision: BLOCK / ESCALATE / MONITOR / IGNORE. See §3.6.</span></td></tr>
+            <tr><td>6</td><td><strong>AI Decision</strong></td><td><span data-i18n-ro>Decizia luată automat: BLOCKED / ESCALATE / MONITOR / IGNORE. Vezi §3.6.</span><span data-i18n-en>Automated decision: BLOCKED / ESCALATE / MONITOR / IGNORE. See §3.6.</span></td></tr>
             <tr><td>7</td><td><strong>Context Sources Fusion</strong></td><td><span data-i18n-ro>Sursele care au contribuit la enrichment: <code>MISP · AI · Suricata · Wazuh</code>. Text plain separat cu " · ".</span><span data-i18n-en>Sources that contributed to enrichment: <code>MISP · AI · Suricata · Wazuh</code>. Plain text separated by " · ".</span></td></tr>
             <tr><td>8</td><td><strong>Telegram</strong></td><td><span data-i18n-ro><code>SENT</code> verde dacă alerta a fost trimisă pe Telegram CYBER3, <code>—</code> dacă nu (decizie IGNORARE).</span><span data-i18n-en><code>SENT</code> in green if the alert was sent via Telegram CYBER3, <code>—</code> if not (IGNORE decision).</span></td></tr>
           </tbody>
@@ -4140,13 +4416,13 @@ li { margin-bottom: 6px; color: var(--ink); }
               <td><strong style="color:var(--red)">13 — 15</strong></td>
               <td><strong style="color:var(--red)">CRITICAL</strong></td>
               <td><span data-i18n-ro>Critic — atac confirmat, posibil compromis activ</span><span data-i18n-en>Critical — confirmed attack, possible active compromise</span></td>
-              <td><span data-i18n-ro>BLOCARE_IMEDIATA + investigație umană</span><span data-i18n-en>BLOCK + human investigation</span></td>
+              <td><span data-i18n-ro>BLOCARE_IMEDIATA + investigație umană</span><span data-i18n-en>BLOCKED + human investigation</span></td>
             </tr>
             <tr>
               <td><strong style="color:var(--red)">10 — 12</strong></td>
               <td><strong style="color:var(--red)">HIGH</strong></td>
               <td><span data-i18n-ro>Mare — atac probabil, malware C2, brute force activ</span><span data-i18n-en>High — likely attack, malware C2, active brute force</span></td>
-              <td><span data-i18n-ro>BLOCARE_IMEDIATA sau ESCALADARE</span><span data-i18n-en>BLOCK or ESCALATE</span></td>
+              <td><span data-i18n-ro>BLOCARE_IMEDIATA sau ESCALADARE</span><span data-i18n-en>BLOCKED or ESCALATE</span></td>
             </tr>
             <tr>
               <td><strong style="color:var(--amber)">7 — 9</strong></td>
@@ -4177,7 +4453,7 @@ li { margin-bottom: 6px; color: var(--ink); }
           <tbody>
             <tr>
               <td><code>BLOCARE_IMEDIATA</code></td>
-              <td><span class="htu-dec-badge htu-dec-block">BLOCK</span></td>
+              <td><span class="htu-dec-badge htu-dec-block">BLOCKED</span></td>
               <td><span data-i18n-ro>Active Response: <code>iptables DROP</code> pe IP-ul atacator pe senzor. Notificare Telegram.</span><span data-i18n-en>Active Response: <code>iptables DROP</code> on attacker IP at sensor. Telegram notification.</span></td>
             </tr>
             <tr>
@@ -4235,7 +4511,7 @@ li { margin-bottom: 6px; color: var(--ink); }
             </div>
           </div>
           <div class="htu-col-level">12</div>
-          <div class="htu-col-decision"><span class="htu-dec-badge htu-dec-block">BLOCK</span></div>
+          <div class="htu-col-decision"><span class="htu-dec-badge htu-dec-block">BLOCKED</span></div>
           <div class="htu-col-srcs">SURICATA · AI</div>
         </div>
       </div>
@@ -4250,7 +4526,7 @@ li { margin-bottom: 6px; color: var(--ink); }
         <li><span data-i18n-ro><strong>T1071.001</strong> + <strong>Command and Control</strong> — MITRE ATT&CK: malware-ul comunică prin HTTP/HTTPS cu serverul atacatorului</span><span data-i18n-en><strong>T1071.001</strong> + <strong>Command and Control</strong> — MITRE ATT&CK: malware communicates via HTTP/HTTPS with attacker's server</span></li>
         <li><span data-i18n-ro><strong>GDPR</strong> + <strong>NIST</strong> — relevant pentru raport conformitate (date personale + sector public)</span><span data-i18n-en><strong>GDPR</strong> + <strong>NIST</strong> — relevant for compliance report (personal data + public sector)</span></li>
         <li><span data-i18n-ro><strong>Level 12</strong> — High severity, roșu</span><span data-i18n-en><strong>Level 12</strong> — High severity, red</span></li>
-        <li><span data-i18n-ro><strong>BLOCK</strong> — IP-ul atacator a fost blocat automat pe senzor</span><span data-i18n-en><strong>BLOCK</strong> — attacker IP was automatically blocked at sensor</span></li>
+        <li><span data-i18n-ro><strong>BLOCKED</strong> — IP-ul atacator a fost blocat automat pe senzor</span><span data-i18n-en><strong>BLOCKED</strong> — attacker IP was automatically blocked at sensor</span></li>
         <li><span data-i18n-ro><strong>SURICATA · AI</strong> — atât IDS-ul cât și AI-ul au confirmat: probabilitate mare de adevăr</span><span data-i18n-en><strong>SURICATA · AI</strong> — both IDS and AI confirmed: high probability of being real</span></li>
       </ul>
 
@@ -4278,7 +4554,7 @@ li { margin-bottom: 6px; color: var(--ink); }
             <tr><td>4</td><td><strong>IP</strong></td><td><span data-i18n-ro>IP-ul agentului în VPN.</span><span data-i18n-en>Agent VPN IP.</span></td></tr>
             <tr><td>5</td><td><strong>Status</strong></td><td><span data-i18n-ro>Verde <code>ACTIVE</code> · Galben <code>PENDING</code> · Roșu <code>DISCONNECTED</code>.</span><span data-i18n-en>Green <code>ACTIVE</code> · Yellow <code>PENDING</code> · Red <code>DISCONNECTED</code>.</span></td></tr>
             <tr><td>6</td><td><strong>Wazuh Agents</strong></td><td><span data-i18n-ro>Numărul de agenți Wazuh sub acest client (de obicei 1).</span><span data-i18n-en>Number of Wazuh agents under this client (usually 1).</span></td></tr>
-            <tr><td>7</td><td><strong>Incidents 7d</strong></td><td><span data-i18n-ro>Alerte cu decizie BLOCK + ESCALATE în ultimele 7 zile.</span><span data-i18n-en>Alerts with BLOCK + ESCALATE decision in last 7 days.</span></td></tr>
+            <tr><td>7</td><td><strong>Incidents 7d</strong></td><td><span data-i18n-ro>Alerte cu decizie BLOCKED + ESCALATE în ultimele 7 zile.</span><span data-i18n-en>Alerts with BLOCKED + ESCALATE decision in last 7 days.</span></td></tr>
             <tr><td>8</td><td><strong>Uptime %</strong></td><td><span data-i18n-ro>Procent timp în care agentul a fost <code>active</code> în ultima lună.</span><span data-i18n-en>Percentage of time the agent was <code>active</code> in the last month.</span></td></tr>
             <tr><td>9</td><td><strong>Action</strong></td><td><span data-i18n-ro>Buton <code>▸ REPORT</code> care deschide tab-ul Reports cu acest client preselectat.</span><span data-i18n-en><code>▸ REPORT</code> button that opens the Reports tab with this client preselected.</span></td></tr>
           </tbody>
@@ -4472,7 +4748,7 @@ li { margin-bottom: 6px; color: var(--ink); }
           <div class="htu-wf-step-body">
             <span data-i18n-ro><strong>Coloana AI Decision</strong> îți spune dacă AI-ul a acționat:
             <ul style="margin-top:6px;">
-              <li><span class="htu-dec-badge htu-dec-block">BLOCK</span> — atac blocat, doar verifici că nu e fals pozitiv</li>
+              <li><span class="htu-dec-badge htu-dec-block">BLOCKED</span> — atac blocat, doar verifici că nu e fals pozitiv</li>
               <li><span class="htu-dec-badge htu-dec-escal">ESCALATE</span> — <strong>tu ești cel care trebuie să acționeze</strong></li>
               <li><span class="htu-dec-badge htu-dec-monitor">MONITOR</span> — urmărești dacă pattern-ul revine</li>
               <li><span class="htu-dec-badge htu-dec-ignore">IGNORE</span> — sărit, fals pozitiv probabil</li>
@@ -4480,7 +4756,7 @@ li { margin-bottom: 6px; color: var(--ink); }
             </span>
             <span data-i18n-en><strong>The AI Decision column</strong> tells you if AI acted:
             <ul style="margin-top:6px;">
-              <li><span class="htu-dec-badge htu-dec-block">BLOCK</span> — attack blocked, just verify it's not a false positive</li>
+              <li><span class="htu-dec-badge htu-dec-block">BLOCKED</span> — attack blocked, just verify it's not a false positive</li>
               <li><span class="htu-dec-badge htu-dec-escal">ESCALATE</span> — <strong>you must act on this</strong></li>
               <li><span class="htu-dec-badge htu-dec-monitor">MONITOR</span> — watch if pattern returns</li>
               <li><span class="htu-dec-badge htu-dec-ignore">IGNORE</span> — skip, likely false positive</li>
@@ -4551,8 +4827,8 @@ li { margin-bottom: 6px; color: var(--ink); }
       <h3 id="htu-tut-3">T3 · <span data-i18n-ro>Cum investighez o alertă C2 (Command and Control)</span><span data-i18n-en>How to investigate a C2 (Command and Control) alert</span></h3>
 
       <p>
-        <span data-i18n-ro>Scenariu: <strong style="color:var(--phos)">FasterUp AI Autonomous</strong> a blocat deja autonom un atac. Vezi în tabel o alertă <span class="htu-dec-badge htu-dec-block">BLOCK</span> Level 12 cu badge <span class="htu-mini-tag htu-mitre">T1071.001</span> și <span class="htu-mini-tag htu-tactic">Command and Control</span>. Acțiunea de blocare e deja făcută — rolul tău e investigarea contextului. Ce faci?</span>
-        <span data-i18n-en>Scenario: <strong style="color:var(--phos)">FasterUp AI Autonomous</strong> has already autonomously blocked an attack. You see a <span class="htu-dec-badge htu-dec-block">BLOCK</span> Level 12 alert in the table with badges <span class="htu-mini-tag htu-mitre">T1071.001</span> and <span class="htu-mini-tag htu-tactic">Command and Control</span>. The blocking action is already done — your role is to investigate the context. What do you do?</span>
+        <span data-i18n-ro>Scenariu: <strong style="color:var(--phos)">FasterUp AI Autonomous</strong> a blocat deja autonom un atac. Vezi în tabel o alertă <span class="htu-dec-badge htu-dec-block">BLOCKED</span> Level 12 cu badge <span class="htu-mini-tag htu-mitre">T1071.001</span> și <span class="htu-mini-tag htu-tactic">Command and Control</span>. Acțiunea de blocare e deja făcută — rolul tău e investigarea contextului. Ce faci?</span>
+        <span data-i18n-en>Scenario: <strong style="color:var(--phos)">FasterUp AI Autonomous</strong> has already autonomously blocked an attack. You see a <span class="htu-dec-badge htu-dec-block">BLOCKED</span> Level 12 alert in the table with badges <span class="htu-mini-tag htu-mitre">T1071.001</span> and <span class="htu-mini-tag htu-tactic">Command and Control</span>. The blocking action is already done — your role is to investigate the context. What do you do?</span>
       </p>
 
       <div class="htu-workflow">
@@ -4802,7 +5078,7 @@ li { margin-bottom: 6px; color: var(--ink); }
             <tr><td><strong>Active Response</strong></td><td><span data-i18n-ro>Acțiune automată pe senzor la detectarea unui atac (ex: <code>iptables DROP</code> pe IP atacator).</span><span data-i18n-en>Automated action on sensor when attack is detected (e.g. <code>iptables DROP</code> on attacker IP).</span></td></tr>
             <tr><td><strong>Agent ID</strong></td><td><span data-i18n-ro>Identificator unic Wazuh pentru fiecare senzor (ex: <code>002</code> ICISOC100, <code>003</code> ICISOC101).</span><span data-i18n-en>Unique Wazuh identifier for each sensor (e.g. <code>002</code> ICISOC100, <code>003</code> ICISOC101).</span></td></tr>
             <tr><td><strong>C2</strong></td><td><span data-i18n-ro>Command and Control — comunicare malware ↔ server atacator.</span><span data-i18n-en>Command and Control — communication between malware and attacker's server.</span></td></tr>
-            <tr><td><strong style="color:var(--phos)">FasterUp AI Autonomous</strong></td><td><span data-i18n-ro>Platforma proprietară FasterUp pentru securitate autonomă. Ia decizii (BLOCK / ESCALATE / MONITOR / IGNORE) fără intervenție umană, în mai puțin de 2 secunde de la sosirea alertei.</span><span data-i18n-en>FasterUp's proprietary platform for autonomous operations. Makes decisions (BLOCK / ESCALATE / MONITOR / IGNORE) without human intervention, in under 2 seconds from alert arrival.</span></td></tr>
+            <tr><td><strong style="color:var(--phos)">FasterUp AI Autonomous</strong></td><td><span data-i18n-ro>Platforma proprietară FasterUp pentru securitate autonomă. Ia decizii (BLOCKED / ESCALATE / MONITOR / IGNORE) fără intervenție umană, în mai puțin de 2 secunde de la sosirea alertei.</span><span data-i18n-en>FasterUp's proprietary platform for autonomous operations. Makes decisions (BLOCKED / ESCALATE / MONITOR / IGNORE) without human intervention, in under 2 seconds from alert arrival.</span></td></tr>
             <tr><td><strong style="color:var(--phos)">FasterUp AI Fusion Engine</strong></td><td><span data-i18n-ro>Motorul central al platformei FasterUp AI Autonomous. Ingerează date de la Suricata, Wazuh, MISP și alte surse, le normalizează, le corelează și produce decizia autonomă. Componentă proprietară.</span><span data-i18n-en>The central engine of the FasterUp AI Autonomous platform. Ingests data from Suricata, Wazuh, MISP and other sources, normalizes them, correlates them and produces the autonomous decision. Proprietary component.</span></td></tr>
             <tr><td><strong>FIM</strong></td><td><span data-i18n-ro>File Integrity Monitoring — monitorizarea integrității fișierelor critice (Wazuh).</span><span data-i18n-en>File Integrity Monitoring — monitoring critical files (Wazuh).</span></td></tr>
             <tr><td><strong>IoC</strong></td><td><span data-i18n-ro>Indicator of Compromise — IP, hash, domeniu sau pattern care indică un atac. Stocat în MISP.</span><span data-i18n-en>Indicator of Compromise — IP, hash, domain or pattern indicating an attack. Stored in MISP.</span></td></tr>
@@ -4969,8 +5245,8 @@ li { margin-bottom: 6px; color: var(--ink); }
         <div class="htu-wf-step">
           <div class="htu-wf-step-num">2</div>
           <div class="htu-wf-step-body">
-            <span data-i18n-ro><span class="htu-dec-badge htu-dec-block">BLOCK</span> atac confirmat → blocat automat · <span class="htu-dec-badge htu-dec-escal">ESCALATE</span> necesită analist uman · <span class="htu-dec-badge htu-dec-monitor">MONITOR</span> urmărit dacă revine · <span class="htu-dec-badge htu-dec-ignore">IGNORE</span> fals-pozitiv probabil, doar audit.</span>
-            <span data-i18n-en><span class="htu-dec-badge htu-dec-block">BLOCK</span> confirmed attack → auto-blocked · <span class="htu-dec-badge htu-dec-escal">ESCALATE</span> needs a human analyst · <span class="htu-dec-badge htu-dec-monitor">MONITOR</span> watched if it recurs · <span class="htu-dec-badge htu-dec-ignore">IGNORE</span> likely false positive, audit only.</span>
+            <span data-i18n-ro><span class="htu-dec-badge htu-dec-block">BLOCKED</span> atac confirmat → blocat automat · <span class="htu-dec-badge htu-dec-escal">ESCALATE</span> necesită analist uman · <span class="htu-dec-badge htu-dec-monitor">MONITOR</span> urmărit dacă revine · <span class="htu-dec-badge htu-dec-ignore">IGNORE</span> fals-pozitiv probabil, doar audit.</span>
+            <span data-i18n-en><span class="htu-dec-badge htu-dec-block">BLOCKED</span> confirmed attack → auto-blocked · <span class="htu-dec-badge htu-dec-escal">ESCALATE</span> needs a human analyst · <span class="htu-dec-badge htu-dec-monitor">MONITOR</span> watched if it recurs · <span class="htu-dec-badge htu-dec-ignore">IGNORE</span> likely false positive, audit only.</span>
           </div></div>
       </div>
       <h3 id="hw-4">S4 · <span data-i18n-ro>De la decizie la acțiune</span><span data-i18n-en>From decision to action</span></h3>
@@ -4979,8 +5255,8 @@ li { margin-bottom: 6px; color: var(--ink); }
         <div class="htu-wf-step">
           <div class="htu-wf-step-num">1</div>
           <div class="htu-wf-step-body">
-            <span data-i18n-ro><strong>BLOCK</strong> → intră în lanțul de blocare (mai jos). <strong>ESCALATE</strong> → notificare prioritară pe <strong>Telegram</strong> + apare în coada de investigații pentru analist. <strong>MONITOR / IGNORE</strong> → înregistrate (urmărire / audit).</span>
-            <span data-i18n-en><strong>BLOCK</strong> → enters the blocking chain (below). <strong>ESCALATE</strong> → priority <strong>Telegram</strong> notification + appears in the analyst's investigation queue. <strong>MONITOR / IGNORE</strong> → logged (watch / audit).</span>
+            <span data-i18n-ro><strong>BLOCKED</strong> → intră în lanțul de blocare (mai jos). <strong>ESCALATE</strong> → notificare prioritară pe <strong>Telegram</strong> + apare în coada de investigații pentru analist. <strong>MONITOR / IGNORE</strong> → înregistrate (urmărire / audit).</span>
+            <span data-i18n-en><strong>BLOCKED</strong> → enters the blocking chain (below). <strong>ESCALATE</strong> → priority <strong>Telegram</strong> notification + appears in the analyst's investigation queue. <strong>MONITOR / IGNORE</strong> → logged (watch / audit).</span>
           </div></div>
         <div class="htu-wf-step">
           <div class="htu-wf-step-num">2</div>
@@ -4989,14 +5265,42 @@ li { margin-bottom: 6px; color: var(--ink); }
             <span data-i18n-en>Every relevant decision is sent to <strong>Telegram</strong> (operator/client) and feeds the <strong>reports</strong> (daily + monthly NIS2). All autonomous.</span>
           </div></div>
       </div>
+      <h3 id="hw-blk3"><span data-i18n-ro>Lanțul de blocare — cele 3 straturi</span><span data-i18n-en>The blocking chain — the 3 layers</span></h3>
+      <div class="htu-workflow" style="border-left:3px solid var(--phos)">
+        <div class="htu-workflow-head"><span class="htu-wf-num">▣</span><span data-i18n-ro>3 STRATURI DE BLOCARE (AUTONOME)</span><span data-i18n-en>3 BLOCKING LAYERS (AUTONOMOUS)</span></div>
+        <div class="htu-wf-step">
+          <div class="htu-wf-step-num" style="color:var(--blue);border-color:var(--blue)">1</div>
+          <div class="htu-wf-step-body">
+            <span data-i18n-ro><strong style="color:var(--blue)">IPS Blocked</strong> (Suricata inline) — pachetul e picat la fir, în milisecunde, înainte să intre în rețea.</span>
+            <span data-i18n-en><strong style="color:var(--blue)">IPS Blocked</strong> (Suricata inline) — the packet is dropped at the wire, in milliseconds, before it reaches the network.</span>
+          </div></div>
+        <div class="htu-wf-step">
+          <div class="htu-wf-step-num" style="color:var(--amber);border-color:var(--amber)">2</div>
+          <div class="htu-wf-step-body">
+            <span data-i18n-ro><strong style="color:var(--amber)">AR Native Blocked</strong> (Wazuh Active Response) — regulă DROP în firewall-ul gazdei; fallback nativ, independent de AI.</span>
+            <span data-i18n-en><strong style="color:var(--amber)">AR Native Blocked</strong> (Wazuh Active Response) — a DROP rule in the host firewall; native fallback, independent of the AI.</span>
+          </div></div>
+        <div class="htu-wf-step">
+          <div class="htu-wf-step-num" style="color:var(--phos);border-color:var(--phos)">3</div>
+          <div class="htu-wf-step-body">
+            <span data-i18n-ro><strong style="color:var(--phos)">CyberBot Fusion Blocked</strong> — decizia AI din fuziunea a 4 surse (MISP + CYBER3 DB + Suricata + Wazuh); blochează inclusiv conexiunile din rețeaua clientului către serverele de Comandă și Control (C2).</span>
+            <span data-i18n-en><strong style="color:var(--phos)">CyberBot Fusion Blocked</strong> — the AI decision fusing 4 sources (MISP + CYBER3 DB + Suricata + Wazuh); it blocks even connections from the client network to Command &amp; Control (C2) servers.</span>
+          </div></div>
+        <div class="htu-wf-step">
+          <div class="htu-wf-step-num">Σ</div>
+          <div class="htu-wf-step-body">
+            <span data-i18n-ro>Toate trei sunt <strong>autonome</strong> (fără intervenție umană) și apar în portal, în timp real, ca <strong>Total Blocked</strong> — pe toată flota și pe fiecare senzor.</span>
+            <span data-i18n-en>All three are <strong>autonomous</strong> (no human intervention) and show in the portal, in real time, as <strong>Total Blocked</strong> — fleet-wide and per sensor.</span>
+          </div></div>
+      </div>
       <h3 id="hw-5">S5 · <span data-i18n-ro>Blocarea în detaliu — 10 min → permanent</span><span data-i18n-en>Blocking in detail — 10 min → permanent</span></h3>
       <div class="htu-workflow">
         <div class="htu-workflow-head"><span class="htu-wf-num">S5</span><span data-i18n-ro>AVERTISMENT, APOI ELIMINARE</span><span data-i18n-en>A WARNING, THEN REMOVAL</span></div>
         <div class="htu-wf-step">
           <div class="htu-wf-step-num">1</div>
           <div class="htu-wf-step-body">
-            <span data-i18n-ro>La <strong>BLOCK</strong> pe un atac de nivel ≥10 cu IP sursă, <strong>Active Response</strong> scrie o regulă DROP în iptables pe senzor (inline, br_netfilter) — blocat <strong>10 minute</strong>, apoi deblocat. Prima ofensă = avertisment.</span>
-            <span data-i18n-en>On a <strong>BLOCK</strong> for a level ≥10 attack with a source IP, <strong>Active Response</strong> writes a DROP rule in iptables on the sensor (inline, br_netfilter) — blocked for <strong>10 minutes</strong>, then unblocked. First offense = a warning.</span>
+            <span data-i18n-ro>La <strong>BLOCKED</strong> pe un atac de nivel ≥10 cu IP sursă, <strong>Active Response</strong> scrie o regulă DROP în iptables pe senzor (inline, br_netfilter) — blocat <strong>10 minute</strong>, apoi deblocat. Prima ofensă = avertisment.</span>
+            <span data-i18n-en>On a <strong>BLOCKED</strong> for a level ≥10 attack with a source IP, <strong>Active Response</strong> writes a DROP rule in iptables on the sensor (inline, br_netfilter) — blocked for <strong>10 minutes</strong>, then unblocked. First offense = a warning.</span>
           </div></div>
         <div class="htu-wf-step">
           <div class="htu-wf-step-num">2</div>
@@ -5033,8 +5337,8 @@ li { margin-bottom: 6px; color: var(--ink); }
       </div>
     <div class="htu-callout" style="margin-top:22px;padding:16px 18px;border-left:4px solid var(--accent,#00ff9c);background:rgba(0,255,156,.06);border-radius:8px;">
       <strong data-i18n-ro>Fluxul complet:</strong><strong data-i18n-en>The full flow:</strong>
-      <span data-i18n-ro> Surse (Suricata / Wazuh / MISP + CYBER3 DATABASE / CYBER3 Global Scan / XDR) → <strong>AI Fusion</strong> (corelare context) → <strong>CyberBot AI</strong> (decizie &lt;2s: BLOCK / ESCALATE / MONITOR / IGNORE) → Acțiune (blocare 10min→permanent · escaladare la analist · Telegram · rapoarte). Whitelist-ul protejează IP-urile legitime la fiecare pas.</span>
-      <span data-i18n-en> Sources (Suricata / Wazuh / MISP + CYBER3 DATABASE / CYBER3 Global Scan / XDR) → <strong>AI Fusion</strong> (context correlation) → <strong>CyberBot AI</strong> (decision &lt;2s: BLOCK / ESCALATE / MONITOR / IGNORE) → Action (10min→permanent block · escalate to analyst · Telegram · reports). The whitelist protects legitimate IPs at every step.</span>
+      <span data-i18n-ro> Surse (Suricata / Wazuh / MISP + CYBER3 DATABASE / CYBER3 Global Scan / XDR) → <strong>AI Fusion</strong> (corelare context) → <strong>CyberBot AI</strong> (decizie &lt;2s: BLOCKED / ESCALATE / MONITOR / IGNORE) → Acțiune (blocare 10min→permanent · escaladare la analist · Telegram · rapoarte). Whitelist-ul protejează IP-urile legitime la fiecare pas.</span>
+      <span data-i18n-en> Sources (Suricata / Wazuh / MISP + CYBER3 DATABASE / CYBER3 Global Scan / XDR) → <strong>AI Fusion</strong> (context correlation) → <strong>CyberBot AI</strong> (decision &lt;2s: BLOCKED / ESCALATE / MONITOR / IGNORE) → Action (10min→permanent block · escalate to analyst · Telegram · reports). The whitelist protects legitimate IPs at every step.</span>
     </div>
     <div class="htu-callout" style="margin-top:18px;padding:16px 18px;border-left:4px solid var(--accent,#00ff9c);background:rgba(0,255,156,.06);border-radius:8px;">
       <strong data-i18n-ro>Clarificări operaționale (instalare senzor / răspuns la fișiere / indicatori)</strong><strong data-i18n-en>Operational clarifications (sensor deployment / file response / indicators)</strong>
@@ -5096,6 +5400,7 @@ const I18N = {
     tab_alerts: 'Alerts',
     tab_clients: 'Clients',
     tab_reports: 'Reports',
+    tab_workstations: 'Workstations',
     tab_sources: 'Context Sources Fusion',
     tab_system: 'System',
     // hero
@@ -5151,11 +5456,27 @@ const I18N = {
     // kpis
     kpi1_l: 'Alerts processed · 24h',
     kpi1_d: '+12% vs weekly avg',
-    kpi2_l: 'IPs blocked autonomously',
+    kpi2_l: 'Total Blocked · 24h',
     kpi2_d: '+31 vs prev 24h',
     kpi3_l: 'Escalations to analyst',
     kpi3_d: 'Level 15 · all confirmed',
     kpi4_l: 'Telegram messages sent',
+    blk3_title: '▣ 4 Blocking Layers',
+    blk3_meta: 'DEFENSE-IN-DEPTH · REAL-TIME',
+    blk_l1: 'IPS Blocked',
+    blk_l2: 'AR Native Blocked',
+    blk_l3: 'CyberBot Fusion Blocked',
+    blk_l1_sub: 'Suricata inline — packets dropped at the wire (milliseconds), before they reach the network.',
+    blk_l2_sub: 'Wazuh Active Response — host firewall (native fallback), independent of the AI.',
+    blk_l3_sub: 'AI decision fusing 4 sources (MISP + CYBER3 DB + Suricata + Wazuh).',
+    blk_l2s: 'L2 Shield',
+    blk_l2s_sub: 'ebtables L2 — anti-ARP-spoof / rogue-DHCP (the Ethernet blind spot).',
+    blk_cap: 'INDEPENDENT · 24H',
+    blk_per_sensor: 'Per-sensor activity (events, 24h)',
+    blk_col_sensor: 'Sensor',
+    blk_total: 'Blocked autonomously · 24h',
+    blk_total_sub: 'Unique threats across all layers — deduplicated, no human',
+    blk_total_col: 'Total Blocked',
     autonomy_lbl: 'Autonomy Index',
     autonomy_st_total: 'AI Decisions · 24h',
     autonomy_st_auto: 'Autonomous',
@@ -5323,6 +5644,7 @@ const I18N = {
     tab_alerts: 'Alerte',
     tab_clients: 'Clienți',
     tab_reports: 'Rapoarte',
+    tab_workstations: 'Stații EDR',
     tab_sources: 'Context Sources Fusion',
     tab_system: 'Sistem',
     hero_mission: "Platformă AI care orchestrează autonom instrumentele de securitate cibernetică, reduce timpul de răspuns la incidente și minimizează intervenția umană în Centrele de Operațiuni de Securitate.",
@@ -5373,11 +5695,27 @@ const I18N = {
     how_4_b: 'Selectează și execută automat workflow-uri de răspuns — blocare, monitorizare, escaladare — și notifică părțile interesate.',
     kpi1_l: 'Alerte procesate · 24h',
     kpi1_d: '+12% vs medie săptămânală',
-    kpi2_l: 'IP-uri blocate autonom',
+    kpi2_l: 'Total Blocked · 24h',
     kpi2_d: '+31 vs 24h precedente',
     kpi3_l: 'Escaladări către analist',
     kpi3_d: 'Nivel 15 · toate confirmate',
     kpi4_l: 'Mesaje Telegram trimise',
+    blk3_title: '▣ 4 Straturi de Blocare',
+    blk3_meta: 'APĂRARE ÎN ADÂNCIME · TIMP REAL',
+    blk_l1: 'IPS Blocked',
+    blk_l2: 'AR Native Blocked',
+    blk_l3: 'CyberBot Fusion Blocked',
+    blk_l1_sub: 'Suricata inline — pachete oprite la fir (milisecunde), înainte să intre în rețea.',
+    blk_l2_sub: 'Wazuh Active Response — firewall pe gazdă (fallback nativ), independent de AI.',
+    blk_l3_sub: 'Decizie AI din fuziunea a 4 surse (MISP + CYBER3 DB + Suricata + Wazuh).',
+    blk_l2s: 'L2 Shield',
+    blk_l2s_sub: 'ebtables L2 — anti-ARP-spoof / rogue-DHCP (unghiul mort Ethernet).',
+    blk_cap: 'INDEPENDENT · 24H',
+    blk_per_sensor: 'Activitate pe senzor (evenimente, 24h)',
+    blk_col_sensor: 'Senzor',
+    blk_total: 'Blocate autonom · 24h',
+    blk_total_sub: 'Amenințări unice pe toate straturile — dedup, fără om',
+    blk_total_col: 'Total Blocked',
     autonomy_lbl: 'Index Autonomie',
     autonomy_st_total: 'Decizii AI · 24h',
     autonomy_st_auto: 'Autonome',
@@ -5574,7 +5912,7 @@ async function renderTgFeed() {
     const months = (typeof CURRENT_LANG !== 'undefined' && CURRENT_LANG === 'en') ? monthsEN : monthsRO;
     const decClass = { 'BLOCARE_IMEDIATA': 'block', 'ESCALADARE': 'escalate', 'MONITORIZARE': 'monitor' };
     const decEmoji = { 'BLOCARE_IMEDIATA': '<svg class="cshield" viewBox="0 0 24 24"><path d="M12 2.1 L20.6 5 V11 C20.6 16.6 16.8 20.5 12 21.9 C7.2 20.5 3.4 16.6 3.4 11 V5 Z" fill="rgba(212,175,55,.14)" stroke="#d4af37" stroke-width="1.3"/><g fill="none" stroke="#f2d778" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5.2 V18.2"/><path d="M12 5.7 h2.2 a2 2 0 0 1 0 3.9 H12"/><path d="M8 11 L16 15.6"/><path d="M16 11 L8 15.6"/></g></svg>', 'ESCALADARE': '🆘', 'MONITORIZARE': '👁' };
-    const decLabel = { 'BLOCARE_IMEDIATA': 'BLOCK', 'ESCALADARE': 'ESCALATE', 'MONITORIZARE': 'MONITOR' };
+    const decLabel = { 'BLOCARE_IMEDIATA': 'BLOCKED', 'ESCALADARE': 'ESCALATE', 'MONITORIZARE': 'MONITOR' };
     let html = '';
     let lastDay = '';
     msgs.forEach(function(m) {
@@ -5648,7 +5986,7 @@ const ATTACK_TYPES = [
 ];
 
 const DECISIONS = [
-  { code: 'BLOCARE_IMEDIATA', css: 'dec-block', label: 'BLOCK' },
+  { code: 'BLOCARE_IMEDIATA', css: 'dec-block', label: 'BLOCKED' },
   { code: 'MONITORIZARE', css: 'dec-monitor', label: 'MONITOR' },
   { code: 'ESCALADARE', css: 'dec-escal', label: 'ESCALATE' },
   { code: 'IGNORARE', css: 'dec-ignore', label: 'IGNORE' }
@@ -5989,6 +6327,7 @@ function onClientChange() {
   // Reîmprospătează TOATE afișările care respectă filtrul (tabel Alerte + feed Overview)
   if (typeof refreshAlertsTable === 'function') refreshAlertsTable();
   if (typeof refreshAlertFeed === 'function') refreshAlertFeed();
+  if (typeof refreshBlockingLayers === 'function') refreshBlockingLayers();
   // când selectezi un client anume, sari automat pe tab-ul Alerte ca să-i vezi imediat alertele
   if (window.SELECTED_CLIENT) {
     const at = document.querySelector('.tab[data-page="alerts"]');
@@ -6730,13 +7069,13 @@ async function refreshHeroStats() {
     const el = document.getElementById(id);
     if (el && val !== undefined && val !== null) el.textContent = val;
   };
-  setIf("hKpi-decisions", (s24.alerts_processed || 0).toLocaleString());
+  setIf("hKpi-decisions", (s24.ai_decisions || 0).toLocaleString());
   setIf("hKpi-clients", cls.total || 0);
   setIf("bKpi-alerts", (s24.alerts_processed || 0).toLocaleString());
-  setIf("bKpi-blocked", (s24.ips_blocked || 0).toLocaleString());
-  setIf("bKpi-escalations", s24.escalations || 0);
+  // bKpi-blocked = „Total Blocked" (suma celor 3 straturi) — setat de refreshBlockingLayers, nu din /stats
+  setIf("bKpi-escalations", s24.escalations || 0);   setIf("bKpi-telegram", (s24.telegram_sent_count == null ? "—" : s24.telegram_sent_count.toLocaleString()));
   // === AUTONOMY INDEX (calculat din date reale) ===
-  const totalDec = s24.alerts_processed || 0;
+  const totalDec = s24.ai_decisions || 0;
   const escalated = s24.escalations || 0;
   const autonomous = totalDec - escalated;
   const score = totalDec > 0 ? Math.round((autonomous / totalDec) * 100) : 100;
@@ -6750,7 +7089,63 @@ async function refreshHeroStats() {
   setIf("hKpi-humanpct", (totalDec > 0 ? Math.round((escalated / totalDec) * 100) : 0) + "%");
   // Avg decision time REAL (măsurat în cyberbot: durata analyze_with_claude) — punct 2 ICI
   const adm = s24.avg_decision_ms;
-  if (adm !== undefined && adm !== null) setIf("hKpi-avgtime", adm >= 1000 ? (adm/1000).toFixed(1) + "s" : adm + "ms");
+  if (adm !== undefined && adm !== null) { setIf("hKpi-avgtime", adm >= 1000 ? (adm/1000).toFixed(1) + "s" : adm + "ms"); } else { setIf("hKpi-avgtime", "< 1s"); }
+}
+
+// ------ 3 STRATURI DE BLOCARE (IPS / AR Native / CyberBot Fusion) — timp real, RBAC ------
+function _blkSpark(elId, arr) {
+  const el = document.getElementById(elId);
+  if (!el) return;
+  const a = arr || [];
+  const m = Math.max(1, ...a);
+  el.innerHTML = a.map(v => `<i style="height:${Math.round((v / m) * 22) + 1}px"></i>`).join('');
+}
+async function refreshBlockingLayers() {
+  if (!LIVE_MODE) return;
+  const q = window.SELECTED_CLIENT ? ('?agent_id=' + encodeURIComponent(window.SELECTED_CLIENT)) : '';
+  const d = await apiFetch('/blocking/layers' + q);
+  if (!d || d.source === 'error') return;
+  const t = d.totals || {};
+  const ind = d.independent || t;   // numărătoare INDEPENDENTĂ (IP distincte, fără dubla numărare)
+  const set = (id, v) => { const e = document.getElementById(id); if (e) e.textContent = (v || 0).toLocaleString(); };
+  set('blk3-ips', ind.ips); set('blk3-ar', ind.ar_native); set('blk3-cb', ind.cyberbot);
+  set('blk3-l2s', (d.l2shield || {}).blocks);
+  // Total = amenințări UNICE (dedup pe IP între straturi), NU suma (care ar dubla)
+  const uniq = (d.unique_total != null) ? d.unique_total
+             : ((ind.ips || 0) + (ind.ar_native || 0) + (ind.cyberbot || 0));
+  set('blk3-total', uniq);
+  set('bKpi-blocked', uniq);
+  const h = d.hourly || {};
+  _blkSpark('blk3-ips-spark', h.ips); _blkSpark('blk3-ar-spark', h.ar_native); _blkSpark('blk3-cb-spark', h.cyberbot);
+  const sc = document.getElementById('blk3-scope');
+  if (sc) {
+    sc.textContent = (d.scope === 'fleet' || !d.scope)
+      ? (CURRENT_LANG === 'en' ? 'FLEET' : 'FLOTĂ')
+      : (d.scope === 'scoped' ? (CURRENT_LANG === 'en' ? 'MY SENSORS' : 'SENZORII MEI')
+         : (window.SELECTED_CLIENT_NAME || ('#' + d.scope)));
+  }
+  const tb = document.getElementById('blk3-tbody');
+  if (tb) {
+    const rows = (d.per_sensor || [])
+      .map(r => ({ ...r, total: (r.ips || 0) + (r.ar_native || 0) + (r.l2shield || 0) + (r.cyberbot || 0) }))
+      .sort((a, b) => (b.total - a.total) || String(a.label).localeCompare(String(b.label)));
+    if (!rows.length) {
+      tb.innerHTML = `<tr><td colspan="6" style="opacity:.5;padding:10px">${CURRENT_LANG === 'en' ? 'No sensors visible' : 'Niciun senzor vizibil'}</td></tr>`;
+    } else {
+      tb.innerHTML = rows.map(r => {
+        const off = r.status && r.status !== 'active';
+        const lbl = off
+          ? `<span style="opacity:.55">${r.label}</span> <span style="font-size:9px;color:var(--red);border:1px solid var(--red);border-radius:3px;padding:0 4px">${r.status}</span>`
+          : r.label;
+        return `<tr${off ? ' style="opacity:.8"' : ''}><td class="mono">${lbl}</td>` +
+          `<td class="table-num" style="color:var(--blue)">${(r.ips || 0).toLocaleString()}</td>` +
+          `<td class="table-num" style="color:var(--amber)">${(r.ar_native || 0).toLocaleString()}</td>` +
+          `<td class="table-num" style="color:#22d3ee">${(r.l2shield || 0).toLocaleString()}</td>` +
+          `<td class="table-num" style="color:var(--phos)">${(r.cyberbot || 0).toLocaleString()}</td>` +
+          `<td class="table-num tot">${r.total.toLocaleString()}</td></tr>`;
+      }).join('');
+    }
+  }
 }
 
 // ------ Update MISP stats card (right column of Overview) ------
@@ -6870,7 +7265,8 @@ async function refreshAlertFeed() {
     refreshMispStats(),
     refreshWazuhStats(),
     refreshTelegramCard(),
-    refreshAlertFeed()
+    refreshAlertFeed(),
+    refreshBlockingLayers()
   ]);
   console.log('[FasterUp Portal] Live data loaded');
 })();
@@ -6888,6 +7284,9 @@ setInterval(() => {
   refreshMispStats();
   refreshWazuhStats();
 }, 30000);
+
+// 3 straturi de blocare — contor în timp real (12s)
+setInterval(refreshBlockingLayers, 12000);
 
 setInterval(renderDecisionsChart, 30000);
 
@@ -7105,8 +7504,6 @@ function c3row(k,v){return '<div style="display:flex;justify-content:space-betwe
 async function loadCyber3(){
   var box=document.getElementById('cyber3Nodes'),sum=document.getElementById('cyber3Summary'),meta=document.getElementById('cyber3Meta');
   if(!box)return;
-  loadCyber3Endpoints();
-  loadCyber3Codes();
   box.innerHTML='<div style="color:var(--ink-dim)">Se încarcă…</div>';
   try{
     var d=await fetch('/api/cyber3/status',{credentials:'include'}).then(function(r){return r.json();});
@@ -7206,6 +7603,139 @@ async function c3deactivateCode(code){
     else{msg.style.color='var(--red)';msg.textContent=c3esc(d.error||'eroare');}
   }catch(e){msg.style.color='var(--red)';msg.textContent='Eroare: '+c3esc(''+e);}
 }
+
+/* ===== WORKSTATIONS (EDR/XDR per client) ===== */
+var wsData={stations:[],traffic:{}},wsSel=null,wsLoaded=false;
+function wsEsc(x){return String(x==null?'':x).replace(/[&<>"']/g,function(c){return{'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c];});}
+function wsTip(ev,html){var t=document.getElementById('wsTip');if(!html){t.style.display='none';return;}t.innerHTML=html;t.style.display='block';t.style.left=(ev.clientX+14)+'px';t.style.top=(ev.clientY+10)+'px';}
+async function loadWorkstations(){
+  try{
+    var r=await fetch('/api/workstations',{credentials:'include',cache:'no-store'});
+    var d=await r.json();wsData.stations=d.stations||[];
+    wsRenderTable();wsRenderTiles();wsLoaded=true;
+    await wsLoadTraffic();
+    if(!wsSel&&wsData.stations.length)wsSelect(wsData.stations[0].name);
+  }catch(e){document.getElementById('wsTbody').innerHTML='<tr><td colspan="8" class="ws-sub">eroare: '+wsEsc(e)+'</td></tr>';}
+}
+async function wsLoadTraffic(){
+  var days=document.getElementById('wsDays').value;
+  document.getElementById('wsMeta').textContent='…';
+  try{
+    var r=await fetch('/api/workstations/traffic?days='+days,{credentials:'include',cache:'no-store'});
+    var d=await r.json();wsData.traffic=d.stations||{};
+    document.getElementById('wsMeta').textContent=(d.sensors&&d.sensors.length?('senzor: '+d.sensors.join(', ')+' · '):'')+'actualizat '+new Date().toLocaleTimeString();
+    wsRenderTiles();if(wsSel)wsSelect(wsSel);
+  }catch(e){document.getElementById('wsMeta').textContent='trafic indisponibil';}
+}
+function wsStationByName(n){for(var i=0;i<wsData.stations.length;i++)if(wsData.stations[i].name===n)return wsData.stations[i];return null;}
+function wsTrafficFor(st){return (st&&st.ip&&wsData.traffic[st.ip])||null;}
+function wsRenderTiles(){
+  var stations=wsData.stations,online=0,blocked=0;
+  stations.forEach(function(s){if(s.online)online++;blocked+=s.blocked||0;});
+  var totalMin=0,sites={};
+  Object.keys(wsData.traffic).forEach(function(ip){var t=wsData.traffic[ip];totalMin+=t.total_minutes||0;(t.sites||[]).forEach(function(x){sites[x.site]=1;});});
+  var h='';
+  h+='<div class="ws-tile"><div class="v">'+stations.length+'</div><div class="l">Stații înrolate</div></div>';
+  h+='<div class="ws-tile"><div class="v">'+online+'</div><div class="l">Online</div></div>';
+  h+='<div class="ws-tile"><div class="v">'+totalMin+'</div><div class="l">Minute navigare</div></div>';
+  h+='<div class="ws-tile"><div class="v">'+Object.keys(sites).length+'</div><div class="l">Situri distincte</div></div>';
+  h+='<div class="ws-tile'+(blocked?' warn':'')+'"><div class="v">'+(blocked?'⛔ ':'')+blocked+'</div><div class="l">Blocări aplicație</div></div>';
+  document.getElementById('wsTiles').innerHTML=h;
+}
+function wsRenderTable(){
+  var tb=document.getElementById('wsTbody');
+  if(!wsData.stations.length){tb.innerHTML='<tr><td colspan="8" class="ws-sub">Nicio stație înrolată încă.</td></tr>';return;}
+  tb.innerHTML=wsData.stations.map(function(s){
+    var last=s.last_seen?s.last_seen.replace('T',' ').slice(0,16)+' UTC':'—';
+    return '<tr class="'+(wsSel===s.name?'sel':'')+'" onclick="wsSelect(\''+wsEsc(s.name)+'\')">'+
+      '<td>'+wsEsc(s.name)+'</td><td>'+wsEsc(s.ip||'—')+'</td><td>'+wsEsc(s.os||'—')+'</td><td>'+wsEsc(s.sensor||'—')+'</td>'+
+      '<td class="ws-sub">'+last+'</td>'+
+      '<td><span class="ws-badge '+(s.online?'ws-on':'ws-off')+'">'+(s.online?'ONLINE':'OFFLINE')+'</span></td>'+
+      '<td>'+(s.scans||0)+'</td>'+
+      '<td>'+((s.blocked||0)>0?'<span class="ws-badge ws-blk">⛔ '+s.blocked+'</span>':'0')+'</td></tr>';
+  }).join('');
+}
+function wsSelect(name){
+  wsSel=name;wsRenderTable();
+  var st=wsStationByName(name),det=document.getElementById('wsDetail');
+  det.style.display='block';
+  document.getElementById('wsDetailName').textContent=name+(st&&st.ip?' · '+st.ip:'');
+  var tr=wsTrafficFor(st);
+  var sc=document.getElementById('wsSitesChart'),stb=document.getElementById('wsSitesTbody');
+  if(!tr){
+    sc.innerHTML='<span class="ws-sub">Fără date de trafic încă pentru această stație (IP-ul se leagă automat la următorul heartbeat al aplicației; colectarea a pornit azi).</span>';
+    stb.innerHTML='';document.getElementById('wsHours').innerHTML='';document.getElementById('wsHLabels').innerHTML='';document.getElementById('wsDay').innerHTML='';
+  }else{
+    var top=(tr.sites||[]).slice(0,10),max=top.length?(top[0].minutes||1):1;
+    sc.innerHTML=top.map(function(x){
+      var w=Math.max(2,Math.round(100*x.minutes/max));
+      return '<div class="ws-barrow" onmousemove="wsTip(event,\''+wsEsc(x.site)+' — '+x.minutes+' min · '+x.events+' ev.\')" onmouseleave="wsTip(null)">'+
+        '<div class="lbl" title="'+wsEsc(x.site)+'">'+wsEsc(x.site)+'</div>'+
+        '<div class="ws-track"><div class="ws-fill" style="width:'+w+'%"></div></div>'+
+        '<div class="val">'+x.minutes+' min</div></div>';
+    }).join('')||'<span class="ws-sub">—</span>';
+    stb.innerHTML=(tr.sites||[]).map(function(x){return '<tr><td>'+wsEsc(x.site)+'</td><td>'+x.minutes+'</td><td>'+x.events+'</td></tr>';}).join('');
+    var days=Object.keys(tr.hourly||{}).sort().reverse();
+    var sel=document.getElementById('wsDay');
+    sel.innerHTML='<option value="__all">Σ perioada</option>'+days.map(function(d){return '<option value="'+d+'">'+d+'</option>';}).join('');
+    sel.value=days.length?days[0]:'__all';
+    wsRenderHours();
+  }
+  var evs=(st&&st.recent)||[];
+  var bl=document.getElementById('wsBlocks');
+  if(!evs.length){bl.innerHTML='Nicio blocare / amenințare raportată de aplicație — stație curată.';}
+  else{
+    bl.innerHTML='<table class="ws-t"><tbody>'+evs.map(function(e){
+      var bad=(e.type==='threat'||e.type==='malware');
+      var d=Object.keys(e.data||{}).map(function(k){return wsEsc(k)+'='+wsEsc(e.data[k]);}).join(' · ');
+      return '<tr><td class="ws-sub" style="width:150px">'+wsEsc((e.ts||'').replace('T',' ').slice(0,16))+'</td>'+
+        '<td style="width:110px">'+(bad?'<span class="ws-badge ws-blk">⛔ '+wsEsc(e.type)+'</span>':'<span class="ws-badge ws-off">'+wsEsc(e.type)+'</span>')+'</td>'+
+        '<td class="ws-sub">'+d+'</td></tr>';
+    }).join('')+'</tbody></table>';
+  }
+}
+function wsRenderHours(){
+  var st=wsStationByName(wsSel),tr=wsTrafficFor(st);if(!tr)return;
+  var day=document.getElementById('wsDay').value,arr=new Array(24).fill(0);
+  if(day==='__all'){Object.keys(tr.hourly||{}).forEach(function(d){(tr.hourly[d]||[]).forEach(function(v,i){arr[i]+=v||0;});});}
+  else{arr=((tr.hourly||{})[day]||arr).slice();}
+  var max=Math.max.apply(null,arr.concat([1]));
+  document.getElementById('wsHours').innerHTML=arr.map(function(v,i){
+    var hpx=Math.round(112*v/max);
+    return '<div class="ws-hcol" onmousemove="wsTip(event,\''+String(i).padStart(2,'0')+':00 — '+v+' min\')" onmouseleave="wsTip(null)">'+
+      '<div class="ws-hbar" style="height:'+(v?Math.max(3,hpx):0)+'px"></div></div>';
+  }).join('');
+  document.getElementById('wsHLabels').innerHTML=arr.map(function(_,i){return '<span>'+(i%3===0?String(i).padStart(2,'0'):'')+'</span>';}).join('');
+}
+var wsTabBtn=document.querySelector('.tab[data-page="workstations"]');
+if(wsTabBtn)wsTabBtn.addEventListener('click',function(){if(!wsLoaded)loadWorkstations();else wsLoadTraffic();});
+
+function mleoCard(l,v,d,c){return '<div class="mleo-card"><div class="v" style="color:'+(c||'#e6edf3')+'">'+v+'</div><div class="l">'+l+'</div><div class="d">'+d+'</div></div>';}
+function loadMleo(){
+  fetch('/api/mleo/summary',{credentials:'include'}).then(function(r){return r.json();}).then(function(d){
+    var s=d.stats||{};
+    document.getElementById('mleoStats').innerHTML=
+      mleoCard('Reconciliere MAC&harr;IP',s.recon_rows,'Perechi MAC/IP colectate din ARP-ul senzorilor (la 5 min). Baza corelării L3&harr;L2.')+
+      mleoCard('Dispozitive (MAC unice)',s.distinct_mac,'Echipamente distincte văzute la nivel Ethernet.')+
+      mleoCard('Candidați evaziune',s.mac_multi_ip,'MAC-uri care au folosit &gt;1 IP.', s.mac_multi_ip>0?'#f0b429':'#e6edf3')+
+      mleoCard('Blocări corelate',(s.blocks_with_mac||0)+' / '+(s.blocks||0),'Cu MAC = interne (corelabile). Externe (fără MAC): '+(s.blocks_external||0)+'.')+
+      mleoCard('Match 1 (evaziune)',s.match1,'Același MAC blocat pe IP-uri diferite în 15 min.', s.match1>0?'#e5484d':'#3fb950')+
+      mleoCard('Propuneri carantină',s.tx_proposed,'Izolări propuse (dry-run). Armate de operator: '+(s.tx_armed||0)+'.', s.tx_proposed>0?'#f0b429':'#e6edf3');
+    var mh=d.matches||[];
+    document.getElementById('mleoMatches').innerHTML=mh.length?'<table class="mleo-tbl"><tr><th>Când</th><th>MAC</th><th>Senzor</th><th>Detaliu</th></tr>'+mh.map(function(m){return '<tr><td>'+new Date(m.ts*1000).toLocaleString()+'</td><td><code>'+m.mac+'</code></td><td>'+m.sensor+'</td><td>'+(m.note||'')+'</td></tr>';}).join('')+'</table>':'<div style="color:#3fb950">✓ Nicio evaziune detectată (stare normală).</div>';
+    var tx=d.tx||[];
+    document.getElementById('mleoTx').innerHTML=tx.length?'<table class="mleo-tbl"><tr><th>Stare</th><th>MAC</th><th>IP-uri</th><th>Senzor</th><th>Tranzacție (rollback)</th></tr>'+tx.map(function(t){return '<tr><td>'+t.state+'</td><td><code>'+t.mac+'</code></td><td>'+(t.ips||'')+'</td><td>'+t.sensor+'</td><td><code>'+t.txid+'</code></td></tr>';}).join('')+'</table>':'<div style="color:#9aa">Nicio propunere (0 Match 1 declanșat).</div>';
+    var mu=d.multi_ip||[];
+    document.getElementById('mleoMulti').innerHTML=mu.length?'<table class="mleo-tbl"><tr><th>MAC (dispozitiv)</th><th>IP-uri folosite</th><th>Senzor</th></tr>'+mu.map(function(x){return '<tr><td><code>'+x.mac+'</code></td><td>'+(x.ips||'')+'</td><td>'+(x.sensors||'')+'</td></tr>';}).join('')+'</table>':'<div style="color:#9aa">-</div>';
+  }).catch(function(){document.getElementById('mleoStats').innerHTML='<div style="color:#e5484d">Eroare la încărcarea MLEO.</div>';});
+}
+function mleoQuery(){var ip=(document.getElementById('mleoQip').value||'').trim();if(!ip)return;
+  fetch('/api/mleo/query/'+encodeURIComponent(ip),{credentials:'include'}).then(function(r){return r.json();}).then(function(d){
+    if(!d.found){document.getElementById('mleoQres').innerHTML='<span style="color:#9aa">IP necunoscut (extern sau necolectat din ARP).</span>';return;}
+    var h=(d.history||[]).map(function(x){return '<tr><td>'+x.ip+'</td><td>'+x.sensor+'</td><td>'+new Date(x.last_seen*1000).toLocaleString()+'</td></tr>';}).join('');
+    document.getElementById('mleoQres').innerHTML='<b>'+ip+'</b> &rarr; MAC <code>'+d.mac+'</code> (senzor '+d.sensor+')<br>Istoric IP-uri pentru acest dispozitiv:<table class="mleo-tbl"><tr><th>IP</th><th>Senzor</th><th>Ultima dată</th></tr>'+h+'</table>';
+  });
+}
 (async function(){
   try{
     var me=await fetch('/api/auth/me',{credentials:'include'}).then(function(r){return r.json();});
@@ -7213,8 +7743,11 @@ async function c3deactivateCode(code){
       document.querySelectorAll('.cyber3-only').forEach(function(el){el.remove();});
       return;
     }
+    var tabV=document.querySelector('.tab[data-page="vpn"]');
+    if(tabV)tabV.addEventListener('click',loadCyber3);
     var tab=document.querySelector('.tab[data-page="cyber3"]');
-    if(tab)tab.addEventListener('click',loadCyber3);
+    if(tab)tab.addEventListener('click',function(){loadCyber3Endpoints();loadCyber3Codes();});
+    var tabMleo=document.querySelector('.tab[data-page="mleo"]');if(tabMleo)tabMleo.addEventListener('click',loadMleo);
   }catch(e){document.querySelectorAll('.cyber3-only').forEach(function(el){el.remove();});}
 })();
 </script>
@@ -7232,12 +7765,12 @@ async function c3deactivateCode(code){
         <svg class="c3eco-cross" viewBox="0 0 100 100" aria-hidden="true"><g fill="#FF0000"><rect x="44" y="15" width="12" height="70"/><rect x="15" y="44" width="70" height="12"/><rect x="36" y="13" width="28" height="6"/><rect x="36" y="81" width="28" height="6"/><rect x="13" y="36" width="6" height="28"/><rect x="81" y="36" width="6" height="28"/><rect x="27" y="22" width="6" height="16"/><rect x="22" y="27" width="16" height="6"/><rect x="67" y="22" width="6" height="16"/><rect x="62" y="27" width="16" height="6"/><rect x="27" y="62" width="6" height="16"/><rect x="22" y="67" width="16" height="6"/><rect x="67" y="62" width="6" height="16"/><rect x="62" y="67" width="16" height="6"/></g><circle cx="50" cy="50" r="47" fill="none" stroke="#FF0000" stroke-width="3"/></svg>
         <span class="c3eco-wm"><span class="c3eco-r">CYBER3</span><span class="c3eco-w">.AI</span></span>
       </span>
-      <span class="c3eco-tag">Suveran UE · Conformitate AI Act · NIS2-ready · Security LLM · Global Scan &amp; VAS · Senzor INLINE &amp; EDR/XDR app · Protecție mobilă</span>
+      <span class="c3eco-tag">Security LLM · Autonomous Monitoring &amp; Response - Global Scan &amp; VAS - Senzor INLINE &amp; EDR/XDR app - Protecție mobilă - Suveran UE - AI Act - NIS2 compliance</span>
     </div>
-    <div class="c3eco-motto"><b><span class='c3eco-r'>CYBER3</span> Agents Division</b> — autonomous AI defense for every customer.</div><nav class="c3eco-pillars">
+    <div class="c3eco-motto"><b><span class='c3eco-r'>ROL PORTAL</span> - Agentic company</b> — Your dedicated AI security team. Autonomous, always on.</div><nav class="c3eco-pillars">
       <a href="https://cyber3.ai/" target="_blank" rel="noopener">🧠 <b>CYBER3.AI Security LLM</b><span>COPILOT AI de securitate, suveran</span></a>
-      <a href="https://cyber3.ai/" target="_blank" rel="noopener">🛰️ <b>CYBER3 Global Scan</b><span>UNSTOPPABLE — descoperire autonomă + VAS</span></a>
-      <a href="https://fasterup.ai/" target="_blank" rel="noopener">🛡️ <b>Cloud SOC &amp; SOC&amp;VAS</b><span>senzori INLINE FasterUp · EDR/XDR app</span></a>
+      <a href="https://cyber3.ai/?start=scan" target="_blank" rel="noopener">🛰️ <b>CYBER3 Global Scan</b><span>UNSTOPPABLE — descoperire autonomă + VAS</span></a>
+      <a href="https://fasterup.ai/ro/" target="_blank" rel="noopener">🛡️ <b>SOC &amp; VAS</b><span>senzori INLINE FasterUp · EDR/XDR app</span></a>
       <a href="https://cyber3.app/" target="_blank" rel="noopener">📱 <b>CYBER3.APP</b><span>Mobile Protection</span></a>
     </nav>
     <div class="c3eco-bottom">
@@ -7263,7 +7796,7 @@ async function c3deactivateCode(code){
 .c3eco-r{color:#FF0000;text-shadow:0 0 8px rgba(255,0,0,.35)}
 .c3eco-w{color:#fff}
 .c3eco-tag{color:#9FB3D1;font-size:12.5px;font-weight:600;letter-spacing:.4px}
-.c3eco-motto{margin:16px 0 2px;padding:11px 14px;background:rgba(212,175,55,.08);border:1px solid rgba(212,175,55,.24);border-radius:10px;color:#e8eefb;font-size:13.5px;line-height:1.4} .c3eco-motto b{color:#D4AF37} .c3eco-pillars{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:10px;padding:16px 0}
+.c3eco-motto{text-align:center;margin:16px 0 2px;padding:11px 14px;background:rgba(212,175,55,.08);border:1px solid rgba(212,175,55,.24);border-radius:10px;color:#e8eefb;font-size:13.5px;line-height:1.4} .c3eco-motto b{color:#D4AF37} .c3eco-pillars{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:10px;padding:16px 0}
 .c3eco-pillars a{display:flex;flex-direction:column;gap:1px;text-decoration:none;color:#e8eefb;background:rgba(17,42,82,.5);border:1px solid rgba(30,76,149,.4);border-radius:10px;padding:10px 12px;line-height:1.3;transition:border-color .15s,background .15s}
 .c3eco-pillars a:hover{border-color:rgba(212,175,55,.55);background:rgba(17,42,82,.85)}
 .c3eco-pillars a b{font-size:13px;color:#f2f6ff}
