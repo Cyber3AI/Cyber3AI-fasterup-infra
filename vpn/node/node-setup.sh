@@ -57,16 +57,36 @@ server:
 EOF
 touch /etc/unbound/ioc.blocklist
 
-# 5) hook IOC: trage domeniile (cron orar). Endpoint de confirmat/adăugat în worker.
+# 5) hook IOC: trage domeniile (cron orar) de la cyber3-edge /v1/domains.
+#    ROBUST (22 sep 2026): filtreaza nume DNS invalide (eticheta >63 = fatal pt unbound),
+#    valideaza cu unbound-checkconf INAINTE de reload, si PASTREAZA lista veche daca noua
+#    e invalida sau daca unbound cade -> o lista defecta NU poate dobora DNS-ul nodului.
 cat >/usr/local/bin/cyber3-ioc-sync.sh <<'EOS'
 #!/usr/bin/env bash
 set -e
 SRC="https://cyber3-edge.cyber3.workers.dev/v1/domains"
 OUT=/etc/unbound/ioc.blocklist
-curl -fsS --max-time 60 "$SRC" 2>/dev/null \
- | grep -E '^[a-z0-9.-]+$' \
- | awk '{print "local-zone: \""$1"\" always_nxdomain"}' > "$OUT.tmp" \
- && mv "$OUT.tmp" "$OUT" && systemctl reload unbound || true
+TMP="$(mktemp)"; PREV="$(mktemp)"
+curl -fsS --max-time 90 "$SRC" 2>/dev/null \
+ | tr 'A-Z' 'a-z' \
+ | grep -E '^([a-z0-9]([a-z0-9-]{0,61}[a-z0-9])?\.)+[a-z]{2,63}$' \
+ | awk '{print "local-zone: \""$1"\" always_nxdomain"}' > "$TMP" || true
+if [ ! -s "$TMP" ]; then rm -f "$TMP" "$PREV"; exit 0; fi
+cp -f "$OUT" "$PREV" 2>/dev/null || : > "$PREV"
+mv -f "$TMP" "$OUT"
+if unbound-checkconf >/dev/null 2>&1; then
+  systemctl reload unbound 2>/dev/null || systemctl restart unbound 2>/dev/null || true
+  sleep 1
+  if ! systemctl is-active --quiet unbound; then
+    cp -f "$PREV" "$OUT" 2>/dev/null || : > "$OUT"
+    systemctl restart unbound 2>/dev/null || true
+    logger -t cyber3-ioc "unbound cazut dupa reload -> rollback lista veche"
+  fi
+else
+  cp -f "$PREV" "$OUT" 2>/dev/null || : > "$OUT"
+  logger -t cyber3-ioc "blocklist noua invalida (checkconf) -> pastrez lista veche"
+fi
+rm -f "$PREV"
 EOS
 chmod +x /usr/local/bin/cyber3-ioc-sync.sh
 echo "0 * * * * root /usr/local/bin/cyber3-ioc-sync.sh" >/etc/cron.d/cyber3-ioc
