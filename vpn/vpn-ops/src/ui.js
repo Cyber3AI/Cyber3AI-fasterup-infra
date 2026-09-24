@@ -14,8 +14,8 @@ a{color:var(--gold)}code{font:12.5px var(--mono);background:var(--p3);padding:1p
 header{position:sticky;top:0;z-index:30;background:rgba(7,13,26,.94);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
 .hd{max-width:1440px;margin:0 auto;padding:10px 20px;display:flex;align-items:center;gap:14px;flex-wrap:wrap}
 .brand{display:flex;align-items:center;gap:10px;font-weight:800}
-.brand .x{width:28px;height:28px;border-radius:50%;border:2px solid var(--red);display:grid;place-items:center;color:var(--red);font-weight:900;animation:pl 3s ease-in-out infinite}
-@keyframes pl{50%{box-shadow:0 0 0 5px rgba(225,29,46,.12)}}
+.brand .x{width:28px;height:28px;background:url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><g fill='%23F00'><rect x='44' y='15' width='12' height='70'/><rect x='15' y='44' width='70' height='12'/><rect x='36' y='13' width='28' height='6'/><rect x='36' y='81' width='28' height='6'/><rect x='13' y='36' width='6' height='28'/><rect x='81' y='36' width='6' height='28'/><rect x='27' y='22' width='6' height='16'/><rect x='22' y='27' width='16' height='6'/><rect x='67' y='22' width='6' height='16'/><rect x='62' y='27' width='16' height='6'/><rect x='27' y='62' width='6' height='16'/><rect x='22' y='67' width='16' height='6'/><rect x='67' y='62' width='6' height='16'/><rect x='62' y='67' width='16' height='6'/></g><circle cx='50' cy='50' r='47' fill='none' stroke='%23F00' stroke-width='3'/></svg>") center/contain no-repeat;filter:drop-shadow(0 0 4px rgba(255,0,0,.55));animation:xpulse 1.8s ease-in-out infinite}
+@keyframes xpulse{0%,100%{transform:scale(1);opacity:1}50%{transform:scale(1.12);opacity:.72}}
 .brand b{color:var(--red)}.brand small{display:block;color:var(--mut);font-weight:600;font-size:10.5px;letter-spacing:.18em}
 .chips{display:flex;gap:6px;flex-wrap:wrap}
 .chip{font:600 11px var(--mono);padding:4px 10px;border-radius:20px;border:1px solid var(--line);color:var(--mut)}
@@ -61,8 +61,15 @@ tr:last-child td{border-bottom:0}td.num{font-family:var(--mono);font-variant-num
 .tag{font:600 10px var(--mono);padding:2px 7px;border-radius:12px;border:1px solid currentColor;letter-spacing:.06em}
 .note{font-size:13px;color:#cdd7ec;border-left:3px solid var(--gold);padding:8px 12px;margin:8px 0;background:rgba(212,175,55,.05);border-radius:0 10px 10px 0}
 .note.w{border-color:var(--warn);background:rgba(251,191,36,.06)}.note.c{border-color:var(--crit);background:rgba(255,77,94,.07)}
-.map{position:relative;height:260px;border-radius:12px;overflow:hidden;border:1px solid var(--line);
-background:linear-gradient(rgba(29,42,68,.35) 1px,transparent 1px) 0 0/100% 12.5%,linear-gradient(90deg,rgba(29,42,68,.35) 1px,transparent 1px) 0 0/8.33% 100%,var(--p2)}
+.map{position:relative;min-height:260px;border-radius:12px;overflow:hidden;border:1px solid var(--line);background:radial-gradient(ellipse at 50% 40%,#0c1d3a 0%,#060d1c 75%)}
+.map svg{display:block;width:100%;height:auto}
+.map .ctry{fill:#13243f;stroke:rgba(212,175,55,.38);stroke-width:.5}.map .ctry:hover{fill:#1c3257}
+.map .ctry.host{fill:rgba(212,175,55,.26);stroke:rgba(243,210,126,.85);stroke-width:.8}
+.map .sph{fill:#0a1a33;stroke:rgba(212,175,55,.55);stroke-width:1.2}.map .grat{fill:none;stroke:rgba(120,150,200,.10);stroke-width:.5}
+.map .lbl{font:600 11px var(--mono);fill:#e8eefc;paint-order:stroke;stroke:#060d1c;stroke-width:3px}
+.map .lbl .c{fill:#22d38a}.map .lead{stroke:rgba(243,210,126,.55);stroke-width:.9}
+.map .leg{position:absolute;left:12px;bottom:8px;font:11px var(--mono);color:var(--dim)}
+.map .mlist{display:flex;flex-wrap:wrap;gap:6px 14px;padding:6px 12px 40px;font:11px var(--mono);color:#e8eefc}.map .mlist i{display:inline-block;width:8px;height:8px;border-radius:50%;margin-right:5px}
 .pin{position:absolute;transform:translate(-50%,-50%);font:600 11px var(--mono);white-space:nowrap;text-align:center}
 .pin i{display:block;width:12px;height:12px;border-radius:50%;margin:0 auto 3px;border:2px solid var(--bg)}
 .pin span{background:rgba(7,13,26,.85);padding:1px 6px;border-radius:6px;border:1px solid var(--line)}
@@ -92,7 +99,7 @@ details.proc .in{padding:0 16px 12px;font-size:13.2px;color:#cdd7ec}details.proc
 @media(prefers-reduced-motion:reduce){.brand .x,.live .pulse{animation:none}}
 </style></head><body>
 <header><div class="hd">
-  <div class="brand"><div class="x">✚</div><div><b>CYBER3</b> · VPN OPERATIONS<small>COMANDĂ · CONTROL · EXPLOATARE — INFRASTRUCTURĂ WIREGUARD</small></div></div>
+  <div class="brand"><div class="x" role="img" aria-label="CYBER3 — Crucea de Ierusalim"></div><div><b>CYBER3</b> · VPN OPERATIONS<small>COMANDĂ · CONTROL · EXPLOATARE — INFRASTRUCTURĂ WIREGUARD</small></div></div>
   <div class="chips"><span class="chip on">● CYBER3 VPN · LIVE</span><span class="chip plan">◆ VPNzone.NET · pregătit</span></div>
   <div class="upd"><span id="upd">—</span><button id="refresh" title="Rulează acum o colectare completă (durează ~15 s)">Colectează acum</button></div>
 </div>
@@ -343,7 +350,8 @@ function render(){
  $("upd").textContent="date complete: acum "+ago(s.ts);
  var up=N.filter(function(n){return n.ok}),act=0,peers=0,cap=0,cost=0,out=0,incl=0,over=0,now=new Date(),dim=new Date(now.getUTCFullYear(),now.getUTCMonth()+1,0).getDate();
  N.forEach(function(n){var m=n.met;if(m){act+=m.wg.active_3m;peers+=m.wg.peers}else if(n.stat)peers+=n.stat.peers;cap+=n.capacity||0;
-  if(n.hz){cost+=n.hz.price_month;out+=n.hz.out_bytes;incl+=n.hz.included_bytes;var pr=n.hz.out_bytes/Math.max(1,now.getUTCDate())*dim;n._proj=pr;n._over=Math.max(0,(pr-n.hz.included_bytes)/1e12*n.hz.price_tb);over+=n._over}});
+  cost+=n.cost_month||0;if(n.cost_month==null)n._nocost=1;
+  if(n.hz){out+=n.hz.out_bytes;incl+=n.hz.included_bytes;var pr=n.hz.out_bytes/Math.max(1,now.getUTCDate())*dim;n._proj=pr;n._over=Math.max(0,(pr-n.hz.included_bytes)/1e12*n.hz.price_tb);over+=n._over}});
  var al=s.alerts||[],cr=al.filter(function(a){return a.sev==="CRIT"}),wa=al.filter(function(a){return a.sev!=="CRIT"});
  var ta=document.querySelector('#tabs a[href="#alerte"]');ta.innerHTML="Alerte"+(al.length?'<span class="b" style="background:'+(cr.length?"var(--crit)":"var(--warn)")+';color:'+(cr.length?"#fff":"#1a1400")+'">'+al.length+'</span>':"");
 
@@ -352,15 +360,13 @@ function render(){
  else if(wa.length)bn='<div class="banner y"><div class="ic">⚠️</div><div><h2>Funcționează — cu '+wa.length+' observație(i)</h2><p>Clienții nu sunt afectați. Detalii și ce faci: <a href="#alerte">tab-ul Alerte</a>.</p></div></div>';
  else bn='<div class="banner g"><div class="ic">✅</div><div><h2>Totul funcționează</h2><p>Toate cele '+N.length+' noduri răspund, nicio problemă detectată. Nu e nimic de făcut.</p></div></div>';
  $("banner").innerHTML=bn;
- $("kpis").innerHTML=kpi(up.length+" / "+N.length,"noduri online",Object.keys(R).length?Object.keys(R).length+" în pregătire":"",up.length===N.length?"ok":"crit")
+ $("kpis").innerHTML=kpi(up.length+" / "+N.length,"noduri online",planned(N,R).length?planned(N,R).length+" în pregătire":"",up.length===N.length?"ok":"crit")
   +kpi(peers,"clienți înregistrați pe noduri","chei WireGuard (peer-i)")
   +kpi(cc.paid_real!=null?cc.paid_real:"—","clienți plătitori reali",(cc.paid_active||0)+" abonamente active incl. operator/test",cc.paid_real?"ok":"")
   +kpi(fr.today_users!=null?fr.today_users:"—","VPN gratuit azi",(fr.today_capped||0)+" au atins plafonul")
   +kpi(fb(out),"trafic luna aceasta","din "+fb(incl)+" incluși")
   +kpi(eur(cost),"cost servere / lună",over>0?"+ "+eur(over)+" depășire proiectată":"fără depășiri proiectate",over>0?"warn":"");
- var pins=N.filter(function(n){return n.hz&&n.hz.lat!=null}).map(function(n){var x=(n.hz.lon+180)/360*100,y=(90-n.hz.lat)/180*100,c=n.ok?(n.drained?"var(--warn)":"var(--ok)"):"var(--crit)";
-  return '<div class="pin" style="left:'+x+'%;top:'+y+'%"><i style="background:'+c+'"></i><span>'+flag(n.country)+" "+esc(n.name)+" · "+(n.met?n.met.wg.active_3m:"–")+'</span></div>'}).join("");
- $("map").innerHTML=pins+'<div style="position:absolute;left:12px;bottom:8px;font:11px var(--mono);color:var(--dim)">'+up.length+' noduri online · '+new Set(N.map(function(n){return n.country})).size+' țări · cifra de lângă nod = clienți conectați acum'+(Object.keys(R).length?' · + '+Object.keys(R).length+' în pregătire':'')+'</div>';
+ drawMap(N,R,up);
  renderLive();
 
  // NODURI
@@ -422,9 +428,9 @@ function render(){
 
  // RESURSE
  var bwNow=0;N.forEach(function(n){if(n.rate)bwNow+=(n.rate.wg_tx||0)+(n.rate.wg_rx||0)});
- $("rkpis").innerHTML=kpi(fb(out),"trafic ieșire luna aceasta","proiecție: "+fb(N.reduce(function(a,n){return a+(n._proj||0)},0)))+kpi(fm(bwNow)+" Mbps","bandă clienți acum (↓+↑)","")+kpi(eur(cost),"cost servere / lună","furnizor, fără TVA")+kpi(eur(over),"depășire proiectată","la final de lună",over>0?"warn":"ok");
+ $("rkpis").innerHTML=kpi(fb(out),"trafic ieșire luna aceasta","proiecție: "+fb(N.reduce(function(a,n){return a+(n._proj||0)},0)))+kpi(fm(bwNow)+" Mbps","bandă clienți acum (↓+↑)","")+kpi(eur(cost),"cost servere / lună","furnizor, fără TVA"+(N.filter(function(n){return n._nocost}).length?" · "+N.filter(function(n){return n._nocost}).length+" nod(uri) fără preț în registru":""))+kpi(eur(over),"depășire proiectată","la final de lună",over>0?"warn":"ok");
  $("tres").innerHTML='<tr><th>Nod</th><th>Plan</th><th>€ / lună</th><th>Ieșire (lună)</th><th>Inclus</th><th>Consumat</th><th>Proiecție</th><th>€ / TB peste</th><th>Depășire proiectată</th><th>Disc liber</th></tr>'+N.map(function(n){var h=n.hz;
-  if(!h)return '<tr><td>'+esc(n.name)+'</td><td colspan="9" class="dim">'+esc(n.provider)+' — costul se introduce manual (în afara API-ului Hetzner)</td></tr>';
+  if(!h)return '<tr><td>'+flag(n.country)+" "+esc(n.name)+'</td><td>'+esc(n.provider)+(n.plan?' · '+esc(n.plan):'')+'</td><td class="num">'+(n.cost_month!=null?eur(n.cost_month):'<span class="warn">preț lipsă</span>')+'</td><td class="num">—</td><td class="num">nelimitat</td><td class="dim">fără contor de trafic</td><td class="dim">—</td><td class="num">—</td><td class="num">'+eur(0)+'</td><td class="num">'+(n.met?n.met.disk.free_gb+" / "+n.met.disk.total_gb+" GB":"—")+'</td></tr>';
   var u=100*h.out_bytes/(h.included_bytes||1),pj=100*(n._proj||0)/(h.included_bytes||1);
   return '<tr><td>'+flag(n.country)+" "+esc(n.name)+'</td><td>'+esc(h.type)+'</td><td class="num">'+eur(h.price_month)+'</td><td class="num">'+fb(h.out_bytes)+'</td><td class="num">'+fb(h.included_bytes)+'</td><td>'+pct(u)+bar(u,70,90)+'</td><td>'+pct(pj)+bar(pj,70,90)+'</td><td class="num '+(h.price_tb>2?"warn":"")+'">'+eur(h.price_tb)+'</td><td class="num '+(n._over>0?"warn":"")+'">'+eur(n._over)+'</td><td class="num">'+(n.met?n.met.disk.free_gb+" / "+n.met.disk.total_gb+" GB":"—")+'</td></tr>'}).join("");
 
@@ -488,6 +494,41 @@ function continent(cc){var EU="RO,DE,FI,FR,IT,ES,NL,BE,AT,PL,CZ,HU,BG,GR,PT,SE,N
 function tagsel(key,tag){return '<select onchange="setTag(\''+esc(key)+'\',this.value)" style="padding:3px 6px;font-size:11.5px"><option value=""'+(tag?"":" selected")+'>client</option><option value="operator"'+(tag==="operator"?" selected":"")+'>operator</option><option value="test"'+(tag==="test"?" selected":"")+'>test</option></select>'}
 
 // ---------- timp real ----------
+// ---------- HARTA: glob desfășurat (Natural Earth) cu țări + noduri pulsatile ----------
+var WORLD=null,WLOAD=false,MAPARGS=null;
+var ISO_NAME={DE:"Germany",FR:"France",GB:"United Kingdom",US:"United States of America",FI:"Finland",PL:"Poland",CA:"Canada",IT:"Italy",RO:"Romania",NL:"Netherlands",SG:"Singapore",ES:"Spain",SE:"Sweden",CH:"Switzerland",AT:"Austria",JP:"Japan",AU:"Australia",BR:"Brazil",IN:"India",AE:"United Arab Emirates",MD:"Moldova",BG:"Bulgaria",HU:"Hungary"};
+function planned(N,R){var have={};N.forEach(function(n){have[n.name]=1});return Object.keys(R).filter(function(k){return !have[k]&&R[k].lat!=null}).map(function(k){var r=R[k];return {name:k,country:r.country,city:r.location,lat:r.lat,lon:r.lon,_planned:true}})}
+function loadScript(u,cb){var e=document.createElement("script");e.src=u;e.onload=cb;e.onerror=function(){WLOAD=false};document.head.appendChild(e)}
+function loadWorld(){if(WLOAD)return;WLOAD=true;
+ loadScript("https://cdn.jsdelivr.net/npm/d3-array@3",function(){loadScript("https://cdn.jsdelivr.net/npm/d3-geo@3",function(){loadScript("https://cdn.jsdelivr.net/npm/topojson-client@3",function(){
+  fetch("https://cdn.jsdelivr.net/npm/world-atlas@2/countries-110m.json").then(function(r){return r.json()}).then(function(t){WORLD=topojson.feature(t,t.objects.countries);if(MAPARGS)drawMap.apply(null,MAPARGS)}).catch(function(){WLOAD=false})})})})}
+function drawMap(N,R,up){MAPARGS=[N,R,up];var el=$("map");if(!el)return;
+ var P=planned(N,R),all=N.filter(function(n){return n.lat!=null}).concat(P);
+ var leg='<div class="leg">'+up.length+' noduri online · '+new Set(N.map(function(n){return n.country})).size+' țări · cifra de lângă nod = clienți conectați acum'+(P.length?' · + '+P.length+' în pregătire':'')+'</div>';
+ if(!WORLD||!window.d3){loadWorld();el.innerHTML='<div style="padding:110px 0;text-align:center" class="dim">se încarcă harta…</div>'+leg;return}
+ var W=Math.max(320,el.clientWidth||900),H=Math.round(W*0.5);
+ var pr=d3.geoNaturalEarth1().fitExtent([[8,8],[W-8,H-8]],{type:"Sphere"}),pa=d3.geoPath(pr);
+ var hosts={};N.forEach(function(n){if(ISO_NAME[n.country])hosts[ISO_NAME[n.country]]=1});
+ var g='<path class="sph" d="'+pa({type:"Sphere"})+'"/><path class="grat" d="'+pa(d3.geoGraticule10())+'"/>';
+ g+=WORLD.features.map(function(f){var nm=(f.properties&&f.properties.name)||"";return '<path class="ctry'+(hosts[nm]?' host':'')+'" d="'+pa(f)+'"><title>'+esc(nm)+'</title></path>'}).join("");
+ var pts=all.map(function(n){var xy=pr([n.lon,n.lat]);var c=n._planned?"#8c9ab3":(n.ok?(n.drained?"#fbbf24":"#22d38a"):"#ff4d5e");return {n:n,x:xy[0],y:xy[1],c:c}});
+ var dots=pts.map(function(p){var n=p.n,anim=(!n._planned&&n.ok)?'<circle cx="'+p.x.toFixed(1)+'" cy="'+p.y.toFixed(1)+'" r="5" fill="none" stroke="'+p.c+'" stroke-width="2"><animate attributeName="r" values="5;16" dur="1.8s" repeatCount="indefinite"/><animate attributeName="opacity" values="0.9;0" dur="1.8s" repeatCount="indefinite"/></circle>':'';
+  return anim+'<circle cx="'+p.x.toFixed(1)+'" cy="'+p.y.toFixed(1)+'" r="5.5" fill="'+p.c+'" stroke="#060d1c" stroke-width="1.5" style="filter:drop-shadow(0 0 5px '+p.c+')"><title>'+esc(n.name)+' · '+esc(n.city||"")+(n._planned?' · în pregătire':(n.ok?' · online':' · NU răspunde'))+'</title></circle>'}).join("");
+ // etichete: nodurile din Europa (înghesuite) → coloană ordonată la est de Europa, cu linii de legătură; restul lângă nod
+ var boxes=[],lb="",isEU=function(n){return n.lon>-15&&n.lon<35&&n.lat>35&&n.lat<72};
+ var eu=pts.filter(function(p){return isEU(p.n)}).sort(function(a,b){return b.n.lat-a.n.lat}),rest=pts.filter(function(p){return !isEU(p.n)});
+ var txtOf=function(n){return (n.country||"")+" "+n.name+(n._planned?" · în pregătire":" · "+(n.met?n.met.wg.active_3m:"–"))};
+ var compact=W<700;
+ if(!compact&&eu.length){var cx=pr([44,50])[0],cy0=pr([0,71])[1],step=Math.max(15,H*0.034);
+  eu.forEach(function(p,i){var ly=cy0+i*step;
+   lb+='<path class="lead" fill="none" d="M'+p.x.toFixed(1)+','+p.y.toFixed(1)+' C'+(p.x+30).toFixed(1)+','+p.y.toFixed(1)+' '+(cx-40).toFixed(1)+','+(ly-4).toFixed(1)+' '+(cx-4).toFixed(1)+','+(ly-4).toFixed(1)+'"/>';
+   lb+='<text class="lbl" x="'+cx.toFixed(1)+'" y="'+ly.toFixed(1)+'"><tspan style="fill:'+p.c+'">●</tspan> '+esc(txtOf(p.n))+'</text>';boxes.push([cx,ly,200])})}
+ if(!compact)rest.sort(function(a,b){return a.y-b.y}).forEach(function(p){var txt=txtOf(p.n),w=txt.length*6.6+6,right=p.x<W*0.8,lx=right?p.x+12:p.x-12-w,ly=p.y+4,t=0;
+  while(t<30&&boxes.some(function(b){return lx<b[0]+b[2]&&lx+w>b[0]&&Math.abs(ly-b[1])<14})){ly+=14;t++}
+  boxes.push([lx,ly,w]);lb+='<text class="lbl" x="'+lx.toFixed(1)+'" y="'+ly.toFixed(1)+'">'+esc(txt)+'</text>'});
+ var ml=compact?'<div class="mlist">'+pts.map(function(p){return '<span><i style="background:'+p.c+'"></i>'+esc(txtOf(p.n))+'</span>'}).join('')+'</div>':'';
+ el.innerHTML='<svg viewBox="0 0 '+W+' '+H+'">'+g+lb+dots+'</svg>'+ml+leg}
+addEventListener("resize",function(){if(MAPARGS)drawMap.apply(null,MAPARGS)});
 function renderLive(){var L=LIVE;if(!$("livek"))return;var last=L[L.length-1],prev=L[L.length-2];
  var act=0,ok=0,tot=0,cpu=0,rx=null,tx=null;if(last){last.nodes.forEach(function(n){tot++;if(n.ok){ok++;act+=n.act;cpu+=n.cpu}})}
  if(last&&prev){var dt=(last.t-prev.t)/1000;rx=0;tx=0;last.nodes.forEach(function(n){var p=prev.nodes.filter(function(x){return x.name===n.name})[0];if(n.ok&&p&&p.ok&&n.wg_rx>=p.wg_rx){rx+=(n.wg_rx-p.wg_rx)*8/dt/1e6;tx+=(n.wg_tx-p.wg_tx)*8/dt/1e6}})}

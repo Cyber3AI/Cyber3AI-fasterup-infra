@@ -40,12 +40,16 @@ async function collectNodes(env, prev) {
   const auth = { headers: { authorization: "Bearer " + env.AGENT_TOKEN } };
   const nodes = await Promise.all(reg.map(async (n, i) => {
     const o = { name: n.name, url: n.url, ip: ips[i], ok: false, drained: !!n.drained };
-    try {
-      const t0 = Date.now();
-      o.stat = await fetchJson(n.url + "/stat", auth, 8000);
-      o.rtt_cp_ms = Date.now() - t0;
-      o.ok = true;
-    } catch (e) { o.err = String(e.message || e); }
+    // o singură sondă ratată (DNS nip.io / rută lentă spre US-West) nu înseamnă nod căzut → a doua încercare
+    for (let k = 0; k < 2 && !o.ok; k++) {
+      try {
+        const t0 = Date.now();
+        o.stat = await fetchJson(n.url + "/stat", auth, k ? 12000 : 8000);
+        o.rtt_cp_ms = Date.now() - t0;
+        o.ok = true; delete o.err;
+        if (k) o.retried = true;
+      } catch (e) { o.err = String(e.message || e); }
+    }
     if (o.ok) {
       try { o.met = await fetchJson(n.url + "/metrics?targets=" + ips.filter((_, j) => j !== i).join(","), auth, 20000); }
       catch (e) { o.met_err = String(e.message || e); }
@@ -78,6 +82,12 @@ async function collectNodes(env, prev) {
     n.provider = n.hz ? "Hetzner Cloud" : (reg2[n.name]?.provider || "Data center propriu");
     n.country = n.hz?.country || reg2[n.name]?.country || "";
     n.city = n.hz?.city || reg2[n.name]?.location || "";
+    // cost lunar (EUR, fără TVA): Hetzner din API, restul din registru
+    n.cost_month = n.hz ? n.hz.price_month : (reg2[n.name]?.cost_month ?? null);
+    n.plan = n.hz ? n.hz.type : (reg2[n.name]?.plan || "");
+    // coordonate pentru hartă: Hetzner (exacte) → orașul din registru → capitala țării
+    const ll = n.hz?.lat != null ? [n.hz.lat, n.hz.lon] : (CITY_LL[n.city.toLowerCase()] || COUNTRY_LL[n.country] || null);
+    n.lat = ll ? ll[0] : null; n.lon = ll ? ll[1] : null;
     const m = n.met, p = pmap[n.name]?.met;
     n.rate = null; n.delta = null;
     if (m && p && dt > 30) {
@@ -217,11 +227,12 @@ async function collectBilling(env) {
 }
 
 // ---------- alerte ----------
-function evaluate(snap, clients) {
+function evaluate(snap, clients, prev) {
   const a = [];
   const add = (sev, key, node, msg) => a.push({ sev, key, node, msg });
+  const prevDown = new Set((prev?.nodes || []).filter((n) => !n.ok).map((n) => n.name));
   for (const n of snap.nodes) {
-    if (!n.ok) { add(n.drained ? "WARN" : "CRIT", "down:" + n.name, n.name, "Nod inaccesibil (" + (n.err || "fără răspuns") + ")" + (n.drained ? " — e scos din rotație" : " — clienții sunt mutați automat pe celelalte noduri")); continue; }
+    if (!n.ok) { add(n.drained || !prevDown.has(n.name) ? "WARN" : "CRIT", "down:" + n.name, n.name, "Nod inaccesibil (" + (n.err || "fără răspuns") + ")" + (n.drained ? " — e scos din rotație" : " — clienții sunt mutați automat pe celelalte noduri")); continue; }
     if (n.drained) add("WARN", "drained:" + n.name, n.name, "Scos din rotație: nu primește tuneluri noi (cele existente continuă). Readu-l din tab-ul Noduri.");
     const m = n.met; if (!m) { add("WARN", "nometrics:" + n.name, n.name, "Agentul nu întoarce /metrics"); continue; }
     if (m.cpu.util_pct > 95) add("CRIT", "cpu:" + n.name, n.name, `CPU ${m.cpu.util_pct}%`); else if (m.cpu.util_pct > 85) add("WARN", "cpu:" + n.name, n.name, `CPU ${m.cpu.util_pct}%`);
@@ -268,7 +279,7 @@ async function collect(env, { force = false } = {}) {
     await env.OPS.put("play", JSON.stringify(play));
     await env.OPS.put("funnel", JSON.stringify(await collectFunnel(env)));
   }
-  snap.alerts = evaluate(snap, clients);
+  snap.alerts = evaluate(snap, clients, prev);
   await env.OPS.put("snap", JSON.stringify(snap));
   await publishRouting(env, snap).catch(() => {});
   // istoric compact 24h
@@ -294,6 +305,9 @@ async function collect(env, { force = false } = {}) {
 const COUNTRY_LL = { RO: [44.43, 26.1], DE: [50.11, 8.68], NL: [52.37, 4.9], GB: [51.51, -0.13], FR: [48.86, 2.35], FI: [60.17, 24.94], SE: [59.33, 18.07],
   PL: [52.23, 21.01], IT: [45.46, 9.19], ES: [40.42, -3.7], CH: [47.37, 8.54], AT: [48.21, 16.37], US: [39.04, -77.49], CA: [43.65, -79.38],
   SG: [1.35, 103.82], JP: [35.68, 139.69], AE: [25.2, 55.27], IN: [19.08, 72.88], AU: [-33.87, 151.21], BR: [-23.55, -46.63], MD: [47.01, 28.86], BG: [42.7, 23.32], HU: [47.5, 19.04] };
+const CITY_LL = { gravelines: [50.99, 2.13], roubaix: [50.69, 3.18], strasbourg: [48.57, 7.75], frankfurt: [50.11, 8.68], london: [51.51, -0.13],
+  warsaw: [52.23, 21.01], milan: [45.46, 9.19], milano: [45.46, 9.19], beauharnois: [45.31, -73.87], "las vegas": [36.17, -115.14],
+  bucharest: [44.43, 26.1], "bucurești": [44.43, 26.1], amsterdam: [52.37, 4.9], madrid: [40.42, -3.7], tokyo: [35.68, 139.69], sydney: [-33.87, 151.21] };
 async function publishRouting(env, snap) {
   const reg = (await env.OPS.get("registry", "json")) || {};
   const nodes = snap.nodes.map((n) => {
@@ -339,7 +353,7 @@ async function dailyReport(env, snap, clients) {
   const key = "report:" + d.toISOString().slice(0, 10); if (await env.OPS.get(key)) return;
   const daily = (await env.OPS.get("daily", "json")) || []; const y = daily[daily.length - 2] || daily[daily.length - 1] || {};
   const up = snap.nodes.filter((n) => n.ok).length, al = snap.alerts || [];
-  const out = snap.nodes.reduce((a, n) => a + (n.hz?.out_bytes || 0), 0), cost = snap.nodes.reduce((a, n) => a + (n.hz?.price_month || 0), 0);
+  const out = snap.nodes.reduce((a, n) => a + (n.hz?.out_bytes || 0), 0), cost = snap.nodes.reduce((a, n) => a + (n.cost_month || 0), 0);
   const gb = (b) => (b / 1e9).toFixed(2) + " GB";
   const html = `<h2>CYBER3 VPN — raport zilnic ${d.toISOString().slice(0, 10)}</h2>
 <p><b>${al.length ? "⚠️ " + al.length + " problemă(e) de verificat" : "✅ Totul funcționează"}</b></p>
@@ -377,7 +391,10 @@ export default {
       const [snap, clients, billing, registry, tags, play, funnel, drained] = await Promise.all(["snap", "clients", "billing", "registry", "tags", "play", "funnel", "drained"].map((k) => env.OPS.get(k, "json")));
       // tokenurile de achiziție Play rămân pe server (nu ajung în browser)
       const safeClients = clients ? { ...clients, subs: (clients.subs || []).map(({ token, ...r }) => r) } : null;
-      return json({ snap, clients: safeClients, billing, play, funnel, registry: registry || {}, tags: tags || {}, drained: drained || {}, now: Date.now() });
+      return json({ snap, clients: safeClients, billing, play, funnel, registry: Object.fromEntries(Object.entries(registry || {}).map(([k, v]) => {
+        const ll = CITY_LL[String(v.location || "").toLowerCase()] || COUNTRY_LL[v.country] || null;
+        return [k, { ...v, lat: ll ? ll[0] : null, lon: ll ? ll[1] : null }];
+      })), tags: tags || {}, drained: drained || {}, now: Date.now() });
     }
     if (p === "/api/history") return json((await env.OPS.get("hist", "json")) || []);
     if (p === "/api/series") {
@@ -411,7 +428,10 @@ export default {
     if (p === "/api/registry" && req.method === "POST") {
       const b = await req.json().catch(() => ({})); if (!b.name) return json({ error: "name" }, 400);
       const reg = (await env.OPS.get("registry", "json")) || {};
-      reg[b.name] = { provider: b.provider || "", location: b.location || "", country: b.country || "", ip: b.ip || "", port_mbps: +b.port_mbps || null, status: b.status || "planificat", brand: b.brand || "CYBER3", notes: b.notes || "", ts: Date.now() };
+      const old = reg[b.name] || {};
+      reg[b.name] = { provider: b.provider || "", location: b.location || "", country: b.country || "", ip: b.ip || "", port_mbps: +b.port_mbps || null, status: b.status || "planificat", brand: b.brand || "CYBER3", notes: b.notes || "",
+        // costul/planul se păstrează la re-înregistrare (provision.sh nu le trimite)
+        cost_month: b.cost_month != null && b.cost_month !== "" ? +b.cost_month : (old.cost_month ?? null), plan: b.plan || old.plan || "", ts: Date.now() };
       await env.OPS.put("registry", JSON.stringify(reg)); return json({ ok: true, registry: reg });
     }
     if (p === "/api/registry" && req.method === "DELETE") {

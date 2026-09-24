@@ -19,7 +19,17 @@ def token():
 def sh(*args):
     return subprocess.run(args, capture_output=True, text=True, check=True).stdout
 
+PUBLIC_IP_FILE = "/etc/cyber3/public_ip"
+
 def public_ip():
+    # nod în spatele unui router (ex. birou, port-forward UDP 51820): IP-ul public nu e pe interfață
+    try:
+        with open(PUBLIC_IP_FILE) as f:
+            ip = f.read().strip()
+        if re.fullmatch(r"\d+\.\d+\.\d+\.\d+", ip):
+            return ip
+    except OSError:
+        pass
     out = sh("ip", "-4", "route", "get", "1.1.1.1")
     m = re.search(r"src (\d+\.\d+\.\d+\.\d+)", out)
     return m.group(1) if m else ""
