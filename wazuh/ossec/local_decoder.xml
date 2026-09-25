@@ -24,3 +24,19 @@
 <decoder name="local_decoder_example">
     <program_name>local_decoder_example</program_name>
 </decoder>
+<!-- 8 sep 2026: wrapper-ul SMART firewall-drop logheaza cu cale ABSOLUTA + sufixul -real
+     → decoderul stock ar_log nu mai prinde → rule 651 moarta din 20 aug. Decoder nou: -->
+<decoder name="ar_log">
+  <prematch>/var/ossec/active-response/bin/firewall-drop-real: </prematch>
+</decoder>
+<decoder name="ar-real-cmd-src">
+  <parent>ar_log</parent>
+  <regex offset="after_parent">"command":\s*"(\w+)"\.*"srcip":\s*"(\d+.\d+.\d+.\d+)"</regex>
+  <order>action, srcip</order>
+</decoder>
+<decoder name="ar-real-cmd">
+  <parent>ar_log</parent>
+  <regex offset="after_parent">"command":\s*"(\w+)"</regex>
+  <order>action</order>
+</decoder>
+

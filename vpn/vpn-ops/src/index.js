@@ -447,7 +447,7 @@ export default {
       // Activează un nod pentru clienți (intră în rotația /connect a control-plane-ului).
       const b = await req.json().catch(() => ({}));
       if (!/^[a-z0-9-]{3,32}$/.test(b.name || "") || !/^https?:\/\/[\w.-]+(:\d+)?$/.test(b.url || "")) return json({ error: "nume sau URL invalid" }, 400);
-      const r = await env.VPNCP.fetch("https://cp.internal/admin/register-node", { method: "POST", headers: { authorization: "Bearer " + env.CP_ADMIN, "content-type": "application/json" }, body: JSON.stringify({ name: b.name, url: b.url }) });
+      const r = await env.VPNCP.fetch("https://cp.internal/admin/register-node", { method: "POST", headers: { authorization: "Bearer " + env.CP_ADMIN, "content-type": "application/json" }, body: JSON.stringify({ name: b.name, url: b.url, city: b.city, country: b.country, lat: b.lat, lon: b.lon }) });   // metadate glob (înrolare automată în aplicații); vpn-cp le validează
       return json({ ok: r.ok, status: r.status, body: await r.text() }, r.ok ? 200 : 502);
     }
     return json({ error: "not found" }, 404);

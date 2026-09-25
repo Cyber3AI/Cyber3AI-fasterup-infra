@@ -210,6 +210,97 @@ EXCLUDE_PREFIXES = (
 _BLK_IP_FIELDS = ('data.srcip', 'data.parameters.alert.data.src_ip')  # mutual exclusiv per doc
 _BLK_SIG_FIELD = 'data.parameters.alert.data.alert.signature'
 MIRROR_SENSORS = {'ICISOC107'}  # senzori mirror/monitorizare (NU blocheaza)
+# Strat 1 IPS: senzori pe care Suricata ruleaza IDS pasiv (nu blocheaza la fir) -> stratul 1 NU apare ca activ
+IDS_ONLY_SENSORS = {'ICISOC107', 'ICISOC110'}
+# Surse LEGITIME care au fost blocate eronat de IPS (FP) -> excluse din cifrele de atac
+IPS_LEGIT_SRC_PREFIX = ('217.156.52.',)   # ANAF / STS (static.anaf.ro) - FP SID 2016540, corectat 24 sep 2026
+# Straturile 5-7 (Cloud Edge / EDR-XDR / mobil) apar DOAR la clientii cu aplicatia CYBER3 instalata pe
+# dispozitivele lor (regula operator 24 sep 2026: straturile inactive NU se mentioneaza deloc).
+ENDPOINT_LAYER_CLIENTS = set()
+
+
+def _cyberbot_blocks_period(client_id, client_code, since_iso, until_iso):
+    """Stratul 4: blocari REALE CyberBot (BLOCK_IP success=True + PERMA_REBLOCK) pe PERIOADA EXACTA,
+    pentru acest senzor (cheia din log = id agent SAU nume). None daca log-ul nu poate fi citit."""
+    try:
+        import subprocess
+        from app.routes.api_wazuh import get_cyberbot
+        cb = get_cyberbot()
+        cmd = cb._run_on_log_host("grep -hE '\\[BLOCK_IP\\].*success=True|\\[PERMA_REBLOCK\\]' " + cb.log_path + " | grep -vE 'ip=(10[.]|192[.]168[.]|172[.](1[6-9]|2[0-9]|3[01])[.])'")
+        res = subprocess.run(cmd, capture_output=True, text=True, timeout=30)
+        if res.returncode not in (0, 1):
+            return None
+        s = since_iso[:19].replace('T', ' '); u = until_iso[:19].replace('T', ' ')
+        keys = {str(client_id), (client_code or '').lower(), (client_code or '').upper()}
+        n = 0
+        for line in res.stdout.splitlines():
+            m = re.match(r'^\[(\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}) UTC\].*?agent=([^\s,]+)', line)
+            if m and s <= m.group(1) < u and m.group(2) in keys:
+                n += 1
+        return n
+    except Exception:
+        return None
+
+
+def _l2shield_state(client_code):
+    """Stratul 3: L2 Shield (ebtables) de pe senzor, din NOC. None = neinstalat / necunoscut."""
+    try:
+        import requests as _rq
+        tok = open('/opt/fasterup-portal/.noc_read_token').read().strip()
+        r = _rq.get('https://cyber3-noc.cyber3.workers.dev/v1/noc/l2shield',
+                    headers={'Authorization': 'Bearer ' + tok, 'User-Agent': 'cyber3-noc-agent/2.0'}, timeout=6)
+        if not r.ok:
+            return None
+        node = ((r.json() or {}).get('by_node') or {}).get((client_code or '').lower())
+        if not node or not int(node.get('armed', 0)):
+            return None
+        return {'mode': node.get('mode'), 'rules': int(node.get('rules', 0)), 'blocks': int(node.get('blocks', 0))}
+    except Exception:
+        return None
+
+
+AR_BLIND_WINDOW_FILE = '/opt/fasterup-portal/data/ar_blind_window_20260915.json'
+
+
+def _ar_blind_window_count(client_code, since_iso, until_iso):
+    """Stratul 2 — blocari AR REALE executate in fereastra 15.09 ~10:30 → 24.09 09:58 UTC, cand
+    evenimentele nu au ajuns in indexer (format log \"command\": \"add\" nerecunoscut de regula 100651).
+    Extrase o singura data din active-responses.log al fiecarui senzor (fisier de date, fereastra inchisa);
+    se numara doar cele din perioada raportului. 0 daca fisierul lipseste."""
+    try:
+        import json as _json
+        rows = (_json.load(open(AR_BLIND_WINDOW_FILE)).get('sensors') or {}).get((client_code or '').lower()) or []
+        s = since_iso[:19].replace('T', ' '); u = until_iso[:19].replace('T', ' ')
+        return sum(1 for ts, _ip in rows if s <= ts < u)
+    except Exception:
+        return 0
+
+
+def _active_layers(client_id, client_code, since_iso, until_iso, blocked):
+    """Straturile de blocare ACTIVE la acest senzor, cu interventiile din perioada raportului.
+    Doar straturile active apar (nici o mentiune despre cele inactive)."""
+    code = (client_code or '').upper()
+    if blocked.get('mode') == 'mirror':
+        return []
+    L = []
+    if code not in IDS_ONLY_SENSORS:
+        L.append({'n': 1, 'name': 'Rețea — IPS inline (Suricata)',
+                  'mech': 'Pachetul ostil este picat la fir, în milisecunde, pe baza semnăturilor și a analizei de protocol.',
+                  'count': int(blocked.get('ips_events', 0))})
+    L.append({'n': 2, 'name': 'Gazdă — Active Response (regula 651)',
+              'mech': 'Regulă firewall-drop scrisă automat pe senzor, care oprește sursa atacului.',
+              'count': int(blocked.get('external_events', 0))
+                       + _ar_blind_window_count(client_code, since_iso, until_iso)})
+    l2 = _l2shield_state(client_code)
+    if l2:
+        L.append({'n': 3, 'name': 'Ethernet — L2 Shield',
+                  'mech': 'Filtrare nativă la nivel Ethernet: oprește falsificarea gateway-ului (ARP spoofing / MITM).',
+                  'count': l2['blocks'], 'note': 'armat, mod %s, %d reguli' % (l2.get('mode') or 'drop', l2['rules'])})
+    cbn = _cyberbot_blocks_period(client_id, client_code, since_iso, until_iso)
+    L.append({'n': 4, 'name': 'Decizie — CyberBot Fusion (AI)',
+              'mech': 'Fuziune AI a surselor de context; decizie autonomă de blocare în 2–11 secunde.',
+              'count': cbn if cbn is not None else None})
+    return L
 
 
 def _blocked_priv_musts(exclude_ips=None):
@@ -264,7 +355,7 @@ def _our_service_musts():
     """must_not: alerte generate de infrastructura/serviciile noastre (cerinta ICISOC).
     Tiparele se aplica pe AMBELE campuri de semnatura (rule.description SI data.alert.signature),
     fiindca regulile proprii (MISP IOC / CYBER3) si zgomotul de motor Suricata pot fi in oricare."""
-    mn = [{'term': {'rule.id': '651'}}, {'terms': {'rule.groups': OUR_ALERT_GROUPS}}]
+    mn = [{'terms': {'rule.id': ['651', '100651']}}, {'terms': {'rule.groups': OUR_ALERT_GROUPS}}]
     for p in OUR_ALERT_DESC + ['SURICATA*', 'Suricata: anomaly*']:
         mn.append({'wildcard': {'rule.description': p}})
         mn.append({'wildcard': {'data.alert.signature': p}})
@@ -323,14 +414,52 @@ def _blocked_external(os_client, client_id, since_iso, until_iso, lx,
         'total_651': 0, 'external_events': 0, 'external_ips': 0, 'top_country': None,
         'top_ips': [], 'threats': [], 'timeline': {'interval': interval, 'bins': []},
         'countries': [], 'geo_partial': False, 'zero_floor': 2,
+        'ips_events': 0, 'ips_ips': 0, 'ips_top_ips': [], 'ips_threats': [], 'ips_legit_excluded': 0,
     }
     base = [
         {'range': {'@timestamp': {'gte': since_iso, 'lt': until_iso}}},
         {'term': {'agent.id': client_id}},
-        {'term': {'rule.id': '651'}},
+        {'terms': {'rule.id': ['651', '100651']}},
     ]
     try:
         exclude_ips = set(exclude_ips or []) | _detect_scan_ip(os_client, client_id, since_iso, until_iso)
+
+        # (0) STRATUL 1 — IPS inline (Suricata nfqueue): drop la fir, event data.alert.action=blocked.
+        # Independent de Active Response (651). Poate fi 0 pe senzori in mod IDS/mirror sau in
+        # perioade anterioare activarii inline; se afiseaza onest doar cand exista intr-adevar.
+        try:
+            ips_base = [
+                {'range': {'@timestamp': {'gte': since_iso, 'lt': until_iso}}},
+                {'term': {'agent.id': client_id}},
+                {'term': {'data.alert.action': 'blocked'}},
+            ]
+            # Trafic LEGITIM blocat eronat (ex. ANAF static.anaf.ro, FP SID 2016540, corectat 24 sep 2026):
+            # NU e atac -> exclus din cifre, numarat separat pt nota de transparenta.
+            legit_musts = [{'prefix': {'data.src_ip': p}} for p in IPS_LEGIT_SRC_PREFIX]
+            ips_q = {'size': 0, 'track_total_hits': True,
+                     'query': {'bool': {'must': ips_base,
+                                        'must_not': _blocked_priv_musts(exclude_ips) + legit_musts}},
+                     'aggs': {'uips': {'cardinality': {'field': 'data.src_ip'}},
+                              'src': {'terms': {'field': 'data.src_ip', 'size': 10},
+                                      'aggs': {'geo': {'terms': {'field': 'GeoLocation.country_name', 'size': 1}}}},
+                              'sig': {'terms': {'field': 'data.alert.signature', 'size': 8}}}}
+            ir = os_client._search('wazuh-alerts-*', ips_q)
+            ia = ir.get('aggregations', {})
+            out['ips_events'] = ir.get('hits', {}).get('total', {}).get('value', 0)
+            out['ips_ips'] = int(ia.get('uips', {}).get('value', 0))
+            out['ips_top_ips'] = [{'ip': b['key'], 'count': b['doc_count'],
+                                   'country': ((b.get('geo') or {}).get('buckets') or [{}])[0].get('key')}
+                                  for b in ia.get('src', {}).get('buckets', []) if _valid_ip(b.get('key', ''))]
+            out['ips_threats'] = [{'name': b['key'], 'count': b['doc_count']}
+                                  for b in ia.get('sig', {}).get('buckets', [])]
+            if legit_musts:
+                lq = {'size': 0, 'track_total_hits': True,
+                      'query': {'bool': {'must': ips_base,
+                                         'should': legit_musts, 'minimum_should_match': 1}}}
+                lr = os_client._search('wazuh-alerts-*', lq)
+                out['ips_legit_excluded'] = lr.get('hits', {}).get('total', {}).get('value', 0)
+        except Exception:
+            pass
 
         # (1) TOTAL 651 real — track_total_hits OBLIGATORIU (altfel plafon 10000)
         rt = os_client._search('wazuh-alerts-*',
@@ -487,6 +616,24 @@ def build_r16_rows(r16, lang='ro', host_names=None, host_types=None):
 # R2 — nota de context per senzor atipic  |  R15 — audit = activitate CYBER3
 # ============================================================================
 SENSOR_CONTEXT_NOTES = {
+    'f010': {
+        'ro': ('Context senzor: senzorul inspecteaza integral traficul retelei in regim inline si detecteaza, '
+               'la nivel de senzor, sute de evenimente de retea pe zi. Marea lor majoritate reprezinta trafic '
+               'IPv4 malformat emis continuu de un echipament din reteaua interna (VLAN 38) — anomalie de '
+               'echipament, nu atac; platforma le claseaza automat ca zgomot de nivel informational, motiv '
+               'pentru care nu apar ca alerte individuale in acest raport. Recomandare pentru Beneficiar: '
+               'identificarea si remedierea echipamentului respectiv. Restul traficului nu a generat '
+               'evenimente de securitate semnificative — lantul complet de detectie si blocare este activ '
+               'si validat.'),
+        'en': ('Sensor context: the sensor inspects all network traffic inline and detects, at sensor level, '
+               'hundreds of network events per day. The vast majority is malformed IPv4 traffic continuously '
+               'emitted by a device inside the internal network (VLAN 38) — an equipment anomaly, not an '
+               'attack; the platform automatically classifies these as informational-level noise, which is '
+               'why they do not appear as individual alerts in this report. Recommendation for the '
+               'Beneficiary: identify and remediate that device. The remaining traffic generated no '
+               'significant security events — the full detection and blocking chain is active and '
+               'validated.'),
+    },
     'icisoc107': {
         'ro': ('Context senzor: acest senzor este montat in regim de MONITORIZARE (port-mirror), '
                'nu inline — observa si alerteaza integral, dar nu blocheaza activ. In plus, majoritatea '
@@ -536,9 +683,14 @@ L = {
         'kpi_total': 'Total events', 'kpi_avail': 'Sensor availability',
         'no_threats': 'No threats detected in period', 'no_ips': 'No attacker IPs in period',
         'internal': 'internal host', 'external': 'external', 'intern_short': 'internal',
-        'nis2_note': ('Events level >= 12 are treated as candidates for "significant incident" under NIS2 '
-                      'Art. 23. Final classification (service disruption, financial loss, harm to third '
-                      'parties) is confirmed by the SOC analyst together with the client.'),
+        'nis2_note': ('Raw level >= 12 events are telemetry, not incidents: one hostile request typically '
+                      'fires several rules at once, so events sharing the same network flow are first '
+                      'CORRELATED into one incident, then assessed for MATERIALITY — only flows with a '
+                      'confirmed successful server response (HTTP 2xx) remain candidates; refused/failed '
+                      'requests (4xx/5xx) are not material; non-web flows go to analyst review. Final '
+                      'classification as "significant incident" under NIS2 Art. 23 (service disruption, '
+                      'financial loss, harm to third parties) is confirmed by the SOC analyst together '
+                      'with the client.'),
         'dl': [('Early warning', '24h from detection'), ('Incident notification', '72h from detection'),
                ('Final report', '1 month')],
         'dl_to': 'CSIRT National / DNSC',
@@ -554,8 +706,11 @@ L = {
             ('Art.21(2)(i)', 'HR security, access control, asset mgmt', 'Detections for NTLM/auth anomalies and RMM tools included'),
             ('Art.21(2)(j)', 'MFA & secured communications', 'Recommended where weak authentication is observed in traffic'),
         ],
-        'rec_sig': ('{n} events level >= 12 in the period qualify as candidates for NIS2 "significant incident" '
-                    '— review the incident annex and confirm classification within the legal deadlines.'),
+        'rec_sig': ('{raw:,} raw events level >= 12 collapse into {flows:,} correlated incidents (unique '
+                    'network flows), of which {mat:,} had a confirmed successful server response (HTTP 2xx) '
+                    'and qualify as candidates for NIS2 "significant incident" assessment; {nonweb:,} non-web '
+                    'flows need analyst review. Review the incident annex and confirm classification within '
+                    'the legal deadlines.'),
         'rec_vuln': ('Vulnerable software versions were observed in live traffic. Prioritize patching the '
                      'affected assets (see threat typology) — this is the single highest-impact action this period.'),
         'rec_rmm': ('Remote-access tools (RMM) are active in the network. Maintain an approved-tools allowlist '
@@ -573,9 +728,14 @@ L = {
         'kpi_total': 'Total evenimente', 'kpi_avail': 'Disponibilitate senzor',
         'no_threats': 'Nicio amenintare detectata in perioada', 'no_ips': 'Niciun IP atacator in perioada',
         'internal': 'gazda interna', 'external': 'extern', 'intern_short': 'intern',
-        'nis2_note': ('Evenimentele nivel >= 12 sunt tratate drept candidate pentru "incident semnificativ" '
-                      'conform NIS2 Art. 23. Clasificarea finala (intreruperea serviciului, pierderi financiare, '
-                      'prejudicii catre terti) se confirma de analistul SOC impreuna cu clientul.'),
+        'nis2_note': ('Evenimentele brute nivel >= 12 sunt telemetrie, nu incidente: o singura cerere ostila '
+                      'declanseaza de regula mai multe reguli deodata, asa ca evenimentele aceluiasi flux de '
+                      'retea se CORELEAZA intai intr-un singur incident, apoi se evalueaza MATERIALITATEA — '
+                      'raman candidate doar fluxurile cu raspuns de succes confirmat al serverului (HTTP 2xx); '
+                      'cererile refuzate/esuate (4xx/5xx) nu sunt materiale; fluxurile non-web merg la review '
+                      'de analist. Clasificarea finala drept "incident semnificativ" conform NIS2 Art. 23 '
+                      '(intreruperea serviciului, pierderi financiare, prejudicii catre terti) se confirma de '
+                      'analistul SOC impreuna cu clientul.'),
         'dl': [('Avertizare timpurie', '24h de la detectare'), ('Notificare incident', '72h de la detectare'),
                ('Raport final', '1 luna')],
         'dl_to': 'CSIRT National / DNSC',
@@ -591,8 +751,11 @@ L = {
             ('Art.21(2)(i)', 'Securitatea RU, control acces, management active', 'Detectii pentru anomalii NTLM/autentificare si unelte RMM incluse'),
             ('Art.21(2)(j)', 'MFA si comunicatii securizate', 'Recomandat unde se observa autentificare slaba in trafic'),
         ],
-        'rec_sig': ('{n} evenimente nivel >= 12 in perioada se califica drept candidate pentru "incident '
-                    'semnificativ" NIS2 — verificati anexa de incidente si confirmati clasificarea in termenele legale.'),
+        'rec_sig': ('{raw:,} evenimente brute nivel >= 12 se coreleaza in {flows:,} incidente distincte '
+                    '(fluxuri de retea unice), dintre care {mat:,} au avut raspuns de succes confirmat al '
+                    'serverului (HTTP 2xx) si se califica drept candidate pentru evaluare ca "incident '
+                    'semnificativ" NIS2; {nonweb:,} fluxuri non-web necesita review de analist. Verificati '
+                    'anexa de incidente si confirmati clasificarea in termenele legale.'),
         'rec_vuln': ('S-au observat versiuni de software vulnerabile in traficul live. Prioritizati patch-uirea '
                      'activelor afectate (vezi tipologia amenintarilor) — actiunea cu cel mai mare impact in aceasta perioada.'),
         'rec_rmm': ('Unelte de acces la distanta (RMM) sunt active in retea. Mentineti o lista de unelte aprobate '
@@ -774,6 +937,41 @@ def _build_client_data(client_id, period, lang, date_from=None, date_to=None,
         'gdpr': aggs1.get('gdpr', {}).get('doc_count', 0),
     }
 
+    # ---- Q1b: TIERING NIS2 (fix ICI P3) — evenimentele brute nivel>=12 NU sunt
+    # incidente: o cerere ostila declanseaza mai multe reguli deodata (acelasi
+    # data.flow_id Suricata). Corelam pe flux, apoi materialitate pe raspunsul
+    # serverului (data.http.status 2xx = succes; 4xx/5xx = refuz, nematerial;
+    # fara HTTP = non-web, review uman). Clasificarea finala ramane pas uman
+    # (Art. 23). Evenimentele fara flow_id (non-Suricata) = cate un incident.
+    sig_flows = significant; sig_material = 0; sig_nonweb = 0
+    try:
+        _card = {'cardinality': {'field': 'data.flow_id',
+                                 'precision_threshold': 40000}}
+        q_tier = {
+            'size': 0,
+            'query': {'bool': {'must': base_filter + [
+                {'range': {'rule.level': {'gte': 12}}}]}},
+            'aggs': {
+                'flows': _card,
+                'noflow': {'missing': {'field': 'data.flow_id'}},
+                'success': {'filter': {'prefix': {'data.http.status': '2'}},
+                            'aggs': {'flows': _card}},
+                'nonweb': {'filter': {'bool': {'must_not': {
+                              'exists': {'field': 'data.http.status'}}}},
+                           'aggs': {'flows': _card}},
+            }
+        }
+        rt_ = os_client._search('wazuh-alerts-*', q_tier)
+        at_ = rt_.get('aggregations', {})
+        _noflow = at_.get('noflow', {}).get('doc_count', 0)
+        sig_flows = at_.get('flows', {}).get('value', 0) + _noflow
+        sig_material = at_.get('success', {}).get('flows', {}).get('value', 0)
+        sig_nonweb = (at_.get('nonweb', {}).get('flows', {}).get('value', 0)
+                      + _noflow)
+    except Exception as e:
+        current_app.logger.warning(f'NIS2 tiering query failed: {e}')
+        sig_material = significant  # fallback onest: fara corelare, cifra veche
+
     # ---- Q2: top threat types ----
     q_threats = {
         'size': 0,
@@ -944,6 +1142,7 @@ def _build_client_data(client_id, period, lang, date_from=None, date_to=None,
     blocked = _blocked_external(os_client, client_id, since, until, lx,
                                 client_code=client_code, exclude_ips=scanner_ips,
                                 interval=interval)
+    blocked['layers'] = _active_layers(client_id, client_code, since, until, blocked)
     # RECONCILIERE (un singur adevar pe raport): senzor mirror (nu blocheaza) sau
     # numar de blocari externe sub pragul statistic (zero_floor) => afisam 0, coerent
     # cu nota onesta din sectiunea "Atacuri blocate (extern)". Altfel KPI-ul ar spune
@@ -970,8 +1169,13 @@ def _build_client_data(client_id, period, lang, date_from=None, date_to=None,
             current_app.logger.warning(f'Wazuh agent lookup failed: {e}')
 
     # ---- NIS2: clasificare + masuri (Art. 21/23). {blocked} = nivel 10+ (onest). ----
+    # significant_candidates = MATERIAL (corelat + succes 2xx), NU evenimente brute.
     nis2 = {
-        'significant_candidates': significant,
+        'significant_candidates': sig_material,
+        'tier_raw_l12': significant,
+        'tier_correlated': sig_flows,
+        'tier_material': sig_material,
+        'tier_nonweb': sig_nonweb,
         'high_incidents': events_l10,
         'note_classification': lx['nis2_note'],
         'reporting_deadlines': [
@@ -987,7 +1191,8 @@ def _build_client_data(client_id, period, lang, date_from=None, date_to=None,
     recommendations = []
     threat_names = ' '.join(t['name'].lower() for t in threats)
     if significant:
-        recommendations.append(lx['rec_sig'].format(n=significant))
+        recommendations.append(lx['rec_sig'].format(
+            raw=significant, flows=sig_flows, mat=sig_material, nonweb=sig_nonweb))
     if 'vulnerable' in threat_names or 'cve' in threat_names:
         recommendations.append(lx['rec_vuln'])
     if ('anydesk' in threat_names or 'rustdesk' in threat_names or 'teamviewer' in threat_names
@@ -1015,7 +1220,7 @@ def _build_client_data(client_id, period, lang, date_from=None, date_to=None,
             'events_l10': events_l10,
             'attacks_blocked': events_l10,   # compat vechi (nu mai e folosit ca "blocate")
             'escalated': escalated,
-            'significant_candidates': significant,
+            'significant_candidates': sig_material,
             'avg_response_sec': 0.0,
         },
         'severity': severity,
@@ -1284,7 +1489,12 @@ def export_csv():
     w.writerow(['Heightened (lvl>=7)', s.get('heightened_attention', 0)])
     w.writerow(['External attacks blocked (real, active-response)', s.get('real_blocks', 0)])
     w.writerow(['Events level 10+', s.get('events_l10', 0)])
-    w.writerow(['NIS2 significant candidates (lvl>=12)', s.get('significant_candidates', 0)])
+    nis2_ = payload.get('nis2', {})
+    w.writerow(['NIS2 raw events lvl>=12 (telemetry)', nis2_.get('tier_raw_l12', 0)])
+    w.writerow(['NIS2 correlated incidents (unique flows)', nis2_.get('tier_correlated', 0)])
+    w.writerow(['NIS2 significant candidates (correlated + confirmed 2xx)',
+                s.get('significant_candidates', 0)])
+    w.writerow(['NIS2 non-web flows (analyst review)', nis2_.get('tier_nonweb', 0)])
     w.writerow(['Sensor availability', (payload.get('availability') or {}).get('display', '')])
     w.writerow([])
     blk = payload.get('blocked', {})

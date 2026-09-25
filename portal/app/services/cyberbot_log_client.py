@@ -47,16 +47,16 @@ class CyberBotLogClient:
         self.cache_ttl = cache_ttl
         self._cache = {}  # key → (timestamp, value)
 
+    def _run_on_log_host(self, remote_cmd):
+        """Comanda pe hostul cu cyberbot.log: LOCAL daca host=localhost (DR relay-2), altfel SSH (primar)."""
+        if self.ssh_host in ('127.0.0.1', 'localhost', '', None):
+            return ['bash', '-c', remote_cmd]
+        return ['ssh', '-o', 'StrictHostKeyChecking=accept-new', '-o', 'ConnectTimeout=5',
+                '-o', 'BatchMode=yes', f'{self.ssh_user}@{self.ssh_host}', remote_cmd]
+
     def _fetch_log_lines(self) -> List[str]:
-        """SSH la Wazuh Server, returnează ultimele N linii din cyberbot.log."""
-        cmd = [
-            'ssh',
-            '-o', 'StrictHostKeyChecking=accept-new',
-            '-o', 'ConnectTimeout=5',
-            '-o', 'BatchMode=yes',
-            f'{self.ssh_user}@{self.ssh_host}',
-            f'tail -{self.tail_lines} {self.log_path}'
-        ]
+        """Ultimele N linii din cyberbot.log (LOCAL pe DR / SSH pe primar)."""
+        cmd = self._run_on_log_host(f'tail -{self.tail_lines} {self.log_path}')
         try:
             result = subprocess.run(cmd, capture_output=True, text=True, timeout=10)
             if result.returncode != 0:
@@ -184,6 +184,179 @@ class CyberBotLogClient:
             if label:
                 buckets[key][label] += 1
         return list(buckets.values())
+
+    def real_blocks_by_agent(self, hours: int = 24):
+        """Blocari REALE executate de CyberBot (BLOCK_IP success=True + PERMA_REBLOCK)
+        in ultimele N ore, grupate pe agent (id sau nume, cum apare in log). Cache 60s."""
+        cache_key = f'real_blocks_{hours}h'
+        now = time.time()
+        if cache_key in self._cache:
+            cached_at, cached_val = self._cache[cache_key]
+            if now - cached_at < self.cache_ttl:
+                return cached_val
+        cutoff = datetime.now(timezone.utc) - timedelta(hours=hours)
+        cmd = self._run_on_log_host(
+            "grep -hE '\\[BLOCK_IP\\].*success=True|\\[PERMA_REBLOCK\\]' " + self.log_path + " | grep -vE 'ip=(10[.]|192[.]168[.]|172[.](1[6-9]|2[0-9]|3[01])[.])' | tail -50000")
+        counts = {}
+        try:
+            result = subprocess.run(cmd, capture_output=True, text=True, timeout=15)
+            if result.returncode not in (0, 1):
+                log.error(f'CyberBot blocks fetch failed: {result.stderr.strip()}')
+                return {}
+            for line in result.stdout.splitlines():
+                m = re.match(r'^\[(\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}) UTC\].*?agent=(\S+)', line)
+                if not m:
+                    continue
+                try:
+                    ts = datetime.strptime(m.group(1), '%Y-%m-%d %H:%M:%S').replace(tzinfo=timezone.utc)
+                except ValueError:
+                    continue
+                if ts < cutoff:
+                    continue
+                ag = m.group(2)
+                counts[ag] = counts.get(ag, 0) + 1
+        except subprocess.TimeoutExpired:
+            log.error('CyberBot blocks fetch timeout (>15s)')
+            return {}
+        except Exception as e:
+            log.error(f'CyberBot blocks exception: {e}')
+            return {}
+        self._cache[cache_key] = (now, counts)
+        log.info(f'CyberBot real blocks: {sum(counts.values())} in {hours}h / {len(counts)} agents')
+        return counts
+
+    def count_real_blocks(self, allowed_keys=None, hours: int = 24):
+        """Total blocari reale, filtrat pe set de chei vizibile (id-uri SI nume). None = toata flota."""
+        per = self.real_blocks_by_agent(hours=hours)
+        if allowed_keys is None:
+            return sum(per.values())
+        return sum(v for k, v in per.items() if k in allowed_keys)
+
+    def real_blocks_by_hour(self, allowed_keys=None, hours: int = 24):
+        """LAYER 3 sparkline — blocari CyberBot pe ora (25 buckete, vechi→nou), filtrat RBAC.
+        allowed_keys: None = toata flota; set = doar cheile (id-uri SI nume) vizibile. Cache 60s."""
+        cache_key = f'blocks_by_hour_{hours}_{("all" if allowed_keys is None else len(allowed_keys))}'
+        now = time.time()
+        if cache_key in self._cache:
+            cached_at, cached_val = self._cache[cache_key]
+            if now - cached_at < self.cache_ttl:
+                return cached_val
+        cutoff = datetime.now(timezone.utc) - timedelta(hours=hours)
+        base = datetime.now(timezone.utc).replace(minute=0, second=0, microsecond=0)
+        # 25 buckete aliniate la ora, vechi→nou (identic cu date_histogram extended_bounds now-24h..now)
+        order = [base - timedelta(hours=h) for h in range(hours, -1, -1)]
+        idx = {t: i for i, t in enumerate(order)}
+        series = [0] * len(order)
+        cmd = self._run_on_log_host(
+            "grep -hE '\\[BLOCK_IP\\].*success=True|\\[PERMA_REBLOCK\\]' " + self.log_path + " | grep -vE 'ip=(10[.]|192[.]168[.]|172[.](1[6-9]|2[0-9]|3[01])[.])' | tail -50000")
+        try:
+            result = subprocess.run(cmd, capture_output=True, text=True, timeout=15)
+            if result.returncode not in (0, 1):
+                log.error(f'CyberBot blocks-by-hour fetch failed: {result.stderr.strip()}')
+                return series
+            for line in result.stdout.splitlines():
+                m = re.match(r'^\[(\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}) UTC\].*?agent=(\S+)', line)
+                if not m:
+                    continue
+                try:
+                    ts = datetime.strptime(m.group(1), '%Y-%m-%d %H:%M:%S').replace(tzinfo=timezone.utc)
+                except ValueError:
+                    continue
+                if ts < cutoff:
+                    continue
+                if allowed_keys is not None and m.group(2) not in allowed_keys:
+                    continue
+                bkt = ts.replace(minute=0, second=0, microsecond=0)
+                if bkt in idx:
+                    series[idx[bkt]] += 1
+        except subprocess.TimeoutExpired:
+            log.error('CyberBot blocks-by-hour timeout (>15s)')
+            return series
+        except Exception as e:
+            log.error(f'CyberBot blocks-by-hour exception: {e}')
+            return series
+        self._cache[cache_key] = (now, series)
+        return series
+
+
+    def telegram_sent_by_client(self, hours: int = 24):
+        """Mesaje Telegram trimise (sent=True) in ultimele N ore, pe client. Cache 60s."""
+        cache_key = f'tg_sent_{hours}h'
+        now = time.time()
+        if cache_key in self._cache:
+            cached_at, cached_val = self._cache[cache_key]
+            if now - cached_at < self.cache_ttl:
+                return cached_val
+        cutoff = datetime.now(timezone.utc) - timedelta(hours=hours)
+        cmd = self._run_on_log_host("grep -h 'sent=True' " + self.log_path + " | tail -50000")
+        counts = {}
+        try:
+            result = subprocess.run(cmd, capture_output=True, text=True, timeout=15)
+            if result.returncode not in (0, 1):
+                log.error(f'CyberBot tg fetch failed: {result.stderr.strip()}')
+                return {}
+            for line in result.stdout.splitlines():
+                m = re.match(r'^\[(\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}) UTC\].*?client=(\S+)', line)
+                if not m:
+                    continue
+                try:
+                    ts = datetime.strptime(m.group(1), '%Y-%m-%d %H:%M:%S').replace(tzinfo=timezone.utc)
+                except ValueError:
+                    continue
+                if ts >= cutoff:
+                    counts[m.group(2)] = counts.get(m.group(2), 0) + 1
+        except Exception as e:
+            log.error(f'telegram_sent parse failed: {e}')
+            return {}
+        self._cache[cache_key] = (now, counts)
+        return counts
+
+    def blocked_ip_set(self, allowed_keys=None, hours: int = 24):
+        """Set de IP-uri distincte blocate de CyberBot (pt dedup între straturi), filtrat RBAC.
+        allowed_keys None = toată flota; set = doar cheile (id/nume) vizibile. Cache 60s."""
+        cache_key = f'blocked_ips_{hours}_{("all" if allowed_keys is None else len(allowed_keys))}'
+        now = time.time()
+        if cache_key in self._cache:
+            cached_at, cached_val = self._cache[cache_key]
+            if now - cached_at < self.cache_ttl:
+                return cached_val
+        cutoff = datetime.now(timezone.utc) - timedelta(hours=hours)
+        cmd = self._run_on_log_host(
+            "grep -hE '\\[BLOCK_IP\\].*success=True|\\[PERMA_REBLOCK\\]' " + self.log_path + " | grep -vE 'ip=(10[.]|192[.]168[.]|172[.](1[6-9]|2[0-9]|3[01])[.])' | tail -50000")
+        ips = set()
+        try:
+            result = subprocess.run(cmd, capture_output=True, text=True, timeout=15)
+            if result.returncode not in (0, 1):
+                return ips
+            for line in result.stdout.splitlines():
+                m = re.match(r'^\[(\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}) UTC\]', line)
+                if not m:
+                    continue
+                try:
+                    ts = datetime.strptime(m.group(1), '%Y-%m-%d %H:%M:%S').replace(tzinfo=timezone.utc)
+                except ValueError:
+                    continue
+                if ts < cutoff:
+                    continue
+                if allowed_keys is not None:
+                    ag = re.search(r'agent=(\S+)', line)
+                    if not ag or ag.group(1) not in allowed_keys:
+                        continue
+                ip = re.search(r'\bip=([0-9.]+)', line)
+                if ip:
+                    ips.add(ip.group(1))
+        except Exception as e:
+            log.error(f'blocked_ip_set failed: {e}')
+            return ips
+        self._cache[cache_key] = (now, ips)
+        return ips
+
+    def count_telegram_sent(self, allowed_keys=None, hours: int = 24):
+        """Total mesaje Telegram trimise, filtrat pe cheile vizibile (RBAC). None = toata flota."""
+        per = self.telegram_sent_by_client(hours=hours)
+        if allowed_keys is None:
+            return sum(per.values())
+        return sum(v for k, v in per.items() if k in allowed_keys)
 
 
 _client = None
