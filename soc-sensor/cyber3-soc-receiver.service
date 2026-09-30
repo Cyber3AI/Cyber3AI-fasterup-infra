@@ -1,0 +1,16 @@
+[Unit]
+Description=CYBER3 SOC receiver — evenimente EDR/XDR de la endpoint-uri din LAN -> Wazuh
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+User=socadmin
+EnvironmentFile=/etc/default/cyber3-soc-receiver
+ExecStart=/usr/bin/python3 /opt/cyber3/soc-receiver.py
+Restart=on-failure
+RestartSec=5
+Nice=10
+
+[Install]
+WantedBy=multi-user.target

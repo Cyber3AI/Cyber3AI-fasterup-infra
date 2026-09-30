@@ -1,0 +1,9 @@
+[Unit]
+Description=CYBER3 SOC connector cloud — la 2 minute
+[Timer]
+OnBootSec=2min
+OnUnitActiveSec=2min
+AccuracySec=20s
+Persistent=true
+[Install]
+WantedBy=timers.target

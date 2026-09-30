@@ -1,0 +1,62 @@
+<!-- CYBER3 → SOC: reguli pentru evenimentele EDR/XDR de la endpoint-uri (Faza 3).
+     ALERT-ONLY: toate ≤ level 9 (sub pragul active-response level≥10) + fără srcip → nicio
+     auto-blocare. Se adaugă în /var/ossec/etc/rules/local_rules.xml pe manager. Segregare pe $(c3.org).
+     NB: toate câmpurile evenimentului sunt sub namespace "c3" (-> data.c3.*) ca să NU se ciocnească cu
+     schema rezervată Wazuh data.* (data.data=keyword, data.os=object — altfel filebeat respinge docul,
+     mapper_parsing_exception). Câmpurile nested se potrivesc cu type="pcre2". -->
+<group name="cyber3,edr,xdr,">
+
+  <!-- Bază: orice eveniment CYBER3 (marcaj c3.app=cyber3, decodat JSON). Fără alertă proprie. -->
+  <rule id="100600" level="0">
+    <decoded_as>json</decoded_as>
+    <field name="c3.app">^cyber3$</field>
+    <description>CYBER3 endpoint event</description>
+  </rule>
+
+  <!-- Heartbeat: doar prezență, fără alertă. -->
+  <rule id="100601" level="0">
+    <if_sid>100600</if_sid>
+    <field name="c3.type">^heartbeat$</field>
+    <description>CYBER3: heartbeat endpoint ($(c3.org))</description>
+  </rule>
+
+  <!-- Scanare PC raportată. -->
+  <rule id="100602" level="4">
+    <if_sid>100600</if_sid>
+    <field name="c3.type">^pc_scan$</field>
+    <description>CYBER3: scanare PC raportata (org: $(c3.org), dispozitiv: $(c3.device_id))</description>
+  </rule>
+  <!-- Malware găsit pe endpoint (c3.data.malware_found > 0). -->
+  <rule id="100603" level="9">
+    <if_sid>100602</if_sid>
+    <field name="c3.data.malware_found" type="pcre2">[1-9]</field>
+    <description>CYBER3: MALWARE gasit pe endpoint (org: $(c3.org), dispozitiv: $(c3.device_id))</description>
+  </rule>
+
+  <!-- Amenințare detectată (scam/link/număr periculos). -->
+  <rule id="100604" level="9">
+    <if_sid>100600</if_sid>
+    <field name="c3.type">^threat$</field>
+    <description>CYBER3: amenintare detectata pe endpoint (org: $(c3.org), indicator: $(c3.data.indicator))</description>
+  </rule>
+
+  <!-- Email în breșă. -->
+  <rule id="100605" level="5">
+    <if_sid>100600</if_sid>
+    <field name="c3.type">^breach$</field>
+    <description>CYBER3: email in bresa (org: $(c3.org))</description>
+  </rule>
+
+  <!-- Backup raportat + backup eșuat. -->
+  <rule id="100606" level="3">
+    <if_sid>100600</if_sid>
+    <field name="c3.type">^backup$</field>
+    <description>CYBER3: stare backup raportata (org: $(c3.org))</description>
+  </rule>
+  <rule id="100607" level="6">
+    <if_sid>100606</if_sid>
+    <field name="c3.data.status" type="pcre2">fail</field>
+    <description>CYBER3: BACKUP ESUAT pe endpoint (org: $(c3.org), dispozitiv: $(c3.device_id))</description>
+  </rule>
+
+</group>

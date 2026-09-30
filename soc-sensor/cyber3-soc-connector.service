@@ -1,0 +1,10 @@
+[Unit]
+Description=CYBER3 SOC connector cloud — evenimente remote/BYOD din edge -> manager
+After=network-online.target
+Wants=network-online.target
+[Service]
+Type=oneshot
+EnvironmentFile=-/etc/default/cyber3-soc-connector
+ExecStart=/usr/bin/python3 /opt/cyber3/soc-cloud-connector.py
+User=root
+Nice=10

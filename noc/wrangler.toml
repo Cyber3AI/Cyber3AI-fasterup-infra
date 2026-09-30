@@ -1,0 +1,24 @@
+name = "cyber3-noc"
+main = "src/index.ts"
+compatibility_date = "2026-06-01"
+workers_dev = true
+
+# NOC FasterUp/CYBER3 — monitorizare infra, admin-only. Independent de cyber3-edge.
+[[kv_namespaces]]
+binding = "NOC_KV"
+id = "bd8a1f65a7de4e2fb52170111eea760a"
+
+# R2 cyber3-ioc — pentru probe (head obiect cunoscut)
+[[r2_buckets]]
+binding = "IOC_BUNDLES"
+bucket_name = "cyber3-ioc"
+
+# Service Binding spre cyber3-llm — self-test unelte gratuite (evită eroarea 1042 fetch same-zone workers.dev).
+[[services]]
+binding = "LLM"
+service = "cyber3-llm"
+
+# Secrete (wrangler secret put): NOC_NODE_TOKEN, NOC_ADMIN_TOKEN, NOC_TG_TOKEN, NOC_TG_CHAT, NOC_ANTHROPIC_KEY
+
+[triggers]
+crons = ["*/3 * * * *"]

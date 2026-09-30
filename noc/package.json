@@ -1,0 +1,6 @@
+{
+  "name": "cyber3-noc",
+  "version": "0.1.0",
+  "private": true,
+  "description": "NOC FasterUp/CYBER3 — monitorizare infra pe Cloudflare (admin-only)"
+}

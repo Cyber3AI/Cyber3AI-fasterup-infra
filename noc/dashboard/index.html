@@ -1,0 +1,400 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>CYBER3.AI — Network Operations Center</title>
+<style>
+  :root{ --bg:#070b12; --panel:#0e1622; --panel2:#13203045; --line:#1e3354; --ink:#dce8ff; --muted:#7d93b8;
+         --green:#1fd65f; --amber:#f5b53b; --red:#ff3b3b; --grey:#46566f; --brand:#FF0000; }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{background:var(--bg);color:var(--ink);font:14px/1.4 'Segoe UI',system-ui,sans-serif;
+       background-image:linear-gradient(rgba(31,120,200,.05) 1px,transparent 1px),linear-gradient(90deg,rgba(31,120,200,.05) 1px,transparent 1px);
+       background-size:34px 34px;min-height:100vh}
+  /* crucea de Ierusalim (rosie, pulsanta) */
+  .xcross{display:inline-block;vertical-align:middle;background:center/contain no-repeat;
+    background-image:url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><g fill='%23FF0000'><rect x='44' y='15' width='12' height='70'/><rect x='15' y='44' width='70' height='12'/><rect x='36' y='13' width='28' height='6'/><rect x='36' y='81' width='28' height='6'/><rect x='13' y='36' width='6' height='28'/><rect x='81' y='36' width='6' height='28'/><rect x='27' y='22' width='6' height='16'/><rect x='22' y='27' width='16' height='6'/><rect x='67' y='22' width='6' height='16'/><rect x='62' y='27' width='16' height='6'/><rect x='27' y='62' width='6' height='16'/><rect x='22' y='67' width='16' height='6'/><rect x='67' y='62' width='6' height='16'/><rect x='62' y='67' width='16' height='6'/></g><circle cx='50' cy='50' r='47' fill='none' stroke='%23FF0000' stroke-width='3'/></svg>");
+    filter:drop-shadow(0 0 6px rgba(255,0,0,.6));animation:xpulse 1.8s ease-in-out infinite}
+  @keyframes xpulse{0%,100%{transform:scale(1);opacity:.92}50%{transform:scale(1.12);opacity:1}}
+  header{display:flex;align-items:center;gap:16px;padding:13px 22px;border-bottom:1px solid var(--line);position:sticky;top:0;background:#070b12ee;backdrop-filter:blur(6px);z-index:20;flex-wrap:wrap}
+  header .xcross{width:34px;height:34px}
+  .brand{font-size:19px;font-weight:800;letter-spacing:.03em;color:var(--brand);display:flex;align-items:center}
+  .sub{color:var(--muted);font-size:10.5px;text-transform:uppercase;letter-spacing:.13em;margin-top:2px}
+  .chips{display:flex;gap:8px;margin-left:auto;flex-wrap:wrap}
+  .chip{padding:5px 12px;border:1px solid var(--line);border-radius:20px;font-weight:700;font-size:13px;display:flex;gap:7px;align-items:center}
+  .dot{width:10px;height:10px;border-radius:50%}
+  .g{background:var(--green)} .a{background:var(--amber)} .r{background:var(--red)} .x{background:var(--grey)}
+  .upd{color:var(--muted);font-size:11px}
+  main{padding:18px 22px 60px;max-width:1500px;margin:0 auto}
+  .ai{background:var(--panel);border:1px solid var(--line);border-left:3px solid var(--brand);border-radius:10px;padding:12px 16px;margin-bottom:8px;color:#bcd0f0;font-size:13px}
+  .ai b{color:#fff}
+  .help{background:#0e162290;border:1px dashed var(--line);border-radius:8px;padding:9px 14px;margin-bottom:16px;color:var(--muted);font-size:12px}
+  .approval{background:#1a1206;border:1px solid #f5b53b55;border-left:3px solid var(--amber);border-radius:8px;padding:9px 14px;margin-bottom:8px;font-size:13px;display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+  .approval.ok2{background:#0c1a10;border-color:#1fd65f55;border-left-color:var(--green)}
+  .abtn{padding:5px 13px;border-radius:6px;font-weight:700;font-size:12px;text-decoration:none}
+  .abtn.ok{background:var(--green);color:#04210e;margin-left:auto} .abtn.no{background:var(--red);color:#fff}
+  .lane{margin:0 0 8px}
+  .lane h2{font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:.2em;margin:14px 0 8px;font-weight:700}
+  .lane .ldesc{color:#6f86ad;font-size:11px;font-weight:400;text-transform:none;letter-spacing:0;margin-left:8px}
+  .row{display:flex;gap:12px;flex-wrap:wrap}
+  .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(155px,1fr));gap:12px}
+  .blk{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:11px 13px;cursor:pointer;position:relative;
+       min-width:150px;transition:transform .1s,box-shadow .1s;border-top:3px solid var(--grey)}
+  .blk:hover{transform:translateY(-2px);box-shadow:0 6px 18px #0008}
+  .blk.s-green{border-top-color:var(--green)} .blk.s-amber{border-top-color:var(--amber)}
+  .blk.s-red{border-top-color:var(--red);animation:pulse 1.6s infinite} .blk.s-pending{border-top-color:var(--grey);opacity:.6}
+  @keyframes pulse{0%,100%{box-shadow:0 0 0 0 #ff3b3b55}50%{box-shadow:0 0 0 5px #ff3b3b00}}
+  .blk.core{border-color:var(--brand);box-shadow:0 0 16px rgba(255,0,0,.22);min-width:300px;background:linear-gradient(180deg,#160c0f,#0e1622)}
+  .blk.core .nm{color:#ffd2d2}
+  .blk .nm{font-weight:700;font-size:13px;display:flex;align-items:center;gap:7px}
+  .blk .meta{color:var(--muted);font-size:11px;margin-top:5px;line-height:1.5}
+  .blk .bd{color:#637da3;font-size:10.5px;margin-top:5px;line-height:1.4}
+  .flow{text-align:center;color:var(--line);font-size:18px;line-height:1;margin:1px 0}
+  .flow span{color:var(--muted);font-size:10px;letter-spacing:.12em}
+  #drill{position:fixed;top:0;right:-470px;width:450px;max-width:92vw;height:100%;background:var(--panel);border-left:1px solid var(--line);
+         padding:22px;overflow:auto;transition:right .2s;z-index:40;box-shadow:-8px 0 30px #000a}
+  #drill.open{right:0}
+  #drill h3{font-size:17px;margin-bottom:2px} #drill .close{position:absolute;top:14px;right:16px;cursor:pointer;color:var(--muted);font-size:24px}
+  #drill .dd{background:#0a1018;border:1px solid var(--line);border-radius:8px;padding:11px 13px;margin:12px 0;color:#9fb6da;font-size:12.5px;line-height:1.5}
+  #drill pre{background:#060a10;border:1px solid var(--line);border-radius:8px;padding:12px;font-size:12px;overflow:auto;margin-top:12px;color:#a8c4ec}
+  .kv{display:flex;justify-content:space-between;padding:6px 0;border-bottom:1px solid var(--panel2);font-size:12.5px}
+  .kv span:first-child{color:var(--muted)}
+  .reason{background:#ff3b3b1a;border:1px solid #ff3b3b55;border-radius:6px;padding:6px 10px;margin:5px 0;font-size:12px;color:#ffc9c9}
+  #gate{position:fixed;inset:0;background:#050709f5;display:flex;align-items:center;justify-content:center;z-index:60}
+  #gate .box{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:34px 30px;width:400px;text-align:center}
+  #gate .xcross{width:64px;height:64px;margin-bottom:14px}
+  #gate .t{font-size:22px;font-weight:800;color:var(--brand);letter-spacing:.03em}
+  #gate .s1{color:var(--ink);font-size:13px;margin-top:6px}
+  #gate .s2{color:var(--muted);font-size:11px;text-transform:uppercase;letter-spacing:.13em;margin-top:3px}
+  #gate input{width:100%;padding:11px;margin:18px 0 12px;background:#0a0e15;border:1px solid var(--line);color:var(--ink);border-radius:7px;font-family:monospace}
+  #gate button,.btn{background:var(--brand);color:#fff;border:0;padding:11px 18px;border-radius:7px;font-weight:700;cursor:pointer}
+  .legend{display:flex;gap:14px;color:var(--muted);font-size:11px;margin-top:12px;flex-wrap:wrap}
+</style>
+</head>
+<body>
+<header>
+  <span class="xcross"></span>
+  <div><div class="brand">CYBER3.AI</div><div class="sub">Network Operations Center · managed by CYBER3 AI AGENTS</div></div>
+  <div class="chips" id="chips"></div>
+  <div class="upd" id="upd">—</div>
+  <a class="btn" style="padding:6px 12px;text-decoration:none;color:inherit" href="https://cyber3-ops.cyber3.workers.dev/admin/soc" target="_blank" title="Consolă operator Cloud SOC — aprobări T2, findings, audit">⚡ Cloud SOC</a>
+  <button class="btn" style="padding:6px 12px" onclick="logout()">⎋</button>
+</header>
+<main>
+  <div class="ai" id="ai">⏳ Se încarcă starea infrastructurii…</div>
+  <div id="approvals"></div>
+  <!-- 7 STRATURI DE BLOCARE IN CASCADA -->
+  <style>
+  .casc7{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:9px;margin:6px 0 18px}
+  @media(max-width:920px){.casc7{grid-template-columns:repeat(4,1fr)}}
+  @media(max-width:560px){.casc7{grid-template-columns:repeat(2,1fr)}}
+  .casc7-ttl{display:flex;align-items:baseline;gap:12px;margin:16px 0 11px}
+  .casc7-ttl h2{font-size:13px;font-weight:750;letter-spacing:.08em;text-transform:uppercase;color:#f2d778;margin:0}
+  .casc7-ttl span{font-family:ui-monospace,monospace;font-size:10px;letter-spacing:.1em;color:#7089a8;margin-left:auto}
+  .c7l{background:#0e1622;border:1px solid #1e3354;border-top:3px solid var(--c7c);border-radius:12px;padding:12px 11px;position:relative}
+  .c7l .c7n{font:700 11px/1 ui-monospace,monospace;letter-spacing:.05em;color:var(--c7c)}
+  .c7l .c7t{font-weight:800;font-size:13.5px;margin:6px 0 2px;color:#eef3fb}
+  .c7l .c7z{font:600 9px/1.2 ui-monospace,monospace;letter-spacing:.09em;text-transform:uppercase;color:#7089a8}
+  .c7l .c7v{font:700 18px/1 ui-monospace,monospace;margin-top:9px;font-variant-numeric:tabular-nums}
+  .c7l.c7new::after{content:"NOU";position:absolute;top:9px;right:9px;font:700 8px/1 ui-monospace,monospace;color:#22d3ee;border:1px solid #22d3ee;border-radius:10px;padding:2px 5px}
+  </style>
+  <div class="casc7-ttl"><h2>🚨 Alerte SOC · 24h</h2><span>detecție inline pe flotă · triere autonomă · monitorizare 24/7</span></div>
+  <div style="display:flex;flex-wrap:wrap;gap:12px;margin:0 0 18px">
+    <div style="background:#0e1622;border:1px solid #1e3354;border-radius:12px;padding:13px;flex:1;min-width:150px"><div style="font:800 25px ui-monospace,monospace;color:#eef3fb" id="naEvents">—</div><div style="font-weight:700;margin-top:3px;color:#dbe6f5;font-size:13px">Evenimente 24h</div><div style="color:#7089a8;font-size:11.5px;margin-top:4px;line-height:1.35">Total evenimente de securitate procesate în ultimele 24h pe flotă.</div></div>
+    <div style="background:#0e1622;border:1px solid #1e3354;border-radius:12px;padding:13px;flex:1;min-width:150px"><div style="font:800 25px ui-monospace,monospace;color:#1fd65f" id="naSensors">—</div><div style="font-weight:700;margin-top:3px;color:#dbe6f5;font-size:13px">Senzori activi</div><div style="color:#7089a8;font-size:11.5px;margin-top:4px;line-height:1.35">Senzori inline care raportează în timp real (15 min).</div></div>
+    <div style="background:#0e1622;border:1px solid #1e3354;border-radius:12px;padding:13px;flex:1;min-width:150px"><div style="font:800 25px ui-monospace,monospace;color:#f0913b" id="naAutonomy">—</div><div style="font-weight:700;margin-top:3px;color:#dbe6f5;font-size:13px">Index autonomie</div><div style="color:#7089a8;font-size:11.5px;margin-top:4px;line-height:1.35">Ponderea răspunsului autonom față de evenimentele semnificative.</div></div>
+  </div>
+  <div class="casc7-ttl"><h2>🛡️ Blocare în Cascadă · 7 Straturi</h2><span>apărare în adâncime · complementare</span></div>
+  <div class="casc7" id="casc7"></div>
+<div class="casc7-ttl"><h2>🔗 MLEO · Corelare L3&harr;L2</h2><span>același dispozitiv ca IP și ca MAC · evaziune prin schimbare de IP · izolează atacatorul, nu victima · doar admin</span></div>
+<div style="display:flex;flex-wrap:wrap;gap:12px;margin:0 0 18px"><div style="background:#0e1622;border:1px solid #1e3354;border-radius:12px;padding:13px;flex:1;min-width:150px"><div style="font:800 25px ui-monospace,monospace;color:#eef3fb" id="nmleoRecon">—</div><div style="font-weight:700;margin-top:3px;color:#dbe6f5;font-size:13px">Reconciliere MAC&harr;IP</div><div style="color:#7089a8;font-size:11.5px;margin-top:4px;line-height:1.35">Perechi MAC/IP din ARP-ul senzorilor (5 min). Baza corelării L3&harr;L2.</div></div><div style="background:#0e1622;border:1px solid #1e3354;border-radius:12px;padding:13px;flex:1;min-width:150px"><div style="font:800 25px ui-monospace,monospace;color:#eef3fb" id="nmleoMacs">—</div><div style="font-weight:700;margin-top:3px;color:#dbe6f5;font-size:13px">Dispozitive (MAC)</div><div style="color:#7089a8;font-size:11.5px;margin-top:4px;line-height:1.35">Echipamente distincte la nivel Ethernet.</div></div><div style="background:#0e1622;border:1px solid #1e3354;border-radius:12px;padding:13px;flex:1;min-width:150px"><div style="font:800 25px ui-monospace,monospace;color:#f0913b" id="nmleoCand">—</div><div style="font-weight:700;margin-top:3px;color:#dbe6f5;font-size:13px">Candidați evaziune</div><div style="color:#7089a8;font-size:11.5px;margin-top:4px;line-height:1.35">MAC-uri cu &gt;1 IP folosit.</div></div><div style="background:#0e1622;border:1px solid #1e3354;border-radius:12px;padding:13px;flex:1;min-width:150px"><div style="font:800 25px ui-monospace,monospace;color:#1fd65f" id="nmleoM1">—</div><div style="font-weight:700;margin-top:3px;color:#dbe6f5;font-size:13px">Match 1 · evaziune</div><div style="color:#7089a8;font-size:11.5px;margin-top:4px;line-height:1.35">Același MAC blocat pe IP-uri diferite în 15 min. Observare.</div></div><div style="background:#0e1622;border:1px solid #1e3354;border-radius:12px;padding:13px;flex:1;min-width:150px"><div style="font:800 25px ui-monospace,monospace;color:#eef3fb" id="nmleoProp">—</div><div style="font-weight:700;margin-top:3px;color:#dbe6f5;font-size:13px">Propuneri carantină</div><div style="color:#7089a8;font-size:11.5px;margin-top:4px;line-height:1.35">Izolări L2 propuse (dry-run). Armarea = manuală, cu allowlist + rollback.</div></div></div>
+
+  <script>
+  (function(){
+   var L=[{n:1,t:'IPS',z:'Rețea',c:'#3b82f6',k:'ips'},{n:2,t:'AR Nativ',z:'Rețea',c:'#f59e0b',k:'ar_native'},
+    {n:3,t:'L2 Shield',z:'Ethernet',c:'#22d3ee',k:'l2shield',nw:1},{n:4,t:'CyberBot',z:'AI',c:'#34d399',k:'cyberbot'},
+    {n:5,t:'CYBER3 Edge',z:'Cloud',c:'#a78bfa',s:'ACTIV'},{n:6,t:'EDR/XDR Desktop',z:'Endpoint',c:'#2dd4bf',s:'ACTIV'},
+    {n:7,t:'Mobile',z:'Endpoint',c:'#fb7185',s:'ACTIV'}];
+   var el=document.getElementById('casc7'); if(!el)return;
+   el.innerHTML=L.map(function(x){return '<div class="c7l'+(x.nw?' c7new':'')+'" style="--c7c:'+x.c+'"><div class="c7n">STRAT '+x.n+'</div><div class="c7t">'+x.t+'</div><div class="c7z">'+x.z+'</div><div class="c7v" id="c7v-'+(x.k||x.n)+'" style="color:'+x.c+'">'+(x.s||'—')+'</div></div>';}).join('');
+   function upd(){
+    fetch('https://cyber3-noc.cyber3.workers.dev/v1/ccc/summary',{cache:'no-store'}).then(function(r){return r.json();}).then(function(d){
+     if(d&&d.mleo){var M=d.mleo;function sm(id,v){var e=document.getElementById(id);if(e)e.textContent=(typeof v==='number'?v.toLocaleString('ro-RO'):(v==null?'—':v));}sm('nmleoRecon',M.recon);sm('nmleoMacs',M.macs);sm('nmleoCand',M.candidates);sm('nmleoM1',M.match1);sm('nmleoProp',M.proposals);}
+     var _sm=function(id,v){var e=document.getElementById(id);if(e)e.textContent=(typeof v==='number'?v.toLocaleString('ro-RO'):(v==null?'—':v));};_sm('naEvents',d.events_24h);_sm('naSensors',d.sensors);_sm('naAutonomy',(typeof d.autonomy_pct==='number'?d.autonomy_pct+'%':null));
+     if(!d||!d.layers)return; var ly=d.layers; ['ips','ar_native','l2shield','cyberbot'].forEach(function(k){var e=document.getElementById('c7v-'+k); if(e)e.textContent=(ly[k]||0).toLocaleString('ro-RO');});}).catch(function(){});
+    fetch('https://cyber3-noc.cyber3.workers.dev/v1/noc/l2shield',{cache:'no-store'}).then(function(r){return r.json();}).then(function(d){
+     var e=document.getElementById('c7v-l2shield'); if(e&&d){e.textContent=(d.armed||0)+'/'+(d.sensors_with_l2||0)+' armat';}}).catch(function(){});}
+   upd(); setInterval(upd,120000);
+  })();
+  </script>
+  <div class="help">🧭 <b>Pentru administrator:</b> harta-bloc a ÎNTREGII infrastructuri, de sus în jos — <b>NUCLEUL AI</b> decide → <b>cloud/edge</b> → <b>clienți &amp; senzori</b> (detecția) → <b>hub VPN</b> → <b>SOC core</b> (creierul) → <b>🛟 REZERVĂ (DR)</b> care preia singur dacă sediul cade. Fiecare <b>bloc</b> = o componentă: <span style="color:#1fd65f">verde=ok</span> · <span style="color:#f5b53b">galben=atenție</span> · <span style="color:#ff3b3b">roșu=critic</span> · <span style="color:#46566f">gri=în așteptare</span>. <b>Click pe orice bloc</b> = ce face + metrici. Agenții raportează la 60s, cloud-ul e probat la 3 min; alerte pe Telegram. 🔑 Acces: Basic Auth (user <b>mihai</b>) + token admin NOC.</div>
+  <!-- ================= HARTĂ PE LOCAȚII · SERVERE & SERVICII ================= -->
+  <style>
+    .loc3-wrap{--l3gold:#d4af37;--l3gold2:#f2d778;--l3cyan:#57c8e0;--l3orange:#f0913b;--l3ink:#eef3fb;--l3ink2:#aab8d0;--l3ink3:#7089a8;--l3line:#1e3354;--l3pan:#0e1622;--l3pan2:#0b1420;margin:6px 0 20px}
+    .loc3-ttl{display:flex;align-items:baseline;gap:12px;margin:16px 0 11px}
+    .loc3-ttl h2{font-size:13px;font-weight:750;letter-spacing:.08em;text-transform:uppercase;color:var(--l3gold2);margin:0}
+    .loc3-ttl span{font-family:ui-monospace,Menlo,monospace;font-size:10px;letter-spacing:.1em;color:var(--l3ink3);margin-left:auto}
+    .loc3-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-bottom:12px}
+    @media(max-width:900px){.loc3-grid{grid-template-columns:1fr}}
+    .loc3-panel{background:linear-gradient(180deg,var(--l3pan),var(--l3pan2));border:1px solid var(--l3line);border-radius:14px;overflow:hidden;display:flex;flex-direction:column}
+    .loc3-hd{display:flex;align-items:center;gap:11px;padding:13px 15px;border-bottom:1px solid var(--l3line)}
+    .loc3-ic{font-size:21px;flex:0 0 auto}
+    .loc3-nm{font-weight:800;font-size:14.5px;color:var(--l3ink)}
+    .loc3-sub{font-family:ui-monospace,Menlo,monospace;font-size:9px;letter-spacing:.13em;text-transform:uppercase;color:var(--l3ink3);margin-top:3px}
+    .loc3-badge{margin-left:auto;font-family:ui-monospace,Menlo,monospace;font-size:9px;letter-spacing:.1em;padding:4px 9px;border-radius:999px;text-transform:uppercase;font-weight:700}
+    .loc3-b-core{color:#0c1220;background:linear-gradient(180deg,var(--l3gold2),var(--l3gold))}
+    .loc3-b-hz{color:var(--l3cyan);border:1px solid var(--l3cyan);background:rgba(87,200,224,.08)}
+    .loc3-b-cf{color:var(--l3orange);border:1px solid var(--l3orange);background:rgba(240,145,59,.08)}
+    .loc3-body{padding:12px 13px;display:flex;flex-direction:column;gap:9px;flex:1}
+    .loc3-srv{border:1px solid var(--l3line);border-radius:10px;padding:9px 11px;background:rgba(255,255,255,.015)}
+    .loc3-srv.hi{border-color:rgba(212,175,55,.45);background:rgba(212,175,55,.05)}
+    .loc3-srv .snm{font-weight:700;font-size:12.5px;color:var(--l3ink);display:flex;align-items:center;gap:6px}
+    .loc3-srv .ssvc{font-size:10.7px;color:var(--l3ink2);margin-top:4px;line-height:1.5}
+    .loc3-tags{display:flex;flex-wrap:wrap;gap:5px;margin-top:6px}
+    .loc3-tag{font-family:ui-monospace,Menlo,monospace;font-size:9px;padding:2px 7px;border-radius:6px;border:1px solid var(--l3line);color:var(--l3ink2);background:rgba(255,255,255,.02)}
+    .loc3-foot{font-size:12px;color:var(--l3ink2);border:1px dashed var(--l3line);border-radius:10px;padding:10px 14px;line-height:1.6}
+    .loc3-foot b{color:var(--l3gold2)}
+  </style>
+  <div class="loc3-wrap">
+    <div class="loc3-ttl"><h2>🗺️ Unde rulează sistemul · Servere &amp; Servicii pe locații</h2><span>ce rulează și unde · suveran UE + edge global</span></div>
+    <div class="loc3-grid">
+      <div class="loc3-panel">
+        <div class="loc3-hd"><span class="loc3-ic">🏛️</span><div><div class="loc3-nm">CYBER3 Data Center</div><div class="loc3-sub">fier propriu · suveran</div></div><span class="loc3-badge loc3-b-core">CORE</span></div>
+        <div class="loc3-body">
+          <div class="loc3-srv hi"><div class="snm">🗃️ Cluster 1 SIEM Server</div><div class="ssvc">SIEM — creierul SOC-ului: <b>manager</b> (corelare + active-response) · <b>indexer</b> OpenSearch · <b>dashboard</b> analiști</div></div>
+          <div class="loc3-srv"><div class="snm">🖥️ Proxmox · host virtualizare</div><div class="ssvc">rulează mașinile virtuale ale SOC-ului:</div><div class="loc3-tags"><span class="loc3-tag">🎛️ Portal Operațional</span><span class="loc3-tag">🧬 MISP + MariaDB</span></div></div>
+          <div class="loc3-srv"><div class="snm">📡 Senzori inline · la clienți</div><div class="ssvc">13 sonde IDS/IPS inline (detecție + blocare) → intră prin VPN la Data Center</div></div>
+        </div>
+      </div>
+      <div class="loc3-panel">
+        <div class="loc3-hd"><span class="loc3-ic">☁️</span><div><div class="loc3-nm">Hetzner Cloud</div><div class="loc3-sub">EU + global · fier dedicat</div></div><span class="loc3-badge loc3-b-hz">CLOUD UE</span></div>
+        <div class="loc3-body">
+          <div class="loc3-srv"><div class="snm">🔐 VPN Hub</div><div class="ssvc">WireGuard hub — toți senzorii + analiștii intră prin el · NTP intern · fail2ban</div></div>
+          <div class="loc3-srv hi"><div class="snm">🛟 relay-2 · Rezervă (DR)</div><div class="ssvc">copia completă a SOC-ului: <b>Cluster 1 SIEM DR</b> + <b>Portal DR</b> — preia singur dacă sediul cade</div></div>
+          <div class="loc3-srv"><div class="snm">🛡️ 6 noduri VPN Premium · exit</div><div class="ssvc">WireGuard no-logs · RAM-only · trafic nelimitat</div><div class="loc3-tags"><span class="loc3-tag">🇩🇪 Nürnberg</span><span class="loc3-tag">🇩🇪 Falkenstein</span><span class="loc3-tag">🇺🇸 Ashburn</span><span class="loc3-tag">🇺🇸 Hillsboro</span><span class="loc3-tag">🇫🇮 Helsinki</span><span class="loc3-tag">🇸🇬 Singapore</span></div></div>
+          <div class="loc3-srv"><div class="snm">🔎 Global Scan</div><div class="ssvc">motor de descoperire + VAS (scanare vulnerabilități) la comandă</div></div>
+        </div>
+      </div>
+      <div class="loc3-panel">
+        <div class="loc3-hd"><span class="loc3-ic">🌐</span><div><div class="loc3-nm">Cloudflare</div><div class="loc3-sub">edge global · 300+ orașe</div></div><span class="loc3-badge loc3-b-cf">EDGE</span></div>
+        <div class="loc3-body">
+          <div class="loc3-srv hi"><div class="snm">⚙️ Workers (cod la margine)</div><div class="loc3-tags"><span class="loc3-tag">🧠 cyber3-llm · Security LLM</span><span class="loc3-tag">🛰️ cyber3-edge · IOC + app</span><span class="loc3-tag">🖥️ cyber3-noc · monitor</span><span class="loc3-tag">🔐 cyber3-vpn-cp · VPN CP</span><span class="loc3-tag">💳 cyber3-billing</span><span class="loc3-tag">⚡ cyber3-ops · Cloud SOC</span><span class="loc3-tag">📊 cyber3-metrics</span></div></div>
+          <div class="loc3-srv"><div class="snm">🌍 Site-uri (Pages)</div><div class="loc3-tags"><span class="loc3-tag">cyber3.ai</span><span class="loc3-tag">fasterup.ai</span><span class="loc3-tag">cyber3.app</span><span class="loc3-tag">ccc · noc (admin)</span><span class="loc3-tag">ad · billing · blog</span></div></div>
+          <div class="loc3-srv"><div class="snm">🗄️ Stocare &amp; date</div><div class="ssvc">R2 (CYBER3 DATABASE IOC · descărcări app · snapshot-uri) · KV · D1</div></div>
+        </div>
+      </div>
+    </div>
+    <div class="loc3-foot"><b>Suveranitate:</b> datele și SOC-ul stau pe <b>fier propriu (Data Center)</b> + <b>Hetzner (UE)</b>; doar distribuția rapidă (IOC, site-uri, LLM) e pe <b>edge-ul global Cloudflare</b>. Rezervă completă a SOC-ului pe <b>relay-2 (Hetzner)</b>, backup zilnic în <b>R2</b>.</div>
+  </div>
+  <div id="lanes"></div>
+  <div class="legend">
+    <span><span class="dot g"></span> OK</span><span><span class="dot a"></span> avertisment</span>
+    <span><span class="dot r"></span> critic</span><span><span class="dot x"></span> în așteptare</span>
+    <span>· auto-refresh 30s · NOC pe Cloudflare (independent de SOC)</span>
+  </div>
+</main>
+<div id="drill"><span class="close" onclick="closeDrill()">×</span><div id="drillBody"></div></div>
+<div id="gate"><div class="box">
+  <span class="xcross"></span>
+  <div class="t">CYBER3.AI</div>
+  <div class="s1">Network Operations Center</div>
+  <div class="s2">managed by CYBER3 AI AGENTS</div>
+  <input id="tok" type="password" placeholder="Token admin NOC" autocomplete="off" onkeydown="if(event.key==='Enter')saveTok()">
+  <button onclick="saveTok()">Intră</button>
+</div></div>
+
+<script>
+const API="https://cyber3-noc.cyber3.workers.dev";
+let TOKEN=localStorage.getItem("noc_tok")||"";
+let NODES={};
+
+// ---- model arhitectură (schema-bloc) cu explicații per bloc ----
+const ARCH=[
+ {group:"🧠 NUCLEU — MOTOR AI", desc:"Creierul autonom care fuzionează toate sursele și decide răspunsul.", items:[
+   {id:"fusion",label:"CYBER3 AI MULTI-SOURCE FUSION ENGINE",kind:"derived",from:"wazuh-server",core:true,
+    d:"Nucleul AI (CyberBot, prin Cluster 1 SIEM integratord pe manager): fuzionează semnalele din TOATE sursele — IDS/IPS (rețea), Cluster 1 SIEM (host/FIM/vulnerabilități), MISP (threat-intel), CYBER3 (endpoint XDR) — le scorează cu AI și decide acțiunea (log / blocare IP / alertă urgentă / escaladare la analist). Inima deciziei autonome a SOC-ului."}]},
+ {group:"CLOUDFLARE / EDGE", desc:"Stratul cloud (Cloudflare) — independent de SOC-ul on-prem.", items:[
+   {id:"cyber3-edge",label:"cyber3-edge",kind:"probe",d:"Worker Cloudflare: distribuie IOC + descărcările aplicației + puntea CYBER3→SOC (calea cloud a evenimentelor XDR de la endpoint-uri)."},
+   {id:"r2",label:"R2 cyber3-ioc",kind:"probe",d:"Stocare obiecte Cloudflare: instalere app (APK/exe), snapshot-uri Cluster 1 SIEM (backup), bundle-uri IOC."},
+   {id:"cyber3.ai",label:"cyber3.ai",kind:"probe",d:"Site-ul consumer CYBER3.AI (Cloudflare Pages) — prezentare + descărcare aplicație."},
+   {id:"fasterup.ai",label:"fasterup.ai",kind:"probe",d:"Site-ul B2B FasterUp SOC (Cloudflare Pages)."},
+   {id:"vpn-cp",label:"VPN Control Plane",kind:"probe",d:"Control plane CYBER3.AI VPN Premium: billing, identitate, gestionarea nodurilor exit."},
+   {id:"noc",label:"NOC (self)",kind:"self",d:"Acest sistem — worker-ul NOC. Colectează rapoartele agenților, probează cloud-ul, evaluează praguri, trimite alerte și rezumatul AI."}]},
+ {group:"CLIENȚI CYBER3.AI · VPN PREMIUM", desc:"Endpoint-urile și serviciile pentru utilizatori.", flow:"app → receiver din senzorul LAN | edge (cloud) — evenimente XDR", items:[
+   {id:"app-mobile",label:"App mobil",kind:"static",d:"Aplicația CYBER3.AI pe Android. În mod EDR/XDR raportează evenimente de securitate la SOC."},
+   {id:"app-desktop",label:"App desktop",kind:"static",d:"Aplicația CYBER3.AI pe Windows (EDR/XDR), agent ușor complementar Cluster 1 SIEM."},
+   {id:"vpn-exit",label:"VPN exit ×6",kind:"probe",d:"6 noduri de ieșire VPN Premium (Hetzner, no-logs, RAM-only): 🇩🇪 Nürnberg, 🇩🇪 Falkenstein, 🇺🇸 Ashburn, 🇺🇸 Hillsboro, 🇫🇮 Helsinki, 🇸🇬 Singapore — 4 țări, 3 continente. Control-plane pe Cloudflare alege nodul cel mai gol + failover automat."}]},
+ {group:"SENZORI", desc:"Sondele de rețea la clienți — inima detecției.", dynamic:"sensor", flow:"captură → IDS/IPS (IDS) → eve → agent Cluster 1 SIEM → tunel wg",
+   d:"Fiecare senzor: capturează traficul clientului, îl analizează cu IDS/IPS (IDS), iar agentul Cluster 1 SIEM trimite alertele la manager prin tunelul VPN. Cele inline pot bloca atacatorii (active-response). Click pe un senzor pentru drops, br_netfilter/AR, captură, disc."},
+ {group:"HUB VPN", desc:"Punctul de concentrare al tunelurilor.", flow:"agregă toți senzorii + analiștii spre SOC", items:[
+   {id:"hub",label:"Hub soc-vpn-relay",node:"soc-vpn-relay",kind:"agent",d:"Hub-ul VPN (Hetzner, WireGuard): toți senzorii și analiștii ICISOC se conectează prin el la SOC. Dacă pică, senzorii pierd legătura cu managerul."}]},
+ {group:"SOC CORE", desc:"Creierul SOC-ului — corelare, stocare, răspuns.", flow:"→ indexare → dashboard (vizibil analiștilor, segregat per client)", items:[
+   {id:"manager",label:"Manager (master)",node:"wazuh-server",kind:"agent",d:"Cluster 1 SIEM manager (master): primește alertele de la toți senzorii, le corelează cu reguli, le indexează și declanșează active-response (blocare atacatori). Nodul central al SOC-ului."},
+   {id:"portal",label:"Portal operațional",node:"portal",kind:"agent",d:"Interfața operațională: analiștii văd alertele/rapoartele, lansează scanări VAS (Nuclei), accesează dashboard-ul Cluster 1 SIEM prin SSO. Separat de acest NOC."},
+   {id:"misp",label:"MISP",node:"misp",kind:"agent",d:"Platforma de threat-intelligence: sursa de indicatori (IOC) care alimentează senzorii și regulile IDS/IPS."},
+   {id:"mariadb",label:"CYBER3 Database MARIA",kind:"derived",from:"misp",d:"Baza de date (MariaDB) a platformei MISP — stochează indicatorii (IOC), evenimentele și corelațiile de threat-intelligence."}]},
+ {group:"🛟 INFRASTRUCTURĂ DE REZERVĂ (DR)", desc:"UN singur server Hetzner (relay-2) ține COPIA completă a SOC-ului și preia SINGUR dacă sediul cade — fără intervenție umană.", flow:"sync continuu din producție → failover automat", items:[
+   {id:"dr-wazuh",label:"🗃️ Cluster 1 SIEM DR · relay-2",node:"relay-2",kind:"agent",d:"Copia Cluster 1 SIEM pe relay-2 (Hetzner): worker în cluster + ISTORIC alerte prin replicare. Preia AUTOMAT rolul de master în ~3 minute dacă sediul cade."},
+   {id:"dr-portal",label:"🎛️ Portal DR · relay-2",node:"portal-dr",kind:"agent",d:"Copia portalului pe ACELAȘI server relay-2: sync la 5 minute din producție, failover automat ~15 secunde. Clienții nu simt căderea sediului."},
+   {id:"dr-r2",label:"☁️ Backup R2 · Cloudflare",node:"r2",kind:"probe",d:"Backup zilnic în cloud (Cloudflare R2): portal + Cluster 1 SIEM + MISP + bundle IOC. Ultima plasă de siguranță, independentă de Hetzner."}]},
+ {group:"PROXMOX (gazdă)", desc:"Virtualizarea pe care rulează SOC-ul.", items:[
+   {id:"proxmox",label:"Proxmox host",node:"pve",kind:"agent",d:"Gazda de virtualizare: rulează VM-urile SOC (manager, portal etc.). Dacă pică host-ul, pică VM-urile de pe el — punct critic de capacitate (CPU/RAM/disc)."}]},
+];
+
+function statusOf(it){
+  if(it.kind==="derived"){
+    const src=NODES[it.from]; if(!src) return {s:"pending",meta:"sursă indisponibilă"};
+    const m=src.metrics||{};
+    if(it.id==="mariadb"){const v=(m.services||{}).mariadb;return {s:v==="active"?"green":(v?"red":"pending"),meta:"MariaDB "+(v||"?"),n:src};}
+    if(it.id==="fusion"){const f=m.fusion_engine||{},ig=f.integratord,er=f.cyberbot_err_recent||0;
+      const s=ig==="running"?(er>10?"amber":"green"):(ig?"red":"pending");
+      return {s,meta:`integratord ${ig||"?"} · erori ${er}`,n:src};}
+    return {s:"pending"};
+  }
+  const n=NODES[it.node||it.id];
+  if(n) return {s:n.status, n};
+  if(it.kind==="self") return {s:"green",meta:"edge"};
+  return {s:"pending",meta:it.kind==="probe"?"probe (în curând)":"info"};
+}
+const sevClass=s=>({green:"s-green",amber:"s-amber",red:"s-red"}[s]||"s-pending");
+const dot=s=>({green:"g",amber:"a",red:"r"}[s]||"x");
+
+function blkHtml(it){
+  const st=statusOf(it); const n=st.n; let meta=st.meta||"";
+  if(n){
+    const m=n.metrics||{}; const parts=[];
+    if(m.capture&&m.capture.ok) parts.push(`${m.capture.pps} pps · ${m.capture.drop_pct}% drop`);
+    if(m.security&&"br_netfilter" in m.security) parts.push("AR:"+(m.security.br_netfilter===1?"✓":"✗"));
+    if(m.host) parts.push(`disc ${m.host.disk_pct}%`);
+    if(m.probe&&m.probe.http) parts.push("HTTP "+m.probe.http);
+    if(n.reasons&&n.reasons.length) parts.push("⚠ "+n.reasons.length);
+    meta=parts.join(" · ")||(n.type||"");
+  }
+  const short=it.d?(it.d.length>62?it.d.slice(0,60)+"…":it.d):"";
+  return `<div class="blk ${sevClass(st.s)} ${it.core?"core":""}" onclick='drill(${JSON.stringify(it).replace(/'/g,"&#39;")})'>
+    <div class="nm"><span class="dot ${dot(st.s)}"></span>${it.label}</div>
+    <div class="meta">${meta}</div>${short?`<div class="bd">${short}</div>`:""}</div>`;
+}
+
+function render(){
+  const root=document.getElementById("lanes"); let h="";
+  for(const lane of ARCH){
+    h+=`<div class="lane"><h2>${lane.group}${lane.desc?`<span class="ldesc">${lane.desc}</span>`:""}</h2>`;
+    if(lane.dynamic){
+      // senzor = type sensor SAU nume de senzor (icisoc###/f###) — icisoc110 e inline pe vmbr2 (nu br0) și agentul îl raportează „server", dar E senzor.
+      const sens=Object.values(NODES).filter(n=>n.type===lane.dynamic||n.group==="sensors"||/^(icisoc|f)\d{2,}$/.test(n.node)).sort((a,b)=>a.node.localeCompare(b.node));
+      h+=`<div class="grid">`;
+      if(!sens.length) h+=`<div class="blk s-pending"><div class="meta">niciun senzor încă</div></div>`;
+      for(const n of sens) h+=blkHtml({label:n.node,node:n.node,kind:"agent",d:lane.d});
+      h+=`</div>`;
+    } else { h+=`<div class="row">`; for(const it of lane.items) h+=blkHtml(it); h+=`</div>`; }
+    h+=`</div>`;
+    if(lane.flow) h+=`<div class="flow">↓ <span>${lane.flow}</span></div>`;
+  }
+  root.innerHTML=h;
+}
+
+function drill(it){
+  const st=statusOf(it); const n=st.n; const b=document.getElementById("drillBody");
+  let h=`<h3>${it.label}</h3><div class="sub">${(n&&n.type)||it.kind||""}</div>`;
+  if(it.d) h+=`<div class="dd">${it.d}</div>`;
+  h+=`<div style="margin:6px 0"><span class="dot ${dot(st.s)}"></span> <b>${st.s.toUpperCase()}</b></div>`;
+  if(n){
+    (n.reasons||[]).forEach(r=>h+=`<div class="reason">⚠ ${r}</div>`);
+    (n.remediations||[]).forEach(r=>h+=`<div class="reason" style="background:#1fd65f1a;border-color:#1fd65f66;color:#bff5d0">🔧 auto-remediat: ${r}</div>`);
+    const m=n.metrics||{};
+    const flat=(o,p="")=>{for(const k in o){const v=o[k];if(v&&typeof v==="object")flat(v,p+k+".");else h+=`<div class="kv"><span>${p+k}</span><span>${v}</span></div>`;}};
+    flat(m); h+=`<div class="kv"><span>raport vechime</span><span>${n.report_age_s}s</span></div>`;
+  } else { h+=`<p style="color:var(--muted);margin-top:12px">Fără agent/probe încă (necesită acces). Va apărea aici când e conectat.</p>`; }
+  b.innerHTML=h; document.getElementById("drill").classList.add("open");
+}
+function closeDrill(){document.getElementById("drill").classList.remove("open");}
+function chips(s){document.getElementById("chips").innerHTML=
+  `<div class="chip"><span class="dot g"></span>${s.green}</div><div class="chip"><span class="dot a"></span>${s.amber}</div><div class="chip"><span class="dot r"></span>${s.red}</div><div class="chip">Σ ${s.total}</div>`;}
+
+async function load(){
+  if(!TOKEN) return;
+  try{
+    const r=await fetch(API+"/v1/noc/state",{headers:{authorization:"Bearer "+TOKEN}});
+    if(r.status===401){logout();return;}
+    const d=await r.json(); NODES={}; (d.nodes||[]).forEach(n=>NODES[n.node]=n);
+    chips(d.summary); render();
+    const ap=document.getElementById("approvals");
+    const pend=(d.proposals||[]).filter(p=>p.state==="pending"), appr=(d.proposals||[]).filter(p=>p.state==="approved");
+    ap.innerHTML = pend.map(p=>`<div class="approval">⏳ <b>${p.node}</b> · ${p.label} <span style="color:var(--muted)">— ${p.reason}</span>
+        <a class="abtn ok" target="_blank" href="${API}/v1/noc/approve?id=${encodeURIComponent(p.node+':'+p.action)}&k=${p.nonce}">✅ Aprobă</a>
+        <a class="abtn no" target="_blank" href="${API}/v1/noc/deny?id=${encodeURIComponent(p.node+':'+p.action)}&k=${p.nonce}">⛔ Respinge</a></div>`).join("")
+      + appr.map(p=>`<div class="approval ok2">👍 <b>${p.node}</b> · ${p.label} — aprobat, se execută în ≤60s…</div>`).join("");
+    document.getElementById("upd").textContent="actualizat "+new Date().toLocaleTimeString();
+    const ai=document.getElementById("ai");
+    ai.innerHTML=d.ai_summary?("<b>🤖 AI:</b> "+d.ai_summary):`<b>${d.summary.total} noduri</b> · ${d.summary.green} ok · ${d.summary.amber} avertisment · ${d.summary.red} critic.`;
+  }catch(e){document.getElementById("upd").textContent="eroare conexiune";}
+}
+function saveTok(){TOKEN=document.getElementById("tok").value.trim();localStorage.setItem("noc_tok",TOKEN);document.getElementById("gate").style.display="none";load();}
+function logout(){localStorage.removeItem("noc_tok");TOKEN="";document.getElementById("gate").style.display="flex";}
+if(TOKEN){document.getElementById("gate").style.display="none";load();}
+setInterval(load,30000);
+</script>
+<!-- ================================================================
+     CYBER3.AI — FOOTER OFICIAL (ecosistem suveran, complet, TOP cybersecurity)
+     Self-contained (clase c3eco-*, zero conflict). Linkuri active DOAR spre
+     site-urile PUBLICE (cyber3.ai / fasterup.ai / cyber3.app) — NICIUN URL admin.
+     Se lipește înainte de </body> pe orice proprietate.
+     ================================================================ -->
+<footer class="c3eco">
+  <div class="c3eco-in">
+    <div class="c3eco-top">
+      <span class="c3eco-brand">
+        <svg class="c3eco-cross" viewBox="0 0 100 100" aria-hidden="true"><g fill="#FF0000"><rect x="44" y="15" width="12" height="70"/><rect x="15" y="44" width="70" height="12"/><rect x="36" y="13" width="28" height="6"/><rect x="36" y="81" width="28" height="6"/><rect x="13" y="36" width="6" height="28"/><rect x="81" y="36" width="6" height="28"/><rect x="27" y="22" width="6" height="16"/><rect x="22" y="27" width="16" height="6"/><rect x="67" y="22" width="6" height="16"/><rect x="62" y="27" width="16" height="6"/><rect x="27" y="62" width="6" height="16"/><rect x="22" y="67" width="16" height="6"/><rect x="67" y="62" width="6" height="16"/><rect x="62" y="67" width="16" height="6"/></g><circle cx="50" cy="50" r="47" fill="none" stroke="#FF0000" stroke-width="3"/></svg>
+        <span class="c3eco-wm"><span class="c3eco-r">CYBER3</span><span class="c3eco-w">.AI</span></span>
+      </span>
+      <span class="c3eco-tag">Security LLM · Autonomous Monitoring &amp; Response - Global Scan &amp; VAS - Senzor INLINE &amp; EDR/XDR app - Protecție mobilă - Suveran UE - AI Act - NIS2 compliance</span>
+    </div>
+    <div class="c3eco-motto"><b><span class='c3eco-r'>ROL PORTAL</span> - Agentic company</b> — Your dedicated AI security team. Autonomous, always on.</div>
+    <nav class="c3eco-pillars">
+      <a href="https://cyber3.ai/" target="_blank" rel="noopener">🧠 <b>CYBER3.AI Security LLM</b><span>COPILOT AI de securitate, suveran</span></a>
+      <a href="https://cyber3.ai/?start=scan" target="_blank" rel="noopener">🛰️ <b>CYBER3 Global Scan</b><span>UNSTOPPABLE — descoperire autonomă + VAS</span></a>
+      <a href="https://fasterup.ai/ro/" target="_blank" rel="noopener">🛡️ <b>SOC &amp; VAS</b><span>senzori INLINE FasterUp · EDR/XDR app</span></a>
+      <a href="https://cyber3.app/" target="_blank" rel="noopener">📱 <b>CYBER3.APP</b><span>Mobile Protection</span></a>
+    </nav>
+    <div class="c3eco-bottom">
+      <span class="c3eco-legal">
+        <a href="https://cyber3.ai/legal/ro/" target="_blank" rel="noopener">Termeni</a>
+        <a href="https://cyber3.ai/legal/ro/" target="_blank" rel="noopener">Confidențialitate</a>
+        <a href="https://cyber3.ai/security/ro/" target="_blank" rel="noopener">Securitate</a>
+        <a href="https://cyber3.ai/status/ro/" target="_blank" rel="noopener">Status</a>
+      </span>
+      <span class="c3eco-copy">© 2026 CYBER3.AI · ROL PORTAL SERVICES SRL · Sovereign EU cybersecurity</span>
+    </div>
+  </div>
+</footer>
+<style>
+.c3eco{background:linear-gradient(180deg,#081123,#050c1a);border-top:1px solid rgba(212,175,55,.28);color:#c3d2ec;font-family:'Segoe UI',system-ui,-apple-system,Arial,sans-serif;font-size:13px}
+.c3eco *{box-sizing:border-box}
+.c3eco-in{max-width:1180px;margin:0 auto;padding:22px 20px 18px}
+.c3eco-top{display:flex;align-items:center;gap:14px;flex-wrap:wrap;padding-bottom:14px;border-bottom:1px solid rgba(30,76,149,.35)}
+.c3eco-brand{display:flex;align-items:center;gap:8px}
+.c3eco-cross{width:26px;height:26px;flex:0 0 auto;filter:drop-shadow(0 0 5px rgba(255,0,0,.6));animation:c3ecoPulse 1.8s ease-in-out infinite}
+@keyframes c3ecoPulse{0%,100%{opacity:1}50%{opacity:.55}}
+.c3eco-wm{font-weight:800;font-size:17px;letter-spacing:.3px}
+.c3eco-r{color:#FF0000;text-shadow:0 0 8px rgba(255,0,0,.35)}
+.c3eco-w{color:#fff}
+.c3eco-tag{color:#9FB3D1;font-size:12.5px;font-weight:600;letter-spacing:.4px}
+.c3eco-motto{text-align:center;margin:16px 0 2px;padding:11px 14px;background:rgba(212,175,55,.08);border:1px solid rgba(212,175,55,.24);border-radius:10px;color:#e8eefb;font-size:13.5px;line-height:1.4}
+.c3eco-motto b{color:#D4AF37}
+.c3eco-pillars{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:10px;padding:16px 0}
+.c3eco-pillars a{display:flex;flex-direction:column;gap:1px;text-decoration:none;color:#e8eefb;background:rgba(17,42,82,.5);border:1px solid rgba(30,76,149,.4);border-radius:10px;padding:10px 12px;line-height:1.3;transition:border-color .15s,background .15s}
+.c3eco-pillars a:hover{border-color:rgba(212,175,55,.55);background:rgba(17,42,82,.85)}
+.c3eco-pillars a b{font-size:13px;color:#f2f6ff}
+.c3eco-pillars a span{font-size:11px;color:#9FB3D1}
+.c3eco-bottom{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;padding-top:6px}
+.c3eco-legal{display:flex;gap:14px;flex-wrap:wrap}
+.c3eco-legal a{color:#9FB3D1;text-decoration:none;font-size:12px}
+.c3eco-legal a:hover{color:#D4AF37}
+.c3eco-copy{color:#6f86ad;font-size:11.5px}
+@media(max-width:560px){.c3eco-bottom{flex-direction:column;align-items:flex-start}.c3eco-tag{font-size:11.5px}}
+</style>
+
+</body>
+</html>
