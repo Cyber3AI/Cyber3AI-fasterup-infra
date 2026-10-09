@@ -15,8 +15,8 @@ CONTACT_LABEL = {"en":"Contact","ro":"Contact","es":"Contacto","it":"Contatto","
 
 # Selector de limbă (identic peste tot) — ordine: RO · EN · ES · IT · DE · FR · RU · ZH
 SELECT = """    <select class="lang" aria-label="%(lang_label)s" onchange="localStorage.setItem('fulang',this.value);document.cookie='fulang='+encodeURIComponent(this.value)+';path=/;max-age=31536000;samesite=lax';location.href=this.value">
-      <option value="/ro/">RO</option>
       <option value="/">EN</option>
+      <option value="/ro/">RO</option>
       <option value="/es/">ES</option>
       <option value="/it/">IT</option>
       <option value="/de/">DE</option>

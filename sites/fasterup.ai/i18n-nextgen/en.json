@@ -1,0 +1,482 @@
+{
+ "title": "FasterUp.AI — One technology. One vendor. Autonomous cyber defense, end to end.",
+ "desc": "FasterUp NEXTGEN SOC: seven complementary defense layers from the Ethernet wire to the workstation and the phone, orchestrated by MLEO, decided by CyberBot Fusion and explained by CYBER3.AI, our sovereign security LLM. Managed SOC, Vulnerability Assessment and endpoint protection from a single vendor.",
+ "nav": [
+  "Platform",
+  "7 Layers",
+  "MLEO",
+  "CYBER3.AI",
+  "VAS",
+  "Agentic Ops",
+  "Endpoint",
+  "Packages"
+ ],
+ "nav_cta": "Request assessment",
+ "lang_label": "Language",
+ "hero_k": "FASTERUP NEXTGEN SOC · AUTONOMOUS · END TO END",
+ "hero_h1": "One technology. One vendor. <span class=\"grad\">Every layer.</span>",
+ "hero_p": "FasterUp detects, decides and blocks cyber threats across seven complementary layers — from the Ethernet wire to the workstation and the phone. MLEO orchestrates every layer, CyberBot Fusion decides in seconds, and CYBER3.AI, our sovereign security LLM, explains, investigates and reports. Managed SOC, Vulnerability Assessment and endpoint protection — engineered, owned and operated by one team.",
+ "hero_cta2": "Explore the platform",
+ "st1": "threat to autonomous decision",
+ "st2": "complementary defense layers",
+ "st3": "monitoring & autonomous response",
+ "st4": "live threat indicators",
+ "ring_center": "Your organization",
+ "rings": [
+  "Inline IPS",
+  "Active Response",
+  "L2 Shield",
+  "CyberBot Fusion",
+  "CYBER3 Edge",
+  "Desktop XDR",
+  "Mobile"
+ ],
+ "tr": [
+  "ISO/IEC 27001:2022 certified company",
+  "NIS2 Art. 21/23 reporting",
+  "GDPR — your data stays on your premises",
+  "Proprietary technology, owned end to end"
+ ],
+ "pf_k": "THE PLATFORM",
+ "pf_h": "The whole defense chain. One owner.",
+ "pf_p": "Most organizations stitch together a firewall vendor, a SIEM vendor, an MSSP, an antivirus and a scanner — and the attacker lives in the gaps between them. FasterUp is one chain, engineered as one organism: no integration seams, no tickets bouncing between providers, one report.",
+ "chain": [
+  [
+   "Sensors",
+   "Inline at every site — IPS at the wire, firewall response and L2 Shield at Ethernet level."
+  ],
+  [
+   "CyberBot Fusion",
+   "Four sources fused on every alert — an autonomous decision in 2–11 seconds."
+  ],
+  [
+   "MLEO",
+   "Chooses the layer that enforces — and isolates the attacker, not the victim."
+  ],
+  [
+   "CYBER3.AI",
+   "Our sovereign security LLM explains, investigates, prioritizes and reports."
+  ],
+  [
+   "CYBER3 apps",
+   "Windows, Android and iPhone — the SOC on every workstation and phone."
+  ],
+  [
+   "Agentic Ops",
+   "NOC, Health Check, CCC and Ops Agents keep everything running, 24/7."
+  ]
+ ],
+ "pf_note": "One contract. One accountable team. From the cable to the phone in your pocket.",
+ "ly_k": "CASCADE DEFENSE",
+ "ly_h": "Seven complementary layers. Every threat stopped — even if one layer is bypassed.",
+ "ly_p": "The layers are not copies of each other. Each one sees what the others cannot: three work on IP, domains and hashes, one is the only defense at Ethernet level, one stops threats in the cloud before they reach your network, and two live on your devices.",
+ "ly_cols": [
+  "Layer",
+  "Level",
+  "How it stops the threat",
+  "Response",
+  "Status"
+ ],
+ "layers": [
+  [
+   "Network — Inline IPS",
+   "L3/L4 + app",
+   "Drops hostile packets at the wire: signatures, anomalies, deep packet inspection.",
+   "~ms"
+  ],
+  [
+   "Host — Active Response",
+   "L3",
+   "Native drop in the firewall of the protected host.",
+   "seconds"
+  ],
+  [
+   "Ethernet — L2 Shield",
+   "L2",
+   "The only layer at Ethernet level: stops ARP spoofing, man-in-the-middle and rogue DHCP — the blind spot of IP defenses.",
+   "~ms"
+  ],
+  [
+   "Decision — CyberBot Fusion",
+   "L3 · IP / domain / hash",
+   "Fuses four sources into one autonomous decision — including command-and-control traffic.",
+   "2–11 s"
+  ],
+  [
+   "Cloud — CYBER3 Edge",
+   "cloud",
+   "DNS shield, cloud threat indicators and a browser extension stop threats before they reach the network.",
+   "edge"
+  ],
+  [
+   "Device — CYBER3 Desktop XDR",
+   "endpoint",
+   "On-access scanning, quarantine, DNS shield and automatic isolation of an infected workstation.",
+   "on device"
+  ],
+  [
+   "Mobile — CYBER3 Mobile",
+   "endpoint",
+   "Real-time anti-scam, DNS filtering, link and SMS analysis on every staff phone.",
+   "on device"
+  ]
+ ],
+ "active": "Active",
+ "ly_note": "Capabilities Status — no attack counters are published: what we stop for you stays between us.",
+ "fl_k": "SENSOR FLEET",
+ "fl_h": "Sensors that live inside your network — and never stand in its way.",
+ "fl_p": "Dedicated FasterUp sensors run the first defense layers on the spot, at every site. They are built to protect without ever becoming the reason your network stops.",
+ "fl_cards": [
+  [
+   "Inline or passive",
+   "Installed in about 15 minutes per site, with no agents on your endpoints — VLAN-aware, up to 10 Gbps links."
+  ],
+  [
+   "Fail-open by design",
+   "Multi-queue packet inspection that steps aside if it ever stalls: traffic keeps flowing, protection resumes automatically."
+  ],
+  [
+   "Self-updating",
+   "Detection rules refreshed autonomously, with self-guard and automatic rollback if anything looks wrong."
+  ],
+  [
+   "Private by default",
+   "Your data stays on your premises; only security metadata travels to the SOC, over an encrypted private VPN."
+  ]
+ ],
+ "fb_k": "FALLBACK EVERYWHERE",
+ "fb_h": "No single point of failure. Anywhere.",
+ "fb_p": "Every critical part of the platform has a second path that takes over on its own. If one component fails, the defense doesn't.",
+ "fb_items": [
+  [
+   "Sensors",
+   "Fail-open inspection — your traffic never stops because of us."
+  ],
+  [
+   "SOC core",
+   "Clustered event platform plus a disaster-recovery site in the cloud."
+  ],
+  [
+   "Monitoring",
+   "The agentic NOC runs on independent cloud infrastructure — visible even if a site goes dark."
+  ],
+  [
+   "AI",
+   "Multi-engine CYBER3.AI with automatic failover — no single AI vendor can switch it off."
+  ],
+  [
+   "Threat database",
+   "Served from 300+ edge locations; the apps keep protecting on-device, even offline."
+  ],
+  [
+   "Data",
+   "Encrypted off-site backups with tested restore procedures."
+  ]
+ ],
+ "fu_k": "LAYER 4 · CYBERBOT FUSION",
+ "fu_h": "Four sources. One autonomous decision. In seconds.",
+ "fu_p": "Every alert is checked against four independent sources at once. CyberBot fuses them into a single verdict and acts — without waiting for a human at 3 a.m.",
+ "fu_src": [
+  [
+   "Network telemetry",
+   "inline IDS/IPS at every site"
+  ],
+  [
+   "SIEM correlation",
+   "events correlated across the whole estate"
+  ],
+  [
+   "Threat intelligence",
+   "live global feeds"
+  ],
+  [
+   "CYBER3 Database",
+   "our own indicators, growing every day"
+  ]
+ ],
+ "fu_ladder_h": "Severity-driven action",
+ "fu_ladder": [
+  "Silent log",
+  "Automatic IP block",
+  "Urgent alert",
+  "Human escalation"
+ ],
+ "fu_b": [
+  "Blocks outbound command-and-control, not just inbound attacks",
+  "Anti-false-positive guard: your own infrastructure is never blocked",
+  "Plain-language alert to your team by Telegram and email"
+ ],
+ "ml_k": "MLEO · MULTI LAYER ENFORCEMENT ORCHESTRATOR",
+ "ml_h": "It doesn't just detect on seven layers. It decides which layer strikes.",
+ "ml_p": "MLEO is the core that links the seven layers into one organism. It correlates what each layer sees, gives every device a single identity across layers, and enforces on the layer that stops the threat best — with no redundant blocks and no conflicts.",
+ "ml_cards": [
+  [
+   "Unified identity",
+   "The same device seen as an IP at Layer 3 and as a MAC, VLAN and switch port at Layer 2."
+  ],
+  [
+   "Evasion-proof",
+   "Changing IP address no longer helps the attacker — the block follows the device."
+  ],
+  [
+   "Isolate the attacker, not the victim",
+   "During ARP spoofing, traffic looks like it comes from the victim. Directional correlation isolates the real source."
+  ],
+  [
+   "Safe by construction",
+   "Quarantine VLAN instead of port shutdown, allowlist and transaction-ID rollback as preconditions, fail-safe on every layer."
+  ]
+ ],
+ "ml_note": "Deployed in stages: the first stages give full visibility without touching the client network.",
+ "ai_k": "CYBER3.AI · SOVEREIGN SECURITY LLM",
+ "ai_h": "An AI analyst built into the SOC and VAS — not bolted on.",
+ "ai_p": "CYBER3.AI is our security language model, built for one job: defense. It sits across the whole chain — reading the same CYBER3 Database as the sensors, the apps and the scanner.",
+ "ai_roles": [
+  [
+   "Explains",
+   "Alerts and findings in plain language, in your team's language: what happened, why it matters, what was already done."
+  ],
+  [
+   "Investigates",
+   "A security copilot that correlates indicators across the CYBER3 Database and live threat intelligence."
+  ],
+  [
+   "Prioritizes",
+   "Turns vulnerability findings into a remediation order: what to fix first, and how."
+  ],
+  [
+   "Reports",
+   "Drafts incident and NIS2 Art. 21/23 reporting from real SOC data."
+  ]
+ ],
+ "ai_sov_h": "Sovereign by design",
+ "ai_sov": [
+  "A self-hosted security model in the EU",
+  "Multi-engine architecture with automatic failover — no single AI vendor can switch your SOC off",
+  "Grounded on our own threat database, not on the open internet"
+ ],
+ "db_k": "CYBER3 DATABASE",
+ "db_h": "Our own threat intelligence. Growing every day.",
+ "db_p": "The CYBER3 Database fuses global threat feeds with indicators our own sensors observe in real networks. It is published daily to a global edge network and powers every layer: the sensors, the AI, the desktop and the mobile apps — one live truth everywhere.",
+ "db_l1": "threat indicators — live",
+ "db_l2": "first-party indicators from our sensors",
+ "db_l3": "edge locations serving lookups",
+ "db_b": [
+  "Daily publication pipeline, verified end to end",
+  "Privacy-preserving lookups: only a hashed prefix leaves a device",
+  "The same database protects networks, workstations and phones"
+ ],
+ "vas_k": "VAS · CYBER3 SCAN & GLOBAL SCAN",
+ "vas_h": "Agile scanning that finds the whole network — and never trips the alarm.",
+ "vas_p": "Vulnerability Assessment built by the team that defends the networks. Our scanner runs from the sensor already inside your network, so it discovers everything — even what nobody remembered to give it.",
+ "vas_cards": [
+  [
+   "Discovers without being told",
+   "Passive listening plus tagged probes on every VLAN map hosts, MAC addresses, vendors and roles — including silent devices."
+  ],
+  [
+   "Unstoppable Adaptive Scan",
+   "Studies the target and moves in measured steps; it backs off at the first sign of a firewall and doesn't set off alarms."
+  ],
+  [
+   "Agile Global Scan",
+   "On-demand external exposure scan from the cloud — no installation, results in minutes. Whole-network scan built into the Windows app."
+  ],
+  [
+   "Prioritized, actionable",
+   "Known vulnerabilities (CVE), insecure configurations and exposed services — ranked so you fix what matters first."
+  ]
+ ],
+ "ag_k": "AGENTIC OPERATIONS",
+ "ag_h": "An army of agents that runs the platform — around the clock.",
+ "ag_p": "Our people handle the exceptions. Agents handle everything else: they watch, repair, command and respond, and they prove every day that the chain still works.",
+ "agents": [
+  [
+   "NOC Agentic",
+   "Watches the entire infrastructure from an independent cloud vantage point — every sensor, service and tunnel — with live diagrams, AI summaries and alerts."
+  ],
+  [
+   "Health Check Agentic",
+   "Administers and self-repairs the sensor fleet 24/7: stalled capture, stuck services, dropped tunnels — fixed before anyone notices. Synthetic tests validate the pipeline end to end."
+  ],
+  [
+   "CCC Agentic",
+   "The Command & Control Centre: one cockpit over the whole ecosystem, where operators command the agents and see threat intelligence flow into autonomous response."
+  ],
+  [
+   "Ops Agents",
+   "CYBER3.AI agents that triage alerts, correlate indicators, investigate and respond — with autonomy levels from human-approved actions to pre-approved playbooks with a circuit breaker."
+  ]
+ ],
+ "ag_note": "Autonomous rule updates with self-guard and automatic rollback. Fail-open by design: your traffic never stops because of us.",
+ "ep_k": "ENDPOINT · CYBER3",
+ "ep_h": "The SOC, extended to every workstation — and every phone.",
+ "ep_p": "The same platform, native on Windows, Android and iPhone. Organizations enroll devices with an activation code or silently at deployment; only security metadata ever leaves a device.",
+ "ep_desk_h": "CYBER3 for Windows — EDR/XDR",
+ "ep_desk_b": [
+  "Automatic isolation of a workstation on confirmed malware — reversible, supervised by the SOC",
+  "Client console: inventory, remote scan, isolation and reconnection in under 30 seconds",
+  "Global Scan of the whole internal network, browser protection, encrypted VPN",
+  "Digitally signed with Microsoft Trusted Signing, updated automatically"
+ ],
+ "ep_desk_tabs": [
+  [
+   "home",
+   "Dashboard"
+  ],
+  [
+   "globalscan",
+   "Global Scan"
+  ],
+  [
+   "isolation",
+   "Threat isolation"
+  ],
+  [
+   "vpn",
+   "VPN"
+  ]
+ ],
+ "ep_mob_h": "CYBER3 for Android & iPhone",
+ "ep_mob_b": [
+  "Scam call and message protection, message check with AI explanation",
+  "Web protection: ads, trackers and phishing blocked in every app",
+  "Phone security score, identity and breach monitoring, encrypted VPN",
+  "The same threat database as the sensors and workstations"
+ ],
+ "wy_k": "WHY ONE VENDOR",
+ "wy_h": "FasterUp vs. the usual multi-vendor setup",
+ "wy_c": [
+  "",
+  "FasterUp",
+  "Typical multi-vendor setup"
+ ],
+ "wy_rows": [
+  [
+   "From detection to block",
+   "Seconds, autonomous",
+   "Hours — tickets between providers"
+  ],
+  [
+   "Protection at Ethernet level (L2)",
+   "y",
+   "n"
+  ],
+  [
+   "Network + workstation + phone in one chain",
+   "y",
+   "p"
+  ],
+  [
+   "AI analyst explaining every finding",
+   "y",
+   "p"
+  ],
+  [
+   "Own threat database, fed by own sensors",
+   "y",
+   "n"
+  ],
+  [
+   "Self-repairing sensor fleet",
+   "y",
+   "n"
+  ],
+  [
+   "One unified NIS2 report",
+   "y",
+   "n"
+  ],
+  [
+   "Data stays on your premises (metadata only)",
+   "y",
+   "p"
+  ],
+  [
+   "One contract, one accountable team",
+   "y",
+   "n"
+  ]
+ ],
+ "wy_y": "Included",
+ "wy_n": "Not included",
+ "wy_p": "Partial",
+ "pk_k": "PACKAGES",
+ "pk_h": "Sized to your institution",
+ "pk_p": "Each package includes everything in the previous one and adds layers and capabilities. The exact configuration — sites, sensors, workstations, phones — is set after an initial assessment.",
+ "pk_best": "Best for",
+ "pk_rec": "RECOMMENDED",
+ "packages": [
+  [
+   "Standard",
+   "Includes",
+   [
+    "Managed 24/7 SOC · autonomous response in 2–11 s",
+    "Inline sensor at the main site",
+    "Layers 1–4: Inline IPS · Active Response · L2 Shield · CyberBot Fusion",
+    "MLEO: L3 ↔ L2 correlation and enforcement on the right layer",
+    "Monthly scheduled VAS",
+    "Plain-language alerts + client portal with NIS2 reports",
+    "Health Check Agentic 24/7"
+   ],
+   "A central office with concentrated IT — autonomous 24/7 monitoring and a regular vulnerability picture, without building a SOC of your own."
+  ],
+  [
+   "Extended",
+   "Everything in Standard, plus",
+   [
+    "Inline sensors at every site",
+    "Layer 5 · CYBER3 Edge for the whole organization",
+    "Layer 6 · CYBER3 Desktop XDR on critical workstations",
+    "Client console: isolation, remote scans, fleet status",
+    "Global Scan of the internal network",
+    "MLEO across all sites",
+    "Bi-weekly VAS"
+   ],
+   "Multi-site institutions with elevated exposure — network coverage everywhere plus XDR where it matters most."
+  ],
+  [
+   "Complete",
+   "Everything in Extended, plus",
+   [
+    "CYBER3 Desktop XDR on every workstation",
+    "Layer 7 · CYBER3 Mobile on staff phones",
+    "MLEO across all 7 layers",
+    "Continuous VAS",
+    "Breach and identity monitoring for the organization",
+    "Unified network + endpoint + mobile reporting (NIS2 Art. 21/23)"
+   ],
+   "Sensitive citizen data and strict compliance — full multi-layer defense under one vendor and one report."
+  ]
+ ],
+ "pk_note": "A detailed financial offer is prepared on request, based on the initial assessment and the procurement method applicable to your institution.",
+ "sp_k": "GET STARTED",
+ "sp_h": "From assessment to autonomous defense",
+ "steps": [
+  [
+   "Assessment",
+   "We map your assets and exposure with a vulnerability assessment — a clear picture of where you stand."
+  ],
+  [
+   "Sensor deployment",
+   "Inline or passive, about 15 minutes per site, no agents on your endpoints."
+  ],
+  [
+   "Autonomous SOC",
+   "24/7 detection and response, plain-language alerts, client portal and NIS2 reports from day one."
+  ]
+ ],
+ "end_h": "See your network the way an attacker does — before they do.",
+ "end_p": "Start with an assessment. No commitment, scoped to your environment.",
+ "ft_tag": "Autonomous cybersecurity for business and public administration — one technology, one vendor, end to end.",
+ "ft_h": [
+  "Platform",
+  "Ecosystem",
+  "Company"
+ ],
+ "ft_status": "Service status",
+ "ft_contact": "Contact",
+ "ft_privacy": "Privacy",
+ "ft_terms": "Terms",
+ "ft_copy": "FasterUp.AI is a brand of ROL PORTAL SERVICES SRL · © 2026"
+}

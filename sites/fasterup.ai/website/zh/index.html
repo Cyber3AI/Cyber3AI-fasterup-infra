@@ -1,358 +1,424 @@
 <!DOCTYPE html>
 <html lang="zh">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>FasterUp.AI — AI 自主网络安全平台</title>
-<meta name="description" content="FasterUp AI Autonomous Platform — 面向企业与公共管理的托管 SOC 与漏洞评估。自主检测、决策与响应。">
-<meta property="og:title" content="FasterUp.AI — AI 自主网络安全平台">
-<meta property="og:description" content="面向企业与公共管理的托管 SOC 与漏洞评估。数秒内自主检测与响应。">
-<meta property="og:image" content="/assets/icon.svg">
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>FasterUp.AI — 一套技术，一家供应商，端到端自主网络防御。</title>
+<meta name="description" content="FasterUp NEXTGEN SOC：从以太网线路到工作站和手机的七层互补防御，由 MLEO 统一编排，由 CyberBot Fusion 自主决策，并由我们的主权安全大模型 CYBER3.AI 解释说明。托管 SOC、漏洞评估与终端防护，均来自同一家供应商。">
+<link rel="canonical" href="https://fasterup.ai/zh/"><link rel="alternate" hreflang="en" href="https://fasterup.ai/"><link rel="alternate" hreflang="ro" href="https://fasterup.ai/ro/"><link rel="alternate" hreflang="es" href="https://fasterup.ai/es/"><link rel="alternate" hreflang="it" href="https://fasterup.ai/it/"><link rel="alternate" hreflang="de" href="https://fasterup.ai/de/"><link rel="alternate" hreflang="fr" href="https://fasterup.ai/fr/"><link rel="alternate" hreflang="ru" href="https://fasterup.ai/ru/"><link rel="alternate" hreflang="zh" href="https://fasterup.ai/zh/"><link rel="alternate" hreflang="x-default" href="https://fasterup.ai/">
+<meta name="theme-color" content="#030a18">
+<meta property="og:type" content="website"><meta property="og:url" content="https://fasterup.ai/zh/"><meta property="og:title" content="FasterUp.AI — 一套技术，一家供应商，端到端自主网络防御。"><meta property="og:description" content="FasterUp NEXTGEN SOC：从以太网线路到工作站和手机的七层互补防御，由 MLEO 统一编排，由 CyberBot Fusion 自主决策，并由我们的主权安全大模型 CYBER3.AI 解释说明。托管 SOC、漏洞评估与终端防护，均来自同一家供应商。">
 <link rel="icon" href="/assets/icon.svg">
-<link rel="stylesheet" href="/styles.css">
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-KH8RKEF517"></script>
-<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-KH8RKEF517');</script>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Sora:wght@600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#030a18;--bg2:#061430;--panel:rgba(17,42,82,.5);--line:rgba(120,165,255,.15);--line2:rgba(120,165,255,.26);--text:#eef3ff;--mute:#a3b6d6;--dim:#6f86ad;
+--red:#FF0000;--red2:#ff3b4b;--gold:#D4AF37;--gold2:#f2d778;--blue:#33A1FF;--green:#22d38a;--r:22px;--max:1220px;--sh:0 30px 80px -20px rgba(0,0,0,.65)}
+*{box-sizing:border-box;margin:0;padding:0}html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+body{background:var(--bg);color:var(--text);font:16px/1.6 Inter,'Segoe UI',system-ui,-apple-system,Arial,sans-serif;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+img{max-width:100%;display:block}a{color:inherit;text-decoration:none}
+h1,h2,h3{font-family:Sora,Inter,'Segoe UI',system-ui,sans-serif;letter-spacing:-.02em;line-height:1.1}
+:lang(zh) h1,:lang(zh) h2,:lang(zh) h3,:lang(ru) h1,:lang(ru) h2{letter-spacing:0}
+.wrap{max-width:var(--max);margin:0 auto;padding:0 24px}
+.grad{background:linear-gradient(92deg,#ff4d5a,#ff1a1a 35%,#D4AF37);-webkit-background-clip:text;background-clip:text;color:transparent}
+.kicker{display:inline-flex;align-items:center;gap:8px;font:700 12px/1.3 Inter,sans-serif;letter-spacing:2px;text-transform:uppercase;color:var(--gold);padding:8px 14px;border:1px solid rgba(212,175,55,.35);border-radius:999px;background:rgba(212,175,55,.07)}
+:lang(zh) .kicker,:lang(ru) .kicker{letter-spacing:.5px}
+.kicker::before{content:"";width:6px;height:6px;border-radius:50%;background:var(--red);box-shadow:0 0 10px var(--red);flex:0 0 auto}
+.sec{padding:110px 0;position:relative}
+.head{text-align:center;max-width:860px;margin:0 auto 60px}
+.head h2{font-size:clamp(30px,4.4vw,52px);margin:18px 0 16px}.head p{color:var(--mute);font-size:clamp(16px,1.6vw,19px)}
+.reveal{opacity:0;transform:translateY(26px);transition:opacity .8s cubic-bezier(.2,.7,.2,1),transform .8s cubic-bezier(.2,.7,.2,1)}.reveal.in{opacity:1;transform:none}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;font:700 15px/1 Inter,sans-serif;padding:16px 26px;border-radius:14px;transition:transform .2s,box-shadow .2s,background .2s;border:0;cursor:pointer}
+.btn-red{background:linear-gradient(180deg,#ff2b2b,#d60000);color:#fff;box-shadow:0 12px 32px -8px rgba(255,0,0,.65),inset 0 1px 0 rgba(255,255,255,.25)}
+.btn-red:hover{transform:translateY(-2px);box-shadow:0 18px 44px -8px rgba(255,0,0,.85)}
+.btn-ghost{background:rgba(255,255,255,.06);border:1px solid var(--line2);color:var(--text)}.btn-ghost:hover{background:rgba(255,255,255,.11)}
+.btn-sm{padding:11px 18px;font-size:14px;border-radius:12px}
+/* NAV */
+.nav{position:fixed;inset:0 0 auto 0;z-index:50;border-bottom:1px solid transparent;transition:background .3s,border-color .3s}
+.nav.solid{background:rgba(3,10,24,.8);backdrop-filter:blur(18px) saturate(1.4);-webkit-backdrop-filter:blur(18px) saturate(1.4);border-bottom-color:var(--line)}
+.nav .wrap{display:flex;align-items:center;gap:24px;height:72px}
+.brand{display:inline-flex;align-items:center;font:900 21px/1 'Segoe UI',system-ui,-apple-system,Arial,sans-serif;letter-spacing:.3px;white-space:nowrap;color:#fff}
+.brand .fu{color:#FF0000;text-shadow:0 0 8px rgba(255,0,0,.35)}
+.xmark{display:inline-block;vertical-align:middle;width:1em;height:1em;margin-right:.4em;position:relative;top:-.04em;background:url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><g fill='%23F00'><rect x='44' y='15' width='12' height='70'/><rect x='15' y='44' width='70' height='12'/><rect x='36' y='13' width='28' height='6'/><rect x='36' y='81' width='28' height='6'/><rect x='13' y='36' width='6' height='28'/><rect x='81' y='36' width='6' height='28'/><rect x='27' y='22' width='6' height='16'/><rect x='22' y='27' width='16' height='6'/><rect x='67' y='22' width='6' height='16'/><rect x='62' y='27' width='16' height='6'/><rect x='27' y='62' width='6' height='16'/><rect x='22' y='67' width='16' height='6'/><rect x='67' y='62' width='6' height='16'/><rect x='62' y='67' width='16' height='6'/></g><circle cx='50' cy='50' r='47' fill='none' stroke='%23F00' stroke-width='3'/></svg>") center/contain no-repeat;filter:drop-shadow(0 0 6px rgba(255,0,0,.6));animation:c3pulse 1.8s ease-in-out infinite}
+@keyframes c3pulse{0%,100%{filter:drop-shadow(0 0 3px rgba(255,0,0,.5));transform:scale(1)}50%{filter:drop-shadow(0 0 9px rgba(255,0,0,.95));transform:scale(1.13)}}
+.links{display:flex;gap:20px;margin-left:8px}.links a{font-size:14px;font-weight:500;color:var(--mute);transition:color .2s;white-space:nowrap}.links a:hover{color:var(--text)}
+.nav-r{margin-left:auto;display:flex;align-items:center;gap:12px}
+.lang{background:rgba(255,255,255,.05);color:var(--text);border:1px solid var(--line2);border-radius:999px;padding:8px 12px;font:700 13px/1 Inter,sans-serif;cursor:pointer}
+.lang option{background:#0b1a38;color:#fff}
+.burger{display:none;background:none;border:0;color:var(--text);width:40px;height:40px;cursor:pointer}
+/* HERO */
+.hero{position:relative;min-height:100vh;padding:140px 0 70px;overflow:hidden;isolation:isolate}
+.aurora{position:absolute;inset:-20%;z-index:-2;background:radial-gradient(40% 35% at 18% 28%,rgba(51,161,255,.24),transparent 70%),radial-gradient(35% 32% at 82% 30%,rgba(255,0,0,.2),transparent 70%),radial-gradient(45% 40% at 60% 90%,rgba(212,175,55,.12),transparent 70%);filter:blur(8px);animation:drift 20s ease-in-out infinite alternate}
+@keyframes drift{to{transform:translate3d(3%,-2%,0) rotate(4deg) scale(1.06)}}
+.gridbg{position:absolute;inset:0;z-index:-1;background-image:linear-gradient(var(--line) 1px,transparent 1px),linear-gradient(90deg,var(--line) 1px,transparent 1px);background-size:64px 64px;mask-image:radial-gradient(ellipse 70% 60% at 50% 40%,#000 30%,transparent 80%);-webkit-mask-image:radial-gradient(ellipse 70% 60% at 50% 40%,#000 30%,transparent 80%);opacity:.5}
+.hero .wrap{display:grid;grid-template-columns:1.05fr .95fr;gap:30px;align-items:center}
+.hero h1{font-size:clamp(38px,4.9vw,66px);font-weight:800;margin:22px 0}
+.hero .lead{font-size:clamp(16px,1.55vw,19px);color:var(--mute);max-width:640px}
+.cta{display:flex;flex-wrap:wrap;gap:12px;margin:32px 0 40px}
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;max-width:680px}
+.stat{padding:16px;border-radius:16px;background:var(--panel);border:1px solid var(--line)}
+.stat b{display:block;font:800 clamp(20px,2.2vw,28px)/1.1 Sora,sans-serif;white-space:nowrap;font-variant-numeric:tabular-nums}
+.stat span{display:block;color:var(--mute);font-size:12.5px;line-height:1.35;margin-top:6px}
+.ringbox{position:relative;width:100%;max-width:600px;aspect-ratio:1;justify-self:center}
+.ringbox svg{width:100%;height:100%;overflow:hidden}
+.ring{fill:none;stroke-width:2;opacity:.85;transform-origin:300px 300px}
+.ring.dash{stroke-dasharray:4 10;animation:spin 60s linear infinite}.ring.dash.rev{animation-direction:reverse}
+@keyframes spin{to{transform:rotate(360deg)}}
+.ring.hit{animation:hit .6s ease-out}
+.rlabel{font:700 13px Inter,sans-serif;letter-spacing:.2px}
+.core{font:800 15px Sora,sans-serif;fill:#fff}
+/* TRUST */
+.trust{border-top:1px solid var(--line);border-bottom:1px solid var(--line);background:rgba(6,20,48,.55)}
+.trust .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:16px 28px;padding:24px}
+.trust div{display:flex;align-items:center;gap:10px;color:var(--mute);font-size:14.5px;font-weight:500}.trust svg{color:var(--gold);flex:0 0 auto}
+/* CHAIN */
+.chain{display:grid;grid-template-columns:repeat(6,1fr);gap:16px;position:relative}
+.chain::before{content:"";position:absolute;left:4%;right:4%;top:46px;height:2px;background:linear-gradient(90deg,var(--red),var(--gold),var(--blue),var(--green));opacity:.6}
+.chain::after{content:"";position:absolute;top:43px;left:4%;width:60px;height:8px;border-radius:8px;background:#fff;filter:blur(4px);opacity:.8;animation:run 4s linear infinite}
+@keyframes run{to{left:92%}}
+.cnode{position:relative;text-align:center;padding:0 4px}
+.cnode .n{width:92px;height:92px;margin:0 auto 18px;border-radius:50%;display:grid;place-items:center;background:radial-gradient(circle at 35% 30%,#16336a,#081833);border:1px solid var(--line2);box-shadow:0 0 0 6px rgba(3,10,24,1),0 0 40px -6px var(--c);font:800 26px Sora,sans-serif;color:var(--c);position:relative;z-index:1}
+.cnode h3{font-size:17px;margin-bottom:8px}.cnode p{color:var(--mute);font-size:14px}
+.pfnote{text-align:center;margin-top:46px;color:var(--gold);font-weight:600;font-size:17px}
+/* LAYERS */
+.ltable{border:1px solid var(--line);border-radius:26px;overflow:hidden;background:rgba(6,18,42,.6)}
+.lrow{display:grid;grid-template-columns:56px 1.3fr .8fr 2.4fr .7fr .7fr;gap:16px;align-items:center;padding:18px 26px;border-top:1px solid var(--line);transition:background .25s}
+.lrow:hover{background:rgba(255,255,255,.03)}
+.lrow.h{border-top:0;color:var(--dim);font:700 12px/1 Inter,sans-serif;letter-spacing:1.4px;text-transform:uppercase;padding-top:20px;padding-bottom:14px}
+.lnum{width:40px;height:40px;border-radius:12px;display:grid;place-items:center;font:800 16px Sora,sans-serif;color:#fff;background:var(--c);box-shadow:0 0 22px -4px var(--c)}
+.lname{font-weight:700;font-size:16px}.llev{color:var(--mute);font-size:13.5px}.lhow{color:var(--mute);font-size:14.5px}
+.lt{font:700 14px Sora,sans-serif;color:var(--gold2);white-space:nowrap}
+.lst{display:flex;align-items:center;gap:8px;font-weight:600;font-size:14px;color:var(--green)}
+.lst i{width:9px;height:9px;border-radius:50%;background:var(--green);box-shadow:0 0 10px var(--green);animation:pulse 1.8s infinite}
+@keyframes pulse{50%{opacity:.35}}
+.lnote{padding:16px 26px 22px;color:var(--dim);font-size:13.5px;border-top:1px solid var(--line)}
+/* FUSION */
+.two{display:grid;grid-template-columns:1fr 1fr;gap:54px;align-items:center}
+.two h2{font-size:clamp(30px,3.8vw,46px);margin:18px 0 16px}.two .lead{color:var(--mute);font-size:17.5px}
+.ul{list-style:none;display:grid;gap:12px;margin-top:26px}.ul li{display:flex;gap:12px;align-items:flex-start;font-weight:500}
+.ck{width:22px;height:22px;flex:0 0 auto;color:var(--green);background:rgba(34,211,138,.12);border-radius:50%;padding:3px;margin-top:1px}
+.fusion{position:relative;aspect-ratio:1;max-width:520px;width:100%;justify-self:center}
+.fusion svg{position:absolute;inset:0;width:100%;height:100%}
+.fsrc{position:absolute;width:44%;padding:16px;border-radius:16px;background:var(--panel);border:1px solid var(--line2);backdrop-filter:blur(8px)}
+.fsrc b{display:block;font-size:15px}.fsrc span{color:var(--mute);font-size:13px}
+.fsrc.s0{left:0;top:0}.fsrc.s1{right:0;top:0}.fsrc.s2{left:0;bottom:0}.fsrc.s3{right:0;bottom:0}
+.fcore{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:150px;height:150px;border-radius:50%;display:grid;place-items:center;text-align:center;font:800 15px/1.2 Sora,sans-serif;background:radial-gradient(circle,#2a0b12,#0a1530 70%);border:1px solid rgba(255,0,0,.5);box-shadow:0 0 60px -6px rgba(255,0,0,.6),inset 0 0 30px rgba(255,0,0,.25);animation:corep 2.6s ease-in-out infinite}
+@keyframes corep{50%{box-shadow:0 0 90px 0 rgba(255,0,0,.75),inset 0 0 40px rgba(255,0,0,.35)}}
+.fcore small{display:block;color:var(--gold2);font:700 12px Inter,sans-serif;margin-top:4px}
+.flow{stroke:url(#fg);stroke-width:2;fill:none;stroke-dasharray:6 8;animation:dash 1.2s linear infinite}
+@keyframes dash{to{stroke-dashoffset:-28}}
+.ladder{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-top:28px}
+.ladder div{padding:12px 10px;border-radius:12px;text-align:center;font-size:13px;font-weight:600;background:rgba(255,255,255,.04);border:1px solid var(--line)}
+.ladder div:nth-child(1){border-color:rgba(160,180,210,.35)}.ladder div:nth-child(2){border-color:rgba(255,59,75,.55);color:#ff8a94}.ladder div:nth-child(3){border-color:rgba(232,195,90,.55);color:var(--gold2)}.ladder div:nth-child(4){border-color:rgba(51,161,255,.55);color:#8cc8ff}
+.lh{margin-top:26px;color:var(--dim);font:700 12px Inter,sans-serif;letter-spacing:1.4px;text-transform:uppercase}
+/* CARDS */
+.cards{display:grid;grid-template-columns:repeat(4,1fr);gap:18px}
+.card{position:relative;padding:28px;border-radius:var(--r);background:linear-gradient(180deg,rgba(17,42,82,.6),rgba(6,18,42,.35));border:1px solid var(--line);overflow:hidden;transition:transform .3s,border-color .3s}
+.card:hover{transform:translateY(-6px);border-color:rgba(255,0,0,.45)}
+.card::after{content:"";position:absolute;right:-60px;bottom:-80px;width:220px;height:220px;background:radial-gradient(circle,rgba(255,0,0,.14),transparent 70%)}
+.card .i{font:800 13px Sora,sans-serif;color:var(--red2);letter-spacing:1px}
+.card h3{font-size:19px;margin:12px 0 10px}.card p{color:var(--mute);font-size:14.5px}
+.note{text-align:center;color:var(--dim);font-size:14px;margin-top:30px}
+/* AI */
+.ai{background:radial-gradient(60% 60% at 50% 40%,rgba(255,0,0,.08),transparent 70%)}
+.aigrid{display:grid;grid-template-columns:1.2fr 1fr;gap:30px;align-items:stretch}
+.roles{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.role{padding:24px;border-radius:20px;background:var(--panel);border:1px solid var(--line)}
+.role b{display:flex;align-items:center;gap:10px;font:700 18px Sora,sans-serif;margin-bottom:8px}.role b i{width:10px;height:10px;border-radius:50%;background:var(--red);box-shadow:0 0 12px var(--red)}
+.role p{color:var(--mute);font-size:14.5px}
+.sov{padding:32px;border-radius:24px;border:1px solid transparent;background:linear-gradient(180deg,#0f2450,#091835) padding-box,linear-gradient(160deg,var(--red),var(--gold)) border-box;box-shadow:0 30px 80px -30px rgba(255,0,0,.45)}
+.sov h3{font-size:24px;margin-bottom:6px}.sov .tag{font:800 13px Sora,sans-serif;color:#FF0000;letter-spacing:.5px}
+/* DATABASE */
+.dbnums{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin:30px 0}
+.dbn{padding:22px;border-radius:18px;background:var(--panel);border:1px solid var(--line)}
+.dbn b{display:block;font:800 clamp(26px,3vw,38px)/1 Sora,sans-serif;font-variant-numeric:tabular-nums;background:linear-gradient(180deg,#fff,#b9c8e6);-webkit-background-clip:text;background-clip:text;color:transparent;white-space:nowrap}
+.dbn span{color:var(--mute);font-size:13.5px}
+.dbviz{position:relative;aspect-ratio:1;max-width:480px;width:100%;justify-self:center;border-radius:50%;background:radial-gradient(circle at 50% 50%,rgba(212,175,55,.18),rgba(6,18,42,.2) 55%,transparent 70%)}
+.dbviz canvas{position:absolute;inset:0;width:100%;height:100%}
+.dbviz .c{position:absolute;inset:34%;border-radius:50%;display:grid;place-items:center;text-align:center;font:800 16px/1.2 Sora,sans-serif;background:radial-gradient(circle,#1c2c55,#0a1530);border:1px solid rgba(212,175,55,.5);box-shadow:0 0 50px -8px rgba(212,175,55,.6)}
+.dbviz .c small{display:block;color:var(--gold2);font:600 11px Inter,sans-serif;margin-top:4px}
+/* AGENTS */
+.agents{display:grid;grid-template-columns:repeat(4,1fr);gap:18px}
+.agent{padding:28px;border-radius:22px;background:linear-gradient(180deg,rgba(17,42,82,.65),rgba(6,18,42,.35));border:1px solid var(--line);position:relative;overflow:hidden}
+.agent .dot{display:inline-flex;align-items:center;gap:8px;font:700 11px Inter,sans-serif;letter-spacing:1px;color:var(--green);text-transform:uppercase;margin-bottom:14px}
+.agent .dot i{width:8px;height:8px;border-radius:50%;background:var(--green);box-shadow:0 0 10px var(--green);animation:pulse 1.6s infinite}
+.agent h3{font-size:20px;margin-bottom:10px}.agent p{color:var(--mute);font-size:14.5px}
+.agent .scan{position:absolute;left:0;right:0;top:-40%;height:40%;background:linear-gradient(180deg,transparent,rgba(51,161,255,.08),transparent);animation:scanv 5s linear infinite}
+@keyframes scanv{to{top:110%}}
+/* FALLBACK */
+.fb{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.fbi{display:flex;gap:16px;align-items:flex-start;padding:24px;border-radius:20px;background:var(--panel);border:1px solid var(--line)}
+.fbi b{display:block;font:700 17px Sora,sans-serif;margin-bottom:6px}.fbi p{color:var(--mute);font-size:14.5px}
+.fbx{position:relative;flex:0 0 auto;width:38px;height:38px}
+.fbx i{position:absolute;width:24px;height:24px;border-radius:8px;border:2px solid var(--green)}
+.fbx i:first-child{left:0;top:0;background:rgba(34,211,138,.15)}.fbx i:last-child{right:0;bottom:0;border-color:var(--gold);border-style:dashed;animation:pulse 2.4s infinite}
+/* ENDPOINT */
+.ep{display:grid;grid-template-columns:1.45fr 1fr;gap:30px;align-items:start}
+.epb{padding:30px;border-radius:26px;background:linear-gradient(180deg,rgba(17,42,82,.55),rgba(6,18,42,.3));border:1px solid var(--line)}
+.epb h3{font-size:22px;margin-bottom:16px}
+.screen{border-radius:14px;padding:9px;background:linear-gradient(160deg,#2b3449,#0c111b);box-shadow:var(--sh);margin-bottom:16px}
+.screen .dots{display:flex;gap:6px;padding:2px 4px 8px}.screen .dots i{width:10px;height:10px;border-radius:50%;background:#ff5f57}.screen .dots i:nth-child(2){background:#febc2e}.screen .dots i:nth-child(3){background:#28c840}
+.view{position:relative;aspect-ratio:3/2;border-radius:8px;overflow:hidden;background:#071430}.view img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0;transition:opacity .6s}.view img.on{opacity:1}
+.dtabs{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:18px}
+.dtab{padding:8px 14px;border-radius:999px;border:1px solid var(--line2);background:rgba(255,255,255,.03);color:var(--mute);font:600 13px/1 Inter,sans-serif;cursor:pointer}.dtab.on,.dtab:hover{background:var(--text);color:#06122b}
+.phones{display:flex;justify-content:center;gap:14px;margin-bottom:22px;height:430px;position:relative}
+.phone{width:200px;aspect-ratio:660/1467;border-radius:34px;padding:7px;background:linear-gradient(145deg,#2a3348,#0b0f18 40%,#1b2232);box-shadow:var(--sh),0 0 0 1px rgba(255,255,255,.08)}
+.phone img{width:100%;height:100%;object-fit:cover;border-radius:28px}
+.phones .phone:nth-child(1){transform:rotate(-5deg) translateY(16px)}.phones .phone:nth-child(2){transform:rotate(5deg)}
+.stores{display:flex;flex-wrap:wrap;gap:10px;margin-top:18px;align-items:center}
+.store{display:inline-flex;align-items:center;height:46px}.store img{height:46px;width:auto}.store.gp img{height:68px;margin:-11px -8px}
+.store.win{background:#000;border:1px solid #a6a6a6;color:#fff;padding:0 14px;border-radius:10px;gap:8px;font:600 15px Inter,sans-serif}
+/* WHY */
+.cmp{max-width:980px;margin:0 auto;border:1px solid var(--line);border-radius:26px;overflow:hidden;background:rgba(6,18,42,.6)}
+.cmp table{width:100%;border-collapse:collapse}
+.cmp th,.cmp td{padding:17px 22px;text-align:center;border-top:1px solid var(--line);font-size:15px}
+.cmp th:first-child,.cmp td:first-child{text-align:left;font-weight:500;padding-left:30px}
+.cmp thead th{border-top:0;color:var(--mute);font-weight:600;font-size:14px;padding-top:24px}
+.cmp thead th.us{font:900 19px 'Segoe UI',system-ui,sans-serif;color:#FF0000}
+.cmp td.us{background:rgba(255,0,0,.07);color:var(--text);font-weight:700}
+.cmp .mk{display:inline-grid;place-items:center;width:28px;height:28px;border-radius:50%}
+.cmp .y{color:var(--green)}.cmp .y .mk{background:rgba(34,211,138,.14)}.cmp .n{color:#5d6f92}.cmp .n .mk{background:rgba(255,255,255,.04)}.cmp .p{color:var(--gold)}.cmp .p .mk{background:rgba(212,175,55,.12)}
+.cmp .t{color:var(--mute);font-size:14px}
+/* PACKAGES */
+.pk{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;align-items:stretch}
+.pkc{position:relative;display:flex;flex-direction:column;padding:32px 28px;border-radius:26px;background:linear-gradient(180deg,rgba(17,42,82,.6),rgba(6,18,42,.4));border:1px solid var(--line)}
+.pkc.best{border:1px solid transparent;background:linear-gradient(180deg,#0f2550,#0a1a3a) padding-box,linear-gradient(160deg,var(--red),var(--gold)) border-box;box-shadow:0 30px 80px -30px rgba(255,0,0,.5)}
+.pkc .pop{position:absolute;top:-13px;left:50%;transform:translateX(-50%);font:800 11px/1 Inter,sans-serif;letter-spacing:1.5px;padding:8px 14px;border-radius:999px;background:linear-gradient(90deg,#ff1a1a,#ff6a3d);color:#fff;white-space:nowrap}
+.pkc h3{font-size:26px}.pkc .inc{color:var(--gold);font:700 12px Inter,sans-serif;letter-spacing:1.2px;text-transform:uppercase;margin:16px 0 12px}
+.pkc ul{list-style:none;display:grid;gap:11px;margin-bottom:22px}.pkc li{display:flex;gap:10px;font-size:14.5px}
+.pkc .bf{margin-top:auto;padding-top:18px;border-top:1px solid var(--line);color:var(--mute);font-size:14px}.pkc .bf b{display:block;color:var(--text);font-size:12px;letter-spacing:1.2px;text-transform:uppercase;margin-bottom:6px}
+/* STEPS */
+.steps{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;counter-reset:s}
+.step{padding:30px;border-radius:22px;border:1px solid var(--line);background:rgba(255,255,255,.02)}
+.step .sn{width:46px;height:46px;border-radius:14px;display:grid;place-items:center;font:800 18px Sora,sans-serif;background:linear-gradient(180deg,#ff2b2b,#b80000);margin-bottom:16px}
+.step h3{font-size:20px;margin-bottom:8px}.step p{color:var(--mute);font-size:15px}
+/* END + FOOTER */
+.endbox{position:relative;overflow:hidden;text-align:center;padding:80px 30px;border-radius:36px;background:radial-gradient(60% 90% at 50% 0%,rgba(255,0,0,.3),transparent 70%),linear-gradient(180deg,#0e2250,#081633);border:1px solid var(--line2)}
+.endbox h2{font-size:clamp(28px,4vw,50px);margin-bottom:12px}.endbox p{color:var(--mute);font-size:18px;margin-bottom:30px}
+footer{border-top:1px solid var(--line);padding:60px 0 32px;background:#02070f;margin-top:100px}
+.fgrid{display:grid;grid-template-columns:1.6fr 1fr 1fr 1fr;gap:36px}.fgrid p{color:var(--dim);font-size:14px;margin-top:14px;max-width:360px}
+.fgrid h4{font:700 12.5px/1 Inter,sans-serif;letter-spacing:1.5px;text-transform:uppercase;color:var(--mute);margin-bottom:16px}
+.fgrid a{display:block;color:var(--dim);font-size:14.5px;margin:9px 0;transition:color .2s}.fgrid a:hover{color:var(--text)}
+.certs{display:inline-block;margin-top:16px;color:var(--gold);border:1px solid rgba(212,175,55,.35);border-radius:10px;padding:6px 12px;font-size:12px}
+.fbot{display:flex;flex-wrap:wrap;justify-content:space-between;gap:12px;margin-top:44px;padding-top:22px;border-top:1px solid var(--line);color:var(--dim);font-size:13px}
+.sw{display:inline-flex;align-items:center;gap:8px}.sw i{width:8px;height:8px;border-radius:50%;background:var(--dim)}.sw i.ok{background:var(--green);box-shadow:0 0 8px var(--green);animation:pulse 2s infinite}.sw i.deg{background:#e8b53a}
+/* CONTUR AURIU PREMIUM (cerut de operator): gradient auriu pe margine + strălucire discretă */
+:root{--gl:linear-gradient(135deg,#f6e7a8 0%,#D4AF37 28%,#8a6d1f 55%,#D4AF37 78%,#f6e7a8 100%)}
+.card,.agent,.role,.fbi,.dbn,.stat,.epb,.pkc,.step,.fsrc,.ltable,.cmp,.sov,.endbox{border:1px solid transparent!important;
+ background:linear-gradient(180deg,#0f2449,#081733) padding-box,var(--gl) border-box!important;
+ box-shadow:0 0 0 1px rgba(212,175,55,.08),0 18px 50px -22px rgba(212,175,55,.35),inset 0 1px 0 rgba(255,236,170,.12)}
+.pkc.best,.sov{box-shadow:0 0 0 1px rgba(212,175,55,.2),0 30px 80px -26px rgba(212,175,55,.55),inset 0 1px 0 rgba(255,236,170,.18)!important}
+.card,.agent,.fbi,.role,.pkc,.step,.dbn,.epb{transition:transform .3s,box-shadow .3s}
+.card:hover,.agent:hover,.fbi:hover,.role:hover,.pkc:hover,.step:hover,.dbn:hover{transform:translateY(-5px);box-shadow:0 0 0 1px rgba(212,175,55,.35),0 24px 60px -18px rgba(212,175,55,.55),inset 0 1px 0 rgba(255,236,170,.2)}
+.lrow{border-top-color:rgba(212,175,55,.16)}.cmp th,.cmp td{border-top-color:rgba(212,175,55,.16)}.lnote{border-top-color:rgba(212,175,55,.16)}
+.pkc .bf{border-top-color:rgba(212,175,55,.22)}
+/* cercurile: noduri, nuclee */
+.cnode .n{border:2px solid transparent;background:radial-gradient(circle at 35% 30%,#16336a,#081833) padding-box,var(--gl) border-box;box-shadow:0 0 0 6px #030a18,0 0 34px -4px rgba(212,175,55,.6),0 0 46px -8px var(--c)}
+.fcore{border:2px solid transparent;background:radial-gradient(circle,#2a0b12,#0a1530 70%) padding-box,var(--gl) border-box}
+.dbviz .c{border:2px solid transparent;background:radial-gradient(circle,#1c2c55,#0a1530) padding-box,var(--gl) border-box}
+.fbx i:first-child{border-color:#D4AF37;background:rgba(212,175,55,.14)}
+/* grilele nu au voie să lărgească pagina */
+.fb>*,.hero .wrap>*,.two>*,.aigrid>*,.ep>*,.chain>*,.cards>*,.agents>*,.pk>*,.steps>*{min-width:0}
+@media(max-width:1180px){.links{display:none}}
+@media(max-width:1080px){.hero .wrap,.two,.aigrid,.ep{grid-template-columns:minmax(0,1fr)}.hero{padding-top:120px}.ringbox{max-width:520px}
+.chain{grid-template-columns:repeat(3,minmax(0,1fr));row-gap:36px}.chain::before,.chain::after{display:none}
+.cards,.agents,.fb{grid-template-columns:repeat(2,minmax(0,1fr))}.pk{grid-template-columns:minmax(0,1fr);max-width:560px;margin:0 auto}.pkc.best{order:-1}
+.lrow{grid-template-columns:44px 1fr auto;row-gap:6px}.lrow .llev,.lrow .lhow{grid-column:2/4}.lrow .lt{grid-column:2}.lrow .lst{grid-column:3;grid-row:1}.lrow.h{display:none}.fgrid{grid-template-columns:1fr 1fr}}
+@media(max-width:760px){.burger{display:block}.nav-r .btn{display:none}.nav.open .links{display:flex;position:absolute;top:72px;left:0;right:0;flex-direction:column;gap:0;background:rgba(3,10,24,.97);border-bottom:1px solid var(--line);padding:6px 24px 16px}.nav.open .links a{padding:13px 0;border-bottom:1px solid var(--line);font-size:16px}}
+@media(max-width:640px){.wrap{padding:0 16px}.sec{padding:76px 0}.head{margin-bottom:40px}.stats{grid-template-columns:repeat(2,minmax(0,1fr))}
+.chain,.cards,.agents,.roles,.steps,.dbnums,.fb{grid-template-columns:minmax(0,1fr)}.ladder{grid-template-columns:repeat(2,minmax(0,1fr))}
+.fusion{aspect-ratio:auto;display:grid;gap:10px}.fusion svg{display:none}.fsrc,.fcore{position:static;width:auto;transform:none}.fcore{width:140px;height:140px;margin:6px auto}
+.phones{height:330px}.phone{width:150px;border-radius:26px;padding:5px}.phone img{border-radius:22px}
+.cmp table{table-layout:fixed}.cmp th:first-child{width:46%}.cmp th,.cmp td{padding:12px 8px;font-size:13px;overflow-wrap:anywhere;hyphens:auto;-webkit-hyphens:auto}.cmp thead th.us{font-size:15px}.cmp th:first-child,.cmp td:first-child{padding-left:16px}.cmp .t{font-size:12px}
+.lrow{padding:16px}.endbox{padding:54px 20px;border-radius:26px}.fgrid{grid-template-columns:1fr}.brand{font-size:19px}.epb{padding:20px}}
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important}.reveal{opacity:1;transform:none}}
+</style>
 </head>
 <body>
+<header class="nav" id="nav"><div class="wrap">
+  <a class="brand" href="/zh/" aria-label="FasterUp.AI"><i class="xmark" aria-hidden="true"></i><span class="fu">FasterUp</span>.AI</a>
+  <nav class="links" id="links"><a href="#platform">平台</a><a href="#layers">七层防御</a><a href="#mleo">MLEO</a><a href="#ai">CYBER3.AI</a><a href="#vas">VAS</a><a href="#agents">智能运维</a><a href="#endpoint">终端</a><a href="#packages">方案</a></nav>
+  <div class="nav-r">
+    <select class="lang" aria-label="语言" onchange="try{localStorage.setItem('fulang',this.value)}catch(e){};document.cookie='fulang='+encodeURIComponent(this.value)+';path=/;max-age=31536000;samesite=lax';location.href=this.value"><option value="/">EN</option><option value="/ro/">RO</option><option value="/es/">ES</option><option value="/it/">IT</option><option value="/de/">DE</option><option value="/fr/">FR</option><option value="/ru/">RU</option><option value="/zh/" selected>中文</option></select>
+    <a class="btn btn-red btn-sm" href="mailto:contact@rol.ro?subject=FasterUp%20-%20Assessment">申请评估</a>
+    <button class="burger" aria-label="Menu" onclick="document.getElementById('nav').classList.toggle('open')"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button>
+  </div>
+</div></header>
 
-<header class="nav">
-  <a class="brand" href="/zh/"><i class="xmark"></i><span>FasterUp</span>.AI</a>
-  <nav class="links">
-    <a href="#services">服务</a>
-    <a href="#technology">技术</a>
-    <a href="#xdr">终端 XDR</a>
-    <a href="#packages">套餐</a>
-    <a href="#start">开始</a>
-    <a href="/contact">联系</a>
-    <select class="lang" aria-label="语言" onchange="localStorage.setItem('fulang',this.value);document.cookie='fulang='+encodeURIComponent(this.value)+';path=/;max-age=31536000;samesite=lax';location.href=this.value">
-      <option value="/ro/">RO</option>
-      <option value="/">EN</option>
-      <option value="/es/">ES</option>
-      <option value="/it/">IT</option>
-      <option value="/de/">DE</option>
-      <option value="/fr/">FR</option>
-      <option value="/ru/">RU</option>
-      <option value="/zh/">中文</option>
-    </select>
-    <a class="btn-sm" href="#start">申请评估</a>
-  </nav>
-</header>
-<script>
-  (function(){var p=location.pathname,m=p.match(/^\/(ro|es|it|de|fr|ru|zh)\//),v=m?'/'+m[1]+'/':'/',s=document.querySelector('.lang');if(s)s.value=v;})();
-</script>
-
-<section class="hero">
-  <div class="grid-bg"></div>
-  <div class="hero-inner">
-    <div class="eyebrow">▸ FASTERUP AI AUTONOMOUS PLATFORM</div>
-    <h1><span class="r">自主网络安全</span><br>面向企业与公共管理</h1>
-    <p class="sub">FasterUp 实时检测、决策并响应网络威胁——七层互补防御,从链路到工作站和手机,由 MLEO 编排为一个自主决策。托管安全运营中心与漏洞评估,部署在您的现场。</p>
-    <div class="cta">
-      <a class="btn" href="#start">▸ 申请评估</a>
-      <a class="btn ghost" href="#technology">工作原理</a>
-    </div>
+<section class="hero"><div class="aurora"></div><div class="gridbg"></div><div class="wrap">
+  <div>
+    <span class="kicker">FASTERUP NEXTGEN SOC · 自主 · 端到端</span>
+    <h1>一套技术。一家供应商。<span class="grad">覆盖每一层。</span></h1>
+    <p class="lead">FasterUp 在七个互补的防御层上检测、研判并阻断网络威胁——从以太网线路到工作站和手机。MLEO 编排所有防御层，CyberBot Fusion 在数秒内做出决策，我们的主权安全大模型 CYBER3.AI 负责解释、调查和报告。托管 SOC、漏洞评估与终端防护——由同一支团队设计、拥有并运营。</p>
+    <div class="cta"><a class="btn btn-red" href="mailto:contact@rol.ro?subject=FasterUp%20-%20Assessment">申请评估</a><a class="btn btn-ghost" href="#platform">了解平台</a></div>
     <div class="stats">
-      <div><b>10ms–11s</b><span>从威胁到自主决策</span></div>
-      <div><b>24/7</b><span>监控与响应</span></div>
-      <div><b>7</b><span>层互补防御,由 MLEO 编排</span></div>
-      <div><b data-count="914944" data-suffix="+">0</b><span>实时威胁指标</span></div>
+      <div class="stat"><b>10ms–11s</b><span>从威胁出现到自主决策</span></div>
+      <div class="stat"><b>7</b><span>互补防御层</span></div>
+      <div class="stat"><b>24/7</b><span>监控与自主响应</span></div>
+      <div class="stat"><b class="ioc" data-n="2895988">2.9M+</b><span>实时威胁指标</span></div>
     </div>
   </div>
-</section>
+  <div class="ringbox" aria-hidden="true"><svg viewBox="-20 -20 640 640" role="img" aria-label="7 layers"><defs><linearGradient id="gold" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#f6e7a8"/><stop offset=".3" stop-color="#D4AF37"/><stop offset=".55" stop-color="#8a6d1f"/><stop offset=".8" stop-color="#D4AF37"/><stop offset="1" stop-color="#f6e7a8"/></linearGradient><radialGradient id="cg"><stop offset="0" stop-color="#2a0b12"/><stop offset="1" stop-color="#081833"/></radialGradient></defs><circle class="ring" id="r0" cx="300" cy="300" r="288" stroke="url(#gold)" stroke-opacity=".55"/><circle class="ring dash" cx="300" cy="300" r="288" stroke="#ff3b4b" style="animation-duration:40s"/><circle class="ring" id="r1" cx="300" cy="300" r="256" stroke="url(#gold)" stroke-opacity=".55"/><circle class="ring dash rev" cx="300" cy="300" r="256" stroke="#ff7a45" style="animation-duration:49s"/><circle class="ring" id="r2" cx="300" cy="300" r="224" stroke="url(#gold)" stroke-opacity=".55"/><circle class="ring dash" cx="300" cy="300" r="224" stroke="#e8c35a" style="animation-duration:58s"/><circle class="ring" id="r3" cx="300" cy="300" r="192" stroke="url(#gold)" stroke-opacity=".55"/><circle class="ring dash rev" cx="300" cy="300" r="192" stroke="#4f8cff" style="animation-duration:67s"/><circle class="ring" id="r4" cx="300" cy="300" r="160" stroke="url(#gold)" stroke-opacity=".55"/><circle class="ring dash" cx="300" cy="300" r="160" stroke="#22c7e8" style="animation-duration:76s"/><circle class="ring" id="r5" cx="300" cy="300" r="128" stroke="url(#gold)" stroke-opacity=".55"/><circle class="ring dash rev" cx="300" cy="300" r="128" stroke="#34d399" style="animation-duration:85s"/><circle class="ring" id="r6" cx="300" cy="300" r="96" stroke="url(#gold)" stroke-opacity=".55"/><circle class="ring dash" cx="300" cy="300" r="96" stroke="#9b7bff" style="animation-duration:94s"/><g transform="translate(50.6,156.0)"><rect x="-57" y="-13" rx="11" height="26" width="114" fill="#06122b" stroke="#ff3b4b" stroke-opacity=".8"/><text class="rlabel" x="0" y="4.5" text-anchor="middle" fill="#fff"><tspan fill="#ff3b4b">1</tspan>  Inline IPS</text></g><g transform="translate(220.9,56.5)"><rect x="-76" y="-13" rx="11" height="26" width="152" fill="#06122b" stroke="#ff7a45" stroke-opacity=".8"/><text class="rlabel" x="0" y="4.5" text-anchor="middle" fill="#fff"><tspan fill="#ff7a45">2</tspan>  Active Response</text></g><g transform="translate(391.1,95.4)"><rect x="-53" y="-13" rx="11" height="26" width="106" fill="#06122b" stroke="#e8c35a" stroke-opacity=".8"/><text class="rlabel" x="0" y="4.5" text-anchor="middle" fill="#fff"><tspan fill="#e8c35a">3</tspan>  L2 Shield</text></g><g transform="translate(475.4,221.9)"><rect x="-76" y="-13" rx="11" height="26" width="152" fill="#06122b" stroke="#4f8cff" stroke-opacity=".8"/><text class="rlabel" x="0" y="4.5" text-anchor="middle" fill="#fff"><tspan fill="#4f8cff">4</tspan>  CyberBot Fusion</text></g><g transform="translate(452.2,349.4)"><rect x="-61" y="-13" rx="11" height="26" width="122" fill="#06122b" stroke="#22c7e8" stroke-opacity=".8"/><text class="rlabel" x="0" y="4.5" text-anchor="middle" fill="#fff"><tspan fill="#22c7e8">5</tspan>  CYBER3 Edge</text></g><g transform="translate(364.0,410.9)"><rect x="-61" y="-13" rx="11" height="26" width="122" fill="#06122b" stroke="#34d399" stroke-opacity=".8"/><text class="rlabel" x="0" y="4.5" text-anchor="middle" fill="#fff"><tspan fill="#34d399">6</tspan>  Desktop XDR</text></g><g transform="translate(280.0,393.9)"><rect x="-30" y="-13" rx="11" height="26" width="61" fill="#06122b" stroke="#9b7bff" stroke-opacity=".8"/><text class="rlabel" x="0" y="4.5" text-anchor="middle" fill="#fff"><tspan fill="#9b7bff">7</tspan>  移动端</text></g><circle cx="300" cy="300" r="74" fill="url(#cg)" stroke="url(#gold)" stroke-width="2.5"/><g transform="translate(300,288)"><g transform="translate(-14,-30) scale(.28)"><g fill="#F00"><rect x="44" y="15" width="12" height="70"/><rect x="15" y="44" width="70" height="12"/><rect x="36" y="13" width="28" height="6"/><rect x="36" y="81" width="28" height="6"/><rect x="13" y="36" width="6" height="28"/><rect x="81" y="36" width="6" height="28"/></g><circle cx="50" cy="50" r="47" fill="none" stroke="#F00" stroke-width="4"/></g></g><text class="core" x="300" y="318" text-anchor="middle">您的组织</text><g id="pz"></g></svg></div>
+</div></section>
+<div class="trust"><div class="wrap"><div><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><path d="M12 2l8 3v6c0 5-3.5 9.5-8 11-4.5-1.5-8-6-8-11V5z"/><path d="M9 12l2 2 4-4"/></svg>公司已通过 ISO/IEC 27001:2022 认证</div><div><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 3h7l5 5v13H7z"/><path d="M14 3v5h5M10 13h6M10 17h6"/></svg>NIS2 第 21/23 条报告</div><div><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="4" y="11" width="16" height="10" rx="2"/><path d="M8 11V7a4 4 0 018 0v4"/></svg>GDPR——您的数据始终留在本地</div><div><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><path d="M12 2l3 6 6 .9-4.5 4.3 1 6.3L12 16.8 6.5 19.5l1-6.3L3 8.9 9 8z"/></svg>自主技术，端到端完全自有</div></div></div>
 
-<section id="services" class="section">
-  <div class="head">
-    <div class="kicker">服务</div>
-    <h2>两项服务。一个自主平台。</h2>
-    <p>托管检测与响应以及持续漏洞评估——由同一 AI 引擎和同一实时威胁情报驱动。</p>
+<section class="sec" id="platform"><div class="wrap">
+  <div class="head reveal"><span class="kicker">平台</span><h2>完整的防御链条。唯一的责任方。</h2><p>大多数组织将防火墙厂商、SIEM 厂商、MSSP、杀毒软件和扫描器拼凑在一起——而攻击者恰恰藏身于它们之间的缝隙。FasterUp 是一条完整的链条，作为一个整体来设计：没有集成接缝，没有在服务商之间来回推诿的工单，只有一份报告。</p></div>
+  <div class="chain reveal"><div class="cnode" style="--c:#ff3b4b"><div class="n">1</div><h3>传感器</h3><p>在每个站点以串联方式部署——线路级 IPS、防火墙响应，以及以太网层的 L2 Shield。</p></div><div class="cnode" style="--c:#4f8cff"><div class="n">2</div><h3>CyberBot Fusion</h3><p>每条告警融合四个来源——在 2–11 秒内做出自主决策。</p></div><div class="cnode" style="--c:#e8c35a"><div class="n">3</div><h3>MLEO</h3><p>选择由哪一层执行阻断——隔离攻击者，而非受害者。</p></div><div class="cnode" style="--c:#ff3b4b"><div class="n">4</div><h3>CYBER3.AI</h3><p>我们的主权安全大模型负责解释、调查、排定优先级并生成报告。</p></div><div class="cnode" style="--c:#34d399"><div class="n">5</div><h3>CYBER3 应用</h3><p>Windows、Android 和 iPhone——将 SOC 延伸到每一台工作站和每一部手机。</p></div><div class="cnode" style="--c:#22c7e8"><div class="n">6</div><h3>智能运维</h3><p>NOC、Health Check、CCC 与 Ops Agents 保障一切 24/7 稳定运行。</p></div></div>
+  <p class="pfnote reveal">一份合同。一支负责到底的团队。从网线到您口袋里的手机。</p>
+</div></section>
+
+<section class="sec" id="layers" style="padding-top:40px"><div class="wrap">
+  <div class="head reveal"><span class="kicker">级联防御</span><h2>七个互补防御层。即使某一层被绕过，威胁依然会被拦截。</h2><p>各防御层并非彼此的复制品。每一层都能看到其他层看不到的内容：三层基于 IP、域名和哈希工作，一层是以太网层唯一的防线，一层在威胁抵达您的网络之前就在云端将其拦截，另有两层直接运行在您的设备上。</p></div>
+  <div class="ltable reveal">
+    <div class="lrow h"><span></span><span>防御层</span><span>层级</span><span>如何拦截威胁</span><span>响应</span><span>状态</span></div>
+    <div class="lrow"><span class="lnum" style="--c:#ff3b4b">1</span><span class="lname">网络 — Inline IPS</span><span class="llev">L3/L4 + 应用层</span><span class="lhow">在线路上直接丢弃恶意数据包：特征签名、异常检测、深度包检测。</span><span class="lt">~ms</span><span class="lst"><i></i>已启用</span></div><div class="lrow"><span class="lnum" style="--c:#ff7a45">2</span><span class="lname">主机 — Active Response</span><span class="llev">L3</span><span class="lhow">在受保护主机的防火墙中进行原生阻断。</span><span class="lt">秒级</span><span class="lst"><i></i>已启用</span></div><div class="lrow"><span class="lnum" style="--c:#e8c35a">3</span><span class="lname">以太网 — L2 Shield</span><span class="llev">L2</span><span class="lhow">唯一工作在以太网层的防御层：拦截 ARP 欺骗、中间人攻击和非法 DHCP——这正是 IP 层防御的盲区。</span><span class="lt">~ms</span><span class="lst"><i></i>已启用</span></div><div class="lrow"><span class="lnum" style="--c:#4f8cff">4</span><span class="lname">决策 — CyberBot Fusion</span><span class="llev">L3 · IP / 域名 / 哈希</span><span class="lhow">将四个来源融合为一个自主决策——包括命令与控制（C2）流量。</span><span class="lt">2–11 s</span><span class="lst"><i></i>已启用</span></div><div class="lrow"><span class="lnum" style="--c:#22c7e8">5</span><span class="lname">云端 — CYBER3 Edge</span><span class="llev">云端</span><span class="lhow">DNS 防护、云端威胁指标和浏览器扩展，在威胁抵达网络之前将其拦截。</span><span class="lt">边缘</span><span class="lst"><i></i>已启用</span></div><div class="lrow"><span class="lnum" style="--c:#34d399">6</span><span class="lname">设备 — CYBER3 Desktop XDR</span><span class="llev">终端</span><span class="lhow">访问时扫描、隔离区、DNS 防护，以及对受感染工作站的自动隔离。</span><span class="lt">设备端</span><span class="lst"><i></i>已启用</span></div><div class="lrow"><span class="lnum" style="--c:#9b7bff">7</span><span class="lname">移动 — CYBER3 Mobile</span><span class="llev">终端</span><span class="lhow">在每位员工的手机上提供实时反诈骗、DNS 过滤以及链接和短信分析。</span><span class="lt">设备端</span><span class="lst"><i></i>已启用</span></div>
+    <div class="lnote">能力状态——不公开任何攻击计数：我们为您拦截了什么，只在你我之间。</div>
   </div>
-  <div class="cards">
-    <article class="card feature">
-      <div class="badge">托管 · 24/7</div><div class="ico"><svg class="cshield" viewBox="0 0 24 24"><path d="M12 2.1 L20.6 5 V11 C20.6 16.6 16.8 20.5 12 21.9 C7.2 20.5 3.4 16.6 3.4 11 V5 Z" fill="rgba(212,175,55,.14)" stroke="#d4af37" stroke-width="1.3"/><g fill="none" stroke="#f2d778" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5.2 V18.2"/><path d="M12 5.7 h2.2 a2 2 0 0 1 0 3.9 H12"/><path d="M8 11 L16 15.6"/><path d="M16 11 L8 15.6"/></g></svg></div>
-      <h3>SOC — 安全运营中心</h3>
-      <p>在七层互补防御上进行完全托管的自主监控。FasterUp 检测入侵、网络异常、命令与控制、数据外泄和策略违规——AI 引擎决策,MLEO 在正确的层执行:拦截、通知或升级,只需数秒。</p>
-      <div class="tech"><span>Cluster 1 IDS/IPS</span><span>Cluster 1 SIEM</span><span>CYBER3 Context Fusion Engine</span><span>MISP threat intel</span></div>
-      <p class="note">数秒内自主响应——而非数小时。告警与报告通过 Telegram 和电子邮件送达您的团队。</p>
-      <details class="more"><summary>查看详情</summary>
-        <div class="body"><ul><li>7×24 监控，<b>无需自有安全分析师</b>——平台处理常规，人工处理例外。</li><li>基于 Cluster 1 IDS/IPS 的实时检测，通过 Cluster 1 SIEM 进行事件关联。</li><li>每条告警进行四来源情境融合：MISP + Cluster 1 IDS/IPS + SIEM + CYBER3 数据库。</li><li>按严重程度的自主行动：静默记录 → 自动拦截 IP → 紧急告警 → 升级给人工。</li></ul><div class="adv"><b>竞争优势：</b>单一供应商掌握整条链路——从网络传感器到决策——因此响应仅需 <b>2–11 秒，而非数小时</b>，无需雇佣、培训并在凌晨 3 点保持清醒的 SOC。</div></div>
-      </details>
-    </article>
+</div></section>
 
-    <article class="card feature">
-      <div class="badge">持续</div><div class="ico">🎯</div>
-      <h3>VAS — 漏洞评估</h3>
-      <p>对您资产的持续自动评估，发现已知漏洞、错误配置和暴露服务。您将收到经优先级排序、可执行的报告——在攻击者发现之前先修复最重要的问题。</p>
-      <div class="tech"><span>资产发现</span><span>CVE 检测</span><span>计划扫描</span><span>优先级报告</span></div>
-      <p class="note">比攻击者更早了解您的暴露面。扫描安全运行，按您控制的计划执行。</p>
-      <details class="more"><summary>查看详情</summary>
-        <div class="body"><ul><li>网络中的<b>自动资产发现</b>——无法保护你不知道拥有的东西。</li><li>检测已知漏洞（CVE）和不安全配置。</li><li>计划扫描，安全执行，按<b>你掌控的日程</b>。</li><li>优先级报告——先修复影响最大的风险。</li></ul><div class="adv"><b>竞争优势：</b>VAS 与 SOC 协同——SOC 阻止进行中的攻击，而 VAS 在攻击者发现缺口之前<b>主动缩小你的攻击面</b>。</div></div>
-      </details>
-    </article>
+<section class="sec" id="sensors" style="padding-top:40px"><div class="wrap">
+  <div class="head reveal"><span class="kicker">传感器集群</span><h2>传感器驻留在您的网络内部——却从不成为网络的阻碍。</h2><p>FasterUp 专用传感器在每个站点就地运行最前沿的防御层。它们专为防护而生，绝不会成为您网络中断的原因。</p></div>
+  <div class="cards"><article class="card reveal"><span class="i">01</span><h3>串联或旁路</h3><p>每个站点约 15 分钟完成安装，终端无需安装代理——支持 VLAN，链路最高 10 Gbps。</p></article><article class="card reveal"><span class="i">02</span><h3>原生故障放行设计</h3><p>多队列数据包检测，一旦卡顿即自动让行：流量持续畅通，防护自动恢复。</p></article><article class="card reveal"><span class="i">03</span><h3>自动更新</h3><p>检测规则自主更新，具备自我守护机制，一旦发现异常即自动回滚。</p></article><article class="card reveal"><span class="i">04</span><h3>默认隐私保护</h3><p>您的数据始终留在本地；只有安全元数据通过加密的专用 VPN 传送至 SOC。</p></article></div>
+</div></section>
 
-    <article class="card">
-      <div class="ico">🤖</div>
-      <h3>自主响应</h3>
-      <p>每条告警都由 AI 结合所有来源进行评估。根据严重程度,FasterUp 会记录、自动拦截、发出紧急告警或升级给分析师——并由 MLEO 在正确的层执行拦截,从防火墙到隔离 VLAN。无需人工介入即可处置。</p>
-      <div class="tech"><span>拦截</span><span>通知</span><span>升级</span></div>
-      <p class="note">按严重程度的行动，24/7——即使凌晨 3 点。</p>
-      <details class="more"><summary>查看详情</summary>
-        <div class="body"><ul><li><b>可疑</b>——含糊事件，需跟踪 → 静默记录。</li><li><b>已确认</b>——确认攻击 → 自动拦截源 IP。</li><li><b>严重</b>——高影响事件 → 发出紧急告警。</li><li><b>关键</b>——关键性入侵 → 升级给人工分析师。</li></ul><div class="adv"><b>竞争优势：</b>平台<b>无需等待人工即可行动</b>。只有当关键决策确实需要时，你的团队才介入。</div></div>
-      </details>
-    </article>
-
-    <article class="card">
-      <div class="ico">🧠</div>
-      <h3>AI 情境融合引擎</h3>
-      <p>CYBER3 Context Fusion Engine 将四个独立来源——威胁情报、网络遥测、SIEM 关联和 CYBER3 Database——统一为单一情境化风险决策。</p>
-      <div class="tech"><span>多来源</span><span>情境化风险</span><span>2–11秒</span></div>
-      <p class="note">将四个信号融合为结构化决策——FasterUp 专有技术。</p>
-      <details class="more"><summary>查看详情</summary>
-        <div class="body"><ul><li>四个独立信号共同评分：<b>MISP</b> 威胁情报、<b>Cluster 1 IDS/IPS</b> 网络遥测、<b>Cluster 1 SIEM</b> 关联、<b>CYBER3 数据库</b>。</li><li>每条告警一个情境化风险决策——2–11 秒内完成。</li><li>专有技术，由 ROL PORTAL SERVICES 端到端掌控。</li></ul><div class="adv"><b>竞争优势：</b>同一引擎也驱动 <b>CYBER3 终端应用（XDR）</b>——网络与工作站共享<b>同一实时威胁情报</b>，闭合边界与终端检测之间的环路。</div></div>
-      </details>
-    </article>
-
-    <article class="card">
-      <div class="ico">🖥️</div>
-      <h3>网络传感器</h3>
-      <p>部署在您各站点的专用传感器——内联或被动——在现场运行前几层网络防护:链路上的 Inline IPS、防火墙中的 Active Response 以及以太网层的 L2 Shield,抵御 ARP 欺骗、伪造 DHCP、扫描和漏洞利用——无需触碰工作站。</p>
-      <div class="tech"><span>inline / 被动</span><span>专用 VPN</span><span>无终端代理</span></div>
-      <p class="note">通过加密专用 VPN 连接回 SOC。</p>
-      <details class="more"><summary>查看详情</summary>
-        <div class="body"><ul><li>在每个站点以 inline 或被动方式安装——<b>每站点约 15 分钟</b>，终端上无代理。</li><li>监视 ARP 欺骗、恶意 DHCP、扫描、漏洞利用和异常行为。</li><li><b>你的数据留在你的现场</b>——仅元数据通过加密专用 VPN 流向 SOC。</li></ul><div class="adv"><b>竞争优势：</b>隐私优先设计——为 <b>GDPR 与公共部门</b>数据处理而构建，具备完整审计跟踪。</div></div>
-      </details>
-    </article>
-
-    <article class="card">
-      <div class="ico">🔔</div>
-      <h3>清晰、易懂的告警</h3>
-      <p>当有重要情况时，您的团队会收到简明易懂的解释——发生了什么、为何是威胁，以及 FasterUp 已经采取的措施——通过 Telegram 和电子邮件。</p>
-      <div class="tech"><span>Telegram</span><span>电子邮件</span><span>AI 解释</span></div>
-      <p class="note">没有噪音。只呈现需要您关注的内容，清晰说明。</p>
-      <details class="more"><summary>查看详情</summary>
-        <div class="body"><ul><li>清晰语言的解释：<b>发生了什么、为何是威胁，以及平台已经采取的措施</b>。</li><li>通过 Telegram 和电子邮件送达你的团队。</li><li>没有原始日志堆，没有告警风暴。</li></ul><div class="adv"><b>竞争优势：</b>零告警疲劳——你的员工只看到<b>需要关注的内容</b>，且已分级并处理。</div></div>
-      </details>
-    </article>
+<section class="sec" id="fusion"><div class="wrap two">
+  <div class="reveal">
+    <span class="kicker">第 4 层 · CYBERBOT FUSION</span><h2>四个来源。一个自主决策。数秒之内。</h2><p class="lead">每条告警都会同时与四个独立来源进行比对。CyberBot 将它们融合为单一结论并立即行动——无需等待凌晨 3 点的人工响应。</p>
+    <div class="lh">按严重程度采取行动</div>
+    <div class="ladder"><div>静默记录</div><div>自动封禁 IP</div><div>紧急告警</div><div>人工升级</div></div>
+    <ul class="ul"><li><svg viewBox="0 0 24 24" class="ck" aria-hidden="true"><path d="M5 12.5l4.2 4.2L19 7" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg><span>阻断出站的命令与控制通信，而不仅仅是入站攻击</span></li><li><svg viewBox="0 0 24 24" class="ck" aria-hidden="true"><path d="M5 12.5l4.2 4.2L19 7" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg><span>防误报机制：绝不会阻断您自己的基础设施</span></li><li><svg viewBox="0 0 24 24" class="ck" aria-hidden="true"><path d="M5 12.5l4.2 4.2L19 7" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg><span>通过 Telegram 和电子邮件向您的团队发送通俗易懂的告警</span></li></ul>
   </div>
-</section>
-
-<section id="technology" class="section alt d7">
-  <div class="head">
-    <div class="kicker">技术</div>
-    <h2>级联拦截。七层互补防御。</h2>
-    <p>每个威胁都要穿过七层防御组成的级联:从链路到以太网,再到云端和终端。某一层漏过的,由下一层拦截。各层互补而非冗余:每一层都覆盖其他层看不到的角度。MLEO 将它们编排为一个有机整体。</p>
+  <div class="fusion reveal">
+    <svg viewBox="0 0 520 520" aria-hidden="true"><defs><linearGradient id="fg" x1="0" x2="1"><stop offset="0" stop-color="#33A1FF"/><stop offset="1" stop-color="#ff1a1a"/></linearGradient></defs>
+      <path class="flow" d="M120 90 C 200 150, 220 200, 260 260"/><path class="flow" d="M400 90 C 320 150, 300 200, 260 260"/>
+      <path class="flow" d="M120 430 C 200 370, 220 320, 260 260"/><path class="flow" d="M400 430 C 320 370, 300 320, 260 260"/></svg>
+    <div class="fsrc s0"><b>网络遥测</b><span>每个站点的串联 IDS/IPS</span></div><div class="fsrc s1"><b>SIEM 关联</b><span>跨整个 IT 环境的事件关联</span></div><div class="fsrc s2"><b>威胁情报</b><span>实时全球情报源</span></div><div class="fsrc s3"><b>CYBER3 Database</b><span>自有威胁指标，每日持续增长</span></div>
+    <div class="fcore">CyberBot<br>Fusion<small>2–11 s</small></div>
   </div>
+</div></section>
 
-  <div id="defense" class="d7-block">
-  <div class="d7-status" aria-labelledby="d7-st-h">
-    <div class="d7-st-head"><h3 id="d7-st-h">Capabilities Status</h3><span class="d7-sum"><i class="d7-led"></i>7 / 7 Active</span></div>
-    <div class="d7-caps">
-<div class="d7-cap" style="--c:#3b82f6"><div class="d7-top"><span class="d7-no">1</span>网络</div><div class="d7-cnm">Inline IPS</div><div class="d7-ln"><span class="d7-act"><i class="d7-led"></i>Active</span><span><span class="d7-rtl">响应 </span><span class="d7-rt">&lt; 10 ms</span></span></div></div>
-<div class="d7-cap" style="--c:#f59e0b"><div class="d7-top"><span class="d7-no">2</span>主机</div><div class="d7-cnm">Active Response</div><div class="d7-ln"><span class="d7-act"><i class="d7-led"></i>Active</span><span><span class="d7-rtl">响应 </span><span class="d7-rt">2–11 s</span></span></div></div>
-<div class="d7-cap" style="--c:#22d3ee"><div class="d7-top"><span class="d7-no">3</span>以太网</div><div class="d7-cnm">L2 Shield</div><div class="d7-ln"><span class="d7-act"><i class="d7-led"></i>Active</span><span><span class="d7-rtl">响应 </span><span class="d7-rt">&lt; 1 ms</span></span></div></div>
-<div class="d7-cap" style="--c:#34d399"><div class="d7-top"><span class="d7-no">4</span>AI</div><div class="d7-cnm">CYBER3 Context Fusion Engine</div><div class="d7-ln"><span class="d7-act"><i class="d7-led"></i>Active</span><span><span class="d7-rtl">响应 </span><span class="d7-rt">2–11 s</span></span></div></div>
-<div class="d7-cap" style="--c:#a78bfa"><div class="d7-top"><span class="d7-no">5</span>云端</div><div class="d7-cnm">CYBER3 Edge</div><div class="d7-ln"><span class="d7-act"><i class="d7-led"></i>Active</span><span><span class="d7-rtl">响应 </span><span class="d7-rt">&lt; 50 ms</span></span></div></div>
-<div class="d7-cap" style="--c:#2dd4bf"><div class="d7-top"><span class="d7-no">6</span>桌面</div><div class="d7-cnm">CYBER3 EDR/XDR for Desktop</div><div class="d7-ln"><span class="d7-act"><i class="d7-led"></i>Active</span><span><span class="d7-rtl">响应 </span><span class="d7-rt">实时</span></span></div></div>
-<div class="d7-cap" style="--c:#fb7185"><div class="d7-top"><span class="d7-no">7</span>移动</div><div class="d7-cnm">CYBER3 Mobile Protection</div><div class="d7-ln"><span class="d7-act"><i class="d7-led"></i>Active</span><span><span class="d7-rtl">响应 </span><span class="d7-rt">实时</span></span></div></div>
-<div class="d7-cap d7-mleo" style="--c:#D4AF37"><div class="d7-top"><span class="d7-no">⬡</span>编排器</div><div class="d7-cnm">Multi Layer Enforcement Orchestrator</div><div class="d7-ln"><span class="d7-orch">编排 7 / 7 层</span><span class="d7-rt">L2 ↔ L3</span></div></div>
+<section class="sec" id="mleo" style="background:linear-gradient(180deg,transparent,rgba(51,161,255,.05) 50%,transparent)"><div class="wrap">
+  <div class="head reveal"><span class="kicker">MLEO · MULTI LAYER ENFORCEMENT ORCHESTRATOR</span><h2>它不只是在七个层面上检测。它决定由哪一层出手。</h2><p>MLEO 是将七个防御层连接为一个整体的核心。它关联每一层所见的信息，为每台设备赋予跨层统一的身份，并在最能有效拦截威胁的那一层执行阻断——没有冗余拦截，也没有冲突。</p></div>
+  <div class="cards"><article class="card reveal"><span class="i">01</span><h3>统一身份</h3><p>同一台设备，在第 3 层表现为 IP，在第 2 层表现为 MAC、VLAN 和交换机端口。</p></article><article class="card reveal"><span class="i">02</span><h3>无法规避</h3><p>更换 IP 地址对攻击者不再有用——阻断会跟随设备。</p></article><article class="card reveal"><span class="i">03</span><h3>隔离攻击者，而非受害者</h3><p>在 ARP 欺骗期间，流量看起来像是来自受害者。方向性关联分析可隔离真正的源头。</p></article><article class="card reveal"><span class="i">04</span><h3>安全源于设计</h3><p>以隔离 VLAN 代替关闭端口，以白名单和基于事务 ID 的回滚作为前提条件，每一层都具备失效安全机制。</p></article></div>
+  <p class="note reveal">分阶段部署：最初的阶段即可提供完整可见性，且无需改动客户网络。</p>
+</div></section>
+
+<section class="sec ai" id="ai"><div class="wrap">
+  <div class="head reveal"><span class="kicker">CYBER3.AI · 主权安全大模型</span><h2>原生内置于 SOC 和 VAS 的 AI 分析师——而非外挂附加。</h2><p>CYBER3.AI 是我们的安全语言模型，专为一项任务打造：防御。它贯穿整条链路——与传感器、应用和扫描器读取同一个 CYBER3 Database。</p></div>
+  <div class="aigrid">
+    <div class="roles"><div class="role reveal"><b><i></i>解释</b><p>以通俗易懂的语言、用您团队的语言说明告警和发现：发生了什么、为何重要、已经采取了哪些措施。</p></div><div class="role reveal"><b><i></i>调查</b><p>安全助手，跨 CYBER3 Database 与实时威胁情报关联分析各类指标。</p></div><div class="role reveal"><b><i></i>排定优先级</b><p>将漏洞发现转化为修复顺序：先修什么、如何修。</p></div><div class="role reveal"><b><i></i>报告</b><p>基于真实的 SOC 数据起草事件报告及 NIS2 第 21/23 条报告。</p></div></div>
+    <div class="sov reveal"><span class="tag">CYBER3.AI</span><h3>主权源于设计</h3><ul class="ul"><li><svg viewBox="0 0 24 24" class="ck" aria-hidden="true"><path d="M5 12.5l4.2 4.2L19 7" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg><span>在欧盟境内自托管的安全模型</span></li><li><svg viewBox="0 0 24 24" class="ck" aria-hidden="true"><path d="M5 12.5l4.2 4.2L19 7" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg><span>多引擎架构，支持自动故障切换——任何单一 AI 厂商都无法关停您的 SOC</span></li><li><svg viewBox="0 0 24 24" class="ck" aria-hidden="true"><path d="M5 12.5l4.2 4.2L19 7" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg><span>以我们自有的威胁数据库为依据，而非开放互联网</span></li></ul></div>
+  </div>
+</div></section>
+
+<section class="sec" id="database"><div class="wrap two">
+  <div class="reveal">
+    <span class="kicker">CYBER3 DATABASE</span><h2>自有威胁情报。每日持续增长。</h2><p class="lead">CYBER3 Database 将全球威胁情报源与我们自有传感器在真实网络中观测到的指标相融合。它每天发布到全球边缘网络，为每一层提供支撑：传感器、AI、桌面应用和移动应用——处处共享同一份实时真相。</p>
+    <div class="dbnums">
+      <div class="dbn"><b class="ioc" data-n="2895988">2,895,988</b><span>威胁指标——实时</span></div>
+      <div class="dbn"><b id="fp">42,213</b><span>来自我们传感器的一手指标</span></div>
+      <div class="dbn"><b>300+</b><span>提供查询服务的边缘节点</span></div>
+    </div>
+    <ul class="ul"><li><svg viewBox="0 0 24 24" class="ck" aria-hidden="true"><path d="M5 12.5l4.2 4.2L19 7" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg><span>每日发布流水线，端到端验证</span></li><li><svg viewBox="0 0 24 24" class="ck" aria-hidden="true"><path d="M5 12.5l4.2 4.2L19 7" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg><span>隐私保护式查询：只有哈希前缀会离开设备</span></li><li><svg viewBox="0 0 24 24" class="ck" aria-hidden="true"><path d="M5 12.5l4.2 4.2L19 7" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg><span>同一个数据库同时保护网络、工作站和手机</span></li></ul>
+  </div>
+  <div class="dbviz reveal" aria-hidden="true"><canvas id="dbc" width="600" height="600"></canvas><div class="c">CYBER3<br>Database<small>live</small></div></div>
+</div></section>
+
+<section class="sec" id="vas"><div class="wrap">
+  <div class="head reveal"><span class="kicker">VAS · CYBER3 SCAN 与 GLOBAL SCAN</span><h2>敏捷扫描，发现整个网络——且绝不触发警报。</h2><p>漏洞评估由守护网络的同一支团队打造。我们的扫描器从已部署在您网络内部的传感器上运行，因此能发现一切——甚至是没人记得告诉它的资产。</p></div>
+  <div class="cards"><article class="card reveal"><span class="i">01</span><h3>无需告知，自动发现</h3><p>被动监听结合每个 VLAN 上的带标签探测，绘制主机、MAC 地址、厂商和角色——包括静默设备。</p></article><article class="card reveal"><span class="i">02</span><h3>Unstoppable Adaptive Scan</h3><p>先研究目标，再以有节制的步调推进；一旦发现防火墙迹象即主动退让，不会触发警报。</p></article><article class="card reveal"><span class="i">03</span><h3>敏捷 Global Scan</h3><p>按需从云端进行外部暴露面扫描——无需安装，数分钟即可出结果。全网扫描已内置于 Windows 应用。</p></article><article class="card reveal"><span class="i">04</span><h3>分级排序，可直接行动</h3><p>已知漏洞（CVE）、不安全配置和暴露的服务——按优先级排序，让您先修复最关键的问题。</p></article></div>
+</div></section>
+
+<section class="sec" id="agents" style="background:radial-gradient(60% 50% at 50% 50%,rgba(34,211,138,.05),transparent 70%)"><div class="wrap">
+  <div class="head reveal"><span class="kicker">智能体运维</span><h2>一支智能体大军，全天候运行整个平台。</h2><p>我们的专家处理例外情况，其余一切交给智能体：它们监控、修复、指挥和响应，并且每天都在证明整条链路依然正常运转。</p></div>
+  <div class="agents"><article class="agent reveal"><div class="scan"></div><span class="dot"><i></i>已启用</span><h3>NOC Agentic</h3><p>从独立的云端视角监控整个基础设施——每个传感器、服务和隧道——提供实时拓扑图、AI 摘要和告警。</p></article><article class="agent reveal"><div class="scan"></div><span class="dot"><i></i>已启用</span><h3>Health Check Agentic</h3><p>24/7 管理并自动修复传感器集群：抓包停滞、服务卡死、隧道中断——在任何人察觉之前即已修复。合成测试对整条流水线进行端到端验证。</p></article><article class="agent reveal"><div class="scan"></div><span class="dot"><i></i>已启用</span><h3>CCC Agentic</h3><p>指挥与控制中心：统管整个生态系统的单一驾驶舱，操作员在此指挥智能体，并直观看到威胁情报如何转化为自主响应。</p></article><article class="agent reveal"><div class="scan"></div><span class="dot"><i></i>已启用</span><h3>Ops Agents</h3><p>CYBER3.AI 智能体负责告警分诊、指标关联、调查与响应——自主级别从需人工批准的操作，到配备熔断机制的预批准剧本。</p></article></div>
+  <p class="note reveal">规则自主更新，具备自我守护与自动回滚。原生故障放行设计：您的流量绝不会因我们而中断。</p>
+</div></section>
+
+<section class="sec" id="fallback"><div class="wrap">
+  <div class="head reveal"><span class="kicker">全面冗余</span><h2>没有单点故障。任何环节都没有。</h2><p>平台的每个关键部分都有第二条路径，可自动接管。即使某个组件失效，防御也不会中断。</p></div>
+  <div class="fb"><div class="fbi reveal"><span class="fbx"><i></i><i></i></span><div><b>传感器</b><p>故障放行式检测——您的流量绝不会因我们而中断。</p></div></div><div class="fbi reveal"><span class="fbx"><i></i><i></i></span><div><b>SOC 核心</b><p>集群化事件平台，外加云端灾难恢复站点。</p></div></div><div class="fbi reveal"><span class="fbx"><i></i><i></i></span><div><b>监控</b><p>智能 NOC 运行在独立的云基础设施上——即使某个站点完全离线，依然清晰可见。</p></div></div><div class="fbi reveal"><span class="fbx"><i></i><i></i></span><div><b>AI</b><p>多引擎 CYBER3.AI，支持自动故障切换——任何单一 AI 厂商都无法将其关停。</p></div></div><div class="fbi reveal"><span class="fbx"><i></i><i></i></span><div><b>威胁数据库</b><p>由 300+ 个边缘节点提供服务；即使离线，应用也能在设备端持续防护。</p></div></div><div class="fbi reveal"><span class="fbx"><i></i><i></i></span><div><b>数据</b><p>加密的异地备份，恢复流程经过实际验证。</p></div></div></div>
+</div></section>
+
+<section class="sec" id="endpoint"><div class="wrap">
+  <div class="head reveal"><span class="kicker">终端 · CYBER3</span><h2>将 SOC 延伸到每一台工作站——以及每一部手机。</h2><p>同一平台，原生支持 Windows、Android 和 iPhone。组织可通过激活码注册设备，或在部署时静默注册；离开设备的只有安全元数据。</p></div>
+  <div class="ep">
+    <div class="epb reveal"><h3>CYBER3 Windows 版 — EDR/XDR</h3>
+      <div class="dtabs"><button class="dtab on" data-i="0">仪表盘</button><button class="dtab" data-i="1">Global Scan</button><button class="dtab" data-i="2">威胁隔离</button><button class="dtab" data-i="3">VPN</button></div>
+      <div class="screen"><div class="dots"><i></i><i></i><i></i></div><div class="view" id="dview"><img class="on" src="/assets/desk/desktop-home-en.webp" alt="CYBER3 for Windows — 仪表盘" width="1600" height="1067" loading="lazy" decoding="async"><img class="" src="/assets/desk/desktop-globalscan-en.webp" alt="CYBER3 for Windows — Global Scan" width="1600" height="1067" loading="lazy" decoding="async"><img class="" src="/assets/desk/desktop-isolation-en.webp" alt="CYBER3 for Windows — 威胁隔离" width="1600" height="1067" loading="lazy" decoding="async"><img class="" src="/assets/desk/desktop-vpn-en.webp" alt="CYBER3 for Windows — VPN" width="1600" height="1067" loading="lazy" decoding="async"></div></div>
+      <ul class="ul"><li><svg viewBox="0 0 24 24" class="ck" aria-hidden="true"><path d="M5 12.5l4.2 4.2L19 7" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg><span>确认存在恶意软件时自动隔离工作站——可撤销，并由 SOC 监督</span></li><li><svg viewBox="0 0 24 24" class="ck" aria-hidden="true"><path d="M5 12.5l4.2 4.2L19 7" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg><span>客户控制台：资产清单、远程扫描、隔离与重新连接，均可在 30 秒内完成</span></li><li><svg viewBox="0 0 24 24" class="ck" aria-hidden="true"><path d="M5 12.5l4.2 4.2L19 7" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg><span>全内网 Global Scan、浏览器防护、加密 VPN</span></li><li><svg viewBox="0 0 24 24" class="ck" aria-hidden="true"><path d="M5 12.5l4.2 4.2L19 7" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg><span>采用 Microsoft Trusted Signing 数字签名，自动更新</span></li></ul>
+      <div class="stores"><a class="store win" href="https://cyber3-edge.cyber3.workers.dev/desktop"><svg width="18" height="18" viewBox="0 0 24 24"><path fill="currentColor" d="M3 5.1 10.4 4v7.1H3zM11.4 3.9 21 2.5v8.6h-9.6zM3 12.1h7.4v7.1L3 18.1zM11.4 12.1H21v8.6l-9.6-1.4z"/></svg>Windows</a></div>
+    </div>
+    <div class="epb reveal"><h3>CYBER3 Android 与 iPhone 版</h3>
+      <div class="phones"><div class="phone"><img src="/assets/phones/message-check.webp" alt="" width="660" height="1467" loading="lazy"></div><div class="phone"><img src="/assets/phones/calls.webp" alt="" width="660" height="1467" loading="lazy"></div></div>
+      <ul class="ul"><li><svg viewBox="0 0 24 24" class="ck" aria-hidden="true"><path d="M5 12.5l4.2 4.2L19 7" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg><span>诈骗电话和短信防护，消息检测并附 AI 解释</span></li><li><svg viewBox="0 0 24 24" class="ck" aria-hidden="true"><path d="M5 12.5l4.2 4.2L19 7" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg><span>网页防护：在所有应用中拦截广告、跟踪器和网络钓鱼</span></li><li><svg viewBox="0 0 24 24" class="ck" aria-hidden="true"><path d="M5 12.5l4.2 4.2L19 7" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg><span>手机安全评分、身份与数据泄露监控、加密 VPN</span></li><li><svg viewBox="0 0 24 24" class="ck" aria-hidden="true"><path d="M5 12.5l4.2 4.2L19 7" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg><span>与传感器和工作站共享同一个威胁数据库</span></li></ul>
+      <div class="stores"><a class="store gp" href="https://play.google.com/store/apps/details?id=ai.cyber3.app"><img src="/assets/google-play-badge.png" alt="Google Play" width="227" height="88" loading="lazy"></a><a class="store" href="https://apps.apple.com/app/id6814547519"><img src="/assets/app-store-badge.svg" alt="App Store" width="138" height="46" loading="lazy"></a></div>
     </div>
   </div>
+</div></section>
 
-  <div class="d7-cascade">
-    <canvas id="d7-rain" aria-hidden="true"></canvas>
-    <div class="d7-rows">
-      <div class="d7-in"><span>◤ 流量 + 威胁进入</span><span class="d7-in-r">100% 检测</span></div>
-<div class="d7-row" style="--c:#3b82f6"><div class="d7-num">1</div><div class="d7-mid"><div class="d7-nm">Inline IPS<span class="d7-badge">网络 · L3–L7</span></div><div class="d7-mech">链路内联检测 · 特征 + 异常 · IOC 指标</div><div class="d7-exp">在链路上<span class="c">检测并拦截数据包</span>,毫秒级完成,在其进入客户网络之前。</div><div class="d7-fnl" style="width:100%"></div></div><div class="d7-right"><span class="d7-act"><i class="d7-led"></i>Active</span><span class="d7-rt2">&lt; 10 ms</span><span class="d7-vs">响应时间</span></div></div>
-<div class="d7-row" style="--c:#f59e0b"><div class="d7-num">2</div><div class="d7-mid"><div class="d7-nm">Active Response<span class="d7-badge">主机 · L3</span></div><div class="d7-mech">防火墙 DROP 规则 · 升级为全舰队永久封禁</div><div class="d7-exp">对告警的自动响应:为攻击者 IP 写入<span class="c">防火墙 DROP 规则</span>。原生兜底,不依赖 AI。</div><div class="d7-fnl" style="width:82%"></div></div><div class="d7-right"><span class="d7-act"><i class="d7-led"></i>Active</span><span class="d7-rt2">2–11 s</span><span class="d7-vs">响应时间</span></div></div>
-<div class="d7-row" style="--c:#22d3ee"><div class="d7-num">3</div><div class="d7-mid"><div class="d7-nm">L2 Shield<span class="d7-badge">以太网 · L2</span></div><div class="d7-mech">原生以太网 · 反 ARP 欺骗(网关 IP↔MAC 绑定)· 反伪造 DHCP · 防黑洞 dead-man</div><div class="d7-exp"><span class="c">唯一的以太网层防护。</span>阻止中间人、ARP 投毒和伪造 DHCP——IP 层<span class="c">看不到</span>的攻击。</div><div class="d7-fnl" style="width:70%"></div></div><div class="d7-right"><span class="d7-act"><i class="d7-led"></i>Active</span><span class="d7-rt2">&lt; 1 ms</span><span class="d7-vs">响应时间</span></div></div>
-<div class="d7-row" style="--c:#34d399"><div class="d7-num">4</div><div class="d7-mid"><div class="d7-nm">CYBER3 Context Fusion Engine<span class="d7-badge">AI · L3–L7</span></div><div class="d7-mech">多源融合:网络 + 主机 + 威胁情报 + CYBER3 DB</div><div class="d7-exp">基于融合上下文自主决策;甚至拦截<span class="c">通往 C2 的出站连接</span>(命令与控制)。</div><div class="d7-fnl" style="width:60%"></div></div><div class="d7-right"><span class="d7-act"><i class="d7-led"></i>Active</span><span class="d7-rt2">2–11 s</span><span class="d7-vs">响应时间</span></div></div>
-<div class="d7-row" style="--c:#a78bfa"><div class="d7-num">5</div><div class="d7-mid"><div class="d7-nm">CYBER3 Edge<span class="d7-badge">云端 · 随处</span></div><div class="d7-mech">DNS 防护盾 · 边缘 IOC(200万+ 指标)· 浏览器扩展</div><div class="d7-exp"><span class="c">随处可用,即使在网络之外</span>的 Web 与 DNS 防护:危险域名和网址在连接前即被拦截。</div><div class="d7-fnl" style="width:52%"></div></div><div class="d7-right"><span class="d7-act"><i class="d7-led"></i>Active</span><span class="d7-rt2">&lt; 50 ms</span><span class="d7-vs">响应时间</span></div></div>
-<div class="d7-row" style="--c:#2dd4bf"><div class="d7-num">6</div><div class="d7-mid"><div class="d7-nm">CYBER3 EDR/XDR for Desktop<span class="d7-badge">桌面 · 工作站</span></div><div class="d7-mech">行为检测 · XDR 遥测 → SOC · 隔离</div><div class="d7-exp">覆盖到达<span class="c">工作站</span>的威胁(USB、文件、进程),超越网络边界。</div><div class="d7-fnl" style="width:46%"></div></div><div class="d7-right"><span class="d7-act"><i class="d7-led"></i>Active</span><span class="d7-rt2">实时</span><span class="d7-vs">响应时间</span></div></div>
-<div class="d7-row" style="--c:#fb7185"><div class="d7-num">7</div><div class="d7-mid"><div class="d7-nm">CYBER3 Mobile Protection<span class="d7-badge">移动 · 设备</span></div><div class="d7-mech">反诈骗 / 反钓鱼 · DNS 过滤 · VPN</div><div class="d7-exp">在<span class="c">移动中</span>保护用户:最后一层,位于个人设备上。</div><div class="d7-fnl" style="width:42%"></div></div><div class="d7-right"><span class="d7-act"><i class="d7-led"></i>Active</span><span class="d7-rt2">实时</span><span class="d7-vs">响应时间</span></div></div>
-      <div class="d7-outb"><span>◣ 到达网络 / 用户</span><span class="d7-outb-r">流量经 7 层检测</span></div>
-    </div>
-  </div>
+<section class="sec" id="why"><div class="wrap">
+  <div class="head reveal"><span class="kicker">为何选择单一供应商</span><h2>FasterUp 与常见多供应商方案对比</h2></div>
+  <div class="cmp reveal"><table><thead><tr><th></th><th class="us">FasterUp</th><th>典型多供应商方案</th></tr></thead>
+    <tbody><tr><td>从检测到阻断</td><td class="t us">数秒，自主完成</td><td class="t">数小时——工单在服务商之间流转</td></tr><tr><td>以太网层（L2）防护</td><td class="y us"><span class="mk" title="包含"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.2 4.2L19 7"/></svg></span></td><td class="n"><span class="mk" title="不包含"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg></span></td></tr><tr><td>网络 + 工作站 + 手机，一条链路</td><td class="y us"><span class="mk" title="包含"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.2 4.2L19 7"/></svg></span></td><td class="p"><span class="mk" title="部分"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"><path d="M6 12h12"/></svg></span></td></tr><tr><td>AI 分析师解释每一项发现</td><td class="y us"><span class="mk" title="包含"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.2 4.2L19 7"/></svg></span></td><td class="p"><span class="mk" title="部分"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"><path d="M6 12h12"/></svg></span></td></tr><tr><td>自有威胁数据库，由自有传感器提供数据</td><td class="y us"><span class="mk" title="包含"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.2 4.2L19 7"/></svg></span></td><td class="n"><span class="mk" title="不包含"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg></span></td></tr><tr><td>可自我修复的传感器集群</td><td class="y us"><span class="mk" title="包含"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.2 4.2L19 7"/></svg></span></td><td class="n"><span class="mk" title="不包含"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg></span></td></tr><tr><td>一份统一的 NIS2 报告</td><td class="y us"><span class="mk" title="包含"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.2 4.2L19 7"/></svg></span></td><td class="n"><span class="mk" title="不包含"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg></span></td></tr><tr><td>数据留在本地（仅传输元数据）</td><td class="y us"><span class="mk" title="包含"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.2 4.2L19 7"/></svg></span></td><td class="p"><span class="mk" title="部分"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"><path d="M6 12h12"/></svg></span></td></tr><tr><td>一份合同，一支负责到底的团队</td><td class="y us"><span class="mk" title="包含"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.2 4.2L19 7"/></svg></span></td><td class="n"><span class="mk" title="不包含"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg></span></td></tr></tbody></table></div>
+</div></section>
 
-  <div class="d7-mleo-sec">
-    <p class="d7-mtag"><span class="d7-hex">⬡</span>自有编排器 · 7 层</p>
-    <h3 class="d7-mh">Multi Layer Enforcement Orchestrator<small>MLEO · 连接 7 层的核心</small></h3>
-    <p class="d7-ml">如果没有编排,每一层都会<b>各自检测、各自拦截</b>。MLEO 是<b>在各层之间关联信号、并决定每个威胁由哪一层执行处置</b>的核心,其基础是统一的设备身份:同一台设备在<b>第 3 层被视为 IP</b>,在<b>第 2 层被视为 MAC</b>。</p>
-    <div class="d7-corr">
-      <div class="d7-cbox"><p class="d7-k">第 3 层 · 第 1 · 2 · 4 层</p><p class="d7-t">基于 IP 的封禁</p><p class="d7-d">Inline IPS、Active Response 与 CYBER3 Context Fusion Engine:谁发起攻击、在哪个端口、何时。</p></div>
-      <div class="d7-arr" aria-hidden="true">⇄</div>
-      <div class="d7-cbox d7-core"><p class="d7-k">MLEO · 统一身份</p><p class="d7-t">唯一的事实来源</p><p class="d7-id">MAC ↔ IP ↔ VLAN ↔ 端口<br>↔ 物理位置 ↔ 关键程度</p></div>
-      <div class="d7-arr" aria-hidden="true">⇄</div>
-      <div class="d7-cbox"><p class="d7-k">第 2 层 · 第 3 层</p><p class="d7-t">MAC 身份</p><p class="d7-d">L2 Shield:带历史的 ARP 表、以太网异常、IP 背后的真实设备。</p></div>
-    </div>
-    <div class="d7-out"><b>在正确的层执行处置</b><span>传感器上的 drop 列表(L3)</span><span class="d7-sep">·</span><span>交换机上的隔离 VLAN(L2)</span><span class="d7-sep">·</span><span>只封禁一次,而不是在每一层分别封禁</span></div>
-    <div class="d7-mcols">
-      <div><h4>解决什么问题</h4><ul class="d7-prob"><li><b>通过更换 IP 规避</b>在一个 IP 上被封禁的攻击者换一个 IP 继续。在 L3 看似新的参与者;在 L2 仍是同一个 MAC——MLEO 能识别它。</li><li><b>ARP 欺骗时的正确隔离</b>伪造的流量看起来来自受害者。方向性关联隔离的是攻击者,而不是流量看似来自的那台机器。</li><li><b>统一视图,而非零散封禁</b>同一设备不再在 3–4 层上被彼此无关地分别封禁。</li><li><b>随时间追溯</b>从 24 小时前出现的 IP 出发,即可找到设备的 MAC 和所在物理端口。</li></ul></div>
-      <div><h4>安全原则</h4><div class="d7-chips"><span>先观察后执行</span><span>allowlist 绝对优先</span><span>事务性回滚</span><span>隔离 VLAN,而非关闭端口</span><span>每层均 fail-safe</span></div>
-        <h4>MLEO 执行链</h4><ol class="d7-stages"><li class=""><span class="d7-sn">0</span><span>持续采集:ARP、MAC 表、各层封禁记录</span><span class="d7-ss">可见性</span></li><li class=""><span class="d7-sn">1</span><span>对账表 MAC ↔ IP ↔ VLAN ↔ 端口,含 IP 历史</span><span class="d7-ss">可见性</span></li><li class=""><span class="d7-sn">2</span><span>每条 L3 封禁都获得其 L2 身份(MAC、VLAN、端口、关键程度)</span><span class="d7-ss">可见性</span></li><li class=""><span class="d7-sn">3</span><span>15 分钟内同一 MAC、不同 IP:更换 IP 规避告警<span class="d7-risk">第 0–3 步提供完整可见性,且不触碰客户网络</span></span><span class="d7-ss">可见性</span></li><li class="enf gate"><span class="d7-sn">4</span><span>执行:端口移入隔离 VLAN,配合 allowlist 与回滚<span class="d7-risk">前提:allowlist + 已测试的回滚</span></span><span class="d7-ss">执行</span></li><li class="enf"><span class="d7-sn">5</span><span>有封禁历史的端口出现新 MAC;伪造 ARP + L3 封禁:隔离端口</span><span class="d7-ss">执行</span></li><li class="enf"><span class="d7-sn">6</span><span>反向 L2 → L3:异常 MAC 解析为 IP 并预防性封禁</span><span class="d7-ss">执行</span></li></ol></div>
-    </div>
-  </div>
+<section class="sec" id="packages"><div class="wrap">
+  <div class="head reveal"><span class="kicker">方案</span><h2>按您的机构规模量身定制</h2><p>每个方案均包含上一级方案的全部内容，并增加更多防御层和能力。具体配置——站点、传感器、工作站、手机——在初步评估后确定。</p></div>
+  <div class="pk"><article class="pkc reveal"><h3>Standard</h3><div class="inc">包含</div><ul><li><svg viewBox="0 0 24 24" class="ck" aria-hidden="true"><path d="M5 12.5l4.2 4.2L19 7" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg><span>24/7 托管 SOC · 2–11 s 内自主响应</span></li><li><svg viewBox="0 0 24 24" class="ck" aria-hidden="true"><path d="M5 12.5l4.2 4.2L19 7" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg><span>主站点部署串联传感器</span></li><li><svg viewBox="0 0 24 24" class="ck" aria-hidden="true"><path d="M5 12.5l4.2 4.2L19 7" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg><span>第 1–4 层：Inline IPS · Active Response · L2 Shield · CyberBot Fusion</span></li><li><svg viewBox="0 0 24 24" class="ck" aria-hidden="true"><path d="M5 12.5l4.2 4.2L19 7" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg><span>MLEO：L3 ↔ L2 关联，并在正确的层执行阻断</span></li><li><svg viewBox="0 0 24 24" class="ck" aria-hidden="true"><path d="M5 12.5l4.2 4.2L19 7" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg><span>每月定期 VAS</span></li><li><svg viewBox="0 0 24 24" class="ck" aria-hidden="true"><path d="M5 12.5l4.2 4.2L19 7" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg><span>通俗易懂的告警 + 含 NIS2 报告的客户门户</span></li><li><svg viewBox="0 0 24 24" class="ck" aria-hidden="true"><path d="M5 12.5l4.2 4.2L19 7" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Health Check Agentic 24/7</span></li></ul><div class="bf"><b>适用于</b>IT 集中的总部办公室——享有 24/7 自主监控和定期漏洞全景，无需自建 SOC。</div></article><article class="pkc reveal"><h3>进阶版</h3><div class="inc">包含 Standard 全部内容，另加</div><ul><li><svg viewBox="0 0 24 24" class="ck" aria-hidden="true"><path d="M5 12.5l4.2 4.2L19 7" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg><span>每个站点部署串联传感器</span></li><li><svg viewBox="0 0 24 24" class="ck" aria-hidden="true"><path d="M5 12.5l4.2 4.2L19 7" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg><span>第 5 层 · 覆盖全组织的 CYBER3 Edge</span></li><li><svg viewBox="0 0 24 24" class="ck" aria-hidden="true"><path d="M5 12.5l4.2 4.2L19 7" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg><span>第 6 层 · 关键工作站部署 CYBER3 Desktop XDR</span></li><li><svg viewBox="0 0 24 24" class="ck" aria-hidden="true"><path d="M5 12.5l4.2 4.2L19 7" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg><span>客户控制台：隔离、远程扫描、集群状态</span></li><li><svg viewBox="0 0 24 24" class="ck" aria-hidden="true"><path d="M5 12.5l4.2 4.2L19 7" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg><span>内网 Global Scan</span></li><li><svg viewBox="0 0 24 24" class="ck" aria-hidden="true"><path d="M5 12.5l4.2 4.2L19 7" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg><span>MLEO 覆盖所有站点</span></li><li><svg viewBox="0 0 24 24" class="ck" aria-hidden="true"><path d="M5 12.5l4.2 4.2L19 7" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg><span>每两周一次 VAS</span></li></ul><div class="bf"><b>适用于</b>暴露风险较高的多站点机构——网络全面覆盖，并在最关键之处部署 XDR。</div></article><article class="pkc best reveal"><span class="pop">推荐</span><h3>全面版</h3><div class="inc">包含进阶版全部内容，另加</div><ul><li><svg viewBox="0 0 24 24" class="ck" aria-hidden="true"><path d="M5 12.5l4.2 4.2L19 7" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg><span>每台工作站部署 CYBER3 Desktop XDR</span></li><li><svg viewBox="0 0 24 24" class="ck" aria-hidden="true"><path d="M5 12.5l4.2 4.2L19 7" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg><span>第 7 层 · 员工手机部署 CYBER3 Mobile</span></li><li><svg viewBox="0 0 24 24" class="ck" aria-hidden="true"><path d="M5 12.5l4.2 4.2L19 7" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg><span>MLEO 覆盖全部 7 层</span></li><li><svg viewBox="0 0 24 24" class="ck" aria-hidden="true"><path d="M5 12.5l4.2 4.2L19 7" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg><span>持续 VAS</span></li><li><svg viewBox="0 0 24 24" class="ck" aria-hidden="true"><path d="M5 12.5l4.2 4.2L19 7" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg><span>面向组织的数据泄露与身份监控</span></li><li><svg viewBox="0 0 24 24" class="ck" aria-hidden="true"><path d="M5 12.5l4.2 4.2L19 7" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg><span>网络 + 终端 + 移动端统一报告（NIS2 第 21/23 条）</span></li></ul><div class="bf"><b>适用于</b>涉及敏感公民数据且合规要求严格——由一家供应商、一份报告提供完整的多层防御。</div></article></div>
+  <p class="note reveal">详细报价可应要求提供，依据初步评估结果及贵机构适用的采购方式编制。</p>
+</div></section>
 
-  <div class="d7-foot"><div class="d7-note"><h3>为什么是级联?</h3><p>没有哪一层单独是完美的。被 IPS 拦下的数据包不会再到达 Active Response;漏过的由 CYBER3 Context Fusion Engine 拦截;IP 层看不到的 L2 攻击(ARP 欺骗)由 L2 Shield 阻止。</p></div><div class="d7-note"><h3>自主运行,无需人工</h3><p>检测 → 上下文融合 → 2–11 秒内自主决策 → 行动:临时封禁、升级为永久封禁、通知。allowlist 在每一步保护合法设备。</p></div><div class="d7-note"><h3>一个有机整体</h3><p>MLEO 不是新的一层,而是连接现有各层的编排器:原本各自为战的七层,成为一个在所有层级都能看到同一设备的有机整体。</p></div></div>
-  <p class="d7-tag">FasterUp NEXTGEN SOC · <b>7 层 · MLEO · 纵深防御</b></p>
-  <script src="/defense7.js" defer></script>
-  </div>
+<section class="sec" id="start" style="padding-top:40px"><div class="wrap">
+  <div class="head reveal"><span class="kicker">开始使用</span><h2>从评估到自主防御</h2></div>
+  <div class="steps"><div class="step reveal"><div class="sn">1</div><h3>评估</h3><p>我们通过漏洞评估梳理您的资产和暴露面——清晰呈现您当前的安全状况。</p></div><div class="step reveal"><div class="sn">2</div><h3>部署传感器</h3><p>串联或旁路，每个站点约 15 分钟，终端无需安装代理。</p></div><div class="step reveal"><div class="sn">3</div><h3>自主 SOC</h3><p>从第一天起即提供 24/7 检测与响应、通俗易懂的告警、客户门户和 NIS2 报告。</p></div></div>
+</div></section>
 
-  <div class="head d7-pipehead">
-    <h3>感知。关联。决策。行动——自主完成。</h3>
-    <p>FasterUp AI Autonomous Platform 在数秒内将原始网络信号转化为结构化响应，为每个决策融合四个独立情报来源。</p>
-  </div>
-  <div class="arch">
-    <div class="flow">
-      <details class="node device"><summary><b>网络传感器</b><span>Cluster 1 IDS/IPS · inline 或被动</span></summary>
-        <div class="nbody">每个站点的专用传感器捕获并检查流量，发现 ARP 欺骗、恶意 DHCP、扫描和漏洞利用——终端上无代理。仅元数据离开你的网络，通过加密专用 VPN。</div>
-      </details>
-      <div class="arrow">→</div>
-      <details class="node edge"><summary><b>SIEM 关联</b><span>Cluster 1 SIEM · 事件标准化与关联</span></summary>
-        <div class="nbody">原始数据包转化为规范化事件，再在整个环境中关联，使孤立信号汇成一个有意义的单一事件——而非数千条互不相连的日志。</div>
-      </details>
-      <div class="arrow">→</div>
-      <details class="node soc"><summary><b>CYBER3 Context Fusion Engine</b><span>2–11秒内自主决策</span></summary>
-        <div class="nbody">专有引擎将四个独立来源——MISP 威胁情报、Cluster 1 IDS/IPS 遥测、SIEM 关联和 CYBER3 数据库——融合为单一情境化风险决策，2–11 秒内完成。</div>
-      </details>
-      <div class="arrow">→</div>
-      <details class="node device"><summary><b>响应</b><span>拦截 · 通知 · 升级</span></summary>
-        <div class="nbody">按严重程度，平台自行行动：静默记录、自动拦截源 IP、紧急告警或升级给人工分析师——端到端数秒，7×24。</div>
-      </details>
-    </div>
-    <details class="kanon" open>
-      <summary><span class="tag">自主</span> 平台如何对每条告警进行决策与行动</summary>
-      <div class="kbody">每条告警都由 AI 跨四个来源评分。<b>可疑</b>事件被静默记录；<b>确认的攻击</b>触发自动 IP 拦截；<b>严重</b>事件发出紧急告警；<b>关键性入侵</b>升级给人工分析师。端到端：2–11 秒。</div>
-    </details>
-    <details class="kanon" open>
-      <summary><span class="tag">HEALTH CHECK</span> 自我监控——并自我修复——的平台</summary>
-      <div class="kbody">整个平台由自主的 <b>Health Check</b> 系统统管，全天候持续监控、管理并自我修复整支传感器舰队——无需人工介入。它检测停滞的抓包、重启卡死的服务、恢复断开的 VPN 隧道，并以合成 canary 告警验证端到端管道。每个传感器自我修复，舰队始终在线。</div>
-    </details>
-  </div>
-  <div class="principles">
-    <details class="p"><summary><b>默认自主</b></summary><span>无需等待分析师即可决策与行动——平台处理常规，人工处理例外。</span></details>
-    <details class="p"><summary><b>多来源情境融合</b></summary><span>MISP threat intel + Cluster 1 IDS/IPS 遥测 + Cluster 1 SIEM 关联 + CYBER3 Database——每个决策皆然。</span></details>
-    <details class="p"><summary><b>部署在您的现场</b></summary><span>传感器位于您的网络中；仅元数据通过加密专用 VPN 流向 SOC。</span></details>
-    <details class="p"><summary><b>为问责而构建</b></summary><span>完整审计跟踪、结构化报告以及符合 GDPR 的数据处理——为公共管理而设计。</span></details>
-    <details class="p"><summary><b>开放且成熟的技术栈</b></summary><span>基于 Cluster 1 IDS/IPS、SIEM 关联与 MISP 威胁情报——经加固、编排，并由我们的 AI 引擎决策。</span></details>
-    <details class="p"><summary><b>实时管道</b></summary><span>原始数据包 → 规范化事件 → 关联告警 → AI 决策 → 响应，端到端数秒完成。</span></details>
-  </div>
-</section>
+<section><div class="wrap"><div class="endbox reveal"><h2>像攻击者一样审视您的网络——抢在他们之前。</h2><p>从一次评估开始。无需承诺，按您的环境定制范围。</p><a class="btn btn-red" href="mailto:contact@rol.ro?subject=FasterUp%20-%20Assessment">申请评估</a></div></div></section>
 
-<section id="xdr" class="section x7">
-  <div class="head">
-    <div class="kicker">ENDPOINT XDR · CYBER3</div>
-    <h2>SOC 延伸至每一台工作站——以及每一部手机</h2>
-    <p>级联防御的第 6 层和第 7 层运行在员工的设备上：CYBER3 EDR/XDR for Desktop 部署于每台 Windows 工作站，CYBER3 Mobile Protection 部署于每部手机。两者向同一个 SOC 上报，使用同一个威胁数据库，并由同一个 MLEO 统一编排——从网络传感器到手机应用，技术始终由同一方掌控。</p>
+<footer><div class="wrap">
+  <div class="fgrid">
+    <div><a class="brand" href="/zh/"><i class="xmark" aria-hidden="true"></i><span class="fu">FasterUp</span>.AI</a><p>面向企业与公共管理部门的自主网络安全——一套技术，一家供应商，端到端。</p><span class="certs">ISO/IEC 27001:2022 · GDPR · NIS2</span></div>
+    <div><h4>平台</h4><a href="#platform">平台</a><a href="#layers">七层防御</a><a href="#mleo">MLEO</a><a href="#ai">CYBER3.AI</a><a href="#vas">VAS</a></div>
+    <div><h4>生态系统</h4><a href="https://cyber3.app/">CYBER3 — app</a><a href="https://cyber3.ai/">CYBER3.AI — LLM</a><a href="https://cyber3.ai/status/zh/" target="_blank" rel="noopener">服务状态</a></div>
+    <div><h4>公司</h4><a href="/contact">联系我们</a><a href="/privacy">隐私</a><a href="/terms">条款</a></div>
   </div>
-  <div class="x7-prod"><div class="x7-ph"><span class="x7-tag">第 6 层 · Windows</span><h3>CYBER3 EDR/XDR for Desktop</h3><p>原生 Windows 应用，将每台工作站变为接入 SOC 的检测与响应节点。经过数字签名，自动更新，并可通过客户控制台按组织统一管理。</p></div><div class="x7-gal"><figure class="x7-main"><img id="x7d-main" src="/assets/shots/desktop-home-en.webp" alt="CYBER3 EDR/XDR for Desktop — 仪表板" loading="lazy" width="1600" height="1067"></figure><div class="x7-thumbs"><button type="button" class="x7-th on" data-g="x7d" data-src="/assets/shots/desktop-home-en.webp" data-alt="CYBER3 EDR/XDR for Desktop — 仪表板"><img src="/assets/shots/desktop-home-en.webp" alt="" loading="lazy"><span>仪表板</span></button><button type="button" class="x7-th" data-g="x7d" data-src="/assets/shots/desktop-globalscan-en.webp" data-alt="CYBER3 EDR/XDR for Desktop — Global Scan"><img src="/assets/shots/desktop-globalscan-en.webp" alt="" loading="lazy"><span>Global Scan</span></button><button type="button" class="x7-th" data-g="x7d" data-src="/assets/shots/desktop-isolation-en.webp" data-alt="CYBER3 EDR/XDR for Desktop — 工作站隔离"><img src="/assets/shots/desktop-isolation-en.webp" alt="" loading="lazy"><span>工作站隔离</span></button><button type="button" class="x7-th" data-g="x7d" data-src="/assets/shots/desktop-pcscan-en.webp" data-alt="CYBER3 EDR/XDR for Desktop — 电脑扫描"><img src="/assets/shots/desktop-pcscan-en.webp" alt="" loading="lazy"><span>电脑扫描</span></button><button type="button" class="x7-th" data-g="x7d" data-src="/assets/shots/desktop-vpn-en.webp" data-alt="CYBER3 EDR/XDR for Desktop — CYBER3 VPN"><img src="/assets/shots/desktop-vpn-en.webp" alt="" loading="lazy"><span>CYBER3 VPN</span></button></div></div><div class="x7-blocks"><div class="x7-b"><div class="x7-bi"><svg class="cshield" viewBox="0 0 24 24"><path d="M12 2.1 L20.6 5 V11 C20.6 16.6 16.8 20.5 12 21.9 C7.2 20.5 3.4 16.6 3.4 11 V5 Z" fill="rgba(212,175,55,.14)" stroke="#d4af37" stroke-width="1.3"/><g fill="none" stroke="#f2d778" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5.2 V18.2"/><path d="M12 5.7 h2.2 a2 2 0 0 1 0 3.9 H12"/><path d="M8 11 L16 15.6"/><path d="M16 11 L8 15.6"/></g></svg></div><h4>实时防护</h4><p>DNS-Shield 覆盖整台工作站：危险域名在解析阶段即被拦截；即使防护意外停止，DNS 仍可正常工作（fail-open）。本地威胁引擎内置超过 250 万个已知威胁指标，浏览器防护扩展包含 29,131 条规则。</p></div><div class="x7-b"><div class="x7-bi">🔍</div><h4>电脑扫描</h4><p>检查工作站的安全状况——杀毒软件、防火墙、UAC、系统更新——并扫描 Downloads、Temp 文件夹及开机启动项中的已知恶意软件。0–100 评分，一键移入隔离区，每 3 小时自动重新扫描。</p></div><div class="x7-b"><div class="x7-bi">🛰️</div><h4>内置 CYBER3 Global Scan</h4><p>发现本地网络中的所有设备，检查 38 个暴露端口，并将软件版本与已知 CVE 进行比对——非破坏性扫描，只“看门，不进门”。可选生成 AI 报告，并保存至组织账户。</p></div><div class="x7-b"><div class="x7-bi">🛑</div><h4>工作站隔离</h4><p>一旦确认存在恶意软件，或收到 SOC 指令，CYBER3 守护程序即将工作站从网络中断开，同时保留与 SOC 的连接，以便远程恢复。除非 SOC 继续保持隔离，30 分钟后将自动恢复连接；kill-switch 可立即解除隔离。</p></div><div class="x7-b"><div class="x7-bi">🖥️</div><h4>客户控制台 + SOC</h4><p>组织模式可通过激活码启用，也可在部署时静默启用。desktopapp.cyber3.ai 控制台展示工作站清单、状态和事件，并可远程执行扫描、隔离和重新连接——工作站在 30 秒内接收指令。每个客户只能看到自己的设备。</p></div><div class="x7-b"><div class="x7-bi">📡</div><h4>安全遥测</h4><p>离开工作站的只有安全元数据——心跳、扫描、威胁、隔离状态——经由本地传感器传输；在办公场所以外，则经由 CYBER3 云边缘传输。个人模式下不发送任何数据。</p></div><div class="x7-b"><div class="x7-bi">🔒</div><h4>CYBER3 VPN</h4><p>加密、无日志的 WireGuard VPN：每天免费 400 MB，订阅即享不限流量，服务器分布于 4 个国家，付费方案可自选服务器。</p></div><div class="x7-b"><div class="x7-bi">⚡</div><h4>即时检测 + 备份</h4><p>检测消息（AI 判定）、链接、电话号码、邮箱泄露和密码（k-匿名：仅哈希前缀离开设备）。将重要文件备份至本地办公场所的服务器，并支持保留策略。</p></div></div></div>
-  <div class="x7-prod x7-mob"><div class="x7-ph"><span class="x7-tag x7-tag7">第 7 层 · Android</span><h3>CYBER3 Mobile Protection</h3><p>这款 Android 应用在每位员工的手机上实时拦截诈骗、网络钓鱼和危险网站，所有处理均在设备端完成。与传感器和工作站共用同一威胁数据库，每 12 小时更新一次。现已在 Google Play 上架。</p></div><div class="x7-phones"><figure class="x7-phone"><img src="/assets/shots/mobile-home-en.webp" alt="CYBER3 Mobile Protection — 主页" loading="lazy" width="540" height="1202"><figcaption>主页</figcaption></figure><figure class="x7-phone"><img src="/assets/shots/mobile-guard-en.webp" alt="CYBER3 Mobile Protection — 来电与消息防护" loading="lazy" width="540" height="1202"><figcaption>来电与消息防护</figcaption></figure></div><div class="x7-blocks"><div class="x7-b"><div class="x7-bi">📞</div><h4>来电防护</h4><p>CYBER3 成为手机的 Caller ID：每个来电号码都会与威胁数据库比对。可选自动拒接已知诈骗号码，并在来电界面上方显示醒目警示。</p></div><div class="x7-b"><div class="x7-bi">💬</div><h4>消息防护</h4><p>读取收到的通知——SMS、WhatsApp 及其他应用——无需 SMS 权限，仅在消息存在危险时发出警告。</p></div><div class="x7-b"><div class="x7-bi">🤖</div><h4>消息检测</h4><p>从任意应用粘贴或分享一条消息，即可获得“安全”“可疑”或“危险”的判定及原因：仿冒品牌、高风险域名、催促或付款话术、URL 伎俩——由 AI 给出解释。</p></div><div class="x7-b"><div class="x7-bi">🌐</div><h4>网页防护</h4><p>手机本地 DNS 过滤，无需中间服务器：威胁数据库中的危险域名、广告和追踪器在所有应用中均被拦截。</p></div><div class="x7-b"><div class="x7-bi">📱</div><h4>手机扫描</h4><p>0–100 评分：屏幕锁定、USB 调试、开发者选项、安全补丁时效；拥有管理员或无障碍权限的应用、带有高风险权限的侧载应用——并将每个已安装应用的哈希值与威胁数据库比对。</p></div><div class="x7-b"><div class="x7-bi">🪪</div><h4>身份与泄露</h4><p>检测邮箱是否泄露，每 12 小时持续监控，每次发现新泄露即发送通知；采用 k-匿名方式检测密码。</p></div><div class="x7-b"><div class="x7-bi">🔒</div><h4>CYBER3 VPN</h4><p>加密、无日志的 WireGuard VPN：每天免费 400 MB，订阅即享不限流量，4 个国家共 6 台服务器，支持分离隧道（split tunneling）和内置测速。</p></div><div class="x7-b"><div class="x7-bi">🔗</div><h4>号码与链接检测 + 上报</h4><p>检测任意号码或链接；未知威胁可提交上报，经分析师验证后纳入共享威胁数据库。</p></div></div></div>
-  <div class="x7-eco"><h3>一个生态系统。技术由同一方端到端掌控。</h3><p class="x7-ep">这七层并非不同厂商产品的拼凑，而是由同一家公司构建、运营和支持的统一系统——产品之间没有盲区，整条链路只有一个责任方。</p><div class="x7-where"><div class="x7-w"><b>1–4</b><span class="x7-wl">在传感器上，部署于您的现场</span><span class="x7-wn">Inline IPS · Active Response · L2 Shield · CYBER3 Context Fusion Engine</span></div><div class="x7-w"><b>5</b><span class="x7-wl">在云端，随时随地</span><span class="x7-wn">CYBER3 Edge——边缘侧的 DNS-shield 与威胁数据库</span></div><div class="x7-w"><b>6</b><span class="x7-wl">在每台工作站上</span><span class="x7-wn">CYBER3 EDR/XDR for Desktop</span></div><div class="x7-w"><b>7</b><span class="x7-wl">在每部手机上</span><span class="x7-wn">CYBER3 Mobile Protection</span></div></div><div class="x7-ecols"><div><h4>七层共享</h4><ul class="x7-shared"><li>同一个 CYBER3 威胁数据库（超过 250 万个指标，每日更新）</li><li>同一个 SOC，24/7 全天候</li><li>同一个 MLEO 编排器：在某一层发现的威胁，会在最合适的层级执行处置</li><li>闭环：我们自有的传感器将其指标贡献给保护工作站和手机的数据库</li></ul></div><div><h4>我们自主构建和运营的部分</h4><div class="x7-own"><span>网络传感器及其规则集</span><span>L2 Shield</span><span>CYBER3 Context Fusion Engine 与 MLEO</span><span>CYBER3 Edge 与威胁数据库</span><span>自主可控的安全大模型（LLM）</span><span>Desktop 与 Mobile 应用</span><span>VPN 网络</span><span>客户控制台与 SOC 门户</span></div></div></div><div class="x7-why"><h4>为何对机构至关重要</h4><ul><li>覆盖最主要的攻击途径：员工与工作站——网络钓鱼、诈骗、恶意链接与附件、泄露的密码。</li><li>保护外勤或远程办公的员工，而不仅限于物理边界之内。</li><li>隐私优先设计：设备端处理与 k-匿名；无需注册账户，无广告，无广告 SDK。</li><li>终端遥测数据汇入同一个 SOC 和 MLEO，打通网络侧检测与终端侧检测的闭环。</li></ul></div></div>
-  <script src="/endpoint7.js" defer></script>
-</section>
-
-<section id="packages" class="section alt">
-  <div class="head">
-    <div class="kicker">套餐</div>
-    <h2>按贵机构规模定制</h2>
-    <p>每个方案都包含上一方案的全部内容,并增加防御层与能力。具体配置(传感器、站点、工作站、手机)在对环境进行初步评估后确定。</p>
-  </div>
-  <div class="cards pk7-cards">
-    <article class="card pk7"><div class="badge" style="background:#1E4C95">STANDARD</div><h3>Standard</h3>
-      <p class="pk7-inc">包含</p><ul class="pk7-list"><li>7×24 托管 SOC · 2–11 秒自主响应</li><li>主站点的内联传感器</li><li>第 1–4 层:Inline IPS · Active Response · L2 Shield · CYBER3 Context Fusion Engine</li><li>MLEO:L3 ↔ L2 关联,并在正确的层执行</li><li>每月定期漏洞评估</li><li>通俗易懂的告警(Telegram、邮件)+ 含 NIS2 报告的客户门户</li><li>传感器 7×24 自主健康检查</li></ul>
-      <details class="more"><summary>适合</summary><div class="body">IT 基础设施集中的中心办公点。无需自建 SOC 即可获得 7×24 自主监控与定期漏洞画像。</div></details></article>
-    <article class="card pk7"><div class="badge" style="background:#1E4C95">扩展</div><h3>扩展</h3>
-      <p class="pk7-inc">Standard 的全部内容,另加</p><ul class="pk7-list"><li>所有站点部署内联传感器</li><li>第 5 层 · CYBER3 Edge:面向整个组织的 DNS 防护盾与边缘 IOC</li><li>第 6 层 · 关键工作站部署 CYBER3 EDR/XDR for Desktop</li><li>客户控制台:隔离工作站、远程扫描、终端群状态</li><li>内部网络的 CYBER3 Global Scan</li><li>MLEO 覆盖所有站点</li><li>每两周漏洞评估</li></ul>
-      <details class="more"><summary>适合</summary><div class="body">暴露较高的多站点机构。处处网络覆盖，外加最重要工作站上的终端 XDR。</div></details></article>
-    <article class="card pk7 feature"><div class="badge">推荐</div><h3>完整</h3>
-      <p class="pk7-inc">扩展版的全部内容,另加</p><ul class="pk7-list"><li>所有工作站部署 CYBER3 EDR/XDR for Desktop</li><li>第 7 层 · 员工手机部署 CYBER3 Mobile Protection</li><li>MLEO 覆盖全部 7 层:网络、云端、工作站、手机</li><li>持续漏洞评估</li><li>组织账户的泄露与身份监测</li><li>网络 + 终端 + 移动统一报告(NIS2 第 21/23 条)</li></ul>
-      <details class="more"><summary>适合</summary><div class="body">县级、敏感公民数据、严格合规。完整的多层防御——边界与每台工作站——由单一供应商提供并统一报告。</div></details></article>
-  </div>
-  <p class="pricenote">价格：本文件介绍服务与技术方案。详细的财务报价应要求提供，依据初始评估（站点、传感器、终端）以及适用于贵机构的采购方式。</p>
-</section>
-
-<section id="start" class="section">
-  <div class="head">
-    <div class="kicker">开始</div>
-    <h2>从评估到自主防御</h2>
-    <p>为任何规模的组织提供简单的上手流程——从单一办公室到分布式公共机构。</p>
-  </div>
-  <div class="dl">
-    <article class="plat">
-      <div class="pico">🎯</div>
-      <h3>1 · 评估</h3>
-      <p>我们通过漏洞评估梳理您的资产和暴露面——清晰呈现您的现状。</p>
-      <a class="btn" href="mailto:contact@rol.ro?subject=FasterUp%20-%20Contact">▸ 申请评估</a>
-      <span class="hint">无需承诺 · 按您的环境定制</span>
-      <details class="more"><summary>查看详情</summary>
-        <div class="body">我们通过漏洞评估梳理贵机构的资产与暴露面——结果是对现状的清晰呈现。<b>无需承诺，严格限定于贵方环境</b>，并为合理规模的报价奠定基础。</div>
-      </details>
-    </article>
-
-    <article class="plat">
-      <div class="pico">🖥️</div>
-      <h3>2 · 传感器部署</h3>
-      <p>我们在您的站点安装网络传感器——inline 或被动——通过专用加密 VPN 连接到 SOC。</p>
-      <a class="btn ghost" href="#technology">▸ 查看架构</a>
-      <span class="hint">每站点约 15 分钟 · 无终端代理</span>
-      <details class="more"><summary>查看详情</summary>
-        <div class="body">我们在每个站点安装网络传感器，inline 或被动，通过加密专用 VPN 连接到 SOC。<b>每站点约 15 分钟，终端上无代理。</b>可选地，按贵方策略在工作站和移动设备上部署 CYBER3 XDR 应用。</div>
-      </details>
-    </article>
-
-    <article class="plat">
-      <div class="pico"><svg class="cshield" viewBox="0 0 24 24"><path d="M12 2.1 L20.6 5 V11 C20.6 16.6 16.8 20.5 12 21.9 C7.2 20.5 3.4 16.6 3.4 11 V5 Z" fill="rgba(212,175,55,.14)" stroke="#d4af37" stroke-width="1.3"/><g fill="none" stroke="#f2d778" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5.2 V18.2"/><path d="M12 5.7 h2.2 a2 2 0 0 1 0 3.9 H12"/><path d="M8 11 L16 15.6"/><path d="M16 11 L8 15.6"/></g></svg></div>
-      <h3>3 · 自主 SOC</h3>
-      <p>7×24 的 AI 监控与响应上线。您收到告警和报告——其余交给平台。</p>
-      <a class="btn" href="mailto:contact@rol.ro?subject=FasterUp%20-%20Contact">▸ 联系我们</a>
-      <span class="hint">托管 · 自主 · 始终在线</span>
-      <details class="more"><summary>查看详情</summary>
-        <div class="body">7×24 的 AI 监控与响应上线。你收到清晰的告警和报告，其余交给平台——在自主 Health Check 之下运行，它监控、管理并自我修复整支舰队，<b>无需人工介入</b>。</div>
-      </details>
-    </article>
-  </div>
-</section>
-
-<style>
-.c3foot{width:100%;box-sizing:border-box;border-top:1px solid #1E4C95;background:#040f24;color:#9FB3D1;padding:12px 22px;display:flex;flex-direction:column;gap:6px;font-size:12px}
-.c3foot .c3r{display:flex;flex-wrap:wrap;align-items:center;gap:4px 16px;width:100%}
-.c3foot .c3b{font-weight:800;font-size:15px;color:#FF0000}.c3foot .c3b .cr{color:#fff}
-.c3foot .c3tag{color:#9FB3D1}
-.c3foot .c3badges{margin-left:auto;color:#D4AF37;border:1px solid rgba(212,175,55,.4);border-radius:8px;padding:3px 10px;font-size:10.5px;letter-spacing:.3px}
-.c3foot a{color:#9FB3D1;text-decoration:none}.c3foot a:hover{color:#D4AF37}
-.c3foot .c3sep{color:#1E4C95}
-.c3foot .c3r3{border-top:1px solid rgba(30,76,149,.3);padding-top:6px;color:#6f86ad;font-size:10.5px}
-.c3foot .c3grow{flex:1;min-width:10px}
-@media(max-width:760px){.c3foot .c3badges{margin-left:0}.c3foot .c3grow{display:none}}
-.cshield{width:1.28em;height:1.28em;vertical-align:-.30em;display:inline-block}</style>
-<footer class="c3foot">
-  <div class="c3r">
-    <span class="c3b">FasterUp<span class="cr">.AI</span></span>
-    <span class="c3tag">面向企业与公共管理的 AI 自主网络安全平台。托管 SOC 与漏洞评估。</span>
-    <span class="c3badges">ISO/IEC 27001:2022 · GDPR · NIS2 · AI Act</span>
-    <a class="c3sw" href="https://cyber3.ai/status/zh/" target="_blank" rel="noopener"><i id="c3swd"></i><span id="c3swt">…</span></a>
-  </div>
-  <div class="c3r">
-    <a href="#services">服务</a><a href="#technology">技术</a>    <a href="#xdr">终端 XDR</a>
-    <a href="#packages">套餐</a>
-<a href="#start">开始</a><a href="https://cyber3.ai/status/zh/" target="_blank" rel="noopener">服务状态</a>
-    <span class="c3sep">·</span>
-    <a href="/contact">联系</a><a href="/terms">条款</a><a href="/privacy">隐私</a>
-  </div>
-  <div class="c3r c3r3">
-    <span>ROL PORTAL SERVICES SRL · CUI RO 36837313 · J2016016379403 · ISO/IEC 27001:2022 · <a href="mailto:contact@rol.ro">contact@rol.ro</a></span>
-    <span class="c3grow"></span>
-    <span>© 2026 FasterUp.AI — ROL PORTAL SERVICES SRL · 保留所有权利。</span>
-  </div>
-</footer>
-
-<script src="/app.js"></script>
-<style>.c3sw{display:inline-flex;align-items:center;gap:7px;font-size:11.5px;color:#9FB3D1;text-decoration:none}.c3sw:hover span{color:#D4AF37}
-.c3sw i{width:8px;height:8px;border-radius:50%;background:#9FB3D1;flex:0 0 auto}
-.c3sw i.ok{background:#37d39b;box-shadow:0 0 6px #37d39b;animation:c3swp 2s ease-in-out infinite}
-.c3sw i.deg{background:#e8b53a;box-shadow:0 0 6px #e8b53a}
-@keyframes c3swp{0%,100%{opacity:1}50%{opacity:.45}}</style>
-<script>(function(){var U=["https://cyber3-edge.cyber3.workers.dev/v1/health","https://cyber3-llm.cyber3.workers.dev/v1/health","https://cyber3-vpn-cp.cyber3.workers.dev/health"];
-function chk(){Promise.all(U.map(function(u){return fetch(u,{cache:"no-store"}).then(function(r){return r.ok?0:1}).catch(function(){return 1})})).then(function(res){
-var bad=res.reduce(function(a,b){return a+b},0),d=document.getElementById("c3swd"),t=document.getElementById("c3swt");if(!d)return;
-d.className=bad?"deg":"ok";t.textContent=bad?"部分服务受影响":"所有系统运行正常";});}chk();setInterval(chk,60000);})();</script>
-</body>
-</html>
+  <div class="fbot"><span>FasterUp.AI 是 ROL PORTAL SERVICES SRL 旗下品牌 · © 2026 · ROL PORTAL SERVICES SRL · CUI RO 36837313 · J2016016379403</span><a class="sw" href="https://cyber3.ai/status/zh/" target="_blank" rel="noopener"><i id="swd"></i><span id="swt">…</span></a></div>
+</div></footer>
+<script>
+(function(){
+var nav=document.getElementById('nav');function sc(){nav.classList.toggle('solid',scrollY>20)}sc();addEventListener('scroll',sc,{passive:true});
+document.querySelectorAll('#links a').forEach(function(a){a.addEventListener('click',function(){nav.classList.remove('open')})});
+var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}})},{threshold:.1,rootMargin:'0px 0px -40px 0px'});
+document.querySelectorAll('.reveal').forEach(function(el){io.observe(el)});
+// capturi desktop
+var dt=[].slice.call(document.querySelectorAll('.dtab')),di=[].slice.call(document.querySelectorAll('#dview img'));
+dt.forEach(function(b,k){b.addEventListener('click',function(){dt.forEach(function(x,j){x.classList.toggle('on',j===k)});di.forEach(function(x,j){x.classList.toggle('on',j===k)})})});
+// inelele: amenințări care vin din exterior și sunt oprite pe un strat (vizualizare, nu date)
+var pz=document.getElementById('pz'),NS='http://www.w3.org/2000/svg',Z=['#ff3b4b','#ff7a45','#e8c35a','#4f8cff','#22c7e8','#34d399','#9b7bff'];
+var reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
+function shot(){if(!pz||document.hidden)return;var a=Math.random()*Math.PI*2,k=Math.floor(Math.random()*7),R0=316,R1=288-k*32+4,c=document.createElementNS(NS,'circle');
+ c.setAttribute('r','4.5');c.setAttribute('fill','#ff2020');c.setAttribute('filter','drop-shadow(0 0 6px #f00)');pz.appendChild(c);var t0=performance.now(),D=900+k*120;
+ (function step(t){var p=Math.min(1,(t-t0)/D),r=R0+(R1-R0)*p;c.setAttribute('cx',300+r*Math.cos(a));c.setAttribute('cy',300+r*Math.sin(a));
+  if(p<1){requestAnimationFrame(step);return}c.remove();var b=document.createElementNS(NS,'circle');b.setAttribute('cx',300+R1*Math.cos(a));b.setAttribute('cy',300+R1*Math.sin(a));
+  b.setAttribute('fill','none');b.setAttribute('stroke',Z[k]);b.setAttribute('stroke-width','2');pz.appendChild(b);var t1=performance.now();
+  (function burst(t){var q=Math.min(1,(t-t1)/600);b.setAttribute('r',4+22*q);b.setAttribute('opacity',1-q);if(q<1)requestAnimationFrame(burst);else b.remove()})(t1);
+  var ring=document.getElementById('r'+k);if(ring){ring.setAttribute('stroke-opacity','1');ring.setAttribute('stroke-width','4');setTimeout(function(){ring.setAttribute('stroke-opacity','.55');ring.setAttribute('stroke-width','2')},380)}
+ })(t0)}
+if(!reduce){setInterval(shot,700);shot()}
+// CYBER3 Database: cifrele REALE din manifest (+ ritmul contorului de pe blog, +0,1/s)
+var L=document.documentElement.lang,els=[].slice.call(document.querySelectorAll('.ioc')),base=+(els[0]&&els[0].dataset.n)||2500000,t0=Date.now();
+function fmt(n,compact){try{return compact?(n/1e6).toLocaleString(L,{maximumFractionDigits:1})+'M+':n.toLocaleString(L)}catch(e){return n}}
+function draw(){var n=Math.floor(base+(Date.now()-t0)/10000);els.forEach(function(e){e.textContent=fmt(n,!!e.closest('.stat'))})}
+fetch('https://cyber3-edge.cyber3.workers.dev/v1/manifest',{cache:'no-store'}).then(function(r){return r.json()}).then(function(d){if(d&&d.count){base=Math.max(+d.count,2500000);t0=Date.now();draw()}
+ var fp=document.getElementById('fp');if(fp&&d&&d.count_firstparty)fp.textContent=(+d.count_firstparty).toLocaleString(L)}).catch(function(){});draw();setInterval(draw,1000);
+// vizualizarea bazei: particule (surse) care curg spre nucleu
+var cv=document.getElementById('dbc');if(cv&&!reduce){var x=cv.getContext('2d'),P=[];for(var i=0;i<120;i++)P.push({a:Math.random()*6.283,r:120+Math.random()*170,s:.4+Math.random()*1.2,c:Math.random()<.2?'#ff3b4b':(Math.random()<.5?'#e8c35a':'#33A1FF')});
+ (function loop(){x.clearRect(0,0,600,600);P.forEach(function(p){p.r-=p.s;p.a+=.004;if(p.r<95){p.r=290;p.a=Math.random()*6.283}var X=300+p.r*Math.cos(p.a),Y=300+p.r*Math.sin(p.a);
+  x.globalAlpha=Math.min(1,(p.r-95)/60);x.fillStyle=p.c;x.beginPath();x.arc(X,Y,2,0,6.283);x.fill()});x.globalAlpha=1;requestAnimationFrame(loop)})()}
+// stare servicii
+var U=["https://cyber3-edge.cyber3.workers.dev/v1/health","https://cyber3-vpn-cp.cyber3.workers.dev/health"];
+function chk(){Promise.all(U.map(function(u){return fetch(u,{cache:"no-store"}).then(function(r){return r.ok?0:1}).catch(function(){return 1})})).then(function(r){var bad=r.reduce(function(a,b){return a+b},0),d=document.getElementById('swd'),t=document.getElementById('swt');if(!d)return;d.className=bad?'deg':'ok';t.textContent=bad?'Degraded':'All systems operational'})}chk();setInterval(chk,60000);
+})();
+</script>
+</body></html>

@@ -1,358 +1,424 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>FasterUp.AI — Plataforma Autónoma de Ciberseguridad con IA</title>
-<meta name="description" content="FasterUp AI Autonomous Platform — SOC gestionado y Evaluación de Vulnerabilidades para empresas y administración pública. Detecta, decide y responde de forma autónoma.">
-<meta property="og:title" content="FasterUp.AI — Plataforma Autónoma de Ciberseguridad con IA">
-<meta property="og:description" content="SOC gestionado y Evaluación de Vulnerabilidades para empresas y administración pública. Detección y respuesta autónoma en segundos.">
-<meta property="og:image" content="/assets/icon.svg">
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>FasterUp.AI — Una tecnología. Un proveedor. Ciberdefensa autónoma, de extremo a extremo.</title>
+<meta name="description" content="FasterUp NEXTGEN SOC: siete capas de defensa complementarias, desde el cable Ethernet hasta el puesto de trabajo y el teléfono, orquestadas por MLEO, decididas por CyberBot Fusion y explicadas por CYBER3.AI, nuestro LLM de seguridad soberano. SOC gestionado, Vulnerability Assessment y protección de endpoints de un único proveedor.">
+<link rel="canonical" href="https://fasterup.ai/es/"><link rel="alternate" hreflang="en" href="https://fasterup.ai/"><link rel="alternate" hreflang="ro" href="https://fasterup.ai/ro/"><link rel="alternate" hreflang="es" href="https://fasterup.ai/es/"><link rel="alternate" hreflang="it" href="https://fasterup.ai/it/"><link rel="alternate" hreflang="de" href="https://fasterup.ai/de/"><link rel="alternate" hreflang="fr" href="https://fasterup.ai/fr/"><link rel="alternate" hreflang="ru" href="https://fasterup.ai/ru/"><link rel="alternate" hreflang="zh" href="https://fasterup.ai/zh/"><link rel="alternate" hreflang="x-default" href="https://fasterup.ai/">
+<meta name="theme-color" content="#030a18">
+<meta property="og:type" content="website"><meta property="og:url" content="https://fasterup.ai/es/"><meta property="og:title" content="FasterUp.AI — Una tecnología. Un proveedor. Ciberdefensa autónoma, de extremo a extremo."><meta property="og:description" content="FasterUp NEXTGEN SOC: siete capas de defensa complementarias, desde el cable Ethernet hasta el puesto de trabajo y el teléfono, orquestadas por MLEO, decididas por CyberBot Fusion y explicadas por CYBER3.AI, nuestro LLM de seguridad soberano. SOC gestionado, Vulnerability Assessment y protección de endpoints de un único proveedor.">
 <link rel="icon" href="/assets/icon.svg">
-<link rel="stylesheet" href="/styles.css">
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-KH8RKEF517"></script>
-<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-KH8RKEF517');</script>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Sora:wght@600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#030a18;--bg2:#061430;--panel:rgba(17,42,82,.5);--line:rgba(120,165,255,.15);--line2:rgba(120,165,255,.26);--text:#eef3ff;--mute:#a3b6d6;--dim:#6f86ad;
+--red:#FF0000;--red2:#ff3b4b;--gold:#D4AF37;--gold2:#f2d778;--blue:#33A1FF;--green:#22d38a;--r:22px;--max:1220px;--sh:0 30px 80px -20px rgba(0,0,0,.65)}
+*{box-sizing:border-box;margin:0;padding:0}html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+body{background:var(--bg);color:var(--text);font:16px/1.6 Inter,'Segoe UI',system-ui,-apple-system,Arial,sans-serif;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+img{max-width:100%;display:block}a{color:inherit;text-decoration:none}
+h1,h2,h3{font-family:Sora,Inter,'Segoe UI',system-ui,sans-serif;letter-spacing:-.02em;line-height:1.1}
+:lang(zh) h1,:lang(zh) h2,:lang(zh) h3,:lang(ru) h1,:lang(ru) h2{letter-spacing:0}
+.wrap{max-width:var(--max);margin:0 auto;padding:0 24px}
+.grad{background:linear-gradient(92deg,#ff4d5a,#ff1a1a 35%,#D4AF37);-webkit-background-clip:text;background-clip:text;color:transparent}
+.kicker{display:inline-flex;align-items:center;gap:8px;font:700 12px/1.3 Inter,sans-serif;letter-spacing:2px;text-transform:uppercase;color:var(--gold);padding:8px 14px;border:1px solid rgba(212,175,55,.35);border-radius:999px;background:rgba(212,175,55,.07)}
+:lang(zh) .kicker,:lang(ru) .kicker{letter-spacing:.5px}
+.kicker::before{content:"";width:6px;height:6px;border-radius:50%;background:var(--red);box-shadow:0 0 10px var(--red);flex:0 0 auto}
+.sec{padding:110px 0;position:relative}
+.head{text-align:center;max-width:860px;margin:0 auto 60px}
+.head h2{font-size:clamp(30px,4.4vw,52px);margin:18px 0 16px}.head p{color:var(--mute);font-size:clamp(16px,1.6vw,19px)}
+.reveal{opacity:0;transform:translateY(26px);transition:opacity .8s cubic-bezier(.2,.7,.2,1),transform .8s cubic-bezier(.2,.7,.2,1)}.reveal.in{opacity:1;transform:none}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;font:700 15px/1 Inter,sans-serif;padding:16px 26px;border-radius:14px;transition:transform .2s,box-shadow .2s,background .2s;border:0;cursor:pointer}
+.btn-red{background:linear-gradient(180deg,#ff2b2b,#d60000);color:#fff;box-shadow:0 12px 32px -8px rgba(255,0,0,.65),inset 0 1px 0 rgba(255,255,255,.25)}
+.btn-red:hover{transform:translateY(-2px);box-shadow:0 18px 44px -8px rgba(255,0,0,.85)}
+.btn-ghost{background:rgba(255,255,255,.06);border:1px solid var(--line2);color:var(--text)}.btn-ghost:hover{background:rgba(255,255,255,.11)}
+.btn-sm{padding:11px 18px;font-size:14px;border-radius:12px}
+/* NAV */
+.nav{position:fixed;inset:0 0 auto 0;z-index:50;border-bottom:1px solid transparent;transition:background .3s,border-color .3s}
+.nav.solid{background:rgba(3,10,24,.8);backdrop-filter:blur(18px) saturate(1.4);-webkit-backdrop-filter:blur(18px) saturate(1.4);border-bottom-color:var(--line)}
+.nav .wrap{display:flex;align-items:center;gap:24px;height:72px}
+.brand{display:inline-flex;align-items:center;font:900 21px/1 'Segoe UI',system-ui,-apple-system,Arial,sans-serif;letter-spacing:.3px;white-space:nowrap;color:#fff}
+.brand .fu{color:#FF0000;text-shadow:0 0 8px rgba(255,0,0,.35)}
+.xmark{display:inline-block;vertical-align:middle;width:1em;height:1em;margin-right:.4em;position:relative;top:-.04em;background:url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><g fill='%23F00'><rect x='44' y='15' width='12' height='70'/><rect x='15' y='44' width='70' height='12'/><rect x='36' y='13' width='28' height='6'/><rect x='36' y='81' width='28' height='6'/><rect x='13' y='36' width='6' height='28'/><rect x='81' y='36' width='6' height='28'/><rect x='27' y='22' width='6' height='16'/><rect x='22' y='27' width='16' height='6'/><rect x='67' y='22' width='6' height='16'/><rect x='62' y='27' width='16' height='6'/><rect x='27' y='62' width='6' height='16'/><rect x='22' y='67' width='16' height='6'/><rect x='67' y='62' width='6' height='16'/><rect x='62' y='67' width='16' height='6'/></g><circle cx='50' cy='50' r='47' fill='none' stroke='%23F00' stroke-width='3'/></svg>") center/contain no-repeat;filter:drop-shadow(0 0 6px rgba(255,0,0,.6));animation:c3pulse 1.8s ease-in-out infinite}
+@keyframes c3pulse{0%,100%{filter:drop-shadow(0 0 3px rgba(255,0,0,.5));transform:scale(1)}50%{filter:drop-shadow(0 0 9px rgba(255,0,0,.95));transform:scale(1.13)}}
+.links{display:flex;gap:20px;margin-left:8px}.links a{font-size:14px;font-weight:500;color:var(--mute);transition:color .2s;white-space:nowrap}.links a:hover{color:var(--text)}
+.nav-r{margin-left:auto;display:flex;align-items:center;gap:12px}
+.lang{background:rgba(255,255,255,.05);color:var(--text);border:1px solid var(--line2);border-radius:999px;padding:8px 12px;font:700 13px/1 Inter,sans-serif;cursor:pointer}
+.lang option{background:#0b1a38;color:#fff}
+.burger{display:none;background:none;border:0;color:var(--text);width:40px;height:40px;cursor:pointer}
+/* HERO */
+.hero{position:relative;min-height:100vh;padding:140px 0 70px;overflow:hidden;isolation:isolate}
+.aurora{position:absolute;inset:-20%;z-index:-2;background:radial-gradient(40% 35% at 18% 28%,rgba(51,161,255,.24),transparent 70%),radial-gradient(35% 32% at 82% 30%,rgba(255,0,0,.2),transparent 70%),radial-gradient(45% 40% at 60% 90%,rgba(212,175,55,.12),transparent 70%);filter:blur(8px);animation:drift 20s ease-in-out infinite alternate}
+@keyframes drift{to{transform:translate3d(3%,-2%,0) rotate(4deg) scale(1.06)}}
+.gridbg{position:absolute;inset:0;z-index:-1;background-image:linear-gradient(var(--line) 1px,transparent 1px),linear-gradient(90deg,var(--line) 1px,transparent 1px);background-size:64px 64px;mask-image:radial-gradient(ellipse 70% 60% at 50% 40%,#000 30%,transparent 80%);-webkit-mask-image:radial-gradient(ellipse 70% 60% at 50% 40%,#000 30%,transparent 80%);opacity:.5}
+.hero .wrap{display:grid;grid-template-columns:1.05fr .95fr;gap:30px;align-items:center}
+.hero h1{font-size:clamp(38px,4.9vw,66px);font-weight:800;margin:22px 0}
+.hero .lead{font-size:clamp(16px,1.55vw,19px);color:var(--mute);max-width:640px}
+.cta{display:flex;flex-wrap:wrap;gap:12px;margin:32px 0 40px}
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;max-width:680px}
+.stat{padding:16px;border-radius:16px;background:var(--panel);border:1px solid var(--line)}
+.stat b{display:block;font:800 clamp(20px,2.2vw,28px)/1.1 Sora,sans-serif;white-space:nowrap;font-variant-numeric:tabular-nums}
+.stat span{display:block;color:var(--mute);font-size:12.5px;line-height:1.35;margin-top:6px}
+.ringbox{position:relative;width:100%;max-width:600px;aspect-ratio:1;justify-self:center}
+.ringbox svg{width:100%;height:100%;overflow:hidden}
+.ring{fill:none;stroke-width:2;opacity:.85;transform-origin:300px 300px}
+.ring.dash{stroke-dasharray:4 10;animation:spin 60s linear infinite}.ring.dash.rev{animation-direction:reverse}
+@keyframes spin{to{transform:rotate(360deg)}}
+.ring.hit{animation:hit .6s ease-out}
+.rlabel{font:700 13px Inter,sans-serif;letter-spacing:.2px}
+.core{font:800 15px Sora,sans-serif;fill:#fff}
+/* TRUST */
+.trust{border-top:1px solid var(--line);border-bottom:1px solid var(--line);background:rgba(6,20,48,.55)}
+.trust .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:16px 28px;padding:24px}
+.trust div{display:flex;align-items:center;gap:10px;color:var(--mute);font-size:14.5px;font-weight:500}.trust svg{color:var(--gold);flex:0 0 auto}
+/* CHAIN */
+.chain{display:grid;grid-template-columns:repeat(6,1fr);gap:16px;position:relative}
+.chain::before{content:"";position:absolute;left:4%;right:4%;top:46px;height:2px;background:linear-gradient(90deg,var(--red),var(--gold),var(--blue),var(--green));opacity:.6}
+.chain::after{content:"";position:absolute;top:43px;left:4%;width:60px;height:8px;border-radius:8px;background:#fff;filter:blur(4px);opacity:.8;animation:run 4s linear infinite}
+@keyframes run{to{left:92%}}
+.cnode{position:relative;text-align:center;padding:0 4px}
+.cnode .n{width:92px;height:92px;margin:0 auto 18px;border-radius:50%;display:grid;place-items:center;background:radial-gradient(circle at 35% 30%,#16336a,#081833);border:1px solid var(--line2);box-shadow:0 0 0 6px rgba(3,10,24,1),0 0 40px -6px var(--c);font:800 26px Sora,sans-serif;color:var(--c);position:relative;z-index:1}
+.cnode h3{font-size:17px;margin-bottom:8px}.cnode p{color:var(--mute);font-size:14px}
+.pfnote{text-align:center;margin-top:46px;color:var(--gold);font-weight:600;font-size:17px}
+/* LAYERS */
+.ltable{border:1px solid var(--line);border-radius:26px;overflow:hidden;background:rgba(6,18,42,.6)}
+.lrow{display:grid;grid-template-columns:56px 1.3fr .8fr 2.4fr .7fr .7fr;gap:16px;align-items:center;padding:18px 26px;border-top:1px solid var(--line);transition:background .25s}
+.lrow:hover{background:rgba(255,255,255,.03)}
+.lrow.h{border-top:0;color:var(--dim);font:700 12px/1 Inter,sans-serif;letter-spacing:1.4px;text-transform:uppercase;padding-top:20px;padding-bottom:14px}
+.lnum{width:40px;height:40px;border-radius:12px;display:grid;place-items:center;font:800 16px Sora,sans-serif;color:#fff;background:var(--c);box-shadow:0 0 22px -4px var(--c)}
+.lname{font-weight:700;font-size:16px}.llev{color:var(--mute);font-size:13.5px}.lhow{color:var(--mute);font-size:14.5px}
+.lt{font:700 14px Sora,sans-serif;color:var(--gold2);white-space:nowrap}
+.lst{display:flex;align-items:center;gap:8px;font-weight:600;font-size:14px;color:var(--green)}
+.lst i{width:9px;height:9px;border-radius:50%;background:var(--green);box-shadow:0 0 10px var(--green);animation:pulse 1.8s infinite}
+@keyframes pulse{50%{opacity:.35}}
+.lnote{padding:16px 26px 22px;color:var(--dim);font-size:13.5px;border-top:1px solid var(--line)}
+/* FUSION */
+.two{display:grid;grid-template-columns:1fr 1fr;gap:54px;align-items:center}
+.two h2{font-size:clamp(30px,3.8vw,46px);margin:18px 0 16px}.two .lead{color:var(--mute);font-size:17.5px}
+.ul{list-style:none;display:grid;gap:12px;margin-top:26px}.ul li{display:flex;gap:12px;align-items:flex-start;font-weight:500}
+.ck{width:22px;height:22px;flex:0 0 auto;color:var(--green);background:rgba(34,211,138,.12);border-radius:50%;padding:3px;margin-top:1px}
+.fusion{position:relative;aspect-ratio:1;max-width:520px;width:100%;justify-self:center}
+.fusion svg{position:absolute;inset:0;width:100%;height:100%}
+.fsrc{position:absolute;width:44%;padding:16px;border-radius:16px;background:var(--panel);border:1px solid var(--line2);backdrop-filter:blur(8px)}
+.fsrc b{display:block;font-size:15px}.fsrc span{color:var(--mute);font-size:13px}
+.fsrc.s0{left:0;top:0}.fsrc.s1{right:0;top:0}.fsrc.s2{left:0;bottom:0}.fsrc.s3{right:0;bottom:0}
+.fcore{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:150px;height:150px;border-radius:50%;display:grid;place-items:center;text-align:center;font:800 15px/1.2 Sora,sans-serif;background:radial-gradient(circle,#2a0b12,#0a1530 70%);border:1px solid rgba(255,0,0,.5);box-shadow:0 0 60px -6px rgba(255,0,0,.6),inset 0 0 30px rgba(255,0,0,.25);animation:corep 2.6s ease-in-out infinite}
+@keyframes corep{50%{box-shadow:0 0 90px 0 rgba(255,0,0,.75),inset 0 0 40px rgba(255,0,0,.35)}}
+.fcore small{display:block;color:var(--gold2);font:700 12px Inter,sans-serif;margin-top:4px}
+.flow{stroke:url(#fg);stroke-width:2;fill:none;stroke-dasharray:6 8;animation:dash 1.2s linear infinite}
+@keyframes dash{to{stroke-dashoffset:-28}}
+.ladder{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-top:28px}
+.ladder div{padding:12px 10px;border-radius:12px;text-align:center;font-size:13px;font-weight:600;background:rgba(255,255,255,.04);border:1px solid var(--line)}
+.ladder div:nth-child(1){border-color:rgba(160,180,210,.35)}.ladder div:nth-child(2){border-color:rgba(255,59,75,.55);color:#ff8a94}.ladder div:nth-child(3){border-color:rgba(232,195,90,.55);color:var(--gold2)}.ladder div:nth-child(4){border-color:rgba(51,161,255,.55);color:#8cc8ff}
+.lh{margin-top:26px;color:var(--dim);font:700 12px Inter,sans-serif;letter-spacing:1.4px;text-transform:uppercase}
+/* CARDS */
+.cards{display:grid;grid-template-columns:repeat(4,1fr);gap:18px}
+.card{position:relative;padding:28px;border-radius:var(--r);background:linear-gradient(180deg,rgba(17,42,82,.6),rgba(6,18,42,.35));border:1px solid var(--line);overflow:hidden;transition:transform .3s,border-color .3s}
+.card:hover{transform:translateY(-6px);border-color:rgba(255,0,0,.45)}
+.card::after{content:"";position:absolute;right:-60px;bottom:-80px;width:220px;height:220px;background:radial-gradient(circle,rgba(255,0,0,.14),transparent 70%)}
+.card .i{font:800 13px Sora,sans-serif;color:var(--red2);letter-spacing:1px}
+.card h3{font-size:19px;margin:12px 0 10px}.card p{color:var(--mute);font-size:14.5px}
+.note{text-align:center;color:var(--dim);font-size:14px;margin-top:30px}
+/* AI */
+.ai{background:radial-gradient(60% 60% at 50% 40%,rgba(255,0,0,.08),transparent 70%)}
+.aigrid{display:grid;grid-template-columns:1.2fr 1fr;gap:30px;align-items:stretch}
+.roles{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.role{padding:24px;border-radius:20px;background:var(--panel);border:1px solid var(--line)}
+.role b{display:flex;align-items:center;gap:10px;font:700 18px Sora,sans-serif;margin-bottom:8px}.role b i{width:10px;height:10px;border-radius:50%;background:var(--red);box-shadow:0 0 12px var(--red)}
+.role p{color:var(--mute);font-size:14.5px}
+.sov{padding:32px;border-radius:24px;border:1px solid transparent;background:linear-gradient(180deg,#0f2450,#091835) padding-box,linear-gradient(160deg,var(--red),var(--gold)) border-box;box-shadow:0 30px 80px -30px rgba(255,0,0,.45)}
+.sov h3{font-size:24px;margin-bottom:6px}.sov .tag{font:800 13px Sora,sans-serif;color:#FF0000;letter-spacing:.5px}
+/* DATABASE */
+.dbnums{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin:30px 0}
+.dbn{padding:22px;border-radius:18px;background:var(--panel);border:1px solid var(--line)}
+.dbn b{display:block;font:800 clamp(26px,3vw,38px)/1 Sora,sans-serif;font-variant-numeric:tabular-nums;background:linear-gradient(180deg,#fff,#b9c8e6);-webkit-background-clip:text;background-clip:text;color:transparent;white-space:nowrap}
+.dbn span{color:var(--mute);font-size:13.5px}
+.dbviz{position:relative;aspect-ratio:1;max-width:480px;width:100%;justify-self:center;border-radius:50%;background:radial-gradient(circle at 50% 50%,rgba(212,175,55,.18),rgba(6,18,42,.2) 55%,transparent 70%)}
+.dbviz canvas{position:absolute;inset:0;width:100%;height:100%}
+.dbviz .c{position:absolute;inset:34%;border-radius:50%;display:grid;place-items:center;text-align:center;font:800 16px/1.2 Sora,sans-serif;background:radial-gradient(circle,#1c2c55,#0a1530);border:1px solid rgba(212,175,55,.5);box-shadow:0 0 50px -8px rgba(212,175,55,.6)}
+.dbviz .c small{display:block;color:var(--gold2);font:600 11px Inter,sans-serif;margin-top:4px}
+/* AGENTS */
+.agents{display:grid;grid-template-columns:repeat(4,1fr);gap:18px}
+.agent{padding:28px;border-radius:22px;background:linear-gradient(180deg,rgba(17,42,82,.65),rgba(6,18,42,.35));border:1px solid var(--line);position:relative;overflow:hidden}
+.agent .dot{display:inline-flex;align-items:center;gap:8px;font:700 11px Inter,sans-serif;letter-spacing:1px;color:var(--green);text-transform:uppercase;margin-bottom:14px}
+.agent .dot i{width:8px;height:8px;border-radius:50%;background:var(--green);box-shadow:0 0 10px var(--green);animation:pulse 1.6s infinite}
+.agent h3{font-size:20px;margin-bottom:10px}.agent p{color:var(--mute);font-size:14.5px}
+.agent .scan{position:absolute;left:0;right:0;top:-40%;height:40%;background:linear-gradient(180deg,transparent,rgba(51,161,255,.08),transparent);animation:scanv 5s linear infinite}
+@keyframes scanv{to{top:110%}}
+/* FALLBACK */
+.fb{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.fbi{display:flex;gap:16px;align-items:flex-start;padding:24px;border-radius:20px;background:var(--panel);border:1px solid var(--line)}
+.fbi b{display:block;font:700 17px Sora,sans-serif;margin-bottom:6px}.fbi p{color:var(--mute);font-size:14.5px}
+.fbx{position:relative;flex:0 0 auto;width:38px;height:38px}
+.fbx i{position:absolute;width:24px;height:24px;border-radius:8px;border:2px solid var(--green)}
+.fbx i:first-child{left:0;top:0;background:rgba(34,211,138,.15)}.fbx i:last-child{right:0;bottom:0;border-color:var(--gold);border-style:dashed;animation:pulse 2.4s infinite}
+/* ENDPOINT */
+.ep{display:grid;grid-template-columns:1.45fr 1fr;gap:30px;align-items:start}
+.epb{padding:30px;border-radius:26px;background:linear-gradient(180deg,rgba(17,42,82,.55),rgba(6,18,42,.3));border:1px solid var(--line)}
+.epb h3{font-size:22px;margin-bottom:16px}
+.screen{border-radius:14px;padding:9px;background:linear-gradient(160deg,#2b3449,#0c111b);box-shadow:var(--sh);margin-bottom:16px}
+.screen .dots{display:flex;gap:6px;padding:2px 4px 8px}.screen .dots i{width:10px;height:10px;border-radius:50%;background:#ff5f57}.screen .dots i:nth-child(2){background:#febc2e}.screen .dots i:nth-child(3){background:#28c840}
+.view{position:relative;aspect-ratio:3/2;border-radius:8px;overflow:hidden;background:#071430}.view img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0;transition:opacity .6s}.view img.on{opacity:1}
+.dtabs{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:18px}
+.dtab{padding:8px 14px;border-radius:999px;border:1px solid var(--line2);background:rgba(255,255,255,.03);color:var(--mute);font:600 13px/1 Inter,sans-serif;cursor:pointer}.dtab.on,.dtab:hover{background:var(--text);color:#06122b}
+.phones{display:flex;justify-content:center;gap:14px;margin-bottom:22px;height:430px;position:relative}
+.phone{width:200px;aspect-ratio:660/1467;border-radius:34px;padding:7px;background:linear-gradient(145deg,#2a3348,#0b0f18 40%,#1b2232);box-shadow:var(--sh),0 0 0 1px rgba(255,255,255,.08)}
+.phone img{width:100%;height:100%;object-fit:cover;border-radius:28px}
+.phones .phone:nth-child(1){transform:rotate(-5deg) translateY(16px)}.phones .phone:nth-child(2){transform:rotate(5deg)}
+.stores{display:flex;flex-wrap:wrap;gap:10px;margin-top:18px;align-items:center}
+.store{display:inline-flex;align-items:center;height:46px}.store img{height:46px;width:auto}.store.gp img{height:68px;margin:-11px -8px}
+.store.win{background:#000;border:1px solid #a6a6a6;color:#fff;padding:0 14px;border-radius:10px;gap:8px;font:600 15px Inter,sans-serif}
+/* WHY */
+.cmp{max-width:980px;margin:0 auto;border:1px solid var(--line);border-radius:26px;overflow:hidden;background:rgba(6,18,42,.6)}
+.cmp table{width:100%;border-collapse:collapse}
+.cmp th,.cmp td{padding:17px 22px;text-align:center;border-top:1px solid var(--line);font-size:15px}
+.cmp th:first-child,.cmp td:first-child{text-align:left;font-weight:500;padding-left:30px}
+.cmp thead th{border-top:0;color:var(--mute);font-weight:600;font-size:14px;padding-top:24px}
+.cmp thead th.us{font:900 19px 'Segoe UI',system-ui,sans-serif;color:#FF0000}
+.cmp td.us{background:rgba(255,0,0,.07);color:var(--text);font-weight:700}
+.cmp .mk{display:inline-grid;place-items:center;width:28px;height:28px;border-radius:50%}
+.cmp .y{color:var(--green)}.cmp .y .mk{background:rgba(34,211,138,.14)}.cmp .n{color:#5d6f92}.cmp .n .mk{background:rgba(255,255,255,.04)}.cmp .p{color:var(--gold)}.cmp .p .mk{background:rgba(212,175,55,.12)}
+.cmp .t{color:var(--mute);font-size:14px}
+/* PACKAGES */
+.pk{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;align-items:stretch}
+.pkc{position:relative;display:flex;flex-direction:column;padding:32px 28px;border-radius:26px;background:linear-gradient(180deg,rgba(17,42,82,.6),rgba(6,18,42,.4));border:1px solid var(--line)}
+.pkc.best{border:1px solid transparent;background:linear-gradient(180deg,#0f2550,#0a1a3a) padding-box,linear-gradient(160deg,var(--red),var(--gold)) border-box;box-shadow:0 30px 80px -30px rgba(255,0,0,.5)}
+.pkc .pop{position:absolute;top:-13px;left:50%;transform:translateX(-50%);font:800 11px/1 Inter,sans-serif;letter-spacing:1.5px;padding:8px 14px;border-radius:999px;background:linear-gradient(90deg,#ff1a1a,#ff6a3d);color:#fff;white-space:nowrap}
+.pkc h3{font-size:26px}.pkc .inc{color:var(--gold);font:700 12px Inter,sans-serif;letter-spacing:1.2px;text-transform:uppercase;margin:16px 0 12px}
+.pkc ul{list-style:none;display:grid;gap:11px;margin-bottom:22px}.pkc li{display:flex;gap:10px;font-size:14.5px}
+.pkc .bf{margin-top:auto;padding-top:18px;border-top:1px solid var(--line);color:var(--mute);font-size:14px}.pkc .bf b{display:block;color:var(--text);font-size:12px;letter-spacing:1.2px;text-transform:uppercase;margin-bottom:6px}
+/* STEPS */
+.steps{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;counter-reset:s}
+.step{padding:30px;border-radius:22px;border:1px solid var(--line);background:rgba(255,255,255,.02)}
+.step .sn{width:46px;height:46px;border-radius:14px;display:grid;place-items:center;font:800 18px Sora,sans-serif;background:linear-gradient(180deg,#ff2b2b,#b80000);margin-bottom:16px}
+.step h3{font-size:20px;margin-bottom:8px}.step p{color:var(--mute);font-size:15px}
+/* END + FOOTER */
+.endbox{position:relative;overflow:hidden;text-align:center;padding:80px 30px;border-radius:36px;background:radial-gradient(60% 90% at 50% 0%,rgba(255,0,0,.3),transparent 70%),linear-gradient(180deg,#0e2250,#081633);border:1px solid var(--line2)}
+.endbox h2{font-size:clamp(28px,4vw,50px);margin-bottom:12px}.endbox p{color:var(--mute);font-size:18px;margin-bottom:30px}
+footer{border-top:1px solid var(--line);padding:60px 0 32px;background:#02070f;margin-top:100px}
+.fgrid{display:grid;grid-template-columns:1.6fr 1fr 1fr 1fr;gap:36px}.fgrid p{color:var(--dim);font-size:14px;margin-top:14px;max-width:360px}
+.fgrid h4{font:700 12.5px/1 Inter,sans-serif;letter-spacing:1.5px;text-transform:uppercase;color:var(--mute);margin-bottom:16px}
+.fgrid a{display:block;color:var(--dim);font-size:14.5px;margin:9px 0;transition:color .2s}.fgrid a:hover{color:var(--text)}
+.certs{display:inline-block;margin-top:16px;color:var(--gold);border:1px solid rgba(212,175,55,.35);border-radius:10px;padding:6px 12px;font-size:12px}
+.fbot{display:flex;flex-wrap:wrap;justify-content:space-between;gap:12px;margin-top:44px;padding-top:22px;border-top:1px solid var(--line);color:var(--dim);font-size:13px}
+.sw{display:inline-flex;align-items:center;gap:8px}.sw i{width:8px;height:8px;border-radius:50%;background:var(--dim)}.sw i.ok{background:var(--green);box-shadow:0 0 8px var(--green);animation:pulse 2s infinite}.sw i.deg{background:#e8b53a}
+/* CONTUR AURIU PREMIUM (cerut de operator): gradient auriu pe margine + strălucire discretă */
+:root{--gl:linear-gradient(135deg,#f6e7a8 0%,#D4AF37 28%,#8a6d1f 55%,#D4AF37 78%,#f6e7a8 100%)}
+.card,.agent,.role,.fbi,.dbn,.stat,.epb,.pkc,.step,.fsrc,.ltable,.cmp,.sov,.endbox{border:1px solid transparent!important;
+ background:linear-gradient(180deg,#0f2449,#081733) padding-box,var(--gl) border-box!important;
+ box-shadow:0 0 0 1px rgba(212,175,55,.08),0 18px 50px -22px rgba(212,175,55,.35),inset 0 1px 0 rgba(255,236,170,.12)}
+.pkc.best,.sov{box-shadow:0 0 0 1px rgba(212,175,55,.2),0 30px 80px -26px rgba(212,175,55,.55),inset 0 1px 0 rgba(255,236,170,.18)!important}
+.card,.agent,.fbi,.role,.pkc,.step,.dbn,.epb{transition:transform .3s,box-shadow .3s}
+.card:hover,.agent:hover,.fbi:hover,.role:hover,.pkc:hover,.step:hover,.dbn:hover{transform:translateY(-5px);box-shadow:0 0 0 1px rgba(212,175,55,.35),0 24px 60px -18px rgba(212,175,55,.55),inset 0 1px 0 rgba(255,236,170,.2)}
+.lrow{border-top-color:rgba(212,175,55,.16)}.cmp th,.cmp td{border-top-color:rgba(212,175,55,.16)}.lnote{border-top-color:rgba(212,175,55,.16)}
+.pkc .bf{border-top-color:rgba(212,175,55,.22)}
+/* cercurile: noduri, nuclee */
+.cnode .n{border:2px solid transparent;background:radial-gradient(circle at 35% 30%,#16336a,#081833) padding-box,var(--gl) border-box;box-shadow:0 0 0 6px #030a18,0 0 34px -4px rgba(212,175,55,.6),0 0 46px -8px var(--c)}
+.fcore{border:2px solid transparent;background:radial-gradient(circle,#2a0b12,#0a1530 70%) padding-box,var(--gl) border-box}
+.dbviz .c{border:2px solid transparent;background:radial-gradient(circle,#1c2c55,#0a1530) padding-box,var(--gl) border-box}
+.fbx i:first-child{border-color:#D4AF37;background:rgba(212,175,55,.14)}
+/* grilele nu au voie să lărgească pagina */
+.fb>*,.hero .wrap>*,.two>*,.aigrid>*,.ep>*,.chain>*,.cards>*,.agents>*,.pk>*,.steps>*{min-width:0}
+@media(max-width:1180px){.links{display:none}}
+@media(max-width:1080px){.hero .wrap,.two,.aigrid,.ep{grid-template-columns:minmax(0,1fr)}.hero{padding-top:120px}.ringbox{max-width:520px}
+.chain{grid-template-columns:repeat(3,minmax(0,1fr));row-gap:36px}.chain::before,.chain::after{display:none}
+.cards,.agents,.fb{grid-template-columns:repeat(2,minmax(0,1fr))}.pk{grid-template-columns:minmax(0,1fr);max-width:560px;margin:0 auto}.pkc.best{order:-1}
+.lrow{grid-template-columns:44px 1fr auto;row-gap:6px}.lrow .llev,.lrow .lhow{grid-column:2/4}.lrow .lt{grid-column:2}.lrow .lst{grid-column:3;grid-row:1}.lrow.h{display:none}.fgrid{grid-template-columns:1fr 1fr}}
+@media(max-width:760px){.burger{display:block}.nav-r .btn{display:none}.nav.open .links{display:flex;position:absolute;top:72px;left:0;right:0;flex-direction:column;gap:0;background:rgba(3,10,24,.97);border-bottom:1px solid var(--line);padding:6px 24px 16px}.nav.open .links a{padding:13px 0;border-bottom:1px solid var(--line);font-size:16px}}
+@media(max-width:640px){.wrap{padding:0 16px}.sec{padding:76px 0}.head{margin-bottom:40px}.stats{grid-template-columns:repeat(2,minmax(0,1fr))}
+.chain,.cards,.agents,.roles,.steps,.dbnums,.fb{grid-template-columns:minmax(0,1fr)}.ladder{grid-template-columns:repeat(2,minmax(0,1fr))}
+.fusion{aspect-ratio:auto;display:grid;gap:10px}.fusion svg{display:none}.fsrc,.fcore{position:static;width:auto;transform:none}.fcore{width:140px;height:140px;margin:6px auto}
+.phones{height:330px}.phone{width:150px;border-radius:26px;padding:5px}.phone img{border-radius:22px}
+.cmp table{table-layout:fixed}.cmp th:first-child{width:46%}.cmp th,.cmp td{padding:12px 8px;font-size:13px;overflow-wrap:anywhere;hyphens:auto;-webkit-hyphens:auto}.cmp thead th.us{font-size:15px}.cmp th:first-child,.cmp td:first-child{padding-left:16px}.cmp .t{font-size:12px}
+.lrow{padding:16px}.endbox{padding:54px 20px;border-radius:26px}.fgrid{grid-template-columns:1fr}.brand{font-size:19px}.epb{padding:20px}}
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important}.reveal{opacity:1;transform:none}}
+</style>
 </head>
 <body>
+<header class="nav" id="nav"><div class="wrap">
+  <a class="brand" href="/es/" aria-label="FasterUp.AI"><i class="xmark" aria-hidden="true"></i><span class="fu">FasterUp</span>.AI</a>
+  <nav class="links" id="links"><a href="#platform">Plataforma</a><a href="#layers">7 capas</a><a href="#mleo">MLEO</a><a href="#ai">CYBER3.AI</a><a href="#vas">VAS</a><a href="#agents">Ops agénticas</a><a href="#endpoint">Endpoint</a><a href="#packages">Paquetes</a></nav>
+  <div class="nav-r">
+    <select class="lang" aria-label="Idioma" onchange="try{localStorage.setItem('fulang',this.value)}catch(e){};document.cookie='fulang='+encodeURIComponent(this.value)+';path=/;max-age=31536000;samesite=lax';location.href=this.value"><option value="/">EN</option><option value="/ro/">RO</option><option value="/es/" selected>ES</option><option value="/it/">IT</option><option value="/de/">DE</option><option value="/fr/">FR</option><option value="/ru/">RU</option><option value="/zh/">中文</option></select>
+    <a class="btn btn-red btn-sm" href="mailto:contact@rol.ro?subject=FasterUp%20-%20Assessment">Solicitar evaluación</a>
+    <button class="burger" aria-label="Menu" onclick="document.getElementById('nav').classList.toggle('open')"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button>
+  </div>
+</div></header>
 
-<header class="nav">
-  <a class="brand" href="/es/"><i class="xmark"></i><span>FasterUp</span>.AI</a>
-  <nav class="links">
-    <a href="#services">Servicios</a>
-    <a href="#technology">Tecnología</a>
-    <a href="#xdr">Endpoint XDR</a>
-    <a href="#packages">Paquetes</a>
-    <a href="#start">Empezar</a>
-    <a href="/contact">Contacto</a>
-    <select class="lang" aria-label="Idioma" onchange="localStorage.setItem('fulang',this.value);document.cookie='fulang='+encodeURIComponent(this.value)+';path=/;max-age=31536000;samesite=lax';location.href=this.value">
-      <option value="/ro/">RO</option>
-      <option value="/">EN</option>
-      <option value="/es/">ES</option>
-      <option value="/it/">IT</option>
-      <option value="/de/">DE</option>
-      <option value="/fr/">FR</option>
-      <option value="/ru/">RU</option>
-      <option value="/zh/">中文</option>
-    </select>
-    <a class="btn-sm" href="#start">Solicitar evaluación</a>
-  </nav>
-</header>
-<script>
-  (function(){var p=location.pathname,m=p.match(/^\/(ro|es|it|de|fr|ru|zh)\//),v=m?'/'+m[1]+'/':'/',s=document.querySelector('.lang');if(s)s.value=v;})();
-</script>
-
-<section class="hero">
-  <div class="grid-bg"></div>
-  <div class="hero-inner">
-    <div class="eyebrow">▸ FASTERUP AI AUTONOMOUS PLATFORM</div>
-    <h1><span class="r">Ciberseguridad autónoma</span><br>para empresas y administración pública</h1>
-    <p class="sub">FasterUp detecta, decide y responde a las amenazas cibernéticas en tiempo real — siete capas de defensa complementarias, del cable a la estación de trabajo y al teléfono, orquestadas por MLEO en una sola decisión autónoma. Centro de Operaciones de Seguridad gestionado y Evaluación de Vulnerabilidades, instalados en tus instalaciones.</p>
-    <div class="cta">
-      <a class="btn" href="#start">▸ Solicitar evaluación</a>
-      <a class="btn ghost" href="#technology">Cómo funciona</a>
-    </div>
+<section class="hero"><div class="aurora"></div><div class="gridbg"></div><div class="wrap">
+  <div>
+    <span class="kicker">FASTERUP NEXTGEN SOC · AUTÓNOMO · DE EXTREMO A EXTREMO</span>
+    <h1>Una tecnología. Un proveedor. <span class="grad">Todas las capas.</span></h1>
+    <p class="lead">FasterUp detecta, decide y bloquea las ciberamenazas en siete capas complementarias, desde el cable Ethernet hasta el puesto de trabajo y el teléfono. MLEO orquesta cada capa, CyberBot Fusion decide en segundos y CYBER3.AI, nuestro LLM de seguridad soberano, explica, investiga e informa. SOC gestionado, Vulnerability Assessment y protección de endpoints: diseñados, desarrollados y operados por un solo equipo.</p>
+    <div class="cta"><a class="btn btn-red" href="mailto:contact@rol.ro?subject=FasterUp%20-%20Assessment">Solicitar evaluación</a><a class="btn btn-ghost" href="#platform">Descubrir la plataforma</a></div>
     <div class="stats">
-      <div><b>10ms–11s</b><span>de la amenaza a la decisión autónoma</span></div>
-      <div><b>24/7</b><span>monitorización y respuesta</span></div>
-      <div><b>7</b><span>capas de defensa complementarias, orquestadas por MLEO</span></div>
-      <div><b data-count="914944" data-suffix="+">0</b><span>indicadores de amenaza en vivo</span></div>
+      <div class="stat"><b>10ms–11s</b><span>de la amenaza a la decisión autónoma</span></div>
+      <div class="stat"><b>7</b><span>capas de defensa complementarias</span></div>
+      <div class="stat"><b>24/7</b><span>monitorización y respuesta autónoma</span></div>
+      <div class="stat"><b class="ioc" data-n="2895988">2.9M+</b><span>indicadores de amenaza en tiempo real</span></div>
     </div>
   </div>
-</section>
+  <div class="ringbox" aria-hidden="true"><svg viewBox="-20 -20 640 640" role="img" aria-label="7 layers"><defs><linearGradient id="gold" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#f6e7a8"/><stop offset=".3" stop-color="#D4AF37"/><stop offset=".55" stop-color="#8a6d1f"/><stop offset=".8" stop-color="#D4AF37"/><stop offset="1" stop-color="#f6e7a8"/></linearGradient><radialGradient id="cg"><stop offset="0" stop-color="#2a0b12"/><stop offset="1" stop-color="#081833"/></radialGradient></defs><circle class="ring" id="r0" cx="300" cy="300" r="288" stroke="url(#gold)" stroke-opacity=".55"/><circle class="ring dash" cx="300" cy="300" r="288" stroke="#ff3b4b" style="animation-duration:40s"/><circle class="ring" id="r1" cx="300" cy="300" r="256" stroke="url(#gold)" stroke-opacity=".55"/><circle class="ring dash rev" cx="300" cy="300" r="256" stroke="#ff7a45" style="animation-duration:49s"/><circle class="ring" id="r2" cx="300" cy="300" r="224" stroke="url(#gold)" stroke-opacity=".55"/><circle class="ring dash" cx="300" cy="300" r="224" stroke="#e8c35a" style="animation-duration:58s"/><circle class="ring" id="r3" cx="300" cy="300" r="192" stroke="url(#gold)" stroke-opacity=".55"/><circle class="ring dash rev" cx="300" cy="300" r="192" stroke="#4f8cff" style="animation-duration:67s"/><circle class="ring" id="r4" cx="300" cy="300" r="160" stroke="url(#gold)" stroke-opacity=".55"/><circle class="ring dash" cx="300" cy="300" r="160" stroke="#22c7e8" style="animation-duration:76s"/><circle class="ring" id="r5" cx="300" cy="300" r="128" stroke="url(#gold)" stroke-opacity=".55"/><circle class="ring dash rev" cx="300" cy="300" r="128" stroke="#34d399" style="animation-duration:85s"/><circle class="ring" id="r6" cx="300" cy="300" r="96" stroke="url(#gold)" stroke-opacity=".55"/><circle class="ring dash" cx="300" cy="300" r="96" stroke="#9b7bff" style="animation-duration:94s"/><g transform="translate(50.6,156.0)"><rect x="-57" y="-13" rx="11" height="26" width="114" fill="#06122b" stroke="#ff3b4b" stroke-opacity=".8"/><text class="rlabel" x="0" y="4.5" text-anchor="middle" fill="#fff"><tspan fill="#ff3b4b">1</tspan>  IPS inline</text></g><g transform="translate(220.9,56.5)"><rect x="-76" y="-13" rx="11" height="26" width="152" fill="#06122b" stroke="#ff7a45" stroke-opacity=".8"/><text class="rlabel" x="0" y="4.5" text-anchor="middle" fill="#fff"><tspan fill="#ff7a45">2</tspan>  Active Response</text></g><g transform="translate(391.1,95.4)"><rect x="-53" y="-13" rx="11" height="26" width="106" fill="#06122b" stroke="#e8c35a" stroke-opacity=".8"/><text class="rlabel" x="0" y="4.5" text-anchor="middle" fill="#fff"><tspan fill="#e8c35a">3</tspan>  L2 Shield</text></g><g transform="translate(475.4,221.9)"><rect x="-76" y="-13" rx="11" height="26" width="152" fill="#06122b" stroke="#4f8cff" stroke-opacity=".8"/><text class="rlabel" x="0" y="4.5" text-anchor="middle" fill="#fff"><tspan fill="#4f8cff">4</tspan>  CyberBot Fusion</text></g><g transform="translate(452.2,349.4)"><rect x="-61" y="-13" rx="11" height="26" width="122" fill="#06122b" stroke="#22c7e8" stroke-opacity=".8"/><text class="rlabel" x="0" y="4.5" text-anchor="middle" fill="#fff"><tspan fill="#22c7e8">5</tspan>  CYBER3 Edge</text></g><g transform="translate(364.0,410.9)"><rect x="-84" y="-13" rx="11" height="26" width="167" fill="#06122b" stroke="#34d399" stroke-opacity=".8"/><text class="rlabel" x="0" y="4.5" text-anchor="middle" fill="#fff"><tspan fill="#34d399">6</tspan>  XDR de escritorio</text></g><g transform="translate(280.0,393.9)"><rect x="-38" y="-13" rx="11" height="26" width="76" fill="#06122b" stroke="#9b7bff" stroke-opacity=".8"/><text class="rlabel" x="0" y="4.5" text-anchor="middle" fill="#fff"><tspan fill="#9b7bff">7</tspan>  Móvil</text></g><circle cx="300" cy="300" r="74" fill="url(#cg)" stroke="url(#gold)" stroke-width="2.5"/><g transform="translate(300,288)"><g transform="translate(-14,-30) scale(.28)"><g fill="#F00"><rect x="44" y="15" width="12" height="70"/><rect x="15" y="44" width="70" height="12"/><rect x="36" y="13" width="28" height="6"/><rect x="36" y="81" width="28" height="6"/><rect x="13" y="36" width="6" height="28"/><rect x="81" y="36" width="6" height="28"/></g><circle cx="50" cy="50" r="47" fill="none" stroke="#F00" stroke-width="4"/></g></g><text class="core" x="300" y="318" text-anchor="middle">Su organización</text><g id="pz"></g></svg></div>
+</div></section>
+<div class="trust"><div class="wrap"><div><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><path d="M12 2l8 3v6c0 5-3.5 9.5-8 11-4.5-1.5-8-6-8-11V5z"/><path d="M9 12l2 2 4-4"/></svg>Empresa certificada ISO/IEC 27001:2022</div><div><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 3h7l5 5v13H7z"/><path d="M14 3v5h5M10 13h6M10 17h6"/></svg>Notificación NIS2 art. 21/23</div><div><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="4" y="11" width="16" height="10" rx="2"/><path d="M8 11V7a4 4 0 018 0v4"/></svg>GDPR: sus datos permanecen en sus instalaciones</div><div><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><path d="M12 2l3 6 6 .9-4.5 4.3 1 6.3L12 16.8 6.5 19.5l1-6.3L3 8.9 9 8z"/></svg>Tecnología propia, de extremo a extremo</div></div></div>
 
-<section id="services" class="section">
-  <div class="head">
-    <div class="kicker">SERVICIOS</div>
-    <h2>Dos servicios. Una plataforma autónoma.</h2>
-    <p>Detección y respuesta gestionadas y evaluación continua de vulnerabilidades — impulsadas por el mismo motor de IA y la misma inteligencia de amenazas en vivo.</p>
+<section class="sec" id="platform"><div class="wrap">
+  <div class="head reveal"><span class="kicker">LA PLATAFORMA</span><h2>Toda la cadena de defensa. Un único responsable.</h2><p>La mayoría de las organizaciones combinan un proveedor de firewall, uno de SIEM, un MSSP, un antivirus y un escáner, y el atacante se instala en los huecos entre ellos. FasterUp es una sola cadena, diseñada como un único organismo: sin costuras de integración, sin tickets que rebotan entre proveedores, con un solo informe.</p></div>
+  <div class="chain reveal"><div class="cnode" style="--c:#ff3b4b"><div class="n">1</div><h3>Sensores</h3><p>Inline en cada sede: IPS en el cable, respuesta en el firewall y L2 Shield a nivel Ethernet.</p></div><div class="cnode" style="--c:#4f8cff"><div class="n">2</div><h3>CyberBot Fusion</h3><p>Cuatro fuentes fusionadas en cada alerta: una decisión autónoma en 2–11 segundos.</p></div><div class="cnode" style="--c:#e8c35a"><div class="n">3</div><h3>MLEO</h3><p>Elige la capa que aplica el bloqueo y aísla al atacante, no a la víctima.</p></div><div class="cnode" style="--c:#ff3b4b"><div class="n">4</div><h3>CYBER3.AI</h3><p>Nuestro LLM de seguridad soberano explica, investiga, prioriza e informa.</p></div><div class="cnode" style="--c:#34d399"><div class="n">5</div><h3>Apps CYBER3</h3><p>Windows, Android y iPhone: el SOC en cada puesto de trabajo y en cada teléfono.</p></div><div class="cnode" style="--c:#22c7e8"><div class="n">6</div><h3>Ops agénticas</h3><p>Los agentes NOC, Health Check, CCC y Ops Agents mantienen todo en funcionamiento, 24/7.</p></div></div>
+  <p class="pfnote reveal">Un contrato. Un equipo responsable. Desde el cable hasta el teléfono que lleva en el bolsillo.</p>
+</div></section>
+
+<section class="sec" id="layers" style="padding-top:40px"><div class="wrap">
+  <div class="head reveal"><span class="kicker">DEFENSA EN CASCADA</span><h2>Siete capas complementarias. Cada amenaza detenida, incluso si se elude una capa.</h2><p>Las capas no son copias unas de otras. Cada una ve lo que las demás no pueden: tres trabajan sobre IP, dominios y hashes, una es la única defensa a nivel Ethernet, otra detiene las amenazas en la nube antes de que lleguen a su red y dos residen en sus dispositivos.</p></div>
+  <div class="ltable reveal">
+    <div class="lrow h"><span></span><span>Capa</span><span>Nivel</span><span>Cómo detiene la amenaza</span><span>Respuesta</span><span>Estado</span></div>
+    <div class="lrow"><span class="lnum" style="--c:#ff3b4b">1</span><span class="lname">Red — IPS inline</span><span class="llev">L3/L4 + app</span><span class="lhow">Descarta los paquetes hostiles en el cable: firmas, anomalías e inspección profunda de paquetes.</span><span class="lt">~ms</span><span class="lst"><i></i>Activa</span></div><div class="lrow"><span class="lnum" style="--c:#ff7a45">2</span><span class="lname">Host — Active Response</span><span class="llev">L3</span><span class="lhow">Bloqueo nativo en el firewall del host protegido.</span><span class="lt">segundos</span><span class="lst"><i></i>Activa</span></div><div class="lrow"><span class="lnum" style="--c:#e8c35a">3</span><span class="lname">Ethernet — L2 Shield</span><span class="llev">L2</span><span class="lhow">La única capa a nivel Ethernet: detiene ARP spoofing, man-in-the-middle y DHCP no autorizado, el punto ciego de las defensas IP.</span><span class="lt">~ms</span><span class="lst"><i></i>Activa</span></div><div class="lrow"><span class="lnum" style="--c:#4f8cff">4</span><span class="lname">Decisión — CyberBot Fusion</span><span class="llev">L3 · IP / dominio / hash</span><span class="lhow">Fusiona cuatro fuentes en una única decisión autónoma, incluido el tráfico de comando y control.</span><span class="lt">2–11 s</span><span class="lst"><i></i>Activa</span></div><div class="lrow"><span class="lnum" style="--c:#22c7e8">5</span><span class="lname">Nube — CYBER3 Edge</span><span class="llev">nube</span><span class="lhow">Escudo DNS, indicadores de amenaza en la nube y una extensión de navegador detienen las amenazas antes de que lleguen a la red.</span><span class="lt">edge</span><span class="lst"><i></i>Activa</span></div><div class="lrow"><span class="lnum" style="--c:#34d399">6</span><span class="lname">Dispositivo — CYBER3 Desktop XDR</span><span class="llev">endpoint</span><span class="lhow">Análisis en tiempo real al acceder, cuarentena, escudo DNS y aislamiento automático del puesto infectado.</span><span class="lt">en el dispositivo</span><span class="lst"><i></i>Activa</span></div><div class="lrow"><span class="lnum" style="--c:#9b7bff">7</span><span class="lname">Móvil — CYBER3 Mobile</span><span class="llev">endpoint</span><span class="lhow">Antiestafa en tiempo real, filtrado DNS y análisis de enlaces y SMS en el teléfono de cada empleado.</span><span class="lt">en el dispositivo</span><span class="lst"><i></i>Activa</span></div>
+    <div class="lnote">Estado de las capacidades: no publicamos contadores de ataques; lo que detenemos por usted queda entre nosotros.</div>
   </div>
-  <div class="cards">
-    <article class="card feature">
-      <div class="badge">GESTIONADO · 24/7</div><div class="ico"><svg class="cshield" viewBox="0 0 24 24"><path d="M12 2.1 L20.6 5 V11 C20.6 16.6 16.8 20.5 12 21.9 C7.2 20.5 3.4 16.6 3.4 11 V5 Z" fill="rgba(212,175,55,.14)" stroke="#d4af37" stroke-width="1.3"/><g fill="none" stroke="#f2d778" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5.2 V18.2"/><path d="M12 5.7 h2.2 a2 2 0 0 1 0 3.9 H12"/><path d="M8 11 L16 15.6"/><path d="M16 11 L8 15.6"/></g></svg></div>
-      <h3>SOC — Centro de Operaciones de Seguridad</h3>
-      <p>Monitorización autónoma y totalmente gestionada en siete capas de defensa complementarias. FasterUp detecta intrusiones, anomalías de red, comando y control, exfiltración de datos y violaciones de políticas — el motor de IA decide y MLEO ejecuta en la capa adecuada: bloquear, notificar o escalar, en segundos.</p>
-      <div class="tech"><span>Cluster 1 IDS/IPS</span><span>Cluster 1 SIEM</span><span>CYBER3 Context Fusion Engine</span><span>MISP threat intel</span></div>
-      <p class="note">Respuesta autónoma en segundos — no horas. Las alertas e informes llegan a su equipo por Telegram y email.</p>
-      <details class="more"><summary>Ver detalles</summary>
-        <div class="body"><ul><li>Monitorización 24/7 <b>sin necesidad de analistas de seguridad propios</b> — la plataforma gestiona la rutina, los humanos las excepciones.</li><li>Detección en tiempo real en Cluster 1 IDS/IPS, correlación de eventos mediante Cluster 1 SIEM.</li><li>Fusión de contexto de cuatro fuentes en cada alerta: MISP + Cluster 1 IDS/IPS + SIEM + la base CYBER3.</li><li>Acción autónoma según la gravedad: registro silencioso → bloqueo automático de IP → alerta urgente → escalado a un humano.</li></ul><div class="adv"><b>Ventaja competitiva:</b> un único proveedor controla toda la cadena — del sensor de red a la decisión — por lo que la respuesta tarda <b>2–11 segundos, no horas</b>, sin un SOC que contratar, formar y mantener despierto a las 3 de la madrugada.</div></div>
-      </details>
-    </article>
+</div></section>
 
-    <article class="card feature">
-      <div class="badge">CONTINUO</div><div class="ico">🎯</div>
-      <h3>VAS — Evaluación de Vulnerabilidades</h3>
-      <p>Evaluación automática y continua de sus activos en busca de vulnerabilidades conocidas, configuraciones incorrectas y servicios expuestos. Recibe informes priorizados y accionables — para corregir primero lo que importa, antes de que lo encuentren los atacantes.</p>
-      <div class="tech"><span>descubrimiento de activos</span><span>detección de CVE</span><span>escaneos programados</span><span>informes priorizados</span></div>
-      <p class="note">Conozca su exposición antes que los atacantes. Los escaneos se ejecutan de forma segura, según un calendario que usted controla.</p>
-      <details class="more"><summary>Ver detalles</summary>
-        <div class="body"><ul><li><b>Descubrimiento automático de activos</b> en su red — no puede proteger lo que no sabe que tiene.</li><li>Detección de vulnerabilidades conocidas (CVE) y configuraciones inseguras.</li><li>Escaneos programados, ejecutados de forma segura, según un calendario <b>que usted controla</b>.</li><li>Informes priorizados — remedie primero los riesgos de mayor impacto.</li></ul><div class="adv"><b>Ventaja competitiva:</b> VAS y SOC trabajan juntos — el SOC detiene los ataques en curso mientras VAS <b>reduce proactivamente su superficie de ataque</b> antes de que los atacantes encuentren la brecha.</div></div>
-      </details>
-    </article>
+<section class="sec" id="sensors" style="padding-top:40px"><div class="wrap">
+  <div class="head reveal"><span class="kicker">FLOTA DE SENSORES</span><h2>Sensores que viven dentro de su red y nunca se interponen en su camino.</h2><p>Los sensores dedicados de FasterUp ejecutan in situ las primeras capas de defensa, en cada sede. Están diseñados para proteger sin convertirse nunca en el motivo por el que su red se detiene.</p></div>
+  <div class="cards"><article class="card reveal"><span class="i">01</span><h3>Inline o pasivo</h3><p>Instalación en unos 15 minutos por sede, sin agentes en sus endpoints; compatible con VLAN, enlaces de hasta 10 Gbps.</p></article><article class="card reveal"><span class="i">02</span><h3>Fail-open por diseño</h3><p>Inspección de paquetes multicola que se aparta si alguna vez se bloquea: el tráfico sigue fluyendo y la protección se reanuda automáticamente.</p></article><article class="card reveal"><span class="i">03</span><h3>Autoactualizable</h3><p>Reglas de detección renovadas de forma autónoma, con autoprotección y rollback automático si algo no cuadra.</p></article><article class="card reveal"><span class="i">04</span><h3>Privado por defecto</h3><p>Sus datos permanecen en sus instalaciones; solo los metadatos de seguridad viajan al SOC, a través de una VPN privada cifrada.</p></article></div>
+</div></section>
 
-    <article class="card">
-      <div class="ico">🤖</div>
-      <h3>Respuesta autónoma</h3>
-      <p>Cada alerta es evaluada por IA en todas las fuentes. Según la gravedad, FasterUp registra, bloquea automáticamente, lanza una alerta urgente o escala a un analista — y MLEO ejecuta el bloqueo en la capa adecuada, del firewall a una VLAN de cuarentena. Sin necesidad de que actúe una persona.</p>
-      <div class="tech"><span>bloquea</span><span>notifica</span><span>escala</span></div>
-      <p class="note">Acciones según la gravedad, 24/7 — incluso a las 3 de la madrugada.</p>
-      <details class="more"><summary>Ver detalles</summary>
-        <div class="body"><ul><li><b>Sospechoso</b> — evento ambiguo, a vigilar → registrado en silencio.</li><li><b>Confirmado</b> — ataque confirmado → bloqueo automático de la IP de origen.</li><li><b>Grave</b> — evento de alto impacto → se genera una alerta urgente.</li><li><b>Crítico</b> — compromiso crítico → escalado a un analista humano.</li></ul><div class="adv"><b>Ventaja competitiva:</b> la plataforma <b>actúa sin esperar a un humano</b>. Su equipo interviene solo cuando una decisión crítica realmente lo requiere.</div></div>
-      </details>
-    </article>
-
-    <article class="card">
-      <div class="ico">🧠</div>
-      <h3>Motor de Fusión de Contexto IA</h3>
-      <p>El motor CYBER3 Context Fusion Engine unifica cuatro fuentes independientes — inteligencia de amenazas, telemetría de red, correlación SIEM y CYBER3 Database — en una única decisión contextual de riesgo.</p>
-      <div class="tech"><span>multi-fuente</span><span>riesgo contextual</span><span>2–11s</span></div>
-      <p class="note">Fusión de cuatro señales en una decisión estructurada — tecnología propia de FasterUp.</p>
-      <details class="more"><summary>Ver detalles</summary>
-        <div class="body"><ul><li>Cuatro señales independientes evaluadas juntas: <b>MISP</b> threat intel, telemetría de red <b>Cluster 1 IDS/IPS</b>, correlación <b>Cluster 1 SIEM</b>, la <b>base CYBER3</b>.</li><li>Una decisión contextual de riesgo por alerta — en 2–11 segundos.</li><li>Tecnología propia, controlada de extremo a extremo por ROL PORTAL SERVICES.</li></ul><div class="adv"><b>Ventaja competitiva:</b> el mismo motor impulsa también la aplicación <b>CYBER3 de endpoint (XDR)</b> — red y estaciones comparten <b>una misma inteligencia de amenazas en vivo</b>, cerrando el ciclo entre perímetro y endpoint.</div></div>
-      </details>
-    </article>
-
-    <article class="card">
-      <div class="ico">🖥️</div>
-      <h3>Sensores de red</h3>
-      <p>Sensores dedicados en tus sedes — inline o pasivos — ejecutan in situ las primeras capas de red: Inline IPS en el cable, Active Response en el firewall y L2 Shield a nivel Ethernet, contra ARP spoofing, DHCP falso, escaneos y exploits — sin tocar las estaciones de trabajo.</p>
-      <div class="tech"><span>inline / pasivo</span><span>VPN privada</span><span>sin agentes en equipos</span></div>
-      <p class="note">Conectados al SOC mediante una VPN privada cifrada.</p>
-      <details class="more"><summary>Ver detalles</summary>
-        <div class="body"><ul><li>Instalados inline o pasivos en cada sede — <b>~15 minutos por sede</b>, sin agentes en los equipos.</li><li>Vigilan ARP spoofing, DHCP fraudulento, escaneos, exploits y comportamiento anómalo.</li><li><b>Sus datos permanecen en sus instalaciones</b> — solo los metadatos fluyen al SOC, por una VPN privada cifrada.</li></ul><div class="adv"><b>Ventaja competitiva:</b> privacidad por diseño — pensado para el tratamiento de datos del <b>RGPD y el sector público</b>, con registro de auditoría completo.</div></div>
-      </details>
-    </article>
-
-    <article class="card">
-      <div class="ico">🔔</div>
-      <h3>Alertas claras y humanas</h3>
-      <p>Cuando algo importa, su equipo recibe una explicación concisa y comprensible — qué pasó, por qué es una amenaza y qué hizo ya FasterUp al respecto — por Telegram y email.</p>
-      <div class="tech"><span>Telegram</span><span>email</span><span>explicación IA</span></div>
-      <p class="note">Sin ruido. Solo lo que necesita su atención, explicado con claridad.</p>
-      <details class="more"><summary>Ver detalles</summary>
-        <div class="body"><ul><li>Explicación en lenguaje claro: <b>qué pasó, por qué es una amenaza y qué hizo ya la plataforma</b>.</li><li>Entregada a su equipo por Telegram y email.</li><li>Sin volcados de registros, sin avalanchas de alertas.</li></ul><div class="adv"><b>Ventaja competitiva:</b> cero fatiga de alertas — su personal ve <b>solo lo que requiere atención</b>, ya clasificado y resuelto.</div></div>
-      </details>
-    </article>
+<section class="sec" id="fusion"><div class="wrap two">
+  <div class="reveal">
+    <span class="kicker">CAPA 4 · CYBERBOT FUSION</span><h2>Cuatro fuentes. Una decisión autónoma. En segundos.</h2><p class="lead">Cada alerta se contrasta a la vez con cuatro fuentes independientes. CyberBot las fusiona en un único veredicto y actúa, sin esperar a que una persona responda a las 3 de la madrugada.</p>
+    <div class="lh">Acción según la gravedad</div>
+    <div class="ladder"><div>Registro silencioso</div><div>Bloqueo automático de IP</div><div>Alerta urgente</div><div>Escalado humano</div></div>
+    <ul class="ul"><li><svg viewBox="0 0 24 24" class="ck" aria-hidden="true"><path d="M5 12.5l4.2 4.2L19 7" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Bloquea el comando y control saliente, no solo los ataques entrantes</span></li><li><svg viewBox="0 0 24 24" class="ck" aria-hidden="true"><path d="M5 12.5l4.2 4.2L19 7" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Protección contra falsos positivos: su propia infraestructura nunca se bloquea</span></li><li><svg viewBox="0 0 24 24" class="ck" aria-hidden="true"><path d="M5 12.5l4.2 4.2L19 7" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Alertas en lenguaje claro para su equipo por Telegram y correo electrónico</span></li></ul>
   </div>
-</section>
-
-<section id="technology" class="section alt d7">
-  <div class="head">
-    <div class="kicker">TECNOLOGÍA</div>
-    <h2>Bloqueo en cascada. Siete capas complementarias.</h2>
-    <p>Cada amenaza atraviesa una cascada de siete capas de defensa: del cable a Ethernet, luego la nube y el endpoint. Lo que escapa a una capa lo detiene la siguiente. Las capas son complementarias, no redundantes: cada una cubre un ángulo que las demás no ven. MLEO las orquesta como un solo organismo.</p>
+  <div class="fusion reveal">
+    <svg viewBox="0 0 520 520" aria-hidden="true"><defs><linearGradient id="fg" x1="0" x2="1"><stop offset="0" stop-color="#33A1FF"/><stop offset="1" stop-color="#ff1a1a"/></linearGradient></defs>
+      <path class="flow" d="M120 90 C 200 150, 220 200, 260 260"/><path class="flow" d="M400 90 C 320 150, 300 200, 260 260"/>
+      <path class="flow" d="M120 430 C 200 370, 220 320, 260 260"/><path class="flow" d="M400 430 C 320 370, 300 320, 260 260"/></svg>
+    <div class="fsrc s0"><b>Telemetría de red</b><span>IDS/IPS inline en cada sede</span></div><div class="fsrc s1"><b>Correlación SIEM</b><span>eventos correlacionados en toda la infraestructura</span></div><div class="fsrc s2"><b>Inteligencia de amenazas</b><span>feeds globales en tiempo real</span></div><div class="fsrc s3"><b>CYBER3 Database</b><span>nuestros propios indicadores, que crecen cada día</span></div>
+    <div class="fcore">CyberBot<br>Fusion<small>2–11 s</small></div>
   </div>
+</div></section>
 
-  <div id="defense" class="d7-block">
-  <div class="d7-status" aria-labelledby="d7-st-h">
-    <div class="d7-st-head"><h3 id="d7-st-h">Capabilities Status</h3><span class="d7-sum"><i class="d7-led"></i>7 / 7 Active</span></div>
-    <div class="d7-caps">
-<div class="d7-cap" style="--c:#3b82f6"><div class="d7-top"><span class="d7-no">1</span>Red</div><div class="d7-cnm">Inline IPS</div><div class="d7-ln"><span class="d7-act"><i class="d7-led"></i>Active</span><span><span class="d7-rtl">respuesta </span><span class="d7-rt">&lt; 10 ms</span></span></div></div>
-<div class="d7-cap" style="--c:#f59e0b"><div class="d7-top"><span class="d7-no">2</span>Host</div><div class="d7-cnm">Active Response</div><div class="d7-ln"><span class="d7-act"><i class="d7-led"></i>Active</span><span><span class="d7-rtl">respuesta </span><span class="d7-rt">2–11 s</span></span></div></div>
-<div class="d7-cap" style="--c:#22d3ee"><div class="d7-top"><span class="d7-no">3</span>Ethernet</div><div class="d7-cnm">L2 Shield</div><div class="d7-ln"><span class="d7-act"><i class="d7-led"></i>Active</span><span><span class="d7-rtl">respuesta </span><span class="d7-rt">&lt; 1 ms</span></span></div></div>
-<div class="d7-cap" style="--c:#34d399"><div class="d7-top"><span class="d7-no">4</span>IA</div><div class="d7-cnm">CYBER3 Context Fusion Engine</div><div class="d7-ln"><span class="d7-act"><i class="d7-led"></i>Active</span><span><span class="d7-rtl">respuesta </span><span class="d7-rt">2–11 s</span></span></div></div>
-<div class="d7-cap" style="--c:#a78bfa"><div class="d7-top"><span class="d7-no">5</span>Nube</div><div class="d7-cnm">CYBER3 Edge</div><div class="d7-ln"><span class="d7-act"><i class="d7-led"></i>Active</span><span><span class="d7-rtl">respuesta </span><span class="d7-rt">&lt; 50 ms</span></span></div></div>
-<div class="d7-cap" style="--c:#2dd4bf"><div class="d7-top"><span class="d7-no">6</span>Escritorio</div><div class="d7-cnm">CYBER3 EDR/XDR for Desktop</div><div class="d7-ln"><span class="d7-act"><i class="d7-led"></i>Active</span><span><span class="d7-rtl">respuesta </span><span class="d7-rt">tiempo real</span></span></div></div>
-<div class="d7-cap" style="--c:#fb7185"><div class="d7-top"><span class="d7-no">7</span>Móvil</div><div class="d7-cnm">CYBER3 Mobile Protection</div><div class="d7-ln"><span class="d7-act"><i class="d7-led"></i>Active</span><span><span class="d7-rtl">respuesta </span><span class="d7-rt">tiempo real</span></span></div></div>
-<div class="d7-cap d7-mleo" style="--c:#D4AF37"><div class="d7-top"><span class="d7-no">⬡</span>Orquestador</div><div class="d7-cnm">Multi Layer Enforcement Orchestrator</div><div class="d7-ln"><span class="d7-orch">orquesta 7 / 7 capas</span><span class="d7-rt">L2 ↔ L3</span></div></div>
+<section class="sec" id="mleo" style="background:linear-gradient(180deg,transparent,rgba(51,161,255,.05) 50%,transparent)"><div class="wrap">
+  <div class="head reveal"><span class="kicker">MLEO · MULTI LAYER ENFORCEMENT ORCHESTRATOR</span><h2>No se limita a detectar en siete capas. Decide qué capa golpea.</h2><p>MLEO es el núcleo que une las siete capas en un solo organismo. Correlaciona lo que ve cada capa, asigna a cada dispositivo una identidad única entre capas y aplica el bloqueo en la capa que mejor detiene la amenaza, sin bloqueos redundantes ni conflictos.</p></div>
+  <div class="cards"><article class="card reveal"><span class="i">01</span><h3>Identidad unificada</h3><p>El mismo dispositivo, visto como IP en la capa 3 y como MAC, VLAN y puerto de switch en la capa 2.</p></article><article class="card reveal"><span class="i">02</span><h3>A prueba de evasión</h3><p>Cambiar de dirección IP ya no le sirve al atacante: el bloqueo sigue al dispositivo.</p></article><article class="card reveal"><span class="i">03</span><h3>Aislar al atacante, no a la víctima</h3><p>Durante un ARP spoofing, el tráfico parece proceder de la víctima. La correlación direccional aísla la fuente real.</p></article><article class="card reveal"><span class="i">04</span><h3>Seguro por construcción</h3><p>VLAN de cuarentena en lugar de desactivar el puerto, lista de permitidos y rollback por ID de transacción como condiciones previas, fail-safe en cada capa.</p></article></div>
+  <p class="note reveal">Despliegue por etapas: las primeras ofrecen visibilidad completa sin tocar la red del cliente.</p>
+</div></section>
+
+<section class="sec ai" id="ai"><div class="wrap">
+  <div class="head reveal"><span class="kicker">CYBER3.AI · LLM DE SEGURIDAD SOBERANO</span><h2>Un analista de IA integrado en el SOC y el VAS, no añadido a posteriori.</h2><p>CYBER3.AI es nuestro modelo de lenguaje de seguridad, creado para una sola misión: la defensa. Abarca toda la cadena y consulta la misma CYBER3 Database que los sensores, las apps y el escáner.</p></div>
+  <div class="aigrid">
+    <div class="roles"><div class="role reveal"><b><i></i>Explica</b><p>Alertas y hallazgos en lenguaje claro, en el idioma de su equipo: qué ha ocurrido, por qué importa y qué se ha hecho ya.</p></div><div class="role reveal"><b><i></i>Investiga</b><p>Un copiloto de seguridad que correlaciona indicadores de la CYBER3 Database y de la inteligencia de amenazas en tiempo real.</p></div><div class="role reveal"><b><i></i>Prioriza</b><p>Convierte los hallazgos de vulnerabilidades en un orden de remediación: qué corregir primero y cómo.</p></div><div class="role reveal"><b><i></i>Informa</b><p>Redacta los informes de incidentes y de NIS2 art. 21/23 a partir de datos reales del SOC.</p></div></div>
+    <div class="sov reveal"><span class="tag">CYBER3.AI</span><h3>Soberano por diseño</h3><ul class="ul"><li><svg viewBox="0 0 24 24" class="ck" aria-hidden="true"><path d="M5 12.5l4.2 4.2L19 7" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Un modelo de seguridad autoalojado en la UE</span></li><li><svg viewBox="0 0 24 24" class="ck" aria-hidden="true"><path d="M5 12.5l4.2 4.2L19 7" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Arquitectura multimotor con conmutación automática: ningún proveedor de IA puede apagar su SOC</span></li><li><svg viewBox="0 0 24 24" class="ck" aria-hidden="true"><path d="M5 12.5l4.2 4.2L19 7" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Basado en nuestra propia base de amenazas, no en internet abierto</span></li></ul></div>
+  </div>
+</div></section>
+
+<section class="sec" id="database"><div class="wrap two">
+  <div class="reveal">
+    <span class="kicker">CYBER3 DATABASE</span><h2>Nuestra propia inteligencia de amenazas. Crece cada día.</h2><p class="lead">La CYBER3 Database fusiona feeds globales de amenazas con los indicadores que nuestros propios sensores observan en redes reales. Se publica a diario en una red edge global e impulsa cada capa: los sensores, la IA y las apps de escritorio y móvil; una única verdad en tiempo real en todas partes.</p>
+    <div class="dbnums">
+      <div class="dbn"><b class="ioc" data-n="2895988">2,895,988</b><span>indicadores de amenaza, en tiempo real</span></div>
+      <div class="dbn"><b id="fp">42,213</b><span>indicadores propios de nuestros sensores</span></div>
+      <div class="dbn"><b>300+</b><span>ubicaciones edge que atienden las consultas</span></div>
+    </div>
+    <ul class="ul"><li><svg viewBox="0 0 24 24" class="ck" aria-hidden="true"><path d="M5 12.5l4.2 4.2L19 7" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Canal de publicación diaria, verificado de extremo a extremo</span></li><li><svg viewBox="0 0 24 24" class="ck" aria-hidden="true"><path d="M5 12.5l4.2 4.2L19 7" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Consultas que preservan la privacidad: solo un prefijo hash sale del dispositivo</span></li><li><svg viewBox="0 0 24 24" class="ck" aria-hidden="true"><path d="M5 12.5l4.2 4.2L19 7" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg><span>La misma base de datos protege redes, puestos de trabajo y teléfonos</span></li></ul>
+  </div>
+  <div class="dbviz reveal" aria-hidden="true"><canvas id="dbc" width="600" height="600"></canvas><div class="c">CYBER3<br>Database<small>live</small></div></div>
+</div></section>
+
+<section class="sec" id="vas"><div class="wrap">
+  <div class="head reveal"><span class="kicker">VAS · CYBER3 SCAN Y GLOBAL SCAN</span><h2>Un escaneo ágil que encuentra toda la red y nunca hace saltar la alarma.</h2><p>Vulnerability Assessment desarrollado por el mismo equipo que defiende las redes. Nuestro escáner se ejecuta desde el sensor que ya está dentro de su red, por lo que lo descubre todo, incluso lo que nadie recordó indicarle.</p></div>
+  <div class="cards"><article class="card reveal"><span class="i">01</span><h3>Descubre sin que se lo digan</h3><p>La escucha pasiva y las sondas etiquetadas en cada VLAN mapean hosts, direcciones MAC, fabricantes y funciones, incluidos los dispositivos silenciosos.</p></article><article class="card reveal"><span class="i">02</span><h3>Unstoppable Adaptive Scan</h3><p>Estudia el objetivo y avanza con pasos medidos; retrocede al primer indicio de un firewall y no dispara alarmas.</p></article><article class="card reveal"><span class="i">03</span><h3>Global Scan ágil</h3><p>Análisis de la exposición externa desde la nube bajo demanda: sin instalación, resultados en minutos. Escaneo de toda la red integrado en la app de Windows.</p></article><article class="card reveal"><span class="i">04</span><h3>Priorizado y accionable</h3><p>Vulnerabilidades conocidas (CVE), configuraciones inseguras y servicios expuestos, ordenados para que corrija primero lo que importa.</p></article></div>
+</div></section>
+
+<section class="sec" id="agents" style="background:radial-gradient(60% 50% at 50% 50%,rgba(34,211,138,.05),transparent 70%)"><div class="wrap">
+  <div class="head reveal"><span class="kicker">OPERACIONES AGÉNTICAS</span><h2>Un ejército de agentes que opera la plataforma, día y noche.</h2><p>Nuestro equipo se ocupa de las excepciones. Los agentes se ocupan de todo lo demás: vigilan, reparan, dirigen y responden, y demuestran cada día que la cadena sigue funcionando.</p></div>
+  <div class="agents"><article class="agent reveal"><div class="scan"></div><span class="dot"><i></i>Activa</span><h3>NOC Agentic</h3><p>Vigila toda la infraestructura desde un punto de observación cloud independiente (cada sensor, servicio y túnel) con diagramas en tiempo real, resúmenes de IA y alertas.</p></article><article class="agent reveal"><div class="scan"></div><span class="dot"><i></i>Activa</span><h3>Health Check Agentic</h3><p>Administra y repara de forma autónoma la flota de sensores 24/7: capturas detenidas, servicios bloqueados, túneles caídos, todo resuelto antes de que nadie lo note. Las pruebas sintéticas validan la cadena de extremo a extremo.</p></article><article class="agent reveal"><div class="scan"></div><span class="dot"><i></i>Activa</span><h3>CCC Agentic</h3><p>El Centro de Mando y Control: una única cabina sobre todo el ecosistema, desde la que los operadores dirigen a los agentes y ven cómo la inteligencia de amenazas se convierte en respuesta autónoma.</p></article><article class="agent reveal"><div class="scan"></div><span class="dot"><i></i>Activa</span><h3>Ops Agents</h3><p>Agentes de CYBER3.AI que clasifican alertas, correlacionan indicadores, investigan y responden, con niveles de autonomía que van desde acciones aprobadas por una persona hasta playbooks preaprobados con disyuntor de seguridad.</p></article></div>
+  <p class="note reveal">Actualización autónoma de reglas con autoprotección y rollback automático. Fail-open por diseño: su tráfico nunca se detiene por nuestra causa.</p>
+</div></section>
+
+<section class="sec" id="fallback"><div class="wrap">
+  <div class="head reveal"><span class="kicker">RESPALDO EN TODAS PARTES</span><h2>Sin un único punto de fallo. En ningún lugar.</h2><p>Cada componente crítico de la plataforma dispone de una segunda vía que toma el relevo por sí sola. Si un componente falla, la defensa no.</p></div>
+  <div class="fb"><div class="fbi reveal"><span class="fbx"><i></i><i></i></span><div><b>Sensores</b><p>Inspección fail-open: su tráfico nunca se detiene por nuestra causa.</p></div></div><div class="fbi reveal"><span class="fbx"><i></i><i></i></span><div><b>Núcleo del SOC</b><p>Plataforma de eventos en clúster y un sitio de recuperación ante desastres en la nube.</p></div></div><div class="fbi reveal"><span class="fbx"><i></i><i></i></span><div><b>Monitorización</b><p>El NOC agéntico funciona en una infraestructura cloud independiente: visible incluso si una sede se queda a oscuras.</p></div></div><div class="fbi reveal"><span class="fbx"><i></i><i></i></span><div><b>IA</b><p>CYBER3.AI multimotor con conmutación automática: ningún proveedor de IA puede apagarlo por sí solo.</p></div></div><div class="fbi reveal"><span class="fbx"><i></i><i></i></span><div><b>Base de amenazas</b><p>Servida desde más de 300 ubicaciones edge; las apps siguen protegiendo en el dispositivo, incluso sin conexión.</p></div></div><div class="fbi reveal"><span class="fbx"><i></i><i></i></span><div><b>Datos</b><p>Copias de seguridad cifradas externas con procedimientos de restauración probados.</p></div></div></div>
+</div></section>
+
+<section class="sec" id="endpoint"><div class="wrap">
+  <div class="head reveal"><span class="kicker">ENDPOINT · CYBER3</span><h2>El SOC, extendido a cada puesto de trabajo y a cada teléfono.</h2><p>La misma plataforma, nativa en Windows, Android y iPhone. Las organizaciones registran los dispositivos con un código de activación o de forma silenciosa durante el despliegue; solo los metadatos de seguridad salen del dispositivo.</p></div>
+  <div class="ep">
+    <div class="epb reveal"><h3>CYBER3 para Windows — EDR/XDR</h3>
+      <div class="dtabs"><button class="dtab on" data-i="0">Panel</button><button class="dtab" data-i="1">Global Scan</button><button class="dtab" data-i="2">Aislamiento de amenazas</button><button class="dtab" data-i="3">VPN</button></div>
+      <div class="screen"><div class="dots"><i></i><i></i><i></i></div><div class="view" id="dview"><img class="on" src="/assets/desk/desktop-home-en.webp" alt="CYBER3 for Windows — Panel" width="1600" height="1067" loading="lazy" decoding="async"><img class="" src="/assets/desk/desktop-globalscan-en.webp" alt="CYBER3 for Windows — Global Scan" width="1600" height="1067" loading="lazy" decoding="async"><img class="" src="/assets/desk/desktop-isolation-en.webp" alt="CYBER3 for Windows — Aislamiento de amenazas" width="1600" height="1067" loading="lazy" decoding="async"><img class="" src="/assets/desk/desktop-vpn-en.webp" alt="CYBER3 for Windows — VPN" width="1600" height="1067" loading="lazy" decoding="async"></div></div>
+      <ul class="ul"><li><svg viewBox="0 0 24 24" class="ck" aria-hidden="true"><path d="M5 12.5l4.2 4.2L19 7" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Aislamiento automático del puesto ante malware confirmado: reversible y supervisado por el SOC</span></li><li><svg viewBox="0 0 24 24" class="ck" aria-hidden="true"><path d="M5 12.5l4.2 4.2L19 7" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Consola de cliente: inventario, escaneo remoto, aislamiento y reconexión en menos de 30 segundos</span></li><li><svg viewBox="0 0 24 24" class="ck" aria-hidden="true"><path d="M5 12.5l4.2 4.2L19 7" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Global Scan de toda la red interna, protección del navegador, VPN cifrada</span></li><li><svg viewBox="0 0 24 24" class="ck" aria-hidden="true"><path d="M5 12.5l4.2 4.2L19 7" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Firmado digitalmente con Microsoft Trusted Signing y actualizado automáticamente</span></li></ul>
+      <div class="stores"><a class="store win" href="https://cyber3-edge.cyber3.workers.dev/desktop"><svg width="18" height="18" viewBox="0 0 24 24"><path fill="currentColor" d="M3 5.1 10.4 4v7.1H3zM11.4 3.9 21 2.5v8.6h-9.6zM3 12.1h7.4v7.1L3 18.1zM11.4 12.1H21v8.6l-9.6-1.4z"/></svg>Windows</a></div>
+    </div>
+    <div class="epb reveal"><h3>CYBER3 para Android e iPhone</h3>
+      <div class="phones"><div class="phone"><img src="/assets/phones/message-check.webp" alt="" width="660" height="1467" loading="lazy"></div><div class="phone"><img src="/assets/phones/calls.webp" alt="" width="660" height="1467" loading="lazy"></div></div>
+      <ul class="ul"><li><svg viewBox="0 0 24 24" class="ck" aria-hidden="true"><path d="M5 12.5l4.2 4.2L19 7" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Protección contra llamadas y mensajes fraudulentos, verificación de mensajes con explicación de IA</span></li><li><svg viewBox="0 0 24 24" class="ck" aria-hidden="true"><path d="M5 12.5l4.2 4.2L19 7" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Protección web: anuncios, rastreadores y phishing bloqueados en todas las apps</span></li><li><svg viewBox="0 0 24 24" class="ck" aria-hidden="true"><path d="M5 12.5l4.2 4.2L19 7" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Puntuación de seguridad del teléfono, vigilancia de identidad y filtraciones, VPN cifrada</span></li><li><svg viewBox="0 0 24 24" class="ck" aria-hidden="true"><path d="M5 12.5l4.2 4.2L19 7" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg><span>La misma base de amenazas que los sensores y los puestos de trabajo</span></li></ul>
+      <div class="stores"><a class="store gp" href="https://play.google.com/store/apps/details?id=ai.cyber3.app"><img src="/assets/google-play-badge.png" alt="Google Play" width="227" height="88" loading="lazy"></a><a class="store" href="https://apps.apple.com/app/id6814547519"><img src="/assets/app-store-badge.svg" alt="App Store" width="138" height="46" loading="lazy"></a></div>
     </div>
   </div>
+</div></section>
 
-  <div class="d7-cascade">
-    <canvas id="d7-rain" aria-hidden="true"></canvas>
-    <div class="d7-rows">
-      <div class="d7-in"><span>◤ Entran tráfico + amenazas</span><span class="d7-in-r">100% inspeccionado</span></div>
-<div class="d7-row" style="--c:#3b82f6"><div class="d7-num">1</div><div class="d7-mid"><div class="d7-nm">Inline IPS<span class="d7-badge">Red · L3–L7</span></div><div class="d7-mech">inspección inline en el cable · firmas + anomalías · indicadores IOC</div><div class="d7-exp">Detecta y <span class="c">detiene el paquete en el cable</span>, en milisegundos, antes de que entre en la red del cliente.</div><div class="d7-fnl" style="width:100%"></div></div><div class="d7-right"><span class="d7-act"><i class="d7-led"></i>Active</span><span class="d7-rt2">&lt; 10 ms</span><span class="d7-vs">tiempo de respuesta</span></div></div>
-<div class="d7-row" style="--c:#f59e0b"><div class="d7-num">2</div><div class="d7-mid"><div class="d7-nm">Active Response<span class="d7-badge">Host · L3</span></div><div class="d7-mech">regla DROP en el firewall · escalado a bloqueo permanente en toda la flota</div><div class="d7-exp">Respuesta automática a una alerta: una <span class="c">regla DROP en el firewall</span> para la IP del atacante. Respaldo nativo, independiente de la IA.</div><div class="d7-fnl" style="width:82%"></div></div><div class="d7-right"><span class="d7-act"><i class="d7-led"></i>Active</span><span class="d7-rt2">2–11 s</span><span class="d7-vs">tiempo de respuesta</span></div></div>
-<div class="d7-row" style="--c:#22d3ee"><div class="d7-num">3</div><div class="d7-mid"><div class="d7-nm">L2 Shield<span class="d7-badge">Ethernet · L2</span></div><div class="d7-mech">Ethernet nativo · anti-ARP-spoof (pin IP↔MAC del gateway) · anti-DHCP falso · dead-man anti-blackhole</div><div class="d7-exp"><span class="c">La única capa a nivel Ethernet.</span> Detiene MITM, envenenamiento ARP y DHCP falso — ataques que las capas IP <span class="c">no ven</span>.</div><div class="d7-fnl" style="width:70%"></div></div><div class="d7-right"><span class="d7-act"><i class="d7-led"></i>Active</span><span class="d7-rt2">&lt; 1 ms</span><span class="d7-vs">tiempo de respuesta</span></div></div>
-<div class="d7-row" style="--c:#34d399"><div class="d7-num">4</div><div class="d7-mid"><div class="d7-nm">CYBER3 Context Fusion Engine<span class="d7-badge">IA · L3–L7</span></div><div class="d7-mech">fusión multifuente: red + host + inteligencia de amenazas + CYBER3 DB</div><div class="d7-exp">Decisión autónoma a partir del contexto fusionado; bloquea incluso <span class="c">las conexiones salientes hacia C2</span> (comando y control).</div><div class="d7-fnl" style="width:60%"></div></div><div class="d7-right"><span class="d7-act"><i class="d7-led"></i>Active</span><span class="d7-rt2">2–11 s</span><span class="d7-vs">tiempo de respuesta</span></div></div>
-<div class="d7-row" style="--c:#a78bfa"><div class="d7-num">5</div><div class="d7-mid"><div class="d7-nm">CYBER3 Edge<span class="d7-badge">Nube · en cualquier lugar</span></div><div class="d7-mech">DNS-shield · IOC en el edge (2M+ indicadores) · extensión de navegador</div><div class="d7-exp">Protección web y DNS <span class="c">en cualquier lugar, incluso fuera de la red</span>: los dominios y URLs peligrosos se bloquean antes de conectar.</div><div class="d7-fnl" style="width:52%"></div></div><div class="d7-right"><span class="d7-act"><i class="d7-led"></i>Active</span><span class="d7-rt2">&lt; 50 ms</span><span class="d7-vs">tiempo de respuesta</span></div></div>
-<div class="d7-row" style="--c:#2dd4bf"><div class="d7-num">6</div><div class="d7-mid"><div class="d7-nm">CYBER3 EDR/XDR for Desktop<span class="d7-badge">Escritorio · estación</span></div><div class="d7-mech">detección de comportamiento · telemetría XDR → SOC · cuarentena</div><div class="d7-exp">Cubre las amenazas que llegan <span class="c">a la estación</span> (USB, archivos, procesos), más allá de la red.</div><div class="d7-fnl" style="width:46%"></div></div><div class="d7-right"><span class="d7-act"><i class="d7-led"></i>Active</span><span class="d7-rt2">tiempo real</span><span class="d7-vs">tiempo de respuesta</span></div></div>
-<div class="d7-row" style="--c:#fb7185"><div class="d7-num">7</div><div class="d7-mid"><div class="d7-nm">CYBER3 Mobile Protection<span class="d7-badge">Móvil · dispositivo</span></div><div class="d7-mech">anti-fraude / anti-phishing · filtrado DNS · VPN</div><div class="d7-exp">Protege al usuario <span class="c">en movilidad</span>: la última capa, en el dispositivo personal.</div><div class="d7-fnl" style="width:42%"></div></div><div class="d7-right"><span class="d7-act"><i class="d7-led"></i>Active</span><span class="d7-rt2">tiempo real</span><span class="d7-vs">tiempo de respuesta</span></div></div>
-      <div class="d7-outb"><span>◣ Llega a la red / al usuario</span><span class="d7-outb-r">tráfico inspeccionado en 7 capas</span></div>
-    </div>
-  </div>
+<section class="sec" id="why"><div class="wrap">
+  <div class="head reveal"><span class="kicker">POR QUÉ UN SOLO PROVEEDOR</span><h2>FasterUp frente al esquema habitual multiproveedor</h2></div>
+  <div class="cmp reveal"><table><thead><tr><th></th><th class="us">FasterUp</th><th>Esquema multiproveedor típico</th></tr></thead>
+    <tbody><tr><td>De la detección al bloqueo</td><td class="t us">Segundos, de forma autónoma</td><td class="t">Horas: tickets entre proveedores</td></tr><tr><td>Protección a nivel Ethernet (L2)</td><td class="y us"><span class="mk" title="Incluido"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.2 4.2L19 7"/></svg></span></td><td class="n"><span class="mk" title="No incluido"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg></span></td></tr><tr><td>Red + puesto de trabajo + teléfono en una sola cadena</td><td class="y us"><span class="mk" title="Incluido"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.2 4.2L19 7"/></svg></span></td><td class="p"><span class="mk" title="Parcial"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"><path d="M6 12h12"/></svg></span></td></tr><tr><td>Analista de IA que explica cada hallazgo</td><td class="y us"><span class="mk" title="Incluido"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.2 4.2L19 7"/></svg></span></td><td class="p"><span class="mk" title="Parcial"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"><path d="M6 12h12"/></svg></span></td></tr><tr><td>Base de amenazas propia, alimentada por sensores propios</td><td class="y us"><span class="mk" title="Incluido"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.2 4.2L19 7"/></svg></span></td><td class="n"><span class="mk" title="No incluido"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg></span></td></tr><tr><td>Flota de sensores autorreparable</td><td class="y us"><span class="mk" title="Incluido"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.2 4.2L19 7"/></svg></span></td><td class="n"><span class="mk" title="No incluido"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg></span></td></tr><tr><td>Un único informe NIS2 unificado</td><td class="y us"><span class="mk" title="Incluido"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.2 4.2L19 7"/></svg></span></td><td class="n"><span class="mk" title="No incluido"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg></span></td></tr><tr><td>Los datos permanecen en sus instalaciones (solo metadatos)</td><td class="y us"><span class="mk" title="Incluido"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.2 4.2L19 7"/></svg></span></td><td class="p"><span class="mk" title="Parcial"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"><path d="M6 12h12"/></svg></span></td></tr><tr><td>Un contrato, un equipo responsable</td><td class="y us"><span class="mk" title="Incluido"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.2 4.2L19 7"/></svg></span></td><td class="n"><span class="mk" title="No incluido"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg></span></td></tr></tbody></table></div>
+</div></section>
 
-  <div class="d7-mleo-sec">
-    <p class="d7-mtag"><span class="d7-hex">⬡</span>Orquestador propio · 7 capas</p>
-    <h3 class="d7-mh">Multi Layer Enforcement Orchestrator<small>MLEO · EL NÚCLEO QUE UNE LAS 7 CAPAS</small></h3>
-    <p class="d7-ml">Sin orquestación, cada capa <b>detectaría y bloquearía por su cuenta</b>. MLEO es el núcleo que <b>correlaciona las señales entre capas y decide en qué capa se ejecuta cada amenaza</b>, a partir de una identidad unificada del dispositivo: el mismo equipo visto como <b>IP en la capa 3</b> y como <b>MAC en la capa 2</b>.</p>
-    <div class="d7-corr">
-      <div class="d7-cbox"><p class="d7-k">Capa 3 · capas 1 · 2 · 4</p><p class="d7-t">Bloqueos por IP</p><p class="d7-d">Inline IPS, Active Response y CYBER3 Context Fusion Engine: quién atacó, en qué puerto, cuándo.</p></div>
-      <div class="d7-arr" aria-hidden="true">⇄</div>
-      <div class="d7-cbox d7-core"><p class="d7-k">MLEO · identidad unificada</p><p class="d7-t">Una única fuente de verdad</p><p class="d7-id">MAC ↔ IP ↔ VLAN ↔ puerto<br>↔ ubicación física ↔ criticidad</p></div>
-      <div class="d7-arr" aria-hidden="true">⇄</div>
-      <div class="d7-cbox"><p class="d7-k">Capa 2 · capa 3</p><p class="d7-t">Identidad MAC</p><p class="d7-d">L2 Shield: tabla ARP con historial, anomalías Ethernet, el dispositivo real detrás de la IP.</p></div>
-    </div>
-    <div class="d7-out"><b>Enforcement en la capa adecuada</b><span>drop list en el sensor (L3)</span><span class="d7-sep">·</span><span>cuarentena VLAN en el switch (L2)</span><span class="d7-sep">·</span><span>bloqueado una sola vez, no en cada capa por separado</span></div>
-    <div class="d7-mcols">
-      <div><h4>Qué resuelve</h4><ul class="d7-prob"><li><b>Evasión por cambio de IP</b>Un atacante bloqueado en una IP toma otra y continúa. En L3 parece otro actor; en L2 es la misma MAC, y MLEO lo reconoce.</li><li><b>Aislamiento correcto ante ARP spoofing</b>El tráfico falso parece venir de la víctima. La correlación direccional aísla al atacante, no al equipo del que parece venir el tráfico.</li><li><b>Una sola imagen, no bloqueos fragmentados</b>El mismo dispositivo ya no se bloquea por separado en 3–4 capas sin relación entre ellas.</li><li><b>Seguimiento en el tiempo</b>A partir de una IP vista hace 24 horas, obtienes la MAC y el puerto físico donde está el dispositivo.</li></ul></div>
-      <div><h4>Principios de seguridad</h4><div class="d7-chips"><span>observar antes de aplicar</span><span>allowlist con precedencia absoluta</span><span>rollback transaccional</span><span>cuarentena VLAN, no apagado</span><span>fail-safe en cada capa</span></div>
-        <h4>La cadena de enforcement de MLEO</h4><ol class="d7-stages"><li class=""><span class="d7-sn">0</span><span>Recopilación continua: ARP, tablas MAC, bloqueos de cada capa</span><span class="d7-ss">visibilidad</span></li><li class=""><span class="d7-sn">1</span><span>Tabla de reconciliación MAC ↔ IP ↔ VLAN ↔ puerto, con historial de IP</span><span class="d7-ss">visibilidad</span></li><li class=""><span class="d7-sn">2</span><span>Cada bloqueo L3 recibe su identidad L2 (MAC, VLAN, puerto, criticidad)</span><span class="d7-ss">visibilidad</span></li><li class=""><span class="d7-sn">3</span><span>Misma MAC, IPs distintas en 15 minutos: alerta de evasión por cambio de IP<span class="d7-risk">los pasos 0–3 dan visibilidad total sin tocar la red del cliente</span></span><span class="d7-ss">visibilidad</span></li><li class="enf gate"><span class="d7-sn">4</span><span>Enforcement: el puerto pasa a una VLAN de cuarentena, con allowlist y rollback<span class="d7-risk">condiciones previas: allowlist + rollback probado</span></span><span class="d7-ss">enforcement</span></li><li class="enf"><span class="d7-sn">5</span><span>MAC nueva en un puerto con historial de bloqueos; ARP falso + bloqueo L3: aislamiento del puerto</span><span class="d7-ss">enforcement</span></li><li class="enf"><span class="d7-sn">6</span><span>Dirección inversa L2 → L3: la MAC anómala se resuelve a IP y se bloquea de forma preventiva</span><span class="d7-ss">enforcement</span></li></ol></div>
-    </div>
-  </div>
+<section class="sec" id="packages"><div class="wrap">
+  <div class="head reveal"><span class="kicker">PAQUETES</span><h2>A la medida de su institución</h2><p>Cada paquete incluye todo lo del anterior y añade capas y capacidades. La configuración exacta (sedes, sensores, puestos de trabajo, teléfonos) se define tras una evaluación inicial.</p></div>
+  <div class="pk"><article class="pkc reveal"><h3>Standard</h3><div class="inc">Incluye</div><ul><li><svg viewBox="0 0 24 24" class="ck" aria-hidden="true"><path d="M5 12.5l4.2 4.2L19 7" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg><span>SOC gestionado 24/7 · respuesta autónoma en 2–11 s</span></li><li><svg viewBox="0 0 24 24" class="ck" aria-hidden="true"><path d="M5 12.5l4.2 4.2L19 7" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Sensor inline en la sede principal</span></li><li><svg viewBox="0 0 24 24" class="ck" aria-hidden="true"><path d="M5 12.5l4.2 4.2L19 7" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Capas 1–4: IPS inline · Active Response · L2 Shield · CyberBot Fusion</span></li><li><svg viewBox="0 0 24 24" class="ck" aria-hidden="true"><path d="M5 12.5l4.2 4.2L19 7" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg><span>MLEO: correlación L3 ↔ L2 y bloqueo en la capa adecuada</span></li><li><svg viewBox="0 0 24 24" class="ck" aria-hidden="true"><path d="M5 12.5l4.2 4.2L19 7" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg><span>VAS mensual programado</span></li><li><svg viewBox="0 0 24 24" class="ck" aria-hidden="true"><path d="M5 12.5l4.2 4.2L19 7" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Alertas en lenguaje claro + portal de cliente con informes NIS2</span></li><li><svg viewBox="0 0 24 24" class="ck" aria-hidden="true"><path d="M5 12.5l4.2 4.2L19 7" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Health Check Agentic 24/7</span></li></ul><div class="bf"><b>Ideal para</b>Una sede central con la TI concentrada: monitorización autónoma 24/7 y una visión periódica de las vulnerabilidades, sin necesidad de crear un SOC propio.</div></article><article class="pkc reveal"><h3>Ampliado</h3><div class="inc">Todo lo de Standard, más</div><ul><li><svg viewBox="0 0 24 24" class="ck" aria-hidden="true"><path d="M5 12.5l4.2 4.2L19 7" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Sensores inline en cada sede</span></li><li><svg viewBox="0 0 24 24" class="ck" aria-hidden="true"><path d="M5 12.5l4.2 4.2L19 7" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Capa 5 · CYBER3 Edge para toda la organización</span></li><li><svg viewBox="0 0 24 24" class="ck" aria-hidden="true"><path d="M5 12.5l4.2 4.2L19 7" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Capa 6 · CYBER3 Desktop XDR en los puestos críticos</span></li><li><svg viewBox="0 0 24 24" class="ck" aria-hidden="true"><path d="M5 12.5l4.2 4.2L19 7" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Consola de cliente: aislamiento, escaneos remotos, estado de la flota</span></li><li><svg viewBox="0 0 24 24" class="ck" aria-hidden="true"><path d="M5 12.5l4.2 4.2L19 7" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Global Scan de la red interna</span></li><li><svg viewBox="0 0 24 24" class="ck" aria-hidden="true"><path d="M5 12.5l4.2 4.2L19 7" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg><span>MLEO en todas las sedes</span></li><li><svg viewBox="0 0 24 24" class="ck" aria-hidden="true"><path d="M5 12.5l4.2 4.2L19 7" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg><span>VAS quincenal</span></li></ul><div class="bf"><b>Ideal para</b>Instituciones con varias sedes y una exposición elevada: cobertura de red en todas partes y XDR donde más importa.</div></article><article class="pkc best reveal"><span class="pop">RECOMENDADO</span><h3>Completo</h3><div class="inc">Todo lo de Ampliado, más</div><ul><li><svg viewBox="0 0 24 24" class="ck" aria-hidden="true"><path d="M5 12.5l4.2 4.2L19 7" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg><span>CYBER3 Desktop XDR en todos los puestos de trabajo</span></li><li><svg viewBox="0 0 24 24" class="ck" aria-hidden="true"><path d="M5 12.5l4.2 4.2L19 7" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Capa 7 · CYBER3 Mobile en los teléfonos del personal</span></li><li><svg viewBox="0 0 24 24" class="ck" aria-hidden="true"><path d="M5 12.5l4.2 4.2L19 7" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg><span>MLEO en las 7 capas</span></li><li><svg viewBox="0 0 24 24" class="ck" aria-hidden="true"><path d="M5 12.5l4.2 4.2L19 7" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg><span>VAS continuo</span></li><li><svg viewBox="0 0 24 24" class="ck" aria-hidden="true"><path d="M5 12.5l4.2 4.2L19 7" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Vigilancia de filtraciones e identidad para la organización</span></li><li><svg viewBox="0 0 24 24" class="ck" aria-hidden="true"><path d="M5 12.5l4.2 4.2L19 7" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Informes unificados de red + endpoint + móvil (NIS2 art. 21/23)</span></li></ul><div class="bf"><b>Ideal para</b>Datos sensibles de la ciudadanía y cumplimiento estricto: defensa multicapa completa con un solo proveedor y un solo informe.</div></article></div>
+  <p class="note reveal">Bajo petición, preparamos una oferta económica detallada basada en la evaluación inicial y en el procedimiento de contratación aplicable a su institución.</p>
+</div></section>
 
-  <div class="d7-foot"><div class="d7-note"><h3>¿Por qué en cascada?</h3><p>Ninguna capa es perfecta por sí sola. Un paquete detenido por el IPS ya no llega a Active Response; uno que escapa lo detiene CYBER3 Context Fusion Engine; un ataque L2 (ARP spoofing), invisible para las capas IP, lo detiene L2 Shield.</p></div><div class="d7-note"><h3>Autónomo, sin intervención humana</h3><p>Detección → fusión de contexto → decisión autónoma en 2–11 segundos → acción: bloqueo temporal, escalado a bloqueo permanente, notificación. La allowlist protege los equipos legítimos en cada paso.</p></div><div class="d7-note"><h3>Un solo organismo</h3><p>MLEO no es una capa nueva. Es el orquestador que une las capas existentes: siete capas que ven por separado se convierten en un solo organismo que ve el mismo dispositivo en todos los niveles.</p></div></div>
-  <p class="d7-tag">FasterUp NEXTGEN SOC · <b>7 capas · MLEO · defensa en profundidad</b></p>
-  <script src="/defense7.js" defer></script>
-  </div>
+<section class="sec" id="start" style="padding-top:40px"><div class="wrap">
+  <div class="head reveal"><span class="kicker">PRIMEROS PASOS</span><h2>De la evaluación a la defensa autónoma</h2></div>
+  <div class="steps"><div class="step reveal"><div class="sn">1</div><h3>Evaluación</h3><p>Mapeamos sus activos y su exposición con una evaluación de vulnerabilidades: una imagen clara de su situación.</p></div><div class="step reveal"><div class="sn">2</div><h3>Despliegue de sensores</h3><p>Inline o pasivo, unos 15 minutos por sede, sin agentes en sus endpoints.</p></div><div class="step reveal"><div class="sn">3</div><h3>SOC autónomo</h3><p>Detección y respuesta 24/7, alertas en lenguaje claro, portal de cliente e informes NIS2 desde el primer día.</p></div></div>
+</div></section>
 
-  <div class="head d7-pipehead">
-    <h3>Detectar. Correlacionar. Decidir. Actuar — de forma autónoma.</h3>
-    <p>La plataforma FasterUp AI Autonomous convierte la señal de red en bruto en una respuesta estructurada en segundos, fusionando cuatro fuentes de inteligencia independientes para cada decisión.</p>
-  </div>
-  <div class="arch">
-    <div class="flow">
-      <details class="node device"><summary><b>Sensores de red</b><span>Cluster 1 IDS/IPS · inline o pasivo</span></summary>
-        <div class="nbody">Sensores dedicados en cada sede capturan e inspeccionan el tráfico en busca de ARP spoofing, DHCP fraudulento, escaneos y exploits — sin agentes en sus equipos. Solo los metadatos salen de su red, por una VPN privada cifrada.</div>
-      </details>
-      <div class="arrow">→</div>
-      <details class="node edge"><summary><b>Correlación SIEM</b><span>Cluster 1 SIEM · eventos normalizados y correlacionados</span></summary>
-        <div class="nbody">Los paquetes en bruto se convierten en eventos normalizados y luego se correlacionan en todo el entorno, de modo que señales aisladas se transforman en un único incidente con sentido — no en miles de registros sin conexión.</div>
-      </details>
-      <div class="arrow">→</div>
-      <details class="node soc"><summary><b>CYBER3 Context Fusion Engine</b><span>decisión autónoma en 2–11s</span></summary>
-        <div class="nbody">El motor propio fusiona cuatro fuentes independientes — MISP threat intel, telemetría Cluster 1 IDS/IPS, correlación SIEM y la base CYBER3 — en una única decisión contextual de riesgo en 2–11 segundos.</div>
-      </details>
-      <div class="arrow">→</div>
-      <details class="node device"><summary><b>Respuesta</b><span>bloquea · notifica · escala</span></summary>
-        <div class="nbody">Según la gravedad, la plataforma actúa por sí sola: registro silencioso, bloqueo automático de la IP de origen, alerta urgente o escalado a un analista humano — de extremo a extremo en segundos, 24/7.</div>
-      </details>
-    </div>
-    <details class="kanon" open>
-      <summary><span class="tag">AUTÓNOMO</span> Cómo decide y actúa la plataforma en cada alerta</summary>
-      <div class="kbody">Cada alerta es evaluada por la IA en cuatro fuentes. Los eventos <b>sospechosos</b> se registran en silencio; un <b>ataque confirmado</b> desencadena un bloqueo automático de IP; los eventos <b>graves</b> generan una alerta urgente; un <b>compromiso crítico</b> escala a un analista humano. De extremo a extremo: 2–11 segundos.</div>
-    </details>
-    <details class="kanon" open>
-      <summary><span class="tag">HEALTH CHECK</span> La plataforma que se vigila — y se repara — a sí misma</summary>
-      <div class="kbody">Toda la plataforma funciona bajo un <b>Health Check</b> autónomo que monitoriza, administra y auto-repara continuamente toda la flota de sensores — 24/7, sin intervención humana. Detecta capturas de paquetes detenidas, reinicia servicios atascados, recupera túneles VPN caídos y valida la cadena de extremo a extremo con alertas canary sintéticas. Cada sensor se cura solo; la flota sigue en línea.</div>
-    </details>
-  </div>
-  <div class="principles">
-    <details class="p"><summary><b>Autónomo por defecto</b></summary><span>Decide y actúa sin esperar a un analista — la plataforma gestiona la rutina, los humanos las excepciones.</span></details>
-    <details class="p"><summary><b>Fusión de contexto multi-fuente</b></summary><span>MISP threat intel + telemetría Cluster 1 IDS/IPS + correlación Cluster 1 SIEM + CYBER3 Database — en cada decisión.</span></details>
-    <details class="p"><summary><b>Instalado en sus instalaciones</b></summary><span>Los sensores residen en su red; solo los metadatos fluyen al SOC mediante una VPN privada cifrada.</span></details>
-    <details class="p"><summary><b>Diseñado para la rendición de cuentas</b></summary><span>Registro de auditoría completo, informes estructurados y tratamiento de datos conforme al RGPD — pensado para la administración pública.</span></details>
-    <details class="p"><summary><b>Stack abierto y probado</b></summary><span>Construido sobre Cluster 1 IDS/IPS, correlación SIEM e inteligencia de amenazas MISP — reforzado, orquestado y decidido por nuestro motor de IA.</span></details>
-    <details class="p"><summary><b>Pipeline en tiempo real</b></summary><span>Paquete bruto → evento normalizado → alerta correlacionada → decisión IA → respuesta, de extremo a extremo en segundos.</span></details>
-  </div>
-</section>
+<section><div class="wrap"><div class="endbox reveal"><h2>Vea su red como la ve un atacante, antes de que lo haga él.</h2><p>Empiece con una evaluación. Sin compromiso, adaptada a su entorno.</p><a class="btn btn-red" href="mailto:contact@rol.ro?subject=FasterUp%20-%20Assessment">Solicitar evaluación</a></div></div></section>
 
-<section id="xdr" class="section x7">
-  <div class="head">
-    <div class="kicker">ENDPOINT XDR · CYBER3</div>
-    <h2>El SOC, extendido a cada puesto de trabajo — y a cada teléfono</h2>
-    <p>Las capas 6 y 7 de la cascada funcionan en los dispositivos de las personas: CYBER3 EDR/XDR for Desktop en cada puesto Windows y CYBER3 Mobile Protection en cada teléfono. Ambas reportan al mismo SOC, se nutren de la misma base de datos de amenazas y están orquestadas por el mismo MLEO: un único propietario de la tecnología, desde el sensor de red hasta la app del teléfono.</p>
+<footer><div class="wrap">
+  <div class="fgrid">
+    <div><a class="brand" href="/es/"><i class="xmark" aria-hidden="true"></i><span class="fu">FasterUp</span>.AI</a><p>Ciberseguridad autónoma para empresas y administraciones públicas: una tecnología, un proveedor, de extremo a extremo.</p><span class="certs">ISO/IEC 27001:2022 · GDPR · NIS2</span></div>
+    <div><h4>Plataforma</h4><a href="#platform">Plataforma</a><a href="#layers">7 capas</a><a href="#mleo">MLEO</a><a href="#ai">CYBER3.AI</a><a href="#vas">VAS</a></div>
+    <div><h4>Ecosistema</h4><a href="https://cyber3.app/">CYBER3 — app</a><a href="https://cyber3.ai/">CYBER3.AI — LLM</a><a href="https://cyber3.ai/status/es/" target="_blank" rel="noopener">Estado del servicio</a></div>
+    <div><h4>Empresa</h4><a href="/contact">Contacto</a><a href="/privacy">Privacidad</a><a href="/terms">Términos</a></div>
   </div>
-  <div class="x7-prod"><div class="x7-ph"><span class="x7-tag">Capa 6 · Windows</span><h3>CYBER3 EDR/XDR for Desktop</h3><p>Una aplicación nativa para Windows que convierte cada puesto de trabajo en un punto de detección y respuesta conectado al SOC. Firmada digitalmente, con actualizaciones automáticas y gestionada por organización desde la consola del cliente.</p></div><div class="x7-gal"><figure class="x7-main"><img id="x7d-main" src="/assets/shots/desktop-home-en.webp" alt="CYBER3 EDR/XDR for Desktop — Panel principal" loading="lazy" width="1600" height="1067"></figure><div class="x7-thumbs"><button type="button" class="x7-th on" data-g="x7d" data-src="/assets/shots/desktop-home-en.webp" data-alt="CYBER3 EDR/XDR for Desktop — Panel principal"><img src="/assets/shots/desktop-home-en.webp" alt="" loading="lazy"><span>Panel principal</span></button><button type="button" class="x7-th" data-g="x7d" data-src="/assets/shots/desktop-globalscan-en.webp" data-alt="CYBER3 EDR/XDR for Desktop — Global Scan"><img src="/assets/shots/desktop-globalscan-en.webp" alt="" loading="lazy"><span>Global Scan</span></button><button type="button" class="x7-th" data-g="x7d" data-src="/assets/shots/desktop-isolation-en.webp" data-alt="CYBER3 EDR/XDR for Desktop — Aislamiento del puesto"><img src="/assets/shots/desktop-isolation-en.webp" alt="" loading="lazy"><span>Aislamiento del puesto</span></button><button type="button" class="x7-th" data-g="x7d" data-src="/assets/shots/desktop-pcscan-en.webp" data-alt="CYBER3 EDR/XDR for Desktop — Análisis del equipo"><img src="/assets/shots/desktop-pcscan-en.webp" alt="" loading="lazy"><span>Análisis del equipo</span></button><button type="button" class="x7-th" data-g="x7d" data-src="/assets/shots/desktop-vpn-en.webp" data-alt="CYBER3 EDR/XDR for Desktop — CYBER3 VPN"><img src="/assets/shots/desktop-vpn-en.webp" alt="" loading="lazy"><span>CYBER3 VPN</span></button></div></div><div class="x7-blocks"><div class="x7-b"><div class="x7-bi"><svg class="cshield" viewBox="0 0 24 24"><path d="M12 2.1 L20.6 5 V11 C20.6 16.6 16.8 20.5 12 21.9 C7.2 20.5 3.4 16.6 3.4 11 V5 Z" fill="rgba(212,175,55,.14)" stroke="#d4af37" stroke-width="1.3"/><g fill="none" stroke="#f2d778" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5.2 V18.2"/><path d="M12 5.7 h2.2 a2 2 0 0 1 0 3.9 H12"/><path d="M8 11 L16 15.6"/><path d="M16 11 L8 15.6"/></g></svg></div><h4>Protección en tiempo real</h4><p>DNS-Shield en todo el puesto: los dominios peligrosos se bloquean en la resolución y el DNS sigue funcionando si el escudo llegara a detenerse (fail-open). Un motor local de amenazas con más de 2,5 millones de indicadores conocidos y una extensión de protección para el navegador con 29.131 reglas.</p></div><div class="x7-b"><div class="x7-bi">🔍</div><h4>Análisis del equipo</h4><p>Comprueba la postura de seguridad del puesto — antivirus, firewall, UAC, actualizaciones — y analiza Descargas, Temp y los elementos de inicio en busca de malware conocido. Puntuación 0–100, cuarentena con un clic y reanálisis automático cada 3 horas.</p></div><div class="x7-b"><div class="x7-bi">🛰️</div><h4>CYBER3 Global Scan, integrado</h4><p>Descubre todos los dispositivos de la red local, comprueba 38 puertos expuestos y contrasta las versiones de software con las CVE conocidas — sin ser destructivo: solo «mira las puertas». Informe de IA opcional, guardado en la cuenta de la organización.</p></div><div class="x7-b"><div class="x7-bi">🛑</div><h4>Aislamiento del puesto</h4><p>Ante malware confirmado, o por orden del SOC, el guardián de CYBER3 desconecta el puesto de la red pero mantiene el enlace con el SOC, para poder reconectarlo en remoto. Se reconecta solo a los 30 minutos, salvo que el SOC lo mantenga aislado; un kill-switch desactiva el aislamiento al instante.</p></div><div class="x7-b"><div class="x7-bi">🖥️</div><h4>Consola del cliente + SOC</h4><p>El modo organización se activa con un código de activación o de forma silenciosa durante el despliegue. La consola desktopapp.cyber3.ai muestra el inventario de puestos, su estado y sus eventos, y ejecuta en remoto el análisis, el aislamiento y la reconexión — el puesto los recoge en 30 segundos como máximo. Cada cliente ve solo su propia flota.</p></div><div class="x7-b"><div class="x7-bi">📡</div><h4>Telemetría de seguridad</h4><p>Del puesto solo salen metadatos de seguridad — heartbeat, análisis, amenazas, aislamiento — a través del sensor local o, fuera de la sede, a través del edge en la nube de CYBER3. En modo personal no se envía nada.</p></div><div class="x7-b"><div class="x7-bi">🔒</div><h4>CYBER3 VPN</h4><p>VPN WireGuard cifrada y sin registros: 400 MB gratis cada día, ilimitada con suscripción, servidores en 4 países y elección de servidor en los planes de pago.</p></div><div class="x7-b"><div class="x7-bi">⚡</div><h4>Comprobaciones al instante + copia de seguridad</h4><p>Mensajes (veredicto de IA), enlaces, números de teléfono, filtraciones de email y contraseñas (k-anonimato: solo un prefijo del hash sale del dispositivo). Copia de seguridad de los archivos importantes en el servidor de la sede, con retención.</p></div></div></div>
-  <div class="x7-prod x7-mob"><div class="x7-ph"><span class="x7-tag x7-tag7">Capa 7 · Android</span><h3>CYBER3 Mobile Protection</h3><p>La app Android que frena estafas, phishing y sitios peligrosos en el teléfono de cada empleado — en tiempo real y con procesamiento en el propio dispositivo. La misma base de datos de amenazas que los sensores y los puestos, actualizada cada 12 horas. Disponible en Google Play.</p></div><div class="x7-phones"><figure class="x7-phone"><img src="/assets/shots/mobile-home-en.webp" alt="CYBER3 Mobile Protection — Inicio" loading="lazy" width="540" height="1202"><figcaption>Inicio</figcaption></figure><figure class="x7-phone"><img src="/assets/shots/mobile-guard-en.webp" alt="CYBER3 Mobile Protection — Protección de llamadas y mensajes" loading="lazy" width="540" height="1202"><figcaption>Protección de llamadas y mensajes</figcaption></figure></div><div class="x7-blocks"><div class="x7-b"><div class="x7-bi">📞</div><h4>Protección de llamadas</h4><p>CYBER3 se convierte en el Caller ID del teléfono: cada número entrante se contrasta con la base de datos de amenazas. Rechazo automático opcional de números de estafa conocidos y aviso visual sobre la pantalla de llamada.</p></div><div class="x7-b"><div class="x7-bi">💬</div><h4>Protección de mensajes</h4><p>Lee las notificaciones entrantes — SMS, WhatsApp y otras apps — sin permisos de SMS, y avisa solo cuando un mensaje es peligroso.</p></div><div class="x7-b"><div class="x7-bi">🤖</div><h4>Verificación de mensajes</h4><p>Pegue o comparta un mensaje desde cualquier app y obtenga Seguro, Sospechoso o Peligro, con los motivos: marca suplantada, dominio de riesgo, lenguaje de urgencia o de pago, trucos en la URL — explicados por IA.</p></div><div class="x7-b"><div class="x7-bi">🌐</div><h4>Protección web</h4><p>Un filtro DNS en el propio teléfono, sin ningún servidor intermedio: los dominios peligrosos de la base de datos de amenazas, la publicidad y los rastreadores se bloquean en todas las apps.</p></div><div class="x7-b"><div class="x7-bi">📱</div><h4>Análisis del teléfono</h4><p>Una puntuación 0–100: bloqueo de pantalla, depuración USB, opciones de desarrollador, antigüedad del parche de seguridad; apps con permisos de administrador o de accesibilidad, apps instaladas fuera de la tienda con permisos de riesgo — y el hash de cada app instalada, contrastado con la base de datos de amenazas.</p></div><div class="x7-b"><div class="x7-bi">🪪</div><h4>Identidad y filtraciones</h4><p>Comprobación de filtraciones del email con monitorización continua cada 12 horas y una notificación ante cada nueva filtración; comprobación de contraseñas con k-anonimato.</p></div><div class="x7-b"><div class="x7-bi">🔒</div><h4>CYBER3 VPN</h4><p>VPN WireGuard cifrada y sin registros: 400 MB gratis cada día, ilimitada con suscripción, 6 servidores en 4 países, split tunneling y test de velocidad integrado.</p></div><div class="x7-b"><div class="x7-bi">🔗</div><h4>Verificación de números y enlaces + notificación</h4><p>Compruebe cualquier número o enlace; las amenazas desconocidas pueden notificarse y, una vez validadas por un analista, se incorporan a la base de datos de amenazas compartida.</p></div></div></div>
-  <div class="x7-eco"><h3>Un solo ecosistema. Un único propietario de la tecnología, de extremo a extremo.</h3><p class="x7-ep">Las siete capas no son productos de distintos fabricantes ensamblados entre sí. Son un único sistema, construido, operado y soportado por la misma empresa: sin puntos ciegos entre productos y con un único responsable de toda la cadena.</p><div class="x7-where"><div class="x7-w"><b>1–4</b><span class="x7-wl">En el sensor, en su sede</span><span class="x7-wn">Inline IPS · Active Response · L2 Shield · CYBER3 Context Fusion Engine</span></div><div class="x7-w"><b>5</b><span class="x7-wl">En la nube, en cualquier lugar</span><span class="x7-wn">CYBER3 Edge — DNS-shield y la base de datos de amenazas en el edge</span></div><div class="x7-w"><b>6</b><span class="x7-wl">En cada puesto de trabajo</span><span class="x7-wn">CYBER3 EDR/XDR for Desktop</span></div><div class="x7-w"><b>7</b><span class="x7-wl">En cada teléfono</span><span class="x7-wn">CYBER3 Mobile Protection</span></div></div><div class="x7-ecols"><div><h4>Compartido por las siete capas</h4><ul class="x7-shared"><li>la misma base de datos de amenazas de CYBER3 (más de 2,5 millones de indicadores, actualizada a diario)</li><li>el mismo SOC, 24/7</li><li>el mismo orquestador MLEO: una amenaza detectada en una capa recibe respuesta en la capa adecuada</li><li>un circuito cerrado: nuestros propios sensores aportan sus indicadores a la base de datos que protege puestos y teléfonos</li></ul></div><div><h4>Lo que construimos y operamos nosotros mismos</h4><div class="x7-own"><span>los sensores de red y sus conjuntos de reglas</span><span>L2 Shield</span><span>CYBER3 Context Fusion Engine y MLEO</span><span>CYBER3 Edge y la base de datos de amenazas</span><span>el LLM de seguridad soberano</span><span>las apps Desktop y Mobile</span><span>la red VPN</span><span>la consola del cliente y el portal del SOC</span></div></div></div><div class="x7-why"><h4>Por qué es importante para una institución</h4><ul><li>Cubre el vector de ataque dominante: el empleado y su puesto de trabajo — phishing, estafas, enlaces y adjuntos maliciosos, contraseñas filtradas.</li><li>Protege al personal que trabaja sobre el terreno o en remoto, no solo dentro del perímetro físico.</li><li>Privacidad desde el diseño: procesamiento en el dispositivo y k-anonimato; sin cuentas obligatorias, sin publicidad y sin SDK publicitarios.</li><li>La telemetría de los endpoints alimenta al mismo SOC y al mismo MLEO, y cierra el circuito entre la detección en la red y la detección en el endpoint.</li></ul></div></div>
-  <script src="/endpoint7.js" defer></script>
-</section>
-
-<section id="packages" class="section alt">
-  <div class="head">
-    <div class="kicker">PAQUETES</div>
-    <h2>Dimensionado para su institución</h2>
-    <p>Cada paquete incluye todo lo del anterior y añade capas y capacidades. La configuración exacta (sensores, sedes, estaciones, teléfonos) se define tras una evaluación inicial del entorno.</p>
-  </div>
-  <div class="cards pk7-cards">
-    <article class="card pk7"><div class="badge" style="background:#1E4C95">STANDARD</div><h3>Standard</h3>
-      <p class="pk7-inc">Incluye</p><ul class="pk7-list"><li>SOC gestionado 24/7 · respuesta autónoma en 2–11 s</li><li>Sensor inline en la sede principal</li><li>Capas 1–4: Inline IPS · Active Response · L2 Shield · CYBER3 Context Fusion Engine</li><li>MLEO: correlación L3 ↔ L2 y enforcement en la capa adecuada</li><li>VAS programado mensual</li><li>Alertas explicadas (Telegram, email) + portal de cliente con informes NIS2</li><li>Health Check autónomo del sensor, 24/7</li></ul>
-      <details class="more"><summary>Recomendado para</summary><div class="body">Sede central con infraestructura de TI concentrada. Obtiene monitorización autónoma 24/7 y una imagen periódica de vulnerabilidades sin montar un SOC propio.</div></details></article>
-    <article class="card pk7"><div class="badge" style="background:#1E4C95">EXTENDIDO</div><h3>Extendido</h3>
-      <p class="pk7-inc">Todo lo de Standard, más</p><ul class="pk7-list"><li>Sensores inline en todas las sedes</li><li>Capa 5 · CYBER3 Edge: DNS-shield e IOC en el edge para toda la organización</li><li>Capa 6 · CYBER3 EDR/XDR for Desktop en las estaciones críticas</li><li>Consola de cliente: aislamiento de la estación, escaneos remotos, estado de la flota</li><li>CYBER3 Global Scan de la red interna</li><li>MLEO en todas las sedes</li><li>VAS quincenal</li></ul>
-      <details class="more"><summary>Recomendado para</summary><div class="body">Instituciones con varias sedes y exposición elevada. Cobertura de red en todas partes más XDR de endpoint en las estaciones más importantes.</div></details></article>
-    <article class="card pk7 feature"><div class="badge">RECOMENDADO</div><h3>Completo</h3>
-      <p class="pk7-inc">Todo lo de Extendido, más</p><ul class="pk7-list"><li>CYBER3 EDR/XDR for Desktop en todas las estaciones</li><li>Capa 7 · CYBER3 Mobile Protection en los teléfonos del personal</li><li>MLEO en las 7 capas: red, nube, estación, teléfono</li><li>VAS continuo</li><li>Monitorización de brechas e identidad de las cuentas de la organización</li><li>Informes unificados red + endpoint + móvil (NIS2 Art. 21/23)</li></ul>
-      <details class="more"><summary>Recomendado para</summary><div class="body">Nivel provincial, datos sensibles de los ciudadanos, cumplimiento estricto. Defensa completa en capas — perímetro y cada estación — con un único proveedor y un único informe unificado.</div></details></article>
-  </div>
-  <p class="pricenote">Precios: este documento presenta los servicios y la solución técnica. Una oferta económica detallada se elabora a petición, según la evaluación inicial (sedes, sensores, endpoints) y la modalidad de contratación aplicable a su institución.</p>
-</section>
-
-<section id="start" class="section">
-  <div class="head">
-    <div class="kicker">EMPEZAR</div>
-    <h2>De la evaluación a la defensa autónoma</h2>
-    <p>Una incorporación sencilla para organizaciones de cualquier tamaño — desde una sola oficina hasta una institución pública distribuida.</p>
-  </div>
-  <div class="dl">
-    <article class="plat">
-      <div class="pico">🎯</div>
-      <h3>1 · Evaluación</h3>
-      <p>Cartografiamos sus activos y exposición con una Evaluación de Vulnerabilidades — una imagen clara de su situación.</p>
-      <a class="btn" href="mailto:contact@rol.ro?subject=FasterUp%20-%20Contact">▸ Solicitar evaluación</a>
-      <span class="hint">Sin compromiso · adaptado a su entorno</span>
-      <details class="more"><summary>Ver detalles</summary>
-        <div class="body">Cartografiamos los activos y la exposición de su institución mediante una evaluación de vulnerabilidades — el resultado es una imagen clara de su estado actual. <b>Sin compromiso, acotada estrictamente a su entorno</b>, y sirve de base para una oferta correctamente dimensionada.</div>
-      </details>
-    </article>
-
-    <article class="plat">
-      <div class="pico">🖥️</div>
-      <h3>2 · Despliegue de sensores</h3>
-      <p>Instalamos sensores de red en sus sedes — inline o pasivos — conectados al SOC mediante una VPN privada cifrada.</p>
-      <a class="btn ghost" href="#technology">▸ Ver la arquitectura</a>
-      <span class="hint">~15 min por sede · sin agentes en equipos</span>
-      <details class="more"><summary>Ver detalles</summary>
-        <div class="body">Instalamos sensores de red en cada sede, inline o pasivos, conectados al SOC por una VPN privada cifrada. <b>Unos 15 minutos por sede, sin agentes en sus equipos.</b> Opcionalmente, desplegamos la app CYBER3 XDR en estaciones y dispositivos móviles según su política.</div>
-      </details>
-    </article>
-
-    <article class="plat">
-      <div class="pico"><svg class="cshield" viewBox="0 0 24 24"><path d="M12 2.1 L20.6 5 V11 C20.6 16.6 16.8 20.5 12 21.9 C7.2 20.5 3.4 16.6 3.4 11 V5 Z" fill="rgba(212,175,55,.14)" stroke="#d4af37" stroke-width="1.3"/><g fill="none" stroke="#f2d778" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5.2 V18.2"/><path d="M12 5.7 h2.2 a2 2 0 0 1 0 3.9 H12"/><path d="M8 11 L16 15.6"/><path d="M16 11 L8 15.6"/></g></svg></div>
-      <h3>3 · SOC autónomo</h3>
-      <p>La monitorización y respuesta con IA 24/7 entra en funcionamiento. Recibe alertas e informes — la plataforma hace el resto.</p>
-      <a class="btn" href="mailto:contact@rol.ro?subject=FasterUp%20-%20Contact">▸ Hablemos</a>
-      <span class="hint">Gestionado · autónomo · siempre activo</span>
-      <details class="more"><summary>Ver detalles</summary>
-        <div class="body">La monitorización y respuesta con IA 24/7 entra en funcionamiento. Recibe alertas e informes claros mientras la plataforma hace el resto — bajo un Health Check autónomo que monitoriza, administra y auto-repara toda la flota, <b>sin intervención humana</b>.</div>
-      </details>
-    </article>
-  </div>
-</section>
-
-<style>
-.c3foot{width:100%;box-sizing:border-box;border-top:1px solid #1E4C95;background:#040f24;color:#9FB3D1;padding:12px 22px;display:flex;flex-direction:column;gap:6px;font-size:12px}
-.c3foot .c3r{display:flex;flex-wrap:wrap;align-items:center;gap:4px 16px;width:100%}
-.c3foot .c3b{font-weight:800;font-size:15px;color:#FF0000}.c3foot .c3b .cr{color:#fff}
-.c3foot .c3tag{color:#9FB3D1}
-.c3foot .c3badges{margin-left:auto;color:#D4AF37;border:1px solid rgba(212,175,55,.4);border-radius:8px;padding:3px 10px;font-size:10.5px;letter-spacing:.3px}
-.c3foot a{color:#9FB3D1;text-decoration:none}.c3foot a:hover{color:#D4AF37}
-.c3foot .c3sep{color:#1E4C95}
-.c3foot .c3r3{border-top:1px solid rgba(30,76,149,.3);padding-top:6px;color:#6f86ad;font-size:10.5px}
-.c3foot .c3grow{flex:1;min-width:10px}
-@media(max-width:760px){.c3foot .c3badges{margin-left:0}.c3foot .c3grow{display:none}}
-.cshield{width:1.28em;height:1.28em;vertical-align:-.30em;display:inline-block}</style>
-<footer class="c3foot">
-  <div class="c3r">
-    <span class="c3b">FasterUp<span class="cr">.AI</span></span>
-    <span class="c3tag">Plataforma Autónoma de Ciberseguridad con IA para empresas y administración pública. SOC gestionado y Evaluación de Vulnerabilidades.</span>
-    <span class="c3badges">ISO/IEC 27001:2022 · GDPR · NIS2 · AI Act</span>
-    <a class="c3sw" href="https://cyber3.ai/status/es/" target="_blank" rel="noopener"><i id="c3swd"></i><span id="c3swt">…</span></a>
-  </div>
-  <div class="c3r">
-    <a href="#services">Servicios</a><a href="#technology">Tecnología</a>    <a href="#xdr">Endpoint XDR</a>
-    <a href="#packages">Paquetes</a>
-<a href="#start">Empezar</a><a href="https://cyber3.ai/status/es/" target="_blank" rel="noopener">Estado del servicio</a>
-    <span class="c3sep">·</span>
-    <a href="/contact">Contacto</a><a href="/terms">Términos</a><a href="/privacy">Privacidad</a>
-  </div>
-  <div class="c3r c3r3">
-    <span>ROL PORTAL SERVICES SRL · CUI RO 36837313 · J2016016379403 · ISO/IEC 27001:2022 · <a href="mailto:contact@rol.ro">contact@rol.ro</a></span>
-    <span class="c3grow"></span>
-    <span>© 2026 FasterUp.AI — ROL PORTAL SERVICES SRL · Todos los derechos reservados.</span>
-  </div>
-</footer>
-
-<script src="/app.js"></script>
-<style>.c3sw{display:inline-flex;align-items:center;gap:7px;font-size:11.5px;color:#9FB3D1;text-decoration:none}.c3sw:hover span{color:#D4AF37}
-.c3sw i{width:8px;height:8px;border-radius:50%;background:#9FB3D1;flex:0 0 auto}
-.c3sw i.ok{background:#37d39b;box-shadow:0 0 6px #37d39b;animation:c3swp 2s ease-in-out infinite}
-.c3sw i.deg{background:#e8b53a;box-shadow:0 0 6px #e8b53a}
-@keyframes c3swp{0%,100%{opacity:1}50%{opacity:.45}}</style>
-<script>(function(){var U=["https://cyber3-edge.cyber3.workers.dev/v1/health","https://cyber3-llm.cyber3.workers.dev/v1/health","https://cyber3-vpn-cp.cyber3.workers.dev/health"];
-function chk(){Promise.all(U.map(function(u){return fetch(u,{cache:"no-store"}).then(function(r){return r.ok?0:1}).catch(function(){return 1})})).then(function(res){
-var bad=res.reduce(function(a,b){return a+b},0),d=document.getElementById("c3swd"),t=document.getElementById("c3swt");if(!d)return;
-d.className=bad?"deg":"ok";t.textContent=bad?"Algunos servicios afectados":"Todos los sistemas operativos";});}chk();setInterval(chk,60000);})();</script>
-</body>
-</html>
+  <div class="fbot"><span>FasterUp.AI es una marca de ROL PORTAL SERVICES SRL · © 2026 · ROL PORTAL SERVICES SRL · CUI RO 36837313 · J2016016379403</span><a class="sw" href="https://cyber3.ai/status/es/" target="_blank" rel="noopener"><i id="swd"></i><span id="swt">…</span></a></div>
+</div></footer>
+<script>
+(function(){
+var nav=document.getElementById('nav');function sc(){nav.classList.toggle('solid',scrollY>20)}sc();addEventListener('scroll',sc,{passive:true});
+document.querySelectorAll('#links a').forEach(function(a){a.addEventListener('click',function(){nav.classList.remove('open')})});
+var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}})},{threshold:.1,rootMargin:'0px 0px -40px 0px'});
+document.querySelectorAll('.reveal').forEach(function(el){io.observe(el)});
+// capturi desktop
+var dt=[].slice.call(document.querySelectorAll('.dtab')),di=[].slice.call(document.querySelectorAll('#dview img'));
+dt.forEach(function(b,k){b.addEventListener('click',function(){dt.forEach(function(x,j){x.classList.toggle('on',j===k)});di.forEach(function(x,j){x.classList.toggle('on',j===k)})})});
+// inelele: amenințări care vin din exterior și sunt oprite pe un strat (vizualizare, nu date)
+var pz=document.getElementById('pz'),NS='http://www.w3.org/2000/svg',Z=['#ff3b4b','#ff7a45','#e8c35a','#4f8cff','#22c7e8','#34d399','#9b7bff'];
+var reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
+function shot(){if(!pz||document.hidden)return;var a=Math.random()*Math.PI*2,k=Math.floor(Math.random()*7),R0=316,R1=288-k*32+4,c=document.createElementNS(NS,'circle');
+ c.setAttribute('r','4.5');c.setAttribute('fill','#ff2020');c.setAttribute('filter','drop-shadow(0 0 6px #f00)');pz.appendChild(c);var t0=performance.now(),D=900+k*120;
+ (function step(t){var p=Math.min(1,(t-t0)/D),r=R0+(R1-R0)*p;c.setAttribute('cx',300+r*Math.cos(a));c.setAttribute('cy',300+r*Math.sin(a));
+  if(p<1){requestAnimationFrame(step);return}c.remove();var b=document.createElementNS(NS,'circle');b.setAttribute('cx',300+R1*Math.cos(a));b.setAttribute('cy',300+R1*Math.sin(a));
+  b.setAttribute('fill','none');b.setAttribute('stroke',Z[k]);b.setAttribute('stroke-width','2');pz.appendChild(b);var t1=performance.now();
+  (function burst(t){var q=Math.min(1,(t-t1)/600);b.setAttribute('r',4+22*q);b.setAttribute('opacity',1-q);if(q<1)requestAnimationFrame(burst);else b.remove()})(t1);
+  var ring=document.getElementById('r'+k);if(ring){ring.setAttribute('stroke-opacity','1');ring.setAttribute('stroke-width','4');setTimeout(function(){ring.setAttribute('stroke-opacity','.55');ring.setAttribute('stroke-width','2')},380)}
+ })(t0)}
+if(!reduce){setInterval(shot,700);shot()}
+// CYBER3 Database: cifrele REALE din manifest (+ ritmul contorului de pe blog, +0,1/s)
+var L=document.documentElement.lang,els=[].slice.call(document.querySelectorAll('.ioc')),base=+(els[0]&&els[0].dataset.n)||2500000,t0=Date.now();
+function fmt(n,compact){try{return compact?(n/1e6).toLocaleString(L,{maximumFractionDigits:1})+'M+':n.toLocaleString(L)}catch(e){return n}}
+function draw(){var n=Math.floor(base+(Date.now()-t0)/10000);els.forEach(function(e){e.textContent=fmt(n,!!e.closest('.stat'))})}
+fetch('https://cyber3-edge.cyber3.workers.dev/v1/manifest',{cache:'no-store'}).then(function(r){return r.json()}).then(function(d){if(d&&d.count){base=Math.max(+d.count,2500000);t0=Date.now();draw()}
+ var fp=document.getElementById('fp');if(fp&&d&&d.count_firstparty)fp.textContent=(+d.count_firstparty).toLocaleString(L)}).catch(function(){});draw();setInterval(draw,1000);
+// vizualizarea bazei: particule (surse) care curg spre nucleu
+var cv=document.getElementById('dbc');if(cv&&!reduce){var x=cv.getContext('2d'),P=[];for(var i=0;i<120;i++)P.push({a:Math.random()*6.283,r:120+Math.random()*170,s:.4+Math.random()*1.2,c:Math.random()<.2?'#ff3b4b':(Math.random()<.5?'#e8c35a':'#33A1FF')});
+ (function loop(){x.clearRect(0,0,600,600);P.forEach(function(p){p.r-=p.s;p.a+=.004;if(p.r<95){p.r=290;p.a=Math.random()*6.283}var X=300+p.r*Math.cos(p.a),Y=300+p.r*Math.sin(p.a);
+  x.globalAlpha=Math.min(1,(p.r-95)/60);x.fillStyle=p.c;x.beginPath();x.arc(X,Y,2,0,6.283);x.fill()});x.globalAlpha=1;requestAnimationFrame(loop)})()}
+// stare servicii
+var U=["https://cyber3-edge.cyber3.workers.dev/v1/health","https://cyber3-vpn-cp.cyber3.workers.dev/health"];
+function chk(){Promise.all(U.map(function(u){return fetch(u,{cache:"no-store"}).then(function(r){return r.ok?0:1}).catch(function(){return 1})})).then(function(r){var bad=r.reduce(function(a,b){return a+b},0),d=document.getElementById('swd'),t=document.getElementById('swt');if(!d)return;d.className=bad?'deg':'ok';t.textContent=bad?'Degraded':'All systems operational'})}chk();setInterval(chk,60000);
+})();
+</script>
+</body></html>
