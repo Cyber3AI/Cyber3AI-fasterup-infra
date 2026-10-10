@@ -478,5 +478,8 @@
  "ft_contact": "联系我们",
  "ft_privacy": "隐私",
  "ft_terms": "条款",
- "ft_copy": "FasterUp.AI 是 ROL PORTAL SERVICES SRL 旗下品牌 · © 2026"
+ "ft_copy": "FasterUp.AI 是 ROL PORTAL SERVICES SRL 旗下品牌 · © 2026",
+ "db_vec_h": "自有向量数据库",
+ "db_vec_t": "已投入运行，基于嵌入向量进行模式匹配。",
+ "db_vec_p": "存储历史攻击的语义向量，即使缺少明确的 IOC，也能识别已知攻击活动的新变种。"
 }

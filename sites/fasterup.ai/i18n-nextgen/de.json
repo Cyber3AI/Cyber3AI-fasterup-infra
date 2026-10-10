@@ -478,5 +478,8 @@
  "ft_contact": "Kontakt",
  "ft_privacy": "Datenschutz",
  "ft_terms": "AGB",
- "ft_copy": "FasterUp.AI ist eine Marke der ROL PORTAL SERVICES SRL · © 2026"
+ "ft_copy": "FasterUp.AI ist eine Marke der ROL PORTAL SERVICES SRL · © 2026",
+ "db_vec_h": "Proprietäre Vektordatenbank",
+ "db_vec_t": "Im Einsatz, für Pattern Matching per Embedding.",
+ "db_vec_p": "Sie speichert semantische Vektoren historischer Angriffe und erkennt neue Varianten bekannter Kampagnen – selbst wenn explizite IOCs fehlen."
 }

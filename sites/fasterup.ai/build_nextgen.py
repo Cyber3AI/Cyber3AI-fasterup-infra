@@ -104,6 +104,8 @@ EN = dict(
     db_k="CYBER3 DATABASE", db_h="Our own threat intelligence. Growing every day.",
     db_p="The CYBER3 Database fuses global threat feeds with indicators our own sensors observe in real networks. It is published daily to a global edge network and powers every layer: the sensors, the AI, the desktop and the mobile apps — one live truth everywhere.",
     db_l1="threat indicators — live", db_l2="first-party indicators from our sensors", db_l3="edge locations serving lookups",
+    db_vec_h="Proprietary vector database", db_vec_t="Operational, for embedding-based pattern matching.",
+    db_vec_p="It stores semantic vectors of historical attacks and recognizes new variants of known campaigns — even when explicit IOCs are missing.",
     db_b=["Daily publication pipeline, verified end to end", "Privacy-preserving lookups: only a hashed prefix leaves a device", "The same database protects networks, workstations and phones"],
     vas_k="VAS · CYBER3 SCAN & GLOBAL SCAN", vas_h="Agile scanning that finds the whole network — and never trips the alarm.",
     vas_p="Vulnerability Assessment built by the team that defends the networks. Our scanner runs from the sensor already inside your network, so it discovers everything — even what nobody remembered to give it.",
@@ -229,6 +231,8 @@ RO = dict(
     db_k="CYBER3 DATABASE", db_h="Propria noastră bază de amenințări. În creștere în fiecare zi.",
     db_p="CYBER3 Database fuzionează fluxurile globale de amenințări cu indicatorii pe care propriii noștri senzori îi observă în rețele reale. E publicată zilnic într-o rețea globală edge și alimentează fiecare strat: senzorii, AI-ul, aplicațiile desktop și mobile — un singur adevăr live peste tot.",
     db_l1="indicatori de amenințare — live", db_l2="indicatori proprii, de la senzorii noștri", db_l3="locații edge care servesc verificările",
+    db_vec_h="Bază de date vectorială proprietară", db_vec_t="Operațională, pentru pattern matching prin embedding.",
+    db_vec_p="Stochează vectori semantici ai atacurilor istorice și recunoaște variante noi ale campaniilor cunoscute — chiar când IOC-urile explicite lipsesc.",
     db_b=["Publicare zilnică, verificată cap-coadă", "Verificări care protejează intimitatea: de pe dispozitiv pleacă doar un prefix de hash", "Aceeași bază protejează rețele, stații și telefoane"],
     vas_k="VAS · CYBER3 SCAN ȘI GLOBAL SCAN", vas_h="Scanare agilă care găsește toată rețeaua — și nu declanșează alarma.",
     vas_p="Evaluarea Vulnerabilităților construită de echipa care apără rețelele. Scanerul rulează din senzorul aflat deja în rețeaua ta, deci descoperă tot — chiar și ce n-a știut nimeni să-i dea.",
@@ -410,6 +414,11 @@ h1,h2,h3{font-family:Sora,Inter,'Segoe UI',system-ui,sans-serif;letter-spacing:-
 .dbviz canvas{position:absolute;inset:0;width:100%;height:100%}
 .dbviz .c{position:absolute;inset:34%;border-radius:50%;display:grid;place-items:center;text-align:center;font:800 16px/1.2 Sora,sans-serif;background:radial-gradient(circle,#1c2c55,#0a1530);border:1px solid rgba(212,175,55,.5);box-shadow:0 0 50px -8px rgba(212,175,55,.6)}
 .dbviz .c small{display:block;color:var(--gold2);font:600 11px Inter,sans-serif;margin-top:4px}
+.vec{display:flex;gap:18px;align-items:flex-start;padding:24px;border-radius:20px;margin:0 0 22px;border:1px solid transparent;background:linear-gradient(180deg,#0f2449,#081733) padding-box,var(--gl) border-box;box-shadow:0 0 0 1px rgba(212,175,55,.1),0 18px 50px -22px rgba(212,175,55,.45)}
+.vec b{display:block;font:800 19px Sora,sans-serif;color:#fff}.vec em{display:block;font-style:normal;color:var(--gold2);font-weight:600;font-size:14.5px;margin:4px 0 8px}.vec p{color:var(--mute);font-size:15px}
+.vi{flex:0 0 auto;width:54px;height:54px;border-radius:14px;position:relative;background:radial-gradient(circle,#1c2c55,#0a1530);border:1px solid rgba(212,175,55,.5)}
+.vi i{position:absolute;width:6px;height:6px;border-radius:50%;background:#f2d778;box-shadow:0 0 8px #f2d778;animation:pulse 2s infinite}
+.vi i:nth-child(1){left:10px;top:12px}.vi i:nth-child(2){left:30px;top:9px;animation-delay:.3s}.vi i:nth-child(3){left:20px;top:25px;animation-delay:.6s;background:#ff3b4b;box-shadow:0 0 8px #ff3b4b}.vi i:nth-child(4){left:38px;top:30px;animation-delay:.9s}.vi i:nth-child(5){left:12px;top:38px;animation-delay:1.2s}.vi i:nth-child(6){left:30px;top:42px;animation-delay:1.5s;background:#33A1FF;box-shadow:0 0 8px #33A1FF}
 /* AGENTS */
 .agents{display:grid;grid-template-columns:repeat(4,1fr);gap:18px}
 .agent{padding:28px;border-radius:22px;background:linear-gradient(180deg,rgba(17,42,82,.65),rgba(6,18,42,.35));border:1px solid var(--line);position:relative;overflow:hidden}
@@ -535,8 +544,7 @@ def ring_svg(T):
         out.append(f'<g transform="translate({x:.1f},{y:.1f})"><rect x="{-w / 2:.0f}" y="-13" rx="11" height="26" width="{w:.0f}" fill="#06122b" stroke="{ZONE[i]}" stroke-opacity=".8"/>'
                    f'<text class="rlabel" x="0" y="4.5" text-anchor="middle" fill="#fff"><tspan fill="{ZONE[i]}">{i + 1}</tspan>  {name}</text></g>')
     out.append('<circle cx="300" cy="300" r="74" fill="url(#cg)" stroke="url(#gold)" stroke-width="2.5"/>'
-               '<g transform="translate(300,288)"><g transform="translate(-14,-30) scale(.28)"><g fill="#F00"><rect x="44" y="15" width="12" height="70"/><rect x="15" y="44" width="70" height="12"/><rect x="36" y="13" width="28" height="6"/><rect x="36" y="81" width="28" height="6"/><rect x="13" y="36" width="6" height="28"/><rect x="81" y="36" width="6" height="28"/></g><circle cx="50" cy="50" r="47" fill="none" stroke="#F00" stroke-width="4"/></g></g>'
-               f'<text class="core" x="300" y="318" text-anchor="middle">{T["ring_center"]}</text><g id="pz"></g></svg>')
+               f'<text class="core" x="300" y="305" text-anchor="middle">{T["ring_center"]}</text><g id="pz"></g></svg>')
     return "".join(out)
 
 
@@ -665,6 +673,7 @@ var m={es:'/es/',it:'/it/',de:'/de/',fr:'/fr/',ru:'/ru/',zh:'/zh/'};if(m[l])loca
       <div class="dbn"><b id="fp">42,213</b><span>{T["db_l2"]}</span></div>
       <div class="dbn"><b>300+</b><span>{T["db_l3"]}</span></div>
     </div>
+    <div class="vec"><span class="vi" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i></span><div><b>{T["db_vec_h"]}</b><em>{T["db_vec_t"]}</em><p>{T["db_vec_p"]}</p></div></div>
     <ul class="ul">{lis(T["db_b"])}</ul>
   </div>
   <div class="dbviz reveal" aria-hidden="true"><canvas id="dbc" width="600" height="600"></canvas><div class="c">CYBER3<br>Database<small>live</small></div></div>
