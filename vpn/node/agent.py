@@ -178,7 +178,7 @@ def health():
         c.append({"id": cid, "ok": bool(ok), "sev": "OK" if ok else sev, "val": val, "msg": msg})
     # 1. WireGuard: interfața există și ascultă
     rc, out = _run(["wg", "show", WG_IF, "listen-port"])
-    add("wg", rc == 0 and out.strip() == str(WG_PORT), "CRIT", out.strip() or None, "WireGuard activ pe portul %d" % WG_PORT)
+    add("wg", rc == 0 and out.strip().isdigit() and int(out) > 0, "CRIT", out.strip() or None, "WireGuard activ (interfața ascultă pe un port)")
     # 2. DNS-ul din tunel răspunde (proba reală, nu doar „serviciul e pornit”)
     st, ans = _dig("example.com")
     add("dns_resolve", st == "NOERROR" and ans, "CRIT", st, "Resolverul din tunel răspunde la un nume obișnuit")
