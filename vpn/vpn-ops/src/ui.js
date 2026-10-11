@@ -105,7 +105,7 @@ details.proc .in{padding:0 16px 12px;font-size:13.2px;color:#cdd7ec}details.proc
 </div>
 <nav class="tabs" id="tabs">
   <a href="#acum">Acum</a><a href="#grafice">Grafice</a><a href="#noduri">Noduri</a><a href="#conexiuni">Conexiuni</a><a href="#clienti">Clienți & vânzări</a>
-  <a href="#latenta">Latență</a><a href="#resurse">Resurse & costuri</a><a href="#alerte">Alerte</a><a href="#exploatare">Exploatare</a>
+  <a href="#latenta">Latență</a><a href="#resurse">Resurse & costuri</a><a href="#alerte">Alerte</a><a href="#health">Health Check</a><a href="#exploatare">Exploatare</a>
   <a href="#scalare">Scalare</a><a href="#oferte">Produse & oferte</a><a href="#internet">Internet · VPNzone</a><a href="#manual">📘 Manual</a>
 </nav></header>
 <main>
@@ -176,6 +176,13 @@ details.proc .in{padding:0 16px 12px;font-size:13.2px;color:#cdd7ec}details.proc
   <div class="help"><div><b>Ce vezi aici</b>Traficul de ieșire consumat luna aceasta față de cel inclus în planul fiecărui server, proiecția la final de lună și costul. Peste traficul inclus, furnizorul taxează pe TB — atenție la SUA și Singapore, unde traficul inclus e mic.</div>
   <div><b>Ce faci</b><ul><li>Proiecție peste 90% → alertă; mută volumul pe noduri cu trafic inclus mare sau adaugă un nod în aceeași regiune.</li><li>Costul pe TB peste inclus e colorat galben unde e scump.</li></ul></div></div>
   <div class="grid k4" id="rkpis"></div><div class="tw" style="margin-top:12px"><table id="tres"></table></div>
+</section>
+
+<section class="tab" id="t-health">
+  <h2>Health Check</h2>
+  <div class="help"><div><b>Ce vezi aici</b>La fiecare 5 minute, fiecare nod se verifică singur, ca un client: tunelul WireGuard ascultă, DNS-ul din tunel răspunde, un domeniu periculos chiar e blocat, ieșirea spre Internet merge (rutare + NAT), iar resursele nu sunt la limită. Nu se citește nimic despre clienți.</div>
+  <div><b>Ce faci</b>Verde → nimic. O verificare critică picată apare întâi ca <b>WARN</b>; dacă se confirmă la următoarea colectare devine <b>CRIT</b> și primești email. Deschide nodul din listă ca să vezi exact ce verificare a picat și cu ce valoare.</div></div>
+  <div id="hcsum"></div><div id="hclist"></div>
 </section>
 
 <section class="tab" id="t-alerte">
@@ -434,9 +441,22 @@ function render(){
   var u=100*h.out_bytes/(h.included_bytes||1),pj=100*(n._proj||0)/(h.included_bytes||1);
   return '<tr><td>'+flag(n.country)+" "+esc(n.name)+'</td><td>'+esc(h.type)+'</td><td class="num">'+eur(h.price_month)+'</td><td class="num">'+fb(h.out_bytes)+'</td><td class="num">'+fb(h.included_bytes)+'</td><td>'+pct(u)+bar(u,70,90)+'</td><td>'+pct(pj)+bar(pj,70,90)+'</td><td class="num '+(h.price_tb>2?"warn":"")+'">'+eur(h.price_tb)+'</td><td class="num '+(n._over>0?"warn":"")+'">'+eur(n._over)+'</td><td class="num">'+(n.met?n.met.disk.free_gb+" / "+n.met.disk.total_gb+" GB":"—")+'</td></tr>'}).join("");
 
+ // HEALTH CHECK
+ var hcN=N.filter(function(n){return n.hc&&n.hc.checks}),hcBad=hcN.filter(function(n){return n.hc.status!=="OK"}),hcNo=N.filter(function(n){return n.ok&&!(n.hc&&n.hc.checks)});
+ var th=document.querySelector('#tabs a[href="#health"]'),hcCrit=hcBad.filter(function(n){return n.hc.status==="CRIT"}).length;
+ th.innerHTML="Health Check"+(hcBad.length?'<span class="b" style="background:'+(hcCrit?"var(--crit)":"var(--warn)")+';color:'+(hcCrit?"#fff":"#1a1400")+'">'+hcBad.length+'</span>':"");
+ $("hcsum").innerHTML='<div class="note'+(hcCrit?" c":(hcBad.length?" w":""))+'"><b>'+(hcN.length-hcBad.length)+' din '+N.length+' noduri</b> trec toate verificările'+(hcBad.length?' · <b>'+hcBad.length+'</b> cu observații':'')+(hcNo.length?' · <b>'+hcNo.length+'</b> fără Health Check instalat ('+hcNo.map(function(n){return esc(n.name)}).join(", ")+')':'')+'</div>';
+ $("hclist").innerHTML=N.slice().sort(function(a,b){var r={CRIT:0,WARN:1,OK:2};return (r[(a.hc||{}).status]==null?1.5:r[a.hc.status])-(r[(b.hc||{}).status]==null?1.5:r[b.hc.status])}).map(function(n){
+  var h=n.hc;if(!h||!h.checks)return '<details class="proc"><summary>'+esc(n.name)+' — <span class="mut">'+(n.ok?"fără Health Check (agent vechi)":"nod inaccesibil")+'</span></summary></details>';
+  var bad=h.checks.filter(function(c){return !c.ok&&c.sev!=="INFO"}),inf=h.checks.filter(function(c){return !c.ok&&c.sev==="INFO"});
+  var st=h.status==="OK"?'<b style="color:var(--ok,#1fd65f)">OK</b>':'<b class="'+(h.status==="CRIT"?"crit":"warn")+'">'+h.status+'</b>';
+  return '<details class="proc"'+(bad.length?" open":"")+'><summary>'+esc(n.name)+' — '+st+' · '+(h.checks.length-bad.length-inf.length)+'/'+h.checks.length+' verificări trecute'+(bad.length?' · pică: '+bad.map(function(c){return esc(c.id)}).join(", "):'')+' <span class="mut">· verificat acum '+ago(h.ts*1000)+'</span></summary>'+
+   '<div class="tw"><table><tr><th></th><th>Verificare</th><th>Valoare</th></tr>'+h.checks.map(function(c){
+    return '<tr><td>'+(c.ok?'<b style="color:var(--ok,#1fd65f)">✓</b>':'<b class="'+(c.sev==="CRIT"?"crit":(c.sev==="WARN"?"warn":"mut"))+'">'+(c.sev==="INFO"?"i":"✗ "+c.sev)+'</b>')+'</td><td>'+esc(c.msg)+'</td><td class="mut">'+esc(c.val==null?"—":(c.val.join?c.val.join(", "):c.val))+'</td></tr>'}).join("")+'</table></div></details>'}).join("");
+
  // ALERTE
  $("alerts").innerHTML=al.length?al.map(function(a){return '<div class="note '+(a.sev==="CRIT"?"c":"w")+'"><b class="'+(a.sev==="CRIT"?"crit":"warn")+'">'+a.sev+'</b> · <b>'+esc(a.node||"flotă")+'</b> — '+esc(a.msg)+'</div>'}).join(""):'<div class="note">Nicio alertă activă. Totul e în regulă.</div>';
- var rules=[["Nod inaccesibil","CRIT","clienții noi sunt trimiși automat pe celelalte noduri"],["Resolver DNS (unbound) oprit","CRIT","clienții rămân fără DNS în tunel"],["Pool WireGuard > 90% / > 70%","CRIT / WARN","maximum 253 de chei pe nod"],["CPU > 95% / > 85%","CRIT / WARN","procesorul nodului"],["Clienți conectați > 80% din capacitate","WARN","~100 la 2 vCPU"],["Trafic proiectat > 90% din inclus","WARN","cost pe TB peste"],["RAM > 90% / disc liber < 10%","WARN",""],["Lista IOC goală","WARN","cunoscut — task de dezvoltare"],["Control-plane → nod > 3 s","WARN","conectare lentă"],["Nod scos din rotație","WARN","reamintire: readu-l după mentenanță"]];
+ var rules=[["Nod inaccesibil","CRIT","clienții noi sunt trimiși automat pe celelalte noduri"],["Resolver DNS (unbound) oprit","CRIT","clienții rămân fără DNS în tunel"],["Pool WireGuard > 90% / > 70%","CRIT / WARN","maximum 253 de chei pe nod"],["CPU > 95% / > 85% susținut","CRIT / WARN","doar dacă și încărcarea pe 1 minut e mare; o citire de o clipă nu alertează"],["Health Check: verificare critică picată","WARN → CRIT","devine CRIT dacă se confirmă la a doua colectare la rând (5 min)"],["Clienți conectați > 80% din capacitate","WARN","~100 la 2 vCPU"],["Trafic proiectat > 90% din inclus","WARN","cost pe TB peste"],["RAM > 90% / disc liber < 10%","WARN",""],["Lista IOC goală","WARN","cunoscut — task de dezvoltare"],["Control-plane → nod > 3 s","WARN","conectare lentă"],["Nod scos din rotație","WARN","reamintire: readu-l după mentenanță"]];
  $("trules").innerHTML='<tr><th>Regulă</th><th>Severitate</th><th>Observație</th></tr>'+rules.map(function(r){return '<tr><td>'+r[0]+'</td><td>'+r[1]+'</td><td class="mut">'+r[2]+'</td></tr>'}).join("");
 
  // EXPLOATARE

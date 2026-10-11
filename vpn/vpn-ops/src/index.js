@@ -51,8 +51,11 @@ async function collectNodes(env, prev) {
       } catch (e) { o.err = String(e.message || e); }
     }
     if (o.ok) {
-      try { o.met = await fetchJson(n.url + "/metrics?targets=" + ips.filter((_, j) => j !== i).join(","), auth, 20000); }
-      catch (e) { o.met_err = String(e.message || e); }
+      // metrici + Health Check (verificările funcționale făcute de nod asupra lui însuși), în paralel
+      await Promise.all([
+        fetchJson(n.url + "/metrics?targets=" + ips.filter((_, j) => j !== i).join(","), auth, 20000).then((d) => { o.met = d; }, (e) => { o.met_err = String(e.message || e); }),
+        fetchJson(n.url + "/health", auth, 25000).then((d) => { if (d && d.checks) o.hc = d; else o.hc_err = "răspuns fără verificări"; }, (e) => { o.hc_err = String(e.message || e); }),
+      ]);
     }
     return o;
   }));
@@ -231,11 +234,16 @@ function evaluate(snap, clients, prev) {
   const a = [];
   const add = (sev, key, node, msg) => a.push({ sev, key, node, msg });
   const prevDown = new Set((prev?.nodes || []).filter((n) => !n.ok).map((n) => n.name));
+  const hcA = [];   // alertele Health Check, grupate la final: aceeași verificare picată pe ≥3 noduri = o singură alertă de flotă
   for (const n of snap.nodes) {
     if (!n.ok) { add(n.drained || !prevDown.has(n.name) ? "WARN" : "CRIT", "down:" + n.name, n.name, "Nod inaccesibil (" + (n.err || "fără răspuns") + ")" + (n.drained ? " — e scos din rotație" : " — clienții sunt mutați automat pe celelalte noduri")); continue; }
     if (n.drained) add("WARN", "drained:" + n.name, n.name, "Scos din rotație: nu primește tuneluri noi (cele existente continuă). Readu-l din tab-ul Noduri.");
     const m = n.met; if (!m) { add("WARN", "nometrics:" + n.name, n.name, "Agentul nu întoarce /metrics"); continue; }
-    if (m.cpu.util_pct > 95) add("CRIT", "cpu:" + n.name, n.name, `CPU ${m.cpu.util_pct}%`); else if (m.cpu.util_pct > 85) add("WARN", "cpu:" + n.name, n.name, `CPU ${m.cpu.util_pct}%`);
+    // CPU: alertă doar la încărcare SUSȚINUTĂ (procent mare ȘI coadă de procese pe 1 minut) — o citire de o clipă
+    // pe un nod cu 1 vCPU dădea „100%” fals (vpn-sg1, 11 oct 2026).
+    const perCore = (m.cpu.load1 || 0) / Math.max(1, m.cpu.cores || 1);
+    if (m.cpu.util_pct > 95 && perCore >= 1) add("CRIT", "cpu:" + n.name, n.name, `CPU ${m.cpu.util_pct}% susținut (încărcare ${m.cpu.load1} pe ${m.cpu.cores} nucleu/nuclee)`);
+    else if (m.cpu.util_pct > 85 && perCore >= 0.7) add("WARN", "cpu:" + n.name, n.name, `CPU ${m.cpu.util_pct}% (încărcare ${m.cpu.load1} pe ${m.cpu.cores} nucleu/nuclee)`);
     const memPct = 100 * (1 - m.mem.avail_mb / m.mem.total_mb); if (memPct > 90) add("WARN", "mem:" + n.name, n.name, `RAM ${memPct.toFixed(0)}%`);
     if (m.disk.free_gb / m.disk.total_gb < 0.1) add("WARN", "disk:" + n.name, n.name, `Disc liber ${m.disk.free_gb} GB`);
     const pool = m.wg.peers / POOL; if (pool > 0.9) add("CRIT", "pool:" + n.name, n.name, `Pool WireGuard ${m.wg.peers}/${POOL}`); else if (pool > 0.7) add("WARN", "pool:" + n.name, n.name, `Pool WireGuard ${m.wg.peers}/${POOL}`);
@@ -248,6 +256,33 @@ function evaluate(snap, clients, prev) {
       if (proj > n.hz.included_bytes * 0.9) add("WARN", "traffic:" + n.name, n.name, `Trafic proiectat ${(proj / 1e12).toFixed(2)} TB > 90% din ${(n.hz.included_bytes / 1e12).toFixed(2)} TB incluși`);
     }
     if (n.rtt_cp_ms > 3000) add("WARN", "rtt:" + n.name, n.name, `Control-plane → nod ${n.rtt_cp_ms} ms`);
+    // Health Check: o verificare critică picată devine CRIT doar dacă e CONFIRMATĂ la a doua colectare la rând
+    // (portalul reverifică singur înainte să trimită email); prima apariție = WARN.
+    if (n.hc && n.hc.checks) {
+      const pv = (prev?.nodes || []).find((x) => x.name === n.name);
+      const prevBad = new Set(((pv && pv.hc && pv.hc.checks) || []).filter((c) => !c.ok).map((c) => c.id));
+      for (const c of n.hc.checks) {
+        if (c.ok || c.sev === "INFO") continue;
+        if (c.id === "dns_resolve" && m.unbound !== "active") continue;      // deja semnalat mai sus
+        if (c.id === "ioc_block" && !m.ioc.blocklist_lines) continue;        // deja semnalat mai sus
+        const confirmed = prevBad.has(c.id);
+        const val = c.val == null ? "" : ` (valoare: ${Array.isArray(c.val) ? c.val.join(", ") : c.val})`;
+        const txt = /_age$/.test(c.id) && typeof c.val === "number"
+          ? `Health Check — ${c.id.startsWith("ioc") ? "lista de domenii periculoase" : "lista de reclame și trackere"} nu s-a mai schimbat de ${Math.round(c.val / 24)} zile`
+          : `Health Check — NU e îndeplinit: ${c.msg}${val}`;
+        hcA.push({ sev: c.sev === "CRIT" && confirmed ? "CRIT" : "WARN", id: c.id, node: n.name,
+          msg: txt + (c.sev === "CRIT" && !confirmed ? " · se reverifică la următoarea colectare" : "") });
+      }
+    }
+  }
+  const byId = {};
+  for (const x of hcA) (byId[x.id] = byId[x.id] || []).push(x);
+  for (const id in byId) {
+    const g = byId[id];
+    if (g.length >= 3) {
+      const sev = g.some((x) => x.sev === "CRIT") ? "CRIT" : "WARN";
+      add(sev, "hc:" + id + ":fleet", "", `${g[0].msg.replace(/ · se reverifică.*$/, "")} — pe ${g.length} noduri (${g.map((x) => x.node).join(", ")}): cauza e probabil comună, nu nodurile`);
+    } else for (const x of g) add(x.sev, "hc:" + id + ":" + x.node, x.node, x.msg);
   }
   if (snap.hz_err) add("WARN", "hz", "", "API Hetzner indisponibil: " + snap.hz_err);
   return a;
