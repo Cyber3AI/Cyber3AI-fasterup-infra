@@ -72,6 +72,9 @@ def create_app():
     from app.routes.auth_routes import bp as auth_bp
     from app.routes.api_dashboard_sso import bp as dashboard_sso_bp
     from app.routes.api_cyber3 import bp as cyber3_bp
+    from app.routes.api_workstations import bp as workstations_bp
+    from app.routes.api_mleo import bp as mleo_bp
+    from app.routes.api_hunt import bp as hunt_bp
     app.register_blueprint(health_bp, url_prefix='/api')
     app.register_blueprint(wazuh_bp, url_prefix='/api')
     app.register_blueprint(misp_bp, url_prefix='/api')
@@ -82,4 +85,7 @@ def create_app():
     app.register_blueprint(auth_bp)
     app.register_blueprint(dashboard_sso_bp, url_prefix="/api")
     app.register_blueprint(cyber3_bp, url_prefix="/api")
+    app.register_blueprint(mleo_bp, url_prefix="/api")
+    app.register_blueprint(hunt_bp, url_prefix="/api")
+    app.register_blueprint(workstations_bp, url_prefix="/api")
     return app

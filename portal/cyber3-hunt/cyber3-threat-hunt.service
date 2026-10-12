@@ -1,0 +1,10 @@
+[Unit]
+Description=CYBER3 Threat Hunt — vanatoare proactiva de amenintari (fereastra 7 zile)
+After=network-online.target
+
+[Service]
+Type=oneshot
+User=socadmin
+ExecStart=/opt/fasterup-portal/venv/bin/python /opt/cyber3/hunt/threat_hunt.py --days 7 --notify --out /opt/fasterup-portal/data/threat_hunt/latest.json
+TimeoutStartSec=900
+Nice=10

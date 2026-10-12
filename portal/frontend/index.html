@@ -2638,6 +2638,7 @@ li { margin-bottom: 6px; color: var(--ink); }
     <button class="tab" data-page="clients" data-i18n="tab_clients">Clients</button>
     <button class="tab" data-page="reports" data-i18n="tab_reports">Reports</button>
     <button class="tab" data-page="workstations" data-i18n="tab_workstations">Workstations</button>
+    <button class="tab" data-page="hunt" data-i18n="tab_hunt">Threat Hunt</button>
     <button class="tab" data-page="sources" data-i18n="tab_sources">Context Sources Fusion</button>
         <button class="tab" data-page="howto" data-i18n="tab_howto">How to use</button>
         <button class="tab" data-page="howwork" data-i18n="tab_howwork">How to work</button>
@@ -2655,7 +2656,7 @@ li { margin-bottom: 6px; color: var(--ink); }
       <button class="lang-btn active" data-lang="en">EN</button>
       <button class="lang-btn" data-lang="ro">RO</button>
     </div>
-    <select id="globalClientSelect" class="client-selector" onchange="onClientChange()"><option value="ALL">ALL CLIENTS</option></select><span class="user-display" id="currentUserDisplay">...</span><a href="/api/wazuh-dashboard" target="_blank" class="ext-btn">▸ WAZUH</a><a href="/misp/" target="_blank" class="ext-btn">▸ MISP</a><a href="#" onclick="document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));document.querySelector('.tab[data-page=howto]').classList.add('active');document.querySelector('.page[data-page=howto]').classList.add('active');return false;" class="ext-btn">▸ HOW TO USE</a><a href="#" onclick="document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));document.querySelector('.tab[data-page=howwork]').classList.add('active');document.querySelector('.page[data-page=howwork]').classList.add('active');return false;" class="ext-btn">▸ HOW TO WORK</a><button class="ext-btn logout" onclick="doLogout()">▸ LOGOUT</button><button class="demo-toggle" id="demoToggle"><span data-i18n="demo_off">▸ Demo Mode</span></button>
+    <select id="globalClientSelect" class="client-selector" onchange="onClientChange()"><option value="ALL">ALL CLIENTS</option></select><span class="user-display" id="currentUserDisplay">...</span><a href="/api/wazuh-dashboard" target="_blank" class="ext-btn">▸ WAZUH</a><a href="#" onclick="var t=document.querySelector('.tab[data-page=hunt]');if(t)t.click();return false;" class="ext-btn" title="CYBER3 Threat Hunt — vânătoare proactivă de amenințări">▸ HUNT</a><a href="/misp/" target="_blank" class="ext-btn">▸ MISP</a><a href="#" onclick="document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));document.querySelector('.tab[data-page=howto]').classList.add('active');document.querySelector('.page[data-page=howto]').classList.add('active');return false;" class="ext-btn">▸ HOW TO USE</a><a href="#" onclick="document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));document.querySelector('.tab[data-page=howwork]').classList.add('active');document.querySelector('.page[data-page=howwork]').classList.add('active');return false;" class="ext-btn">▸ HOW TO WORK</a><button class="ext-btn logout" onclick="doLogout()">▸ LOGOUT</button><button class="demo-toggle" id="demoToggle"><span data-i18n="demo_off">▸ Demo Mode</span></button>
   </div>
 </div>
 
@@ -3006,6 +3007,7 @@ li { margin-bottom: 6px; color: var(--ink); }
             <div class="lbl" data-i18n="blk_l3">CyberBot Fusion Blocked</div>
             <div class="val" id="blk3-cb">—</div>
             <div class="blk3-spark" id="blk3-cb-spark"></div>
+            <div id="blk3-cb-raw" style="font-size:10.5px;color:var(--phos);opacity:.85;margin-top:2px"></div>
             <div class="sub" data-i18n="blk_l3_sub">Decizie AI din fuziunea a 4 surse (MISP + CYBER3 DB + Suricata + Wazuh).</div>
             <div class="cap" data-i18n="blk_cap">ULTIMELE 24H</div>
           </div>
@@ -3354,6 +3356,51 @@ li { margin-bottom: 6px; color: var(--ink); }
 
 
   <!-- ======= PAGE: WORKSTATIONS (EDR/XDR per client — generic, orice org cu solutia completa) ======= -->
+  <div class="page" data-page="hunt">
+    <div class="card">
+      <div class="card-head">
+        <div class="card-title">◎ CYBER3 Threat Hunt — vânătoare proactivă de amenințări</div>
+        <div class="card-meta"><span class="live"></span><span id="huntMeta">—</span></div>
+      </div>
+      <div class="card-body">
+        <div id="huntCounts" style="display:flex;gap:10px;flex-wrap:wrap;margin-bottom:10px"></div>
+        <div class="faint" style="font-size:12px;line-height:1.6">
+          Vânătoare automată (la fiecare 6 ore, fereastră de 7 zile) a tiparelor de compromitere pe care pragurile obișnuite de alertare nu le scot în evidență:
+          <b>H1</b> răspuns reușit la atac · <b>H2</b> încărcare de cod acceptată · <b>H3</b> stager PowerShell urmat de C2 ·
+          <b>H4</b> comunicare C2 permisă · <b>H5</b> volum mare ieșit · <b>H6</b> honeytoken · <b>H7</b> acces la distanță pe o stație nouă · <b>H8</b> senzor fără alerte de rețea.
+        </div>
+        <div style="margin-top:10px;display:flex;gap:12px;align-items:center;flex-wrap:wrap">
+          <label class="faint" style="font-size:12px">Severitate:
+            <select id="huntSev" onchange="loadHunt()"><option value="">toate</option><option>CRITIC</option><option>ÎNALT</option><option>MEDIU</option><option>INFO</option></select></label>
+          <label class="faint" style="font-size:12px"><input type="checkbox" id="huntInfo" onchange="loadHunt()"> include INFO (cloud cunoscut)</label>
+        </div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-body no-pad">
+        <table class="data-table">
+          <thead><tr><th>Severitate</th><th>Vânătoare</th><th>Senzor</th><th>Gazdă</th><th>Constatare</th><th>Prima apariție</th><th>Ultima</th><th>Nr.</th></tr></thead>
+          <tbody id="huntTable"><tr><td colspan="8" class="faint">Se încarcă…</td></tr></tbody>
+        </table>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-head">
+        <div class="card-title">⛔ Carantină propusă — MLEO (stații interne compromise)</div>
+        <div class="card-meta"><span class="mini-tag">APROBARE SUPERVISOR</span> <span id="huntContainMeta">—</span></div>
+      </div>
+      <div class="card-body no-pad">
+        <div class="faint" style="font-size:12px;line-height:1.6;padding:10px 14px">
+          Semnale: vânătorile H3 / H4 / H6 și deciziile CyberBot pe troian / C2 (regula 100216) pentru adrese interne. Identitatea IP→MAC se stabilește strict pe senzorul clientului.
+          Dispozitivele critice (servere, centrale, DNS, gateway) primesc doar notificare. Carantina se aplică DOAR la aprobarea supervisorului, pentru 24 de ore (expiră automat), și poate fi ridicată oricând cu „Eliberează”.
+        </div>
+        <table class="data-table">
+          <thead><tr><th>Stare</th><th>Senzor</th><th>Stație</th><th>MAC</th><th>Sursă</th><th>Motiv</th><th>Acțiune propusă</th><th>Ultimul semnal</th><th>Nr.</th><th></th></tr></thead>
+          <tbody id="huntContain"><tr><td colspan="9" class="faint">Se încarcă…</td></tr></tbody>
+        </table>
+      </div>
+    </div>
+  </div>
   <div class="page" data-page="workstations">
     <style>
       .ws-tiles{display:flex;gap:12px;flex-wrap:wrap;margin-bottom:16px}
@@ -5401,6 +5448,7 @@ const I18N = {
     tab_clients: 'Clients',
     tab_reports: 'Reports',
     tab_workstations: 'Workstations',
+    tab_hunt: 'Threat Hunt',
     tab_sources: 'Context Sources Fusion',
     tab_system: 'System',
     // hero
@@ -5645,6 +5693,7 @@ const I18N = {
     tab_clients: 'Clienți',
     tab_reports: 'Rapoarte',
     tab_workstations: 'Stații EDR',
+    tab_hunt: 'Threat Hunt',
     tab_sources: 'Context Sources Fusion',
     tab_system: 'Sistem',
     hero_mission: "Platformă AI care orchestrează autonom instrumentele de securitate cibernetică, reduce timpul de răspuns la incidente și minimizează intervenția umană în Centrele de Operațiuni de Securitate.",
@@ -7108,7 +7157,23 @@ async function refreshBlockingLayers() {
   const t = d.totals || {};
   const ind = d.independent || t;   // numărătoare INDEPENDENTĂ (IP distincte, fără dubla numărare)
   const set = (id, v) => { const e = document.getElementById(id); if (e) e.textContent = (v || 0).toLocaleString(); };
-  set('blk3-ips', ind.ips); set('blk3-ar', ind.ar_native); set('blk3-cb', ind.cyberbot);
+  set('blk3-ips', ind.ips); set('blk3-ar', ind.ar_native);
+  // CyberBot (cerere operator 27.09): valoarea mare = blocarile BRUTE (identic cu suma coloanei din tabel).
+  // Dedup-ul pe IP ramane DOAR la totalul „Blocate autonom” (unique_total) — acolo nu se dubleaza.
+  set('blk3-cb', t.cyberbot);
+  const cbRawEl = document.getElementById('blk3-cb-raw');
+  if (cbRawEl) {
+    const cbInd = (ind.cyberbot || 0);
+    if (!(t.cyberbot || 0)) cbRawEl.textContent = '';
+    else if (cbInd === 0)
+      cbRawEl.textContent = (CURRENT_LANG === 'en')
+        ? 'IPs also stopped by L1–2 — not double-counted in the total'
+        : 'IP-uri oprite și de L1–2 — fără dublare în total';
+    else
+      cbRawEl.textContent = (CURRENT_LANG === 'en')
+        ? (cbInd.toLocaleString() + ' IPs blocked ONLY by AI')
+        : (cbInd.toLocaleString() + ' IP-uri blocate DOAR de AI');
+  }
   set('blk3-l2s', (d.l2shield || {}).blocks);
   // Total = amenințări UNICE (dedup pe IP între straturi), NU suma (care ar dubla)
   const uniq = (d.unique_total != null) ? d.unique_total
@@ -7707,6 +7772,62 @@ function wsRenderHours(){
   }).join('');
   document.getElementById('wsHLabels').innerHTML=arr.map(function(_,i){return '<span>'+(i%3===0?String(i).padStart(2,'0'):'')+'</span>';}).join('');
 }
+function huntEsc(s){return String(s==null?'':s).replace(/[&<>"']/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c];});}
+function huntTime(t){if(!t)return '-';try{var d=new Date(t);return d.toLocaleString('ro-RO',{timeZone:'Europe/Bucharest',day:'2-digit',month:'2-digit',hour:'2-digit',minute:'2-digit'});}catch(e){return t;}}
+function loadHunt(){
+  var sev=(document.getElementById('huntSev')||{}).value||'';var inf=(document.getElementById('huntInfo')||{}).checked?'1':'0';
+  var tb=document.getElementById('huntTable');if(!tb)return;
+  fetch('/api/hunt/findings?include_info='+inf+(sev?'&severity='+encodeURIComponent(sev):''),{credentials:'include',cache:'no-store'})
+  .then(function(r){return r.json();}).then(function(d){
+    var cls={'CRITIC':'dec-block','ÎNALT':'dec-escal','MEDIU':'dec-monitor','INFO':'dec-ignore'};
+    var c=d.counts||{};var ce=document.getElementById('huntCounts');
+    if(ce){ce.innerHTML=['CRITIC','ÎNALT','MEDIU','INFO'].map(function(k){return '<span class="alert-decision '+cls[k]+'">'+k+': '+(c[k]||0)+'</span>';}).join('');}
+    var m=document.getElementById('huntMeta');if(m){m.textContent=d.generated?('ULTIMA RULARE '+huntTime(d.generated)+' · FEREASTRĂ 7 ZILE'):'ÎNCĂ NERULAT';}
+    var f=d.findings||[];
+    if(!f.length){tb.innerHTML='<tr><td colspan="8" class="faint">Nicio constatare în fereastra curentă.</td></tr>';return;}
+    tb.innerHTML=f.map(function(x){
+      return '<tr><td><span class="alert-decision '+(cls[x.severity]||'dec-ignore')+'">'+huntEsc(x.severity)+'</span>'+(x['new']?' <span class="mini-tag">NOU</span>':'')+'</td>'+
+        '<td class="mono" title="'+huntEsc((d.hunts||{})[x.hunt]||'')+'">'+huntEsc(x.hunt)+'</td>'+
+        '<td class="mono">'+huntEsc(x.agent)+'</td><td class="mono">'+huntEsc(x.host)+'</td>'+
+        '<td><b>'+huntEsc(x.title)+'</b><div class="faint" style="font-size:11px">'+huntEsc(x.detail)+'</div></td>'+
+        '<td class="mono faint">'+huntTime(x.first_seen)+'</td><td class="mono faint">'+huntTime(x.last_seen)+'</td><td class="table-num">'+huntEsc(x.count)+'</td></tr>';
+    }).join('');
+  }).catch(function(){tb.innerHTML='<tr><td colspan="8" class="faint">Serviciul Threat Hunt nu răspunde.</td></tr>';});
+}
+var huntTabBtn=document.querySelector('.tab[data-page="hunt"]');if(huntTabBtn)huntTabBtn.addEventListener('click',loadHunt);
+function loadHuntContain(){
+  var tb=document.getElementById('huntContain');if(!tb)return;
+  fetch('/api/hunt/containment',{credentials:'include',cache:'no-store'}).then(function(r){return r.json();}).then(function(d){
+    var it=d.items||[];var sup=!!d.can_approve;
+    var m=document.getElementById('huntContainMeta');
+    if(m)m.textContent=it.filter(function(x){return x.state==='active';}).length+' ACTIVE · '+it.filter(function(x){return x.state==='proposed';}).length+' PROPUSE';
+    if(!it.length){tb.innerHTML='<tr><td colspan="10" class="faint">Nicio stație internă de izolat.</td></tr>';return;}
+    var lab={proposed:['dec-block','PROPUS'],notify:['dec-monitor','DOAR NOTIFICARE'],active:['dec-block','ÎN CARANTINĂ'],released:['dec-ignore','ELIBERAT'],rejected:['dec-ignore','RESPINS'],expired:['dec-ignore','EXPIRAT']};
+    tb.innerHTML=it.map(function(x){
+      var l=lab[x.state]||['dec-ignore',x.state];
+      var st='<span class="alert-decision '+l[0]+'">'+l[1]+'</span>';
+      var who='';
+      if(x.state==='active')who='<div class="faint" style="font-size:11px">aprobat de '+huntEsc(x.approved_by)+' · expiră '+huntTime(x.expires*1000)+'</div>';
+      if(x.released_by)who='<div class="faint" style="font-size:11px">'+huntEsc(x.released_by)+' · '+huntTime(x.released_at*1000)+'</div>';
+      var act='';
+      if(sup&&x.state==='proposed')act='<button class="ext-btn" onclick="mleoAct(\'approve\',\''+x.txid+'\',\''+huntEsc(x.ip)+'\')">Aprobă</button> <button class="ext-btn" onclick="mleoAct(\'release\',\''+x.txid+'\',\''+huntEsc(x.ip)+'\')">Respinge</button>';
+      if(sup&&x.state==='active')act='<button class="ext-btn" onclick="mleoAct(\'release\',\''+x.txid+'\',\''+huntEsc(x.ip)+'\')">Eliberează</button>';
+      return '<tr><td>'+st+who+'</td><td class="mono">'+huntEsc(x.sensor)+'</td><td class="mono">'+huntEsc(x.ip)+'</td><td class="mono faint">'+huntEsc(x.mac||'-')+'</td>'+
+        '<td class="mono">'+huntEsc(x.source)+'</td><td>'+huntEsc(x.reason)+'</td><td>'+huntEsc(x.action)+'</td>'+
+        '<td class="mono faint">'+huntTime((x.last_signal||x.ts)*1000)+'</td><td class="table-num">'+huntEsc(x.signals)+'</td><td style="white-space:nowrap">'+act+'</td></tr>';
+    }).join('');
+  }).catch(function(){tb.innerHTML='<tr><td colspan="10" class="faint">MLEO nu răspunde.</td></tr>';});
+}
+function mleoAct(verb,tx,ip){
+  var q={approve:'Puneți în CARANTINĂ DE IEȘIRE stația '+ip+' pentru 24 de ore? Stația rămâne în rețeaua internă, dar pierde accesul la Internet.',
+         release:'Confirmați eliberarea / respingerea pentru '+ip+'?'}[verb];
+  if(!confirm(q))return;
+  fetch('/api/hunt/containment/'+encodeURIComponent(tx)+'/'+verb,{method:'POST',credentials:'include',headers:{'Content-Type':'application/json'},body:'{}'})
+  .then(function(r){return r.json();}).then(function(d){
+    alert(d.ok?('OK — '+(d.sensor_output||d.state)):('EȘEC — '+(d.error||'')+(d.sensor_output?'\n'+d.sensor_output:'')));loadHuntContain();
+  }).catch(function(){alert('Eroare de comunicare cu portalul.');});
+}
+if(huntTabBtn)huntTabBtn.addEventListener('click',loadHuntContain);
 var wsTabBtn=document.querySelector('.tab[data-page="workstations"]');
 if(wsTabBtn)wsTabBtn.addEventListener('click',function(){if(!wsLoaded)loadWorkstations();else wsLoadTraffic();});
 
