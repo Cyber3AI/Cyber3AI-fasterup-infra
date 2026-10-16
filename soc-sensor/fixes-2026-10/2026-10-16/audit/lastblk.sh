@@ -1,0 +1,3 @@
+la=$(grep 'firewall-drop-real' /var/ossec/logs/active-responses.log 2>/dev/null | grep '"command": *"add"' | tail -1 | cut -c1-16)
+li=$(for f in /var/log/suricata/eve-alerts.json $(ls -t /var/log/suricata/eve-alerts.json-* 2>/dev/null | head -10); do zcat -f $f 2>/dev/null | grep '"action":"blocked"' | tail -1 | grep -oE '"timestamp":"[^"]{0,16}' && break; done | head -1)
+echo "$(hostname) | ultima blocare AR: ${la:-niciuna în jurnal} | ultima blocare IPS: ${li:-niciuna în ultimele fișiere} | drop rules încărcate: $(grep -c '^drop ' /var/lib/suricata/rules/suricata.rules) | NFQUEUE: $(iptables -S FORWARD | grep -c 'NFQUEUE.*queue-bypass') | AR activ: $(grep -A1 '<active-response>' /var/ossec/etc/ossec.conf | grep -c '<disabled>no')"
